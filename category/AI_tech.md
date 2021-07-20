@@ -2,6 +2,6 @@
 
 layout: category
 
-title: 'test3'
+title: 'AI_tech'
 
 ---
