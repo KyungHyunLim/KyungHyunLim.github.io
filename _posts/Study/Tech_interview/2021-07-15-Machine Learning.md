@@ -2,10 +2,8 @@
 layout: post
 title:  "Machine Learning"
 date:   2021-07-15 19:54:21 +0530
-categoty: 'Tech_interview'
-permalink: 'work/Tech_interview/ML'
+categories: [Tech_interview]
 ---
-# 11. Machine Learning
 ## 11.1 BASIC
 ### 11.1.1 What’s the trade-off between bias and variance?
 ```

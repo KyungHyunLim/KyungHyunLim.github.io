@@ -2,10 +2,9 @@
 layout: post
 title:  "Data Structure (자료구조)"
 date:   2021-07-05 18:05:56 +0530
-categoty: 'Tech_interview'
-permalink: 'work/Tech_interview'
+categories: [Tech_interview]
+permalink: 'Tech_interview/DS'
 ---
-# 5. Data Structure
 ## 5.l Basic
 ### 5.1.1 배열과 링크드 리스트의 차이점에 대해서 설명해 주세요.
 ```

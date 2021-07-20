@@ -2,10 +2,8 @@
 layout: post
 title:  "Programming"
 date:   2021-07-09 14:25:31 +0530
-categoty: 'Tech_interview'
-permalink: 'work/Tech_interview/PL'
+categories: [Tech_interview]
 ---
-# 6. Programming
 ## 6.l Basic
 ### 6.1.1 대표적인 객체지향 언어에는 어떤 것들이 있나요?
 ```
