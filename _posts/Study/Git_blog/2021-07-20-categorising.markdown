@@ -11,6 +11,7 @@ categories: [Blog]
 * 테마: https://github.com/samarsault/plainwhite-jekyll
 ```
 ---
+
 ## 1. root 경로에서 폴더내 category 폴더 생성
  테마를 설치하고 나면 대략적으로 아래와 같은 폴더 구조를 가집니다. <br>
  아래 구조에서 root경로에 category 폴더를 생성해줍니다.
@@ -36,6 +37,7 @@ categories: [Blog]
     +-- category
 ```
 ---
+
 ## 2. category 폴더 안에 markdown 파일 생성하기
  markdown 형식의 파일을 이름은 사용할 카테고리 명과 동일하게 하여 생성합니다.
 ```
@@ -55,6 +57,7 @@ title: 'Tech_interview'
 ---   
 ```
 ---
+
 ## 3. 토글 모양 레이아웃을 잡기 위해 scss 파일 생성
  _sass폴더에 category.scss 파일을 생성한다.
 ```scss
@@ -150,6 +153,7 @@ title: 'Tech_interview'
   }
 ```
 ---
+
 ## 4. 카테고리 레이아웃 만들기
  아래와 같이 _layout 폴더에 category.html을 생성합니다.
 ```
@@ -162,51 +166,41 @@ title: 'Tech_interview'
  그리고, 카테고리에 해당하는 post들을 레이아웃에 맞추어 보여줍니다.
  사용하는 테마가 post의 내용을 보여주도록 작성이 되어있는데,
  페이지가 지저분해 보여 주석처리 해버렸습니다.
+
+ 마크다운에 {% raw %} {% endraw %} 사이에 저 구문을 넣어야 제대로 표시되네요...
+
 ```html
 ---
 layout: default
----
+---{% raw %} 
 <ul class="posts-list">
-  
   {% assign category = page.category | default: page.title %}
   {% for post in site.categories[category] %}
 	<li>
-        {%- assign date_format = site.plainwhite.date_format | default: "%b %-d, %Y" -%}
-        <a class="post-link" href="{{ post.url | relative_url }}">
-          <h2 class="post-title">{{ post.title | escape }}</h2>
-        </a>
-        <div class="post-meta">
-          <div class="post-date">
-            <i class="icon-calendar"></i>
-            {{ post.date | date: date_format }}
-          </div>
-          {%- if post.categories.size > 0-%}
-          <ul class="post-categories">
-            {%- for tag in post.categories -%}
-            <li>{{ tag }}</li>
-            {%- endfor -%}
-          </ul>
-          {%- endif -%}
-        </div>
-        <!--<div class="post">
-          {%- if site.show_excerpts -%}
-            {{ post.excerpt }}
-          {%- endif -%}
-        </div> 내용 표시 -->
-      </li>
-    <!--<li>
-      <h3>
-        <a href="{{ site.baseurl }}{{ post.url }}">
-          {{ post.title }}
-        </a>
-        <small>{{ post.date | date_to_string }}</small>
-      </h3>
-    </li>-->
+    {%- assign date_format = site.plainwhite.date_format | default: "%b %-d, %Y" -%}
+    <a class="post-link" href="{{ post.url | relative_url }}">
+      <h2 class="post-title">{{ post.title | escape }}</h2>
+    </a>
+    <div class="post-meta">
+      <div class="post-date">
+        <i class="icon-calendar"></i>
+        {{ post.date | date: date_format }}
+      </div>
+      {%- if post.categories.size > 0-%}
+      <ul class="post-categories">
+        {%- for tag in post.categories -%}
+        <li>{{ tag }}</li>
+        {%- endfor -%}
+      </ul>
+      {%- endif -%}
+    </div>
+  </li>
   {% endfor %}
-  
 </ul>
+{% endraw %} 
 ```
 ---
+
 ## 5. _sass 폴더의 dark.scss 수정하기
  현재 테마는 다크모드와 화이트모드 전환이 가능합니다.
  모드에 따라 글씨색이 바뀌는 것을 구현하기 위해 클래스를 추가합니다.
@@ -217,11 +211,12 @@ layout: default
 	}
 ```
 ---
+
 ## 6. home.html 수정하기
- home.html에 {%- if site.posts.size > 0 -%} 아래 부분에 아래와 같은 코드를 추가합니다. 토글을 위한 레이아웃 구조를 나타냅니다.
+ home.html에 다음과 같은 코드를 추가합니다. 토글을 위한 레이아웃 구조를 나타냅니다.
  향후 자동 생성하게 할 수 있도록 수정해볼 예정입니다.
+ if문 바로 아래 추가합니다.
 ```html
-{%- if site.posts.size > 0 -%}
 <div class="site-category">
 	<ul class='cat1'>
 	  <li ><a href="/" class="ctext">Project</a>
@@ -240,9 +235,8 @@ layout: default
 		  <li><a href="/category/ustage" class="ctext">U-Stage</a></li>
 		</ul>
 	  </li>
-
 	</ul>
-  </div>
+</div>
 ```
 ---
 ## 7. 설정파일 수정하기
