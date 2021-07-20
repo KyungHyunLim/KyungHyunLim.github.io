@@ -3,7 +3,7 @@ layout: post
 title:  "Algorithm (알고리즘)"
 date:   2021-06-30 15:05:56 +0530
 categoty: 'Tech_interview'
-permalink: 'work/Tech_interview'
+permalink: 'work/Tech_interview/AL'
 ---
 # 4. Algorithm
 ## 4.1 Basic

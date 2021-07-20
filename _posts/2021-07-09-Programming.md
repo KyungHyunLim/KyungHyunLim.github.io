@@ -3,7 +3,7 @@ layout: post
 title:  "Programming"
 date:   2021-07-09 14:25:31 +0530
 categoty: 'Tech_interview'
-permalink: 'work/Tech_interview'
+permalink: 'work/Tech_interview/PL'
 ---
 # 6. Programming
 ## 6.l Basic
