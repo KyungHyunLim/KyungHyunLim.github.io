@@ -244,13 +244,14 @@ layout: default
 	</ul>
   </div>
 ```
+---
 ## 7. 설정파일 수정하기
- _config.yml에 아래 내용을 추가해줍니다. 
+ '_config.yml'에 아래 내용을 추가해줍니다. 
  "깃헙주소/카테고리명" 으로 해당 카테고리만 모여있는 post 리스트를 볼 수 있습니다.
 ```yml
 category_path: "category" # <- default value
 category_layout: "category.html" # <- default value
 ```
-
+---
 ## 8. 완성!!!
  html, css를 거의 몰라서 하나하나 찾아보고 하느라 하루종일 걸렸네요...
