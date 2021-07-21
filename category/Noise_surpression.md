@@ -2,6 +2,6 @@
 
 layout: category
 
-title: 'Noise_supression'
+title: 'Noise_surpression'
 
 ---
