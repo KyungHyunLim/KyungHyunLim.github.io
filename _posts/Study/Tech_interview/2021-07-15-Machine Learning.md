@@ -96,26 +96,66 @@ L1 Regularization 을 사용하는 Regression model 을 Least Absolute Shrinkage
 ```
 ### 11.1.10 What’s the difference between Type I and Type II error?
 ```
-생성 모델은 데이터 범주를 학습하는 반면 판별 모델은 단순히 데이터의 다른 범주 차이를 학습합니다. 
-판별 모델은 일반적으로 분류 작업에서 생성 모델보다 성능이 좋습니다.
+Type I error는 false positive인 반면에 Type II error는 false negative를 의미합니다. 다시말하자면,
+Type I error는 어떤 일이 일어나지 않았을 때 어떤 일이 일어났다고 주장하는 것이고 (false -> true),
+Type II error는 어떤 일이 실제로 일어났을 때, 아무 일도 일어낙지 않는다고 주장한 것을 의미합니다. (true -> false)
 ```
 ### 11.1.11 What’s a Fourier transform?
 ```
-
+퓨리에 트랜스폼은 X라는 도메인에서 다른 도메인으로 신호의 특성을 변환하는 방법을 의미합니다. 주로 시계열 데이터의 특성을 찾기 위해 사용되며, 특히 음성 신호와 같은 데이터에서 시간 영역에서 주파수 영역으로 데이터를 변환해 특성을 활용하기 위해 사용합니다.
 ```
 ### 11.1.12 What’s the difference between probability and likelihood?
 ```
+Probability는 possible result에 기초하고,
+likelihood는 hypothesis를 기반으로 합니다.
 
+간단하게 말하자면,
+probability는 관찰 결과에 의해 계산되는 값입니다.
+likelihood는 어떤 분포를 추정해, 그 분포에서 관찰될 사건이 일어날 확률. 다시말해 어떤 분포에서 그 사건이 관찰될 확률을 의미합니다.
+
++a
+probability는 multually exclusive 하고
+likelihood는 multually exclusive하지 않다.
+
+상호 베타적이라는 것은 P(A or B) = P(A) + P(B)를 만족한다.
+* 독립은 P(A or B) = P(A) + P(B) - P(A)P(B)를 만족한다. 
 ```
 ### 11.1.13 What is deep learning, and how does it contrast with other machine learning algorithms?
 ```
-
+딥러닝은 신경망으로 구성된 기계 학습의 한 종류입니다. 즉, 딥러닝은 역전파 알고리즘과 신경망 구조를 특정 원칙을 사용해 레이블이 지정되지 않거나 반구조화된 큰 데이터의 집합을 보다 정확하게 모델링하는 방법입니다.
 ```
 ### 11.1.14 What’s the difference between a generative and discriminative model?
 ```
-
+생성 모델은 데이터 범주를 학습하는 반면 판별 모델은 단순히 데이터의 다른 범주 차이를 학습합니다. 
+판별 모델은 일반적으로 분류 작업에서 생성 모델보다 성능이 좋습니다.
 ```
 ### 11.1.15 What cross-validation technique would you use on a time series dataset?
 ```
+cross-validation 모델이 정말 원하는 방향으로 학습된 것인지, 단순히 현재 데이터에 피팅된 것인지 파악할 수 있는 방법입니다.
+훈련데이터와 평가데이터의 구성을 다르게해 여러차례 학습과 평가를 반복해 일정한 성능을 보여주는지 확인하는 것이 목적입니다.
+
+시계열 데이터에 적용할 경우
+시계열 데이터의 특성을 이용해
+과거와 예측할 미래를 나누는 시점을 점점 미래로 옮겨가며 구성할 수 있습니다.
+```
+### 11.1.16 How is a decision tree pruned?
+```
 
 ```
+### 11.1.17 Which is more important to you: model accuracy or model performance?
+```
+
+```
+### 11.1.18 What’s the F1 score? How would you use it?
+```
+
+```
+### 11.1.19 How would you handle an imbalanced dataset?
+```
+
+```
+### 11.1.20 When should you use classification over regression?
+```
+
+```
+
