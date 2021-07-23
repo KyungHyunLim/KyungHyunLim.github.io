@@ -3,9 +3,6 @@
 
 <head>
   {%- include head.html -%}
-  {% if page.use_math %}
-    {% include mathjax_support.html %}
-  {% endif %}
 </head>
 
 {%- if site.plainwhite.condensed_mobile contains page.layout -%}
@@ -13,6 +10,10 @@
 {% else %}
 {% assign condensed_class = "" %}
 {%- endif -%}
+
+{% if page.use_math %}
+    {% include mathjax_support.html %}
+{% endif %}
 
 <body>
   <main class="container">
