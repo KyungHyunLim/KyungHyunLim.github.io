@@ -3,6 +3,9 @@
 
 <head>
   {%- include head.html -%}
+  {% if page.use_math %}
+    {% include mathjax_support.html %}
+  {% endif %}
 </head>
 
 {%- if site.plainwhite.condensed_mobile contains page.layout -%}

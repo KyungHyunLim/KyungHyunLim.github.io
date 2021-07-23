@@ -60,6 +60,13 @@ category_layout: "category.html" # <- default value
 # Build settings
 theme: plainwhite
 
+# Conversion
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
+
 plugins:
   - jekyll-seo-tag
 #  - jekyll-feed
