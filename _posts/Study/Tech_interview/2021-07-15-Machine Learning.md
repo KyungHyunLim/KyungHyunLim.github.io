@@ -253,3 +253,12 @@ https://stackoverflow.com/questions/5583257/writing-pseudocode-for-parallel-prog
 해시 함수를 이용한 어떤 값과 키가 매칭이됩니다.
 보통 데이터베이스에서 인덱싱을 위해 사용합니다.
 ```
+### 11.2.6 Which data visualization libraries do you use? What are your thoughts on the best data visualization tools?
+```
+matplot.pyplot 또는 seaborn 라이브러리를 사용합니다.
+다양한 방법으로 데이터를 시각화할 수 있는 기능을 제공하기 때문에 두 라이브러리를 적절이 사용한다면 대부분 원하는 방법으로 시각화가 가능하다고 생각합니다.
+```
+### 11.2.7 Given two strings, A and B, of the same length n, find whether it is possible to cut both strings at a common point such that the first part of A and the second part of B form a palindrome.
+```
+
+```
