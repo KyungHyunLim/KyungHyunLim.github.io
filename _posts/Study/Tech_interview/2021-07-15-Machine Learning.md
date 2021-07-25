@@ -156,14 +156,100 @@ cross-validation 모델이 정말 원하는 방향으로 학습된 것인지, �
 ```
 ### 11.1.18 What’s the F1 score? How would you use it?
 ```
+F1 score = 2 * (Precision * Recall) / (Precision + Recall)
+=> 데이터가 불균형 구조일 때, 모델의 성능을 정확하게 평가 가능 (조화평균)
 
+둘중하나가 0과 가까우면 낮은 수치를 보여주기 때문에, 보다 정확하게 모델을 평가할 수 있습니다.
 ```
 ### 11.1.19 How would you handle an imbalanced dataset?
 ```
+첫번째로는, 더 많은 데이터를 수집하는 방법이 있습니다.
+두번째로는, augmentation 기법을 활용해 데이터를 늘리는 방법입니다.
+마지막으로는, 데이터를 다시 샘플링해 불균형을 완화하는 방법입니다.
 
+중요한 것은 불균형으로 인해, 모델이 편향된 학습을 하지 않도록 주의하는 것이라고 생각합니다.
 ```
 ### 11.1.20 When should you use classification over regression?
 ```
-
+분류 문제는 범주형 데이터를 , 회귀 문제는 연속형 값을 결과로 제공합니다..
+한 입력에 대해 어떤 범주인지를 나누는 것이 목적일때, 분류를 사용합니다.
 ```
+### 11.1.21 Name an example where ensemble techniques might be usful.
+```
+ensemble technique은 서로 다른 알고리즘들의 예측을 voting 또는 평균을 linear combination해 더 좋은 예측을 만들기 위한 것입니다.
+오버피팅을 방지할 수 있고, 더 강건한 모델을 만들 수 있습니다.
 
+앙상블을 위한 기술들에는 bagging, boosting 등이 있습니다.
+
++a
+bagging(bootstrap aggregating):
+    1. 복원추출을 통해 n개의 샘플 모음 생성
+    2. 해당 샘플에 대해 모델 학습
+    3. 1-2 를 일정 횟수 반복
+boosting: 
+    1. weak learner를 생성후 error 계산
+    2. Error에 기여한 샘플들에 다른 가중치를 주어 새로운 모델 학습
+    3. 1-2 반복
+```
+### 11.1.22 How do you ensure you're not overfitting with a model?
+```
+1. 모델을 너무 복잡하지 않도록 설계
+    * 변수와 모수가 적어짐
+2. K-fold와 같은 교차 검증 사용
+3. LASSO와 같은 정규화 기법을 사용 (L1 norm)
+```
+### 11.1.23 What evaluation approaches would you work to gauge the effectiveness of a machine learning model?
+```
+데이터셋을 훈련, 검증, 평가 3가지로 분할합니다.
+또한, 교차 검증을 활용해 학습된 모델을 평가합니다.
+이때, 적절한 메트릭을 선택하는 것 또한 중요합니다.
+```
+### 11.1.24 How would you evaluate a logistic regression model?
+```
+logistic regression 모델의 목적에 따라 적절한 평가방법을 선택해야 합니다.
+
+예를들어, 
+어떤 환자의 정보를 가지고 암에 걸렸는지, 걸리지 않았는지를
+판단하는 모델이라면, 정확도, 정밀도, 재현도, f1-score 등을 활용해 평가를 할 수 있습니다.
+또 다른 경우로,
+어떤 환자의 정보를 바탕으로 간수치를 예측한다면, MSE, MAE와 같은 평가지표를 활용해 얼마나 근접하게 예측했는지 평가할 수 있습니다.
+```
+### 11.1.25 What’s the “kernel trick” and how is it useful?
+```
+커널 트릭은 커널 함수를 이용해, 저차원의 데이터를 고차원 공간에 표현해 주는 것을 의미합니다.
+저차원에서는 구분할 수 없었던 데이터들이 고차원에 표현되면서
+보다 많은 특징이 들어나고 효과적으로 분리하기 위한 알고리즘들을 실행할 수 있습니다. 
+```
+## 11.2 Programming
+### 11.2.1 How do you handle missing or corrupted data in a dataset?
+```
+Panda에서는 isnull()과 dropna()의 두 가지 매우 유용한 방법이 있습니다.
+isnull()과 dropna()는 결측 데이터 또는 손상된 데이터가 있는 데이터 열을 찾아 해당 값을 삭제하는 데 도움이 됩니다.
+잘못된 값 채우려면 fillna() 방법을 사용할 수 있습니다.
+```
+### 11.2.2 Do you have experience with Spark or big data tools for machine learning?
+```
+mysql ?
+hp5y
+HDF5matrix
+```
+### 11.2.3 Pick an algorithm. Write the pseudo-code for a parallel implementation.
+```
+https://stackoverflow.com/questions/5583257/writing-pseudocode-for-parallel-programming
+```
+### 11.2.4 What are some differences between a linked list and an array?
+```
+배열은 데이터를 입력하면 순차적으로 입력이 되며, 물리적 주소 또한 순차적입니다. 
+또한 한번 크기가 결정이 되면 변경이 불가능 합니다. 하지만 인덱스가 있어 데이터에 접근하는 속도가 빠릅니다. 
+하지만 중간에 삽입하거나 삭제하는 경우 인덱스를 재배열해야 하기 때문에 효율이 떨어집니다.
+
+링크드 리스트는 다음 원소의 주소 값을 가지고 있어, 이를 이용해 리스트를 생성합니다. 
+따라서 크기가 가변적이고, 삽입과 삭제가 주소 값을 변경해 주면 되기 때문에 간편합니다.
+하지만 중간에 있는 원소에 접근하기 위해서는 포인터를 따라 탐색이 필요해, 배열과 같이 한번에 접근할 수가 없습니다.
+```
+### 11.2.5 Describe a hash table.
+```
+해시 테이블은 연관된 배열을 생성하는 데이터 구조입니다.
+해시 함수를 이용한 어떤 값과 키가 매칭이됩니다.
+보통 데이터베이스에서 인덱싱을 위해 사용합니다.
+```
