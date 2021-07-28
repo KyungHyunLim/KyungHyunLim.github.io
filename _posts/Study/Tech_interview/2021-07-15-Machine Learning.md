@@ -260,5 +260,8 @@ matplot.pyplot 또는 seaborn 라이브러리를 사용합니다.
 ```
 ### 11.2.7 Given two strings, A and B, of the same length n, find whether it is possible to cut both strings at a common point such that the first part of A and the second part of B form a palindrome.
 ```
-
+팰린드롬을 확인하기 위한 방법은 여러가지가 있지만,
+가장 간단한 방법으로, 
+A와 B의 가능한 부분 문자열들을 모두 구하고,
+두 서브그룹간 팰린드롬이 형성될 수 있는지 검사하는 방법을 사용할 것 같습니다.
 ```
