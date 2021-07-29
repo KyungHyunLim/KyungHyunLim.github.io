@@ -1,0 +1,73 @@
+---
+layout: post
+title:  "Tensorflow, 대용량 데이터 처리 with h5py, HDF5Matrix"
+date:   2021-07-29 11:52:56
+categories: [Study_AI]
+use_math: true
+---
+
+## 0. 메모리에러...
+ * 딥러닝을 학습하다 보면 생각보다 자주 메모리에러에 접하게 됩니다.
+ * 연구실에서 하드웨어 빵빵한 PC를 사용할 때는 거의 문제가 없었는데, 졸업 후 개인 PC로 하려니 힘들어서... 좋은 방법이 없나 찾아보았습니다.
+ * 보통 h5py + HDF5Mtrix나
+ * data generator 라이브러리를 활용했습니다.
+ * 이번엔 h5py + HDF5Mtrix를 알아보겠습니다.
+
+## 1. 텐서플로우 버전
+
+```python
+tensorflow  2.3.1 # 이상 버전은 HDF5Martrix 지원 X
+```
+
+## 2. 라이브러리
+ * h5py와 HDF5Matrix 두 라이브러리를 사용합니다.
+ * HDF5Matrix는 데이터에 접근할 때, 실제로 메모리에 올려사용합니다.
+    * 대용량 데이터 학습시, 메모리 에러를 안볼 수 있습니다.
+    * 아쉬운점은 2.3.1 이후 버전에선 사라졌습니다.
+
+```python
+import h5py
+from tensorflow.keras.utils import HDF5Matrix
+```
+
+## 3. h5py 데이터 생성
+ * 구조 생성시에는 데이터를 불러와서 넣는 작업을 해주어야 합니다.
+ * 한번에 불러오기 힘들면 나누어 불러와 인덱스로 구분지어 입력도 가능합니다.
+
+```python
+data = pd.read_csv("data")
+
+f = h5py.File("저장/불러올 파일 위치", 'w')
+# 데이터를 저장하기 위한 구조를 생성
+# 키워드: 데이터 구조 접근을 위한 키워드
+# (10000000, 22): 데이터의 크기 (#_row, #_col)
+# 데이터 타입 설정 (필수 x)
+X = f.create_dataset("x", (10000000, 22), dtype='float32')
+Y = f.create_dataset("y", (10000000, 1), dtype='float32')
+
+# 두가지 방식으로 데이터 입력 가능
+X[:] = data.iloc[:,1:]
+Y[:] = data.iloc[:,0]
+# f["x"][:] = data.iloc[:,1:]
+# f["y"][:] = data.iloc[:,0]
+
+# 다음과 같이 나누어 입력 가능
+X[1:50] =  data.iloc[1:50,1:]
+
+f.close()
+```
+
+## 4. 데이터 학습에 활용하기
+
+```python
+model = Model() # 딥러닝 모델 생성
+
+# 데이터 경로 로드
+tx = HDF5Matrix("h5py 파일 경로", "키워드")
+ty = HDF5Matrix("h5py 파일 경로", "키워드")
+
+# batch 만큼의 데이터만 실제 메모리에 올려 학습에 사용
+# batch 사이즈만 잘 조절한다면 메모리에러에서 자유로워 질 수 있습니다.
+model.fit(tx[:], ty[:], batch_size = 5000, epochs=100)
+```
+
