@@ -42,3 +42,6 @@ https://www.youtube.com/watch?v=XepXtl9YKwc
  * 정답 레이블 $y=(y_1,...,y_K)$ (원핫 인코딩)을 이용, 소프트맥스 벡터의 로그가능도를 최적화
  * $\hat{\theta_{MLE}}=argmax_{\theta}({1 \over n} \sum_{i=1}^n \sum_{k=1}^K y_{i,k} log(MLP_\theta (x_i)_k))$
  * 소프트맥스 벡터의 likelihood를 최적화
+ * Log likelihood를 사용하는 이유
+    * 계산의 편의성
+    * 추정한 분포와 데이터의 거리의 곱으로 가능도를 표현하기 때문에, 그 값의 크기를 줄일 수 있음
