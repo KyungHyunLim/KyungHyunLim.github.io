@@ -36,7 +36,7 @@ use_math: true
  * 즉! Mutual information이 크면 x와 y 관계가 있는것
  * 독립이면 log값이 0이되기 때문!
  * 독립?
-    * $ P(x_i \vert y_i) = {P(x_i, y_i) \over P(y_i) $
+    * $ P(x_i \vert y_i) = {P(x_i, y_i) \over P(y_i)} $
     * $ P(x_i \vert y_i) = P(x_i)P(y_i) $
 
 ## 5. Machine learning 활용
