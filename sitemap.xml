@@ -1,5 +1,7 @@
 ---
 layout: null
+sitemap:
+    exclude: 'yes'
 ---
 {%-if site.plainwhite.sitemap -%}
     <?xml version="1.0" encoding="UTF-8"?>
