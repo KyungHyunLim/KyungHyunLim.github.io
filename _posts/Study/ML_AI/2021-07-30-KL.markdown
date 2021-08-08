@@ -2,7 +2,7 @@
 layout: post
 title:  "Entropy, KL Divergence (정보이론)"
 date:   2021-07-30 15:20:22
-categories: [Study_AI]
+categories: [ML_AI]
 use_math: true
 ---
 

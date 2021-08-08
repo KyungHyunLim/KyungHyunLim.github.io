@@ -2,7 +2,7 @@
 layout: post
 title:  "Maximum Likelihood"
 date:   2021-07-25 17:05:56 +0530
-categories: [Study_AI]
+categories: [ML_AI]
 use_math: true
 ---
 

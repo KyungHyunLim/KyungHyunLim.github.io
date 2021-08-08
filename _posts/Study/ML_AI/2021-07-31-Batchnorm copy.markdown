@@ -2,7 +2,7 @@
 layout: post
 title:  "Batch Normalization layer"
 date:   2021-07-31 10:27:22
-categories: [Study_AI]
+categories: [ML_AI]
 use_math: true
 ---
 

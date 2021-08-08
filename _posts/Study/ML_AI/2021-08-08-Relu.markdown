@@ -2,7 +2,7 @@
 layout: post
 title:  "Vanishing gradient & Relu"
 date:   2021-08-08 15:12:22
-categories: [Study_AI]
+categories: [ML_AI]
 use_math: true
 ---
 

@@ -2,6 +2,6 @@
 
 layout: category
 
-title: 'Study_AI'
+title: 'ML_AI'
 
 ---
