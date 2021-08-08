@@ -1,0 +1,37 @@
+---
+layout: post
+title:  "Ensemble - bagging and boosting"
+date:   2021-08-08 17:27:22
+categories: [Study_AI]
+use_math: true
+---
+
+## 1. Ensemble learning
+* 목적: 여러 모델을 하나의 모델로 연결해, 더 좋은 성능을 추구
+* 방법: 
+  * 여러 알고리즘 모델: Voting, averaging
+  * 단일 알고리즘 모델: Bagging, Boosting
+
+## 2. Voting and averaging
+* 분류: 여러 모델(weak learner)의 결과를 투표 방식으로 최종 결정(strong classifier)
+* 회귀: 여러 모델의 결과를 평균내어 최종 결정
+* 각 모델에 가중치 부여 가능 (Weighted_~)
+
+## 3. Bagging and Boosting
+* Bagging(Bootstrap Aggregation)
+  * 훈련데이터에서 알고리즘마다 별도의 훈련세트 추출
+  * 대표 모델:
+    * Randomforest: 다수의 decision tree 활용
+* Boosting
+  * 샘플 추출시 잘못 분류된 data 50%를 재학습 or 가중치 활용
+    1. 처음 모델이 예측
+    2. 예측 결과에 따라 데이터에 가중치 부여
+    3. 다음 모델 학습에 영향
+    4. 1-3 반복
+  * 잘못 분류/예측된 데이터에 집중에 새롭게 학습하는 것에 집중
+  * 대표모델:
+    * AdaBoost, XGBoost, Gradient Boost(GBM), LightGBM, CatBoost
+    * 어떻게 가중치를 부여하는지의 차이
+* 비교
+  * Boosting은 Bagging에 비해 성능이 좋아 질 수 있지만, 학습 속도가 교적 느림
+  * 너무 많은 step을 거치면, overfitting 될 가능성 존재
