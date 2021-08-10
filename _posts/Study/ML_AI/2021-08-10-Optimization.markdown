@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Optimization"
-date:   2021-08-10 11:32:22
+date:   2021-08-10 14:31:22
 categories: [ML_AI]
 use_math: true
 ---
