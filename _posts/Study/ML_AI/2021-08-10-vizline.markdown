@@ -1,0 +1,56 @@
+---
+layout: post
+title:  "Visualization-Line"
+date:   2021-08-10 11:32:22
+categories: [ML_AI]
+use_math: true
+---
+
+### 1. 기본
+* 선 그래프
+* 연속적으로 변화하는 값을 순서대로 표현
+* 시계열 분석에 특화!
+* 5개 이하의 선 사용 추천
+* 요소
+  * 색상(color)
+  * 마커(marker, markersize)
+  * 선의 종류(linestyle, linewidth)
+  ![](/assets/image/ustage/w2_day2_8.png)
+* 전처리
+  * smoothing
+    * Noise 영향력 감소
+
+### 2. 정확한 Line plot
+* 꼭 축을 0에 초첨을 둘 필요는 없음
+  * 추세가 목적이기 때문에
+* 구체적인 것 보다는 생략된 것이 더 나을 수 있음
+  * Grid, Annotate 등 모두 제거
+  * 디테일한 정보는 표로 제공
+* 간격
+  * 규칙적인 간격이 아니면 오해를 줄 수 있음
+    * 그래프 상에서 규칙적으로 보일때: 기울기 정보 오해
+    * 그래프 상에서 간격이 다를때: 없는 데이터에 대해 있는 것으로 착각
+  * 규칙적인 간격이 아니라면, 관측 값에 점으로 표시 => 오해 감소
+  ![](/assets/image/ustage/w2_day2_9.png)
+* 보간
+  * 점과 점사이에 데이터가 없을때 이를 잇는 방법
+  * Error나 Noise가 포함된 경우
+    * Moving Average
+    * Smooth Curve with Sipy
+      * interpolate.make_interp_spline()
+      * interpolate.interp1d()
+      * ndimage.gaussan_filter1d()
+  * Presentation에는 좋은 방법 하지만!
+    * 없는 데이터에 대해 오해 위험
+    * 작은 차이를 없앨 수 있음
+    * 일반적인 분석에서는 지양!
+* 이중 축 사용
+  * 한 plot에 두개의 축 사용 (.twinx())
+  * .secondary_xaxis(), .secondary_yaxis()
+* ETC
+  * 라인 끝 단에 레이블 추가(레전드 대신)
+  * Annotation 활용
+  * Uncertainty 표현(신뢰구간, 분산 등)
+
+### 3. 실습
+* [jupyter notebook](https://github.com/KyungHyunLim/Prv/blob/main/Viz/Lineplot.ipynb)
