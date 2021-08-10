@@ -1,0 +1,72 @@
+---
+layout: post
+title:  "Visualization-Bar"
+date:   2021-08-10 10:40:22
+categories: [ML_AI]
+use_math: true
+---
+
+### 1. Bar plot 종류
+* Bar plot
+  * .bar() : 수직 
+  * .barh() : 수평
+* multiple Bar Plot
+  ![](/assets/image/ustage/w2_day2_2.png)
+* Stacked Bar Plot
+  * bar() : bottom 파라미터 사용 
+  * barh() : left 파라미터 사용
+  ![](/assets/image/ustage/w2_day2_3.png)
+* Percentage Stacked Bar Chart
+  ![](/assets/image/ustage/w2_day2_4.png)
+* Overlapped Bar Plot
+  * 2개의 그룹을 비교할 때!
+    * 그이상은 가독성 저하
+  * alpha를 이용해 투명도 조정
+  ![](/assets/image/ustage/w2_day2_5.png)
+* Grouped Bar Polt
+  * 그룹별 범주에 따른 bar를 이웃되게 배치
+  * seaborn 라이브러리 활용
+  * 그룹이 5~7개 이하일 때 효과적, ETC 처리
+  ![](/assets/image/ustage/w2_day2_6.png)
+
+### 2. 정확한 Bar Plot
+  * Principle of Proportion Ink
+    * 실제 값과 그에 표현되는 그래픽 잉크 양은 비례해야 한다.
+    * 반드시 x축의 시작은 zero!
+    ![](/assets/image/ustage/w2_day2_1.png)
+  * 데이터 정렬하기
+    * pandas: sort_values(), sort_index()
+    * 기준
+      * 시계열-시간순
+      * 수치형-크기순
+      * 순서형-범주의 순서(E.g 초, 중, 고)
+      * 명목형-범주의 값에 따라(최대값, 최소값으 양 끝으로)
+  * 적절한 공간 활용
+    * 여백과, 공간 조정
+    ![](/assets/image/ustage/w2_day2_7.png)
+    * Matplotlib tech
+      * X/Y axis Limit
+      * Spines
+      * Gap
+      * Legend
+      * Margins
+  * 복잡함과 단순함
+    * 필요없는 복잡함은 NO!
+    * 목적과 대상
+      * 정확한 차이 (EDA)
+      * 큰 틀에서 비교 및 추세 파악 (Dashboard)
+    * 축과 디테일
+      * Grid
+      * Ticklabels
+      * Text 추가
+  * ETC
+    * 오차 막대 활용
+    * Bar 사이 Gap이 0이라면 Histogram
+      * 연속된 느낌 제공
+    * 다양한 Text 정보 활용
+      * 제목, 라벨 등
+      
+### 3. 실습
+  * [jupyter notebook](https://github.com/KyungHyunLim/Prv/blob/main/Viz/Barplot.ipynb)
+
+
