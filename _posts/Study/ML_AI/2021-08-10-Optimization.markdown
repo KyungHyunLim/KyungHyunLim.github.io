@@ -52,10 +52,12 @@ use_math: true
   * Batch GD
     * 모두 사용해 업데이트
 * Batch-size Matter
+
   ![](/assets/image/ML_AI/opt_3.png)
   큰 배치사이즈를 활용하면 sharp minimizers, 작은 배치 사이즈를 사용하면 Flat minimizers. Flat minimizers는 일반적으로 Test셋에 대해서도 잘 동작할 가능성이 높지만, sharp는 성능이 떨어 질 수도 있다.
 * 종류
   ![](/assets/image/ML_AI/opt_4.png)
+
   출처:https://www.slideshare.net/yongho/ss-79607172
   * Stochastic Gradient Descent
     * $W_{t+1} \leftarrow W_t - r g_t$

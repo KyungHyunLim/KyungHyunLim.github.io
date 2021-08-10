@@ -1,0 +1,49 @@
+---
+layout: post
+title:  "Visualization-Scatter"
+date:   2021-08-10 15:23:22
+categories: [ML_AI]
+use_math: true
+---
+  
+### 1. 기본
+* 정의
+  * 점을 사용해 그리는 그래프
+  * =산점도
+  * x, y값을 매핑해서 사용 (N차원 데이터로 확장 가능)
+* 요소
+  ![](/assets/image/ML_AI/vizsc_1.png)
+  * 색
+  * 모양
+  * 크기
+* 목적
+  * 상관관계 확인
+    * 양의 상관관계
+    * 음의 상관관계
+    * 뚜렷한 관계 없음
+  * 군집/ 값 사이의 차이/ 이상치 확인
+
+### 2. 정확한 Scatter Plot
+* Overplotting
+  * 점이 많아질수록 점의 분포를 파악하기 어려움
+    ![](/assets/image/ML_AI/vizsc_2.png)
+    * 투명도 조정
+    * 지터링: 점의 위치를 약간씩 변경
+    * 2차원 히스토그램: 히트맵을 사용해 시각화
+    * Contour plot : 분포를 등고선을 사용해 표현
+* 점의 요소와 인지
+  ![](/assets/image/ML_AI/vizsc_3.png)
+  * 색, 마커, 크기
+  * 마커는 비추천! (크기가 고르지 않음)
+* 인과관계와 상관관계
+  * 인과관계 != 상관관계
+  * 인과관계는 항상 사전 정보와 함께 가정으로 제시
+* 추세선
+  * scatter의 패턴을 유추할 수 있음
+  * 여러개 사용은 지양!
+* ETC
+  * Grid 지양
+  * 범주형 관계에서는 heatmap 또는 buble chart 추천
+
+### 3. 실습
+* [jupyter notebook](https://github.com/KyungHyunLim/Prv/blob/main/Viz/Scatterplot.ipynb)
