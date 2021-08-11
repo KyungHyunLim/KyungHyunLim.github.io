@@ -64,7 +64,7 @@ use_math: true
   * Training set: 456,567 imgages
 
 ### 2.1 AlexNet
-![](/assets/image/ML_AI/conv_3.png)
+![](/assets/image/ML_AI/conv_3.PNG)
 * ImageNet Classification with Deep Convolutional Neural Networks, NIPS, 2012
 * 5 conv layers + 3 dense layers
 * Key ideas
@@ -75,20 +75,20 @@ use_math: true
   * Dropout
 
 ### 2.2 VGGNet
-![](/assets/image/ML_AI/conv_5.png)
+![](/assets/image/ML_AI/conv_5.PNG)
 * 3x3 conv filter 만 사용 (stride 1)
   * Receptive field: # of params
   * 큰 필터를 사용하는 것 보다 3x3 필터를 여러번 적용하는 것이 deep하면서 파라미터수를 줄일 수 있다
 
 ### 2.3 GoogLeNet
-![](/assets/image/ML_AI/conv_6.png)
+![](/assets/image/ML_AI/conv_6.PNG)
 * Inception blocks
   * 중간 중간 1x1 conv를 사용하면 parameter수를 잘 줄일 수 있다.
   * channel-wise dimenstion reduction
-  ![](/assets/image/ML_AI/conv_7.png)
+  ![](/assets/image/ML_AI/conv_7.PNG)
 
 ### 2.4 ResNet
-![](/assets/image/ML_AI/conv_8.png)
+![](/assets/image/ML_AI/conv_8.PNG)
 * 일반화 성능: training - test 성능 차이가 큼
 * Skip connection
   * 정보의 전달
@@ -98,7 +98,7 @@ use_math: true
   * receptive filed를 키우는 효과
 
 ### 2.5 Densnet
-![](/assets/image/ML_AI/conv_9.png)
+![](/assets/image/ML_AI/conv_9.PNG)
 * Dense Block
   * 각 layer concat
   * chnnel의 수 증가, geometrically
@@ -111,36 +111,36 @@ use_math: true
 * 자율주행에 활용
   * 앞에 있는 것이 자동차인지 사람인지 뭔지 판단
 * How? convolutionalize  
-  ![](/assets/image/ML_AI/conv_10.png)
+  ![](/assets/image/ML_AI/conv_10.PNG)
   * Dense layer를 없애자
   * heat map으로 ouput을 출력!
-  ![](/assets/image/ML_AI/conv_11.png)
+  ![](/assets/image/ML_AI/conv_11.PNG)
 * Reolution이 떨어진 output을 늘리기 위한 방법이 필요
   * Deconvolution (conv transpose)
-  ![](/assets/image/ML_AI/conv_12.png)
+  ![](/assets/image/ML_AI/conv_12.PNG)
     * 정확하게 역은 아니지만, 의미는 conv의 연산의 역
   * unpooling
 
 ### 3.2 Detection
 * R-CNN
-![](/assets/image/ML_AI/conv_13.png)
+![](/assets/image/ML_AI/conv_13.PNG)
   * 어느 위치에 어느 것이 있는지!
   * 2000개의 이미지를 나누어 처리해야하는 문제 -> 너무 오래걸린다.
 * SPPNet
-![](/assets/image/ML_AI/conv_14.png)
+![](/assets/image/ML_AI/conv_14.PNG)
   * 이미지에서 미리 bounding box 추출
   * image 전체에 대해 feature map을 만들고,
   * bounding box영역의 tensor를 가져와 사용
   * R-CNN에 비해 빨라짐: CNN을 한번만 사용
 * Fast R-CNN
-![](/assets/image/ML_AI/conv_15.png)
+![](/assets/image/ML_AI/conv_15.PNG)
   * SPPNet과 유사한 컨셉: 1개의 feature map
   * Region Proposal Network
     * bounding box안에 물체가 있을거 같은지 아닌지 판단
 * YOLO(v1)
   * Fast R-CNN 보다 빠름
   * Region Proposal Network를 한번에 처리
-  ![](/assets/image/ML_AI/conv_16.png)
+  ![](/assets/image/ML_AI/conv_16.PNG)
     * SxS grid로 분할
     * B개 바운딩 박스 예측 (x, y, w, h) + 쓸모있는 박스인지 예측
     * 각 Cell을 C개 class 확률들 예측
