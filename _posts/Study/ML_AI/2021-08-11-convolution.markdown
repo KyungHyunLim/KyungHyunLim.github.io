@@ -114,36 +114,36 @@ use_math: true
 ### 3.1 Sematic Segmetation
 * 자율주행에 활용
   * 앞에 있는 것이 자동차인지 사람인지 뭔지 판단
-* How? convolutionalize  
+* How? convolutionalize    
   ![](/assets/image/ML_AI/conv_10.PNG)
   * Dense layer를 없애자
-  * heat map으로 ouput을 출력!
+  * heat map으로 ouput을 출력!  
   ![](/assets/image/ML_AI/conv_11.PNG)
 * Reolution이 떨어진 output을 늘리기 위한 방법이 필요
-  * Deconvolution (conv transpose)
+  * Deconvolution (conv transpose)  
   ![](/assets/image/ML_AI/conv_12.PNG)
     * 정확하게 역은 아니지만, 의미는 conv의 연산의 역
   * unpooling
 
 ### 3.2 Detection
-* R-CNN
+* R-CNN  
 ![](/assets/image/ML_AI/conv_13.PNG)
   * 어느 위치에 어느 것이 있는지!
   * 2000개의 이미지를 나누어 처리해야하는 문제 -> 너무 오래걸린다.
-* SPPNet
+* SPPNet  
 ![](/assets/image/ML_AI/conv_14.PNG)
   * 이미지에서 미리 bounding box 추출
   * image 전체에 대해 feature map을 만들고,
   * bounding box영역의 tensor를 가져와 사용
   * R-CNN에 비해 빨라짐: CNN을 한번만 사용
-* Fast R-CNN
+* Fast R-CNN  
 ![](/assets/image/ML_AI/conv_15.PNG)
   * SPPNet과 유사한 컨셉: 1개의 feature map
   * Region Proposal Network
     * bounding box안에 물체가 있을거 같은지 아닌지 판단
 * YOLO(v1)
   * Fast R-CNN 보다 빠름
-  * Region Proposal Network를 한번에 처리
+  * Region Proposal Network를 한번에 처리  
   ![](/assets/image/ML_AI/conv_16.PNG)
     * SxS grid로 분할
     * B개 바운딩 박스 예측 (x, y, w, h) + 쓸모있는 박스인지 예측
