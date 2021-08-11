@@ -12,7 +12,7 @@ use_math: true
   * =산점도
   * x, y값을 매핑해서 사용 (N차원 데이터로 확장 가능)
 * 요소
-  ![](/assets/image/ML_AI/vizsc_1.png)
+  ![](/assets/image/ML_AI/vizsc_1.PNG)
   * 색
   * 모양
   * 크기
@@ -26,13 +26,13 @@ use_math: true
 ### 2. 정확한 Scatter Plot
 * Overplotting
   * 점이 많아질수록 점의 분포를 파악하기 어려움
-    ![](/assets/image/ML_AI/vizsc_2.png)
+    ![](/assets/image/ML_AI/vizsc_2.PNG)
     * 투명도 조정
     * 지터링: 점의 위치를 약간씩 변경
     * 2차원 히스토그램: 히트맵을 사용해 시각화
     * Contour plot : 분포를 등고선을 사용해 표현
 * 점의 요소와 인지
-  ![](/assets/image/ML_AI/vizsc_3.png)
+  ![](/assets/image/ML_AI/vizsc_3.PNG)
   * 색, 마커, 크기
   * 마커는 비추천! (크기가 고르지 않음)
 * 인과관계와 상관관계

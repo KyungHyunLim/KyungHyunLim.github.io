@@ -11,29 +11,29 @@ use_math: true
   * .bar() : 수직 
   * .barh() : 수평
 * multiple Bar Plot
-  ![](/assets/image/ustage/w2_day2_2.png)
+  ![](/assets/image/ustage/w2_day2_2.PNG)
 * Stacked Bar Plot
   * bar() : bottom 파라미터 사용 
   * barh() : left 파라미터 사용
-  ![](/assets/image/ustage/w2_day2_3.png)
+  ![](/assets/image/ustage/w2_day2_3.PNG)
 * Percentage Stacked Bar Chart
-  ![](/assets/image/ustage/w2_day2_4.png)
+  ![](/assets/image/ustage/w2_day2_4.PNG)
 * Overlapped Bar Plot
   * 2개의 그룹을 비교할 때!
     * 그이상은 가독성 저하
   * alpha를 이용해 투명도 조정
-  ![](/assets/image/ustage/w2_day2_5.png)
+  ![](/assets/image/ustage/w2_day2_5.PNG)
 * Grouped Bar Polt
   * 그룹별 범주에 따른 bar를 이웃되게 배치
   * seaborn 라이브러리 활용
   * 그룹이 5~7개 이하일 때 효과적, ETC 처리
-  ![](/assets/image/ustage/w2_day2_6.png)
+  ![](/assets/image/ustage/w2_day2_6.PNG)
 
 ### 2. 정확한 Bar Plot
   * Principle of Proportion Ink
     * 실제 값과 그에 표현되는 그래픽 잉크 양은 비례해야 한다.
     * 반드시 x축의 시작은 zero!
-    ![](/assets/image/ustage/w2_day2_1.png)
+    ![](/assets/image/ustage/w2_day2_1.PNG)
   * 데이터 정렬하기
     * pandas: sort_values(), sort_index()
     * 기준
@@ -43,7 +43,7 @@ use_math: true
       * 명목형-범주의 값에 따라(최대값, 최소값으 양 끝으로)
   * 적절한 공간 활용
     * 여백과, 공간 조정
-    ![](/assets/image/ustage/w2_day2_7.png)
+    ![](/assets/image/ustage/w2_day2_7.PNG)
     * Matplotlib tech
       * X/Y axis Limit
       * Spines

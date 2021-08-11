@@ -8,9 +8,9 @@ use_math: true
   
 ## 1. Convolution
 ### 1.1 기본 공식
-* Continuous: $[f*g] (x) = \int_{R^d} f(z) g(x-z)dz = \int_{R^d} f(x-z) g(z)dz = [g*f](x)$			
-* Discrete: $[f*g] (i) = \sum_a f(a)g(i-a) = \sum_a f(i-a)g(a) = [g*f] (i)$
-* 2d image: $[I*K] (i,j) = \sum_{m,n} I(m,n)K(i-m,j-n)$
+* Continuous: $ [f*g] (x) = \int_{R^d} f(z) g(x-z)dz = \int_{R^d} f(x-z) g(z)dz = [g*f](x) $			
+* Discrete: $ [f*g] (i) = \sum_a f(a)g(i-a) = \sum_a f(i-a)g(a) = [g*f] (i) $
+* 2d image: $ [I*K] (i,j) = \sum_{m,n} I(m,n)K(i-m,j-n) $
 
 ### 1.2 의미?
 * 필터모양에 따라 결과가 달라진다
@@ -36,14 +36,14 @@ use_math: true
   * Conv layer를 deep 하게 가져가지만, 동시에 파라미터 수를 줄이기 위해 노력
 * CNN 구성
   * Stride
-    ![](/assets/image/ML_AI/conv_1.png)
+    ![](/assets/image/ML_AI/conv_1.PNG)
     * 칸을 건너 뛰어 계산
   * Padding
     * 가장자리를 계산할 수 없기 때문에
     * 값을 덧대주는 역활
 * 파라미터 수 계산  
   * E.g 1  
-    ![](/assets/image/ML_AI/conv_2.png)
+    ![](/assets/image/ML_AI/conv_2.PNG)
     * $3 \times 3 \times 128 \times 64 = 73,728$
     * $3 \times 3 \times 128$ : 필터 크기
     * $64$ : 원하는 feature map 수  

@@ -15,7 +15,7 @@ use_math: true
   * 색상(color)
   * 마커(marker, markersize)
   * 선의 종류(linestyle, linewidth)
-  ![](/assets/image/ustage/w2_day2_8.png)
+  ![](/assets/image/ustage/w2_day2_8.PNG)
 * 전처리
   * smoothing
     * Noise 영향력 감소
@@ -31,7 +31,7 @@ use_math: true
     * 그래프 상에서 규칙적으로 보일때: 기울기 정보 오해
     * 그래프 상에서 간격이 다를때: 없는 데이터에 대해 있는 것으로 착각
   * 규칙적인 간격이 아니라면, 관측 값에 점으로 표시 => 오해 감소
-  ![](/assets/image/ustage/w2_day2_9.png)
+  ![](/assets/image/ustage/w2_day2_9.PNG)
 * 보간
   * 점과 점사이에 데이터가 없을때 이를 잇는 방법
   * Error나 Noise가 포함된 경우
