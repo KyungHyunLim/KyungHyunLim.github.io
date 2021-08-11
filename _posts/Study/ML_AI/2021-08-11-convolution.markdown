@@ -8,9 +8,9 @@ use_math: true
   
 ## 1. Convolution
 ### 1.1 기본 공식
-* Continuous: $ [f*g] (x) = \int_{R^d} f(z) g(x-z)dz = \int_{R^d} f(x-z) g(z)dz = [g*f](x) $			
-* Discrete: $ [f*g] (i) = \sum_a f(a)g(i-a) = \sum_a f(i-a)g(a) = [g*f] (i) $
-* 2d image: $ [I*K] (i,j) = \sum_{m,n} I(m,n)K(i-m,j-n) $
+* Continuous: $ (f*g) (x) = \int_{R^d} f(z) g(x-z)dz = \int_{R^d} f(x-z) g(z)dz = (g*f)(x) $			
+* Discrete: $ (f*g) (i) = \sum_a f(a)g(i-a) = \sum_a f(i-a)g(a) = (g*f) (i) $
+* 2d image: $ (I*K) (i,j) = \sum_{m,n} I(m,n)K(i-m,j-n) $
 
 ### 1.2 의미?
 * 필터모양에 따라 결과가 달라진다
@@ -20,9 +20,9 @@ use_math: true
   * Filter의 개수와 동일
 * 주의점
   * Feature map의 크기 계산
-  * $(H, W) \rightarrow (K_H, K_W) \rightarrow (O_H, O_W)
-		* $O_H = H - K_H + 1$
-		* $O_W = W - K_W + 1$
+    * $(H, W) \rightarrow (K_H, K_W) \rightarrow (O_H, O_W)$
+    * $O_H = H - K_H + 1$
+    * $O_W = W - K_W + 1$
 
 ### 1.3 Convolution Neural Networks
 * layer 종류
