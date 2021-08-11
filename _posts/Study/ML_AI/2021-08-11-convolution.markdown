@@ -8,9 +8,9 @@ use_math: true
   
 ## 1. Convolution
 ### 1.1 기본 공식
-* Continuous: $ (f*g) (x) = \int_{R^d} f(z) g(x-z)dz = \int_{R^d} f(x-z) g(z)dz = (g*f)(x) $			
-* Discrete: $ (f*g) (i) = \sum_a f(a)g(i-a) = \sum_a f(i-a)g(a) = (g*f) (i) $
-* 2d image: $ (I*K) (i,j) = \sum_{m,n} I(m,n)K(i-m,j-n) $
+* Continuous: $ (f * g) (x) = \int_{R^d} f(z) g(x-z)dz = \int_{R^d} f(x-z) g(z)dz = (g * f)(x) $			
+* Discrete: $ (f * g) (i) = \sum_a f(a)g(i-a) = \sum_a f(i-a)g(a) = (g * f) (i) $
+* 2d image: $ (I * K) (i,j) = \sum_{m,n} I(m,n)K(i-m,j-n) $
 
 ### 1.2 의미?
 * 필터모양에 따라 결과가 달라진다
