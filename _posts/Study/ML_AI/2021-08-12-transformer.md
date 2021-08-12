@@ -35,19 +35,19 @@ use_math: true
 * Query, key, value
     ![](/assets/image/ML_AI/trans_4.PNG)  
     * E.g. Thingking(i 번째)과 Machines 라는 단어가 있을때,
-    * 1. 단어마다 4개의 vector가 생성된다.  
-    ![](/assets/image/ML_AI/trans_5.PNG) 
-    Embedding, Query, keys, Value 벡터 생성
-    * 2. Score vector 생성  
-    ![](/assets/image/ML_AI/trans_6.PNG)  
-    i번째 단어의 query vector와 나머지 모든 N개의 key 벡터를 내적. i번째 단어가 나머지 N개의 벡터와 얼마나 관계가 있는지를 학습하게 만들어 준다. 즉, 어떤 입력을 더 주의 깊게 볼지(어떤 단어를) 학습한다.
-    * 3. Score vector nomalize  
-    값이 너무 커지지 않도록
-    * 4. Softmax  
-    ![](/assets/image/ML_AI/trans_8.PNG)  
-    결과 Thinking과 Thingking의 관계는 0.88, Thinking과 Machines의 관계는 0.12가 된다. => Attention weight(Score)
-    * 5. value 벡터와 Attention weight의 weighted sum  
-    최종적으로 i번째 단어의 인코딩된 벡터. 크기는 value 벡터와 동일(여기 에서만, multi head attention으로 가면 달라짐)
+        1. 단어마다 4개의 vector가 생성된다.  
+        ![](/assets/image/ML_AI/trans_5.PNG) 
+        Embedding, Query, keys, Value 벡터 생성
+        2. Score vector 생성  
+        ![](/assets/image/ML_AI/trans_6.PNG)  
+        i번째 단어의 query vector와 나머지 모든 N개의 key 벡터를 내적. i번째 단어가 나머지 N개의 벡터와 얼마나 관계가 있는지를 학습하게 만들어 준다. 즉, 어떤 입력을 더 주의 깊게 볼지(어떤 단어를) 학습한다.
+        3. Score vector nomalize  
+        값이 너무 커지지 않도록
+        4. Softmax  
+        ![](/assets/image/ML_AI/trans_8.PNG)  
+        결과 Thinking과 Thingking의 관계는 0.88, Thinking과 Machines의 관계는 0.12가 된다. => Attention weight(Score)
+        5. value 벡터와 Attention weight의 weighted sum  
+        최종적으로 i번째 단어의 인코딩된 벡터. 크기는 value 벡터와 동일(여기 에서만, multi head attention으로 가면 달라짐)
     * 행렬 연산으로 보기  
     ![](/assets/image/ML_AI/trans_7.PNG)   
 
