@@ -32,7 +32,7 @@ use_math: true
     n개 단어가 주어지고 n개의 벡터를 찾아야 할때, r번째 벡터를 결정할 때
     나머지 n-1개의 단어(벡터)를 모두 고려한다.
     ```
-* Query, key, value
+* Query, key, value  
     ![](/assets/image/ML_AI/trans_4.PNG)  
     * E.g. Thingking(i 번째)과 Machines 라는 단어가 있을때,
         1. 단어마다 4개의 vector가 생성된다.  
@@ -53,7 +53,7 @@ use_math: true
 
 #### 2.2.2 Multihead-attention
 * 기본 작동
-    ![](/assets/image/ML_AI/trans_9.PNG)   
+    ![](/assets/image/ML_AI/trans_9.png)   
     * Query, key, value를 N개 생성
     * 즉, N번 attention을 반복 $\rightarrow$ N개의 인코딩 벡터
     * 다음으로 넘어가기 위해 차원을 맞춰줄 필요가 있음
@@ -63,13 +63,13 @@ use_math: true
     * 위치에 따라 offset을 주어 특정 값을 더해줌
 
 ### 2.4 Decoder
-![](/assets/image/ML_AI/trans_10.PNG)  
+![](/assets/image/ML_AI/trans_10.png)  
 * Encoder로 부터 어떤 정보를 받아야 하는가?  
  Input에 있는 단어들을 Decoder에 있는 출력하고자 하는 단어들에 대해, attention map을 만들기 위해서는 Input에 해당하는 key와 value 벡터가 필요하다. 디코더의 입력으로 들어가는 단어들의 query 벡터와 인코더로 부터 받은 key와 value 벡터를 활용해 최종 결과를 만든다.
 * 추가정리 필요!!!!!!!!!!!!!!!
 
 ## 3. Vision Transformer
- ![](/assets/image/ML_AI/trans_11.PNG)  
+ ![](/assets/image/ML_AI/trans_11.png)  
  이미지 분류를 할때 인코더를 활용. 이미지를 분할해 sub 영역을 하나의 단어처럼 사용해서 Transformer 구조를 응용한것  
  DALL-E -> 대표적인 모델 중 하나
 
