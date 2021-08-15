@@ -66,7 +66,8 @@ use_math: true
 ![](/assets/image/ML_AI/trans_10.png)  
 * Encoder로 부터 어떤 정보를 받아야 하는가?  
  Input에 있는 단어들을 Decoder에 있는 출력하고자 하는 단어들에 대해, attention map을 만들기 위해서는 Input에 해당하는 key와 value 벡터가 필요하다. 디코더의 입력으로 들어가는 단어들의 query 벡터와 인코더로 부터 받은 key와 value 벡터를 활용해 최종 결과를 만든다.
-* 추가정리 필요!!!!!!!!!!!!!!!
+* 학습시에는 디코더에 입력으로 정답을 넣어준다
+    * 예를들어 번역 테스크의 경우, 디코더에서 정답에 대한 query 벡터들을 활용한다.
 
 ## 3. Vision Transformer
  ![](/assets/image/ML_AI/trans_11.png)  
