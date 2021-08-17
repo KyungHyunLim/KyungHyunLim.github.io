@@ -2,7 +2,7 @@
 layout: post
 title:  "Tensorflow, 대용량 데이터 처리 with h5py, HDF5Matrix"
 date:   2021-07-29 11:52:56
-categories: [ML_AI]
+categories: [Pytorch, ML_AI]
 use_math: true
 ---
 
