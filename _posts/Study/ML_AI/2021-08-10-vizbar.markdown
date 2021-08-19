@@ -2,7 +2,7 @@
 layout: post
 title:  "Visualization-Bar"
 date:   2021-08-10 10:40:22
-categories: [ML_AI]
+categories: [Visualize, ML_AI]
 use_math: true
 ---
 
