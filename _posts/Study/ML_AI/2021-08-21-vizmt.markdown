@@ -1,0 +1,86 @@
+---
+layout: post
+title:  "Visualization-Facet 활용"
+date:   2021-08-21 11:10:22
+categories: [Visualize, ML_AI]
+use_math: true
+---
+
+## 1. Facet
+### 1.1 Multiple View의 필요성
+* Facet?
+	* 분할을 의미
+* 화면 상에서 View를 분할 및 추가해 다양한 관점을 전달
+	* 같은 데이터셋에 서로 다른 인코딩
+	* 같은 방법으로 동시에 여러 feature 확인
+	* 큰 틀에서 볼 수 없는 부분 집합을 세세하게 전달 가능
+
+## 2. Matplotlib에서 구현
+### 2.1 Figure와 Axes
+* Figure는 큰 틀! Ax는 각 플롯이 들어가는 공간
+* Figure는 언제나 1개, 플롯은 N개  
+![](/asset/image/Viz/fc_1.PNG)
+
+### 2.2 NxM subplots
+* 가장 쉬운 3가지 방법
+	* plt.subplot()
+	* plt.figure() + fig.add_subplot()
+	* plt.subplots()
+* 쉽게 조정 가능한 요소
+	* figuresize
+	* dpi
+	* sharex, sharey
+	* squeeze
+	* aspect
+	
+### 2.3 Grid Spec의 활용
+* Grid 형태의 subplot
+	* 기본적으로 NxM 형태로 만들기 가능
+* 다른 사이즈를 만들기 위해서는 ?
+	* Slicing 사용
+		* axes[0, :3]
+		* axes[1, :3]
+		* axes[3, :]
+		* fig.add_grid_spec()
+	* x,y,dx,dy 사용
+		* (0,0), 1,3
+		* (1,0), 3,3
+		* (0,3), 1,4
+		* fig.subplot2grid()  
+![](/asset/image/Viz/fc_2.PNG)
+
+### 2.4 내부에 그리기
+* Ax 내부에 subplot을 추가하는 방법
+	* 미니맵과 같은 형태
+	* 외부 정보를 적은 비중으로 추가!
+	* ax.inset_axes()  
+![](/asset/image/Viz/fc_3.PNG)
+
+* 그리드를 사용하지 않고 사이드에 추가
+	* 단방향의 통계 정보를 제공할 수 있음
+	* 제목 등의 텍스트도 추가가능
+	* make_axes_loactable(ax)  
+![](/asset/image/Viz/fc_4.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

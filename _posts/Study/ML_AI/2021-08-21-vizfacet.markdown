@@ -1,0 +1,122 @@
+---
+layout: post
+title:  "Visualization-More Tips"
+date:   2021-08-21 11:10:22
+categories: [Visualize, ML_AI]
+use_math: true
+---
+
+## 1. Grid 이해하기
+### 1.1 기본 Grid
+* 그리드는 축과 평행한 선을 사용해 거리 또는 값의 정보를 보조하는 역활
+* 색은 무채색으로 설정하는 것이 다른 정보를 가리지 않음
+* 항상 Layer 순서상 맨 밑에 오도록 조정(zoder)
+* 큰 격자 / 세부격자:  3가지 옵션 (which = ['major' , 'minor', 'both'])
+* X축? Y축? 동시에: 3가지 옵션! (axis = ['x' , 'y', 'both'])
+
+### 1.2 다양한 타입의 Grid
+* 다양한 형태의 그리드
+	* 합을 표현 		$x+y=c$  
+	![](assets/image/Viz/mt_1.PNG)
+
+	```python
+	x_start = np.linspace(0, 2.2, 12, endpoint=True)
+	for xs in x_start:
+		ax.plot([xs, 0], [0, xs], linestyle='--', color='gray', alpha=0.5, linewidth=1)
+	```
+
+	* 비율을 표현		$y=cx$  
+	![](assets/image/Viz/mt_2.PNG)
+
+	```python
+	radian = np.linspace(0, np.pi/2, 11, endpoint=True)
+
+	for rad in radian:
+		ax.plot([0,2], [0, 2*np.tan(rad)], linestyle='--', color='gray', alpha=0.5, linewidth=1)
+	```
+
+
+	* 곱을 표현			$xy=c$
+	* 특정 데이터 중심	$(x-x')^2 + (y-y')^2=c$  
+	![](assets/image/Viz/mt_3.PNG)
+
+	```python
+	rs = np.linspace(0.1, 0.8, 8, endpoint=True)
+	for r in rs:
+		xx = r*np.cos(np.linspace(0, 2*np.pi, 100))
+		yy = r*np.sin(np.linspace(0, 2*np.pi, 100))
+		ax.plot(xx+x[2], yy+y[2], linestyle='--', color='gray', alpha=0.5, linewidth=1)
+
+		ax.text(x[2]+r*np.cos(np.pi/4), y[2]-r*np.sin(np.pi/4), f'{r:.1}', color='gray')
+	```
+
+* 색다른 그리드
+	* numpy + matplotlib으로 쉽게 구현 할수 있음
+	* [예시](https://medium.com/nightingale/gotta-gridem-all-2f768048f934)
+
+## 2. 심플한 처리
+### 2.1 선
+* 상한선, 하한선  
+![](assets/image/Viz/mt_4.PNG)
+
+```python
+ax.axvline(0, color='red')
+ax.axhline(0, color='green')
+```
+
+### 2.2 면
+* 범위를 표현  
+![](assets/image/Viz/mt_5.PNG)
+
+```python
+ax.axvspan(0,0.5, color='red')
+ax.axhspan(0,0.5, color='green')
+```
+
+### 2.3 축 옮기기
+* ax.spines: 문서 찾아보기
+	* `set_visible`  
+    * `set_linewidth`
+    * `set_position`
+
+```python
+ax.spines['left'].set_position('center')
+ax.spines['bottom'].set_position('center')
+```
+
+## 3. Setting 바꾸기
+### 3.1 기본 셋팅
+
+```python
+# 기본 셋팅 바꾸기 1
+mpl.rcParams['lines.linewidth'] = 2
+mpl.rcParams['lines.linestyle'] = '--'
+
+# 기본 셋팅 바꾸기 2
+mpl.rc('lines', linewidth=4, linestyle='-.')
+
+# 기본으로 돌아가기
+plt.rcParams.update(plt.rcParamsDefault)
+```
+
+### 3.2 테마
+* fivethirtyeight, ggplot을 많이 사용!
+* 강사님은... 기본에서 약간 수정
+![](assets/image/Viz/mt_6.PNG)
+
+```python
+mpl.style.use("테마 이름")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
