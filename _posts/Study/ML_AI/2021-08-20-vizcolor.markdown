@@ -15,7 +15,7 @@ use_math: true
 ### 1.2 화려함이 시각화이 전부가 아니다!
 * 화려한 것은 매력적이지만, 정보를 담기 어려울 수 있다.
 * 시각화에서 가장 중요한 것은 정보를 전달하는 것!  
-![](assets/image/Viz/cor_1.PNG)
+![](/assets/image/Viz/cor_1.PNG)
 
 ### 1.3 색의 의미
 * 높은 온도에서는 파랑, 낮은 온도에는 빨강?
@@ -31,7 +31,7 @@ use_math: true
 * 독립된 색상으로 구성되, 범주형 변수에 적용
 * 최대 10개까지 사용하는 것이 좋음, 그 이상은 기타로!
 * 색의 차이로 구분하는 것의 특징 (채도 명도 조정은 지양)  
-![](assets/image/Viz/cor_2.PNG)
+![](/assets/image/Viz/cor_2.PNG)
 
 * 예시
 
@@ -49,14 +49,14 @@ for idx, cm in enumerate(qualitative_cm_list):
 	cbar.ax.set_yticklabels(groups)
 	...
 ```  
-![](assets/image/Viz/cor_5.PNG)
+![](/assets/image/Viz/cor_5.PNG)
 
 ### 2.2 연속형
 * 순서형, 연속형 변수에 적용
 * 연속적인 색상(Gradient?)로 값을 표현
 	* 어두운 배경에서는 밝은색, 밝은 배경에서는 어두운 색이 상대적으로 큰 값을 표현
 * 단일 색상 사용, 균일한 변화가 중요한  
-![](assets/image/Viz/cor_3.PNG)
+![](/assets/image/Viz/cor_3.PNG)
 
 * 예시
 
@@ -77,7 +77,7 @@ for idx, cm in enumerate(sequential_cm_list):
     fig.colorbar(pcm, ax=axes[idx])
     axes[idx].set_title(cm)
 ```  
-![](assets/image/Viz/cor_6.PNG)
+![](/assets/image/Viz/cor_6.PNG)
 
 ### 2.3 발산형
 * 중앙을 기준으로 발산
@@ -85,7 +85,7 @@ for idx, cm in enumerate(sequential_cm_list):
 	* 서로 다른 2개의 값을 표현하는 것에 적합
 * 양 끝으로 갈수록 진해지도록 적용
 * 중앙 색은 양쪽의 점에서 편향되지 않아야 한다 (무채색일 필요는 없음)  
-![](assets/image/Viz/cor_4.PNG)
+![](/assets/image/Viz/cor_4.PNG)
 
 * 예시
 
@@ -107,7 +107,7 @@ for idx, cm in enumerate(diverging_cm_list):
     cbar.ax.set_xticklabels([0, student['math score'].mean(), 100])
 	...
 ```  
-![](assets/image/Viz/cor_6.PNG)
+![](/assets/image/Viz/cor_6.PNG)
 
 ## 3. 그외 Tip
 ### 3.1 강조, 그리고 색상 대비

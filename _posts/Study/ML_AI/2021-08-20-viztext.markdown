@@ -21,7 +21,7 @@ use_math: true
 * Annotation(Text): 그 외의 설명 추가
 
 ### 1.3 Text API
-![](assets/image/Viz/text_1.PNG)
+![](/assets/image/Viz/text_1.PNG)
 
 
 ## 2. Text Properties
@@ -55,7 +55,7 @@ plt.show()
 ```
 
 * 결과  
-![](assets/image/Viz/text_2.PNG)
+![](/assets/image/Viz/text_2.PNG)
 
 ### 2.2 Details
 
@@ -70,7 +70,7 @@ ax.text(x=0.5, y=0.5, s='Text\nis Important',
 #         alpha=0.5
    )
 ```  
-![](assets/image/Viz/text_4.PNG)
+![](/assets/image/Viz/text_4.PNG)
 
 ### 2.3 Alignment
 
@@ -86,7 +86,7 @@ ax.text(x=0.5, y=0.5, s='Text\nis Important',
 	rotation='horizontal' 	# vertical?
    )
 ```  
-![](assets/image/Viz/text_5.PNG)
+![](/assets/image/Viz/text_5.PNG)
 
 ### 2.4 Advanced box
 
@@ -104,4 +104,4 @@ ax.text(x=0.5, y=0.5, s='Text\nis Important',
    )
 
 ```  
-![](assets/image/Viz/text_6.PNG)
+![](/assets/image/Viz/text_6.PNG)
