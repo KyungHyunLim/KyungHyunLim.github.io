@@ -13,7 +13,7 @@ sass:
   sass_dir: _sass
 plainwhite:
   name: KyungHyun Lim
-  tagline: AI/ML/SW Developer
+  tagline: ML/AI/SW Developer
   date_format: "%b %-d, %Y"
   sitemap: true # set to true to generate sitemap.xml content
   search: false # set to true to enable searchbar
@@ -69,4 +69,5 @@ incremental: false
 
 plugins:
   - jekyll-seo-tag
-#  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-feed
