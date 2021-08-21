@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Pytorch(8)-Trouble shooting</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Pytorch(8)-Trouble shooting | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Pytorch(8)-Trouble shooting" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. OOM 1.1 대응하기 어려움 왜…를 알기 어려움 어디서… 도 알기 어려움 Error backtracking이 이상한 곳으로 빠짐 메모리의 이전상황의 파악이 난해 주로 Iteration 안에서 발생 GPU clean -&gt; RUN / Batch_size 줄이기" />
+<meta property="og:description" content="1. OOM 1.1 대응하기 어려움 왜…를 알기 어려움 어디서… 도 알기 어려움 Error backtracking이 이상한 곳으로 빠짐 메모리의 이전상황의 파악이 난해 주로 Iteration 안에서 발생 GPU clean -&gt; RUN / Batch_size 줄이기" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-20T22:15:12+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pytorch(8)-Trouble shooting" />
+<script type="application/ld+json">
+{"description":"1. OOM 1.1 대응하기 어려움 왜…를 알기 어려움 어디서… 도 알기 어려움 Error backtracking이 이상한 곳으로 빠짐 메모리의 이전상황의 파악이 난해 주로 Iteration 안에서 발생 GPU clean -&gt; RUN / Batch_size 줄이기","mainEntityOfPage":{"@type":"WebPage","@id":"/pytorch/ml_ai/2021/08/20/Pytorch_8.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Pytorch(8)-Trouble shooting","dateModified":"2021-08-20T22:15:12+09:00","datePublished":"2021-08-20T22:15:12+09:00","url":"/pytorch/ml_ai/2021/08/20/Pytorch_8.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/pytorch/ml_ai/2021/08/20/Pytorch_8.html">
+    <h2 class="post-title">Pytorch(8)-Trouble shooting</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 20, 2021</div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-oom">1. OOM</h2>
+<h3 id="11-대응하기-어려움">1.1 대응하기 어려움</h3>
+<ul>
+  <li>왜…를 알기 어려움</li>
+  <li>어디서… 도 알기 어려움
+    <ul>
+      <li>Error backtracking이 이상한 곳으로 빠짐</li>
+      <li>메모리의 이전상황의 파악이 난해</li>
+    </ul>
+  </li>
+  <li>주로 Iteration 안에서 발생
+    <ul>
+      <li>GPU clean -&gt; RUN / Batch_size 줄이기</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="12-어떻게-대응할까">1.2 어떻게 대응할까?</h3>
+<ul>
+  <li>GPU util 사용하기
+    <ul>
+      <li>nvidia-smi GPU 상태를 보여주는 모듈</li>
+      <li>iter마다 메모리가 늘어나는지 확인</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">import</span> <span class="nn">GPUtill</span>
+  <span class="n">GPUtil</span><span class="p">.</span><span class="n">showUtilization</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </li>
+  <li>torch.cuda.empty_cache() 써보기
+    <ul>
+      <li>사용되지 않는 GPU 위 cache 정리 -&gt; 가용메모리 확보</li>
+      <li>del과는 다른것!</li>
+      <li>reset 대신 사용하기 좋음</li>
+    </ul>
+  </li>
+  <li>trainning loop에 tensor로 축적 되는 변수는 확인 해보기
+    <ul>
+      <li>Tensor로 처리된 변수는 GPU 상에 메모리 사용</li>
+      <li>해당 변수는 loop안에서 computational graph를 생성하기 때문에 메모리 차지</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epoch</span><span class="p">):</span>
+      <span class="n">optimizer</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+      <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+      <span class="n">loss</span> <span class="o">=</span> <span class="n">Loss</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+      <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+      <span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+      <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span> 
+      <span class="c1"># loss1 + loss2 + loss3 + ... = total_loss가 되서쓸데없이 메모리를 잡아 먹는다.
+</span></code></pre></div>    </div>
+    <ul>
+      <li>1- tensor의 경우 python의 기본 객체로 변환하여 처리!</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epoch</span><span class="p">):</span>
+      <span class="n">iter_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">).</span><span class="n">mean</span><span class="p">()</span>
+      <span class="n">iter_loss</span><span class="p">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="bp">True</span>
+      <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">iter_loss</span><span class="p">.</span><span class="n">itme</span><span class="p">()</span> <span class="c1"># item을 붙이거나 float(iter_loss) 처럼 사용!
+</span></code></pre></div>    </div>
+  </li>
+  <li>del 명령어 적절히 사용</li>
+  <li>batch 사이즈 조절하기</li>
+  <li>torch.no_grad() 사용하기
+    <ul>
+      <li>inference 시점에는 gradient를 계산하지 않음</li>
+      <li>backward pass로 인해 사용되는 메모리에서 자유로움</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-예상치-못한-에러-메세지">2. 예상치 못한 에러 메세지</h2>
+<ul>
+  <li>CUDNN_STATUS_NOT_INIT, device-side-assert 등
+    <ul>
+      <li>cuda와 관련해 OOM의 일종으로 생각될 수 있다!</li>
+      <li>적절한 코드 처리 필요</li>
+    </ul>
+  </li>
+  <li>colab에서 너무 큰 사이즈는 실행하지 말 것</li>
+  <li>CNN의 대부분의 에러는 크기가 안맞아서…
+    <ul>
+      <li>torchsummary 등으로 크기를 맞출것!</li>
+    </ul>
+  </li>
+  <li>tensor의 float precision을 16bit으로 줄일 수도 있음!
+    <ul>
+      <li>용량을 줄일 수 있지만, 그렇게 많이 사용되지는 않는다</li>
+    </ul>
+  </li>
+</ul>
+
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

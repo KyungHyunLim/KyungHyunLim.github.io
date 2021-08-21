@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Pytorch, 대용량 데이터 처리 with Dataset 클래스</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Pytorch, 대용량 데이터 처리 with Dataset 클래스 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Pytorch, 대용량 데이터 처리 with Dataset 클래스" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="0. torch에서 제공하는 기본 클래스 HDF5Matrix와 동일하게, 해당 데이터를 사용할 때 메모리에 적재, 메모리에러로 부터 자유로워질 수 있다 아래 함수들을 필수로 구현해 주어야한다 init(self,…): 초기화 함수 len(data): 데이터의 길이 반환 getitem(idx): idx번째 데이터 반환" />
+<meta property="og:description" content="0. torch에서 제공하는 기본 클래스 HDF5Matrix와 동일하게, 해당 데이터를 사용할 때 메모리에 적재, 메모리에러로 부터 자유로워질 수 있다 아래 함수들을 필수로 구현해 주어야한다 init(self,…): 초기화 함수 len(data): 데이터의 길이 반환 getitem(idx): idx번째 데이터 반환" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-30T02:54:56+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pytorch, 대용량 데이터 처리 with Dataset 클래스" />
+<script type="application/ld+json">
+{"description":"0. torch에서 제공하는 기본 클래스 HDF5Matrix와 동일하게, 해당 데이터를 사용할 때 메모리에 적재, 메모리에러로 부터 자유로워질 수 있다 아래 함수들을 필수로 구현해 주어야한다 init(self,…): 초기화 함수 len(data): 데이터의 길이 반환 getitem(idx): idx번째 데이터 반환","mainEntityOfPage":{"@type":"WebPage","@id":"/pytorch/ml_ai/2021/07/30/dataset.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Pytorch, 대용량 데이터 처리 with Dataset 클래스","dateModified":"2021-07-30T02:54:56+09:00","datePublished":"2021-07-30T02:54:56+09:00","url":"/pytorch/ml_ai/2021/07/30/dataset.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/pytorch/ml_ai/2021/07/30/dataset.html">
+    <h2 class="post-title">Pytorch, 대용량 데이터 처리 with Dataset 클래스</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Jul 30, 2021</div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="0-torch에서-제공하는-기본-클래스">0. torch에서 제공하는 기본 클래스</h2>
+<ul>
+  <li>HDF5Matrix와 동일하게, 해당 데이터를 사용할 때 메모리에 적재, 메모리에러로 부터 자유로워질 수 있다</li>
+  <li>아래 함수들을 필수로 구현해 주어야한다
+    <ul>
+      <li><strong>init</strong>(self,…): 초기화 함수</li>
+      <li><strong>len</strong>(data): 데이터의 길이 반환</li>
+      <li><strong>getitem</strong>(idx): idx번째 데이터 반환</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.utils.data</span> <span class="k">as</span> <span class="n">D</span>
+<span class="kn">import</span> <span class="nn">torch.utils.data.Dataset</span> <span class="k">as</span> <span class="n">Dataset</span>
+
+<span class="k">class</span> <span class="nc">CustomDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_root</span><span class="p">,</span> <span class="n">y_root</span><span class="p">,</span> <span class="n">chunksize</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+</code></pre></div></div>
+
+<h2 id="1-init-및-len">1. init 및 len</h2>
+<ul>
+  <li>데이터셋이 파일로 구분된 경우
+    <ul>
+      <li>이미지나 오디오같이 여러개의 파일로 이루어 져있을 경우는 파일 목록을 가지고 있는다</li>
+      <li>목록과 index를 이용해 해당 데이터에 접근</li>
+    </ul>
+  </li>
+  <li>데이터셋이 하나의 파일인 경우
+    <ul>
+      <li>많이 사용되는 csv 형태로 하나의 파일로 존재하는경우</li>
+      <li>chunksize와 iterator를 이용해 원하는 크기만큼의 데이터만 호출한다</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_root</span><span class="p">,</span> <span class="n">y_root</span><span class="p">,</span> <span class="n">chunksize</span><span class="p">):</span>
+    <span class="c1"># 데이터셋이 파일로 구분되어 있는 경우 (Audio, Image)
+</span>    <span class="bp">self</span><span class="p">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">root</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">y_root</span><span class="p">)</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">values</span>
+
+    <span class="c1"># 데이터셋이 하나의 파일인 경우 (CSV)
+</span>    <span class="bp">self</span><span class="p">.</span><span class="n">chunksize</span> <span class="o">=</span> <span class="n">chunksize</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">x_root</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">chunksize</span><span class="p">,</span> <span class="n">iterator</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="c1"># 데이터셋이 파일로 구분되어 있는 경우
+</span>    <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">chunksize</span> <span class="c1"># 데이터셋이 하나의 파일인 경우
+</span></code></pre></div></div>
+
+<h2 id="2-getitem">2. <strong>getitem</strong></h2>
+<ul>
+  <li>데이터셋이 파일로 구분되어 있는 경우
+    <ul>
+      <li>간단하게 원하는 파일만 불러와서 반환해 주면 된다</li>
+    </ul>
+  </li>
+  <li>데이터셋이 하나의 파일인 경우
+    <ul>
+      <li>y라벨이 같은 파일에 있다면 인덱스로 제어해주면 된다</li>
+      <li>청크 사이즈 만큼 얻어온 데이터를 반환해 주면된다</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 데이터셋이 파일로 구분되어 있는 경우
+</span><span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+    <span class="c1"># 원하는 index의 데이터만 호출해서 반환
+</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">file_path</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">x_data</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="nb">float</span><span class="p">()</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">y_data</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">]).</span><span class="nb">float</span><span class="p">()</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">x_data</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">y_data</span>
+
+<span class="c1"># 데이터셋이 하나의 파일인 경우
+</span><span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># 정해진 크기만큼 데이터를 호출해 사용
+</span>    <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">reader</span><span class="p">.</span><span class="n">get_chunk</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">chunksize</span><span class="p">)</span>
+    <span class="n">tensorData</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="nb">input</span> <span class="o">=</span> <span class="n">tensorData</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">y_data</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="p">).</span><span class="nb">float</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">y_data</span>
+</code></pre></div></div>
+
+<h2 id="3-확인해보기">3. 확인해보기</h2>
+<ul>
+  <li>그림에서 보이는 것과 같이 2개씩 읽어 오는 것을 알 수 있다.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">custom_data</span> <span class="o">=</span> <span class="n">CustomDataset</span><span class="p">(</span><span class="s">'./test_data.csv'</span><span class="p">,</span> <span class="s">'label.csv'</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">)</span>
+    <span class="n">train_loader</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">custom_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tarin_loader</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">target</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+<p><img src="/assets/image/data_1.PNG" alt="" /></p>
+
+<ul>
+  <li>여기서 DataLoader의 배치 크기를 늘리면, 해당 묶음 만큼 가져온다</li>
+</ul>
+
+<p><img src="/assets/image/data_2.PNG" alt="" /></p>
+
+<ul>
+  <li>라벨 처리도 쉽게 하려면 동일한 방식으로 불러오도록 수정하면 좋을 것 같다</li>
+</ul>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

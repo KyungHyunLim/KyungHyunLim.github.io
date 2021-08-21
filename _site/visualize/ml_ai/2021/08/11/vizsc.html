@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Visualization-Scatter</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Visualization-Scatter | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Visualization-Scatter" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 기본 정의 점을 사용해 그리는 그래프 =산점도 x, y값을 매핑해서 사용 (N차원 데이터로 확장 가능) 요소 색 모양 크기 목적 상관관계 확인 양의 상관관계 음의 상관관계 뚜렷한 관계 없음 군집/ 값 사이의 차이/ 이상치 확인" />
+<meta property="og:description" content="1. 기본 정의 점을 사용해 그리는 그래프 =산점도 x, y값을 매핑해서 사용 (N차원 데이터로 확장 가능) 요소 색 모양 크기 목적 상관관계 확인 양의 상관관계 음의 상관관계 뚜렷한 관계 없음 군집/ 값 사이의 차이/ 이상치 확인" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-11T00:23:22+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Visualization-Scatter" />
+<script type="application/ld+json">
+{"description":"1. 기본 정의 점을 사용해 그리는 그래프 =산점도 x, y값을 매핑해서 사용 (N차원 데이터로 확장 가능) 요소 색 모양 크기 목적 상관관계 확인 양의 상관관계 음의 상관관계 뚜렷한 관계 없음 군집/ 값 사이의 차이/ 이상치 확인","mainEntityOfPage":{"@type":"WebPage","@id":"/visualize/ml_ai/2021/08/11/vizsc.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Visualization-Scatter","dateModified":"2021-08-11T00:23:22+09:00","datePublished":"2021-08-11T00:23:22+09:00","url":"/visualize/ml_ai/2021/08/11/vizsc.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/visualize/ml_ai/2021/08/11/vizsc.html">
+    <h2 class="post-title">Visualization-Scatter</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 11, 2021</div><ul class="post-categories"><li>Visualize</li><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h3 id="1-기본">1. 기본</h3>
+<ul>
+  <li>정의
+    <ul>
+      <li>점을 사용해 그리는 그래프</li>
+      <li>=산점도</li>
+      <li>x, y값을 매핑해서 사용 (N차원 데이터로 확장 가능)</li>
+    </ul>
+  </li>
+  <li>요소
+<img src="/assets/image/ML_AI/vizsc_1.PNG" alt="" />
+    <ul>
+      <li>색</li>
+      <li>모양</li>
+      <li>크기</li>
+    </ul>
+  </li>
+  <li>목적
+    <ul>
+      <li>상관관계 확인
+        <ul>
+          <li>양의 상관관계</li>
+          <li>음의 상관관계</li>
+          <li>뚜렷한 관계 없음</li>
+        </ul>
+      </li>
+      <li>군집/ 값 사이의 차이/ 이상치 확인</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="2-정확한-scatter-plot">2. 정확한 Scatter Plot</h3>
+<ul>
+  <li>Overplotting
+    <ul>
+      <li>점이 많아질수록 점의 분포를 파악하기 어려움
+<img src="/assets/image/ML_AI/vizsc_2.PNG" alt="" />
+        <ul>
+          <li>투명도 조정</li>
+          <li>지터링: 점의 위치를 약간씩 변경</li>
+          <li>2차원 히스토그램: 히트맵을 사용해 시각화</li>
+          <li>Contour plot : 분포를 등고선을 사용해 표현</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>점의 요소와 인지
+<img src="/assets/image/ML_AI/vizsc_3.PNG" alt="" />
+    <ul>
+      <li>색, 마커, 크기</li>
+      <li>마커는 비추천! (크기가 고르지 않음)</li>
+    </ul>
+  </li>
+  <li>인과관계와 상관관계
+    <ul>
+      <li>인과관계 != 상관관계</li>
+      <li>인과관계는 항상 사전 정보와 함께 가정으로 제시</li>
+    </ul>
+  </li>
+  <li>추세선
+    <ul>
+      <li>scatter의 패턴을 유추할 수 있음</li>
+      <li>여러개 사용은 지양!</li>
+    </ul>
+  </li>
+  <li>ETC
+    <ul>
+      <li>Grid 지양</li>
+      <li>범주형 관계에서는 heatmap 또는 buble chart 추천</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="3-실습">3. 실습</h3>
+<ul>
+  <li><a href="https://github.com/KyungHyunLim/Prv/blob/main/Viz/Scatterplot.ipynb">jupyter notebook</a></li>
+</ul>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

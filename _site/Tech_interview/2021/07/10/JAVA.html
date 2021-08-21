@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>JAVA</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>JAVA | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="JAVA" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="7.l Basic 7.1.1 Java 접근 제어자에 대해서 각각 설명해 주세요. Private: 선언한 클래스 내부에서만 접근 가능 Public: 외부로 공개되어 어디서든 접근 가능 Protected: 같은 패키지 혹은 자식클래스들은 접근 가능 Default: 같은 패키지 클래스들은 접근 가능, 자식은 X (사실상 없음, 지정하지 않은 경우) 7.1.2 JVM의 구조에 대해서 설명해 주세요. Class loader, Garbage Collector, Execution Engine, Runtime data area 가 존재합니다. Class loader는 컴파일러가 .class 파일을 생성하면 이 파일들을 엮어 Runtime data area로 적재하는 역할을 합니다. Execution engine은 적재된 클래스들을 기계어로 변경해 명령어 단위로 실행합니다. Garbage collector는 heap 영역에 생성된 객체들중에 reachability를 잃은 객체를 탐색 후 제거하는 역할을 합니다. 7.1.3 Garbage Collector에 대해서 설명해주세요. 어떻게 동작하나요? ``` JVM의 메모리 영역: 메소드 영역, JVM 스택, 힙 영역 이때 힙 영역 =&gt; YOUNG, OLD, Permanent Generation YOUNG: eden, S0, S1" />
+<meta property="og:description" content="7.l Basic 7.1.1 Java 접근 제어자에 대해서 각각 설명해 주세요. Private: 선언한 클래스 내부에서만 접근 가능 Public: 외부로 공개되어 어디서든 접근 가능 Protected: 같은 패키지 혹은 자식클래스들은 접근 가능 Default: 같은 패키지 클래스들은 접근 가능, 자식은 X (사실상 없음, 지정하지 않은 경우) 7.1.2 JVM의 구조에 대해서 설명해 주세요. Class loader, Garbage Collector, Execution Engine, Runtime data area 가 존재합니다. Class loader는 컴파일러가 .class 파일을 생성하면 이 파일들을 엮어 Runtime data area로 적재하는 역할을 합니다. Execution engine은 적재된 클래스들을 기계어로 변경해 명령어 단위로 실행합니다. Garbage collector는 heap 영역에 생성된 객체들중에 reachability를 잃은 객체를 탐색 후 제거하는 역할을 합니다. 7.1.3 Garbage Collector에 대해서 설명해주세요. 어떻게 동작하나요? ``` JVM의 메모리 영역: 메소드 영역, JVM 스택, 힙 영역 이때 힙 영역 =&gt; YOUNG, OLD, Permanent Generation YOUNG: eden, S0, S1" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-10T20:15:12+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="JAVA" />
+<script type="application/ld+json">
+{"description":"7.l Basic 7.1.1 Java 접근 제어자에 대해서 각각 설명해 주세요. Private: 선언한 클래스 내부에서만 접근 가능 Public: 외부로 공개되어 어디서든 접근 가능 Protected: 같은 패키지 혹은 자식클래스들은 접근 가능 Default: 같은 패키지 클래스들은 접근 가능, 자식은 X (사실상 없음, 지정하지 않은 경우) 7.1.2 JVM의 구조에 대해서 설명해 주세요. Class loader, Garbage Collector, Execution Engine, Runtime data area 가 존재합니다. Class loader는 컴파일러가 .class 파일을 생성하면 이 파일들을 엮어 Runtime data area로 적재하는 역할을 합니다. Execution engine은 적재된 클래스들을 기계어로 변경해 명령어 단위로 실행합니다. Garbage collector는 heap 영역에 생성된 객체들중에 reachability를 잃은 객체를 탐색 후 제거하는 역할을 합니다. 7.1.3 Garbage Collector에 대해서 설명해주세요. 어떻게 동작하나요? ``` JVM의 메모리 영역: 메소드 영역, JVM 스택, 힙 영역 이때 힙 영역 =&gt; YOUNG, OLD, Permanent Generation YOUNG: eden, S0, S1","mainEntityOfPage":{"@type":"WebPage","@id":"/tech_interview/2021/07/10/JAVA.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"JAVA","dateModified":"2021-07-10T20:15:12+09:00","datePublished":"2021-07-10T20:15:12+09:00","url":"/tech_interview/2021/07/10/JAVA.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/tech_interview/2021/07/10/JAVA.html">
+    <h2 class="post-title">JAVA</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Jul 10, 2021</div><ul class="post-categories"><li>Tech_interview</li></ul></div>
+  <div class="post">
+    <h2 id="7l-basic">7.l Basic</h2>
+<h3 id="711-java-접근-제어자에-대해서-각각-설명해-주세요">7.1.1 Java 접근 제어자에 대해서 각각 설명해 주세요.</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Private: 선언한 클래스 내부에서만 접근 가능
+Public: 외부로 공개되어 어디서든 접근 가능
+Protected: 같은 패키지 혹은 자식클래스들은 접근 가능
+Default: 같은 패키지 클래스들은 접근 가능, 자식은 X (사실상 없음, 지정하지 않은 경우)
+</code></pre></div></div>
+<h3 id="712-jvm의-구조에-대해서-설명해-주세요">7.1.2 JVM의 구조에 대해서 설명해 주세요.</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Class loader, Garbage Collector, Execution Engine, Runtime data area 가 존재합니다.
+Class loader는 컴파일러가 .class 파일을 생성하면 이 파일들을 엮어 Runtime data area로 적재하는 역할을 합니다.
+Execution engine은 적재된 클래스들을 기계어로 변경해 명령어 단위로 실행합니다.
+Garbage collector는 heap 영역에 생성된 객체들중에 reachability를 잃은 객체를 탐색 후 제거하는 역할을 합니다.
+</code></pre></div></div>
+<h3 id="713-garbage-collector에-대해서-설명해주세요-어떻게-동작하나요">7.1.3 Garbage Collector에 대해서 설명해주세요. 어떻게 동작하나요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JVM의 메모리 영역: 메소드 영역, JVM 스택, 힙 영역
+이때 힙 영역 =&gt; YOUNG, OLD, Permanent Generation
+YOUNG: eden, S0, S1
+
+새롭게 생성된 객체는 YOUNG의 eden 영역에 들어가고, eden 영역이 다 차면 minor GC가 발생
+GC가 실행되면, GC를 실행하는 스레드외에 나머지 스레드는 멈춘다
+불필요한 객체는 삭제되고, 아직 필요한 객체는 S0으로 이동, S0에 있었던 객체는 S1으로 이동, S1이 다차면 S1에 아직 필요한 객체는 OLD generation으로 이동
+OLD generation은 크기가 크므로, 이 영역이 다 차는 경우는 자주 발생하지 않음.
+이 영역을 삭제할 때 major GC(or full GC) 발생.
+Minor GC는 자주 발생하지만, YOUNG 영역은 OLD 영역보다 적기 떄문에, 프로그램 중지 시간은 짧아짐
+YOUNG 영역을 다 비우므로, YOUNG 영역에는 연속된 여유 공간이 만들어짐
+
+
+Stop the world 방식으로 실행되어 GC 스레드 제외 나머지 스레드 작업이 멈추게 됩니다.
+</code></pre></div></div>
+<h3 id="714-gc의-종류에-대해서-말해보세요">7.1.4 GC의 종류에 대해서 말해보세요.</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Serial GC: Minor GC, Major GC 모두 순차적으로 수행, deletion Compacting 수행
+Parallel GC: 여러 CPU를 효과적으로 활용하기 위해, 멀티스레드 사용, deletion Compacting 수행
+Concurrent Mark Sweep Collector: GC작업을 app 스레드와 동시에 수행, deletion만 수행
+G1 GC: CPU와 아주 큰 메모리에서 효과적인 GC를 활용하기 위함. Heap 크기가 6gb보다 클경우 latency를 0.5sec이하로 낮출 수 있다고 알고 있습니다.
+</code></pre></div></div>
+<h3 id="715-java는-call-by-value일까요-call-by-reference-일까요">7.1.5 Java는 Call By Value일까요, Call By Reference 일까요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Call by value 입니다.
+</code></pre></div></div>
+<h3 id="716-리플렉션reflection이란-무엇인가요">7.1.6 리플렉션(Reflection)이란 무엇인가요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>구체적인 클래스 타입을 알지 못해도 그 클래스의 메소드와 타입 그리고 변수들을 접근할 수 있도록 해주는 자바 API입니다.
+</code></pre></div></div>
+<h3 id="717-stream-api란-무엇인가요">7.1.7 Stream API란 무엇인가요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Stream API는 컬렉션의 요소를 람다식으로 처리할 수 있도록 하는 함수형 프로그래밍 도구입니다.
+</code></pre></div></div>
+<h3 id="718-lambda란-무엇인가요">7.1.8 Lambda란 무엇인가요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>람다식(Lambda Expression)이란 함수를 하나의 식(expression)으로 표현한 것이다. 함수를 람다식으로 표현하면 메소드의 이름이 필요 없기 때문에, 람다식은 익명 함수(Anonymous Function)의 한 종류라고 볼 수 있다.
+괄호() 와 화살표 -&gt; 를 이용해 함수를 선언
+</code></pre></div></div>
+<h3 id="719-함수형-인터페이스란-무엇인가요">7.1.9 함수형 인터페이스란 무엇인가요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>함수를 1급 객체처럼 다룰 수 있게 해주는 어노테이션으로, 인터페이스에 선언하여 단 하나의 추상 메소드만을 갖도록 제한하는 역할을 한다.
+
++a
+자주 사용되는 것: 
+Supplier&lt;T&gt;
+Consumer&lt;T&gt;
+Function&lt;T, R&gt;
+Predicate&lt;T&gt;
+</code></pre></div></div>
+<h3 id="7110-jvm-기동시-주로-사용되는-옵션들을-아는대로-말해보세요">7.1.10 JVM 기동시 주로 사용되는 옵션들을 아는대로 말해보세요.</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-Xms set initial Java heap size(자바 초기 heap 사이즈 설정)
+-Xmx set maximum Java heap size(자바 최고 heap 사이즈 설정)
+-Xss set Java thread stack size(자바 thread stack 사이즈 설정)
+</code></pre></div></div>
+<h3 id="7111-foreach를-사용할-수-있는-자료구조는-어떤-인터페이스를-상속받고-있나요">7.1.11 foreach를 사용할 수 있는 자료구조는 어떤 인터페이스를 상속받고 있나요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Iterable 인터페이스를 상속받습니다.
+</code></pre></div></div>
+<h3 id="7112-iterator와-iterable-차이는-무엇인가요">7.1.12 iterator와 iterable 차이는 무엇인가요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iterable은 순회할 수 있는 컬렉션을 의미한다. iterable 인터페이스를 implement하면 객체는 foreach문을 사용할 수 있다. Iterable의 역할은 iterator()메소드를 하위 클래스에서 무조건 구현을 하게 만들기 위함이다.
+</code></pre></div></div>
+<h3 id="7113-synchronized-키워드에-대해-설명해-주세요">7.1.13 synchronized 키워드에 대해 설명해 주세요.</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>멀티 쓰레드 환경에서의 동시성 제어를 구현을 지원해주는 키워드입니다. 이 키워드를 사용하면 해당 변수에 접근하는 쓰레드 순서를 제어할 수 있습니다.
+</code></pre></div></div>
+<h3 id="7114-volatile-키워드에-대해-설명해-주세요">7.1.14 volatile 키워드에 대해 설명해 주세요.</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>volatile keyword는 Java 변수를 Main Memory에 저장하겠다라는 것을 명시하는 것입니다. 
+변수의 값을 Read할 때마다 CPU cache에 저장된 값이 아닌 Main Memory에서 읽는 것입니다. Write할 때마다 Main Memory에까지 작성하는 것.
+Multi Thread환경에서 Thread가 변수 값을 읽어올 때 각각의 CPU Cache에 저장된 값이 다르기 때문에 변수 값 불일치 문제가 발생하게 됩니다.
+</code></pre></div></div>
+<h3 id="7115-final-키워드에-대해서-설명해주세요-각각의-쓰임에-따라-어떻게-동작하나요">7.1.15 final 키워드에 대해서 설명해주세요. 각각의 쓰임에 따라 어떻게 동작하나요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Final 키워드는 변수, 함수, 클래스에 사용할 수 있습니다.
+변수에 사용하면, 수정할 수 없다는 의미를 가집니다. 따라서 사용하기전 반드시 초기화 과정이 필요합니다.
+함수에 사용할 경우, override를 제한합니다.
+클래스에 사용할 경우, 상속이 불가능한 클래스가 됩니다.
+</code></pre></div></div>
+<h2 id="72-클래스와-객체">7.2 클래스와 객체</h2>
+<h3 id="721-wrapper-class란-무엇인가요">7.2.1 Wrapper class란 무엇인가요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>자료형 중 기본 타입인 char, int, float와 같은 타입을 객체로 표현 해야하는 경우, 이들을 객체로 다루기 위해 사용하는 클래스입니다.
+</code></pre></div></div>
+<h3 id="722-클래스-객체-인스턴스-차이에-대해서-설명해-주세요">7.2.2	클래스, 객체, 인스턴스 차이에 대해서 설명해 주세요.</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>클래스 - 객체를 만들어 내기 위한 설계도 틀, 연관있는 변수와 메서드 집합
+객체 - 구현할 대상, 클래스에 선언된 모양 그대로 실체 (클래스 인스턴스)
+인스턴스 - 설계도 바탕으로 구현된 실체 ,실체화된 인스턴스는 메모리에 할당
+</code></pre></div></div>
+<h3 id="723-직렬화와-역직렬화에-대해서-설명해-주세요">7.2.3 직렬화와 역직렬화에 대해서 설명해 주세요.</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>직렬화란 객체들의 데이터를 연속적인 데이터로 변형하여 Stream을 통해 데이터를 읽도록 해준다 . 객체들을 통째로 파일로 저장하거나 전송하고 싶을때 주로 사용 합니다.
+역직렬화란 파일 등을 역으로 직렬화하여 다시 객체의 형태로 만드는것을 의미 저장된 파일을 읽거나 전송된 스트림 데이터를 읽어 원래 객체 형태로 복원
+</code></pre></div></div>
+<h3 id="724-java-generic에-대해서-설명해-주세요">7.2.4 Java Generic에 대해서 설명해 주세요.</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Generic은 데이터타입의 일반화를 의미하는 것으로 클래스나 메소드 내부에서 사용할 내부 데이터의 타입을 컴파일시에 미리 지정하는 방법이다.
+이렇게 컴파일시 데이터 타입을 검사하면 클래스나 메소드 내부에서 사용되는 객체의 타입 안정성을 높일 수 있고, 반환값에 대한 타입 변환 및 타입 검사에 들어가는 노력을 줄일 수 있다.
+</code></pre></div></div>
+<h3 id="725-equals와-의-차이는-무엇인가요">7.2.5 equals와 ==의 차이는 무엇인가요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>== 은 주소값을 비교하고 equals는 객체 값을 비교합니다.
+</code></pre></div></div>
+<h3 id="726-hashcode란-무엇인가">7.2.6 hashcode란 무엇인가?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>객체를 식별할 수 있는 유니크한 값. 메모리에 생성된 객체의 주소를 정수로 변환한 형태(고유값)
+</code></pre></div></div>
+<h3 id="727-문자열을-리터럴string--abcd로-할당하는-것과-객체string--new-stringabcd로-할당하는-방식의-차이가-무엇인가요">7.2.7 문자열을 리터럴(string = “abcd”)로 할당하는 것과 객체(string = new String(“abcd”))로 할당하는 방식의 차이가 무엇인가요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>객체 할당 하는 방식은 heap 영역에 할당되고 리터럴 방식은 String Constant Pool 이라는 영역에 할당된다.
+</code></pre></div></div>
+<h3 id="728-순수-추상-클래스와-인터페이스의-차이는-무엇인가요">7.2.8 순수 추상 클래스와 인터페이스의 차이는 무엇인가요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>두 클래스의 공통점은 선언만 있고 구현 내용이 없다는 것입니다. 
+상속 받은 자식이 구현을 담당해야합니다.
+차이점으로는 키워드로 abstract , implements 로 구분 한다는 것과 
+추상 클래스의 정의는 abstract 메소드가 하나라도 존재하는 클래스
+인터페이스는 구현체 없이, 메소드에 대한 명세만 있다는 것입니다. 또한 자바에서 단일상속을 지원하기 때문에 인터페이스로 다중상속 가능토록 만들수 있습니다.
+</code></pre></div></div>
+<h3 id="729-본인-관점에서-인터페이스는-주로-어떨-떄-사용하나요">7.2.9 본인 관점에서, 인터페이스는 주로 어떨 떄 사용하나요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>여러 모듈의 기능을 구현 해야할떄, 다중 상속이 필요한 경우에 사용할 것 같습니다.
+</code></pre></div></div>
+<h2 id="73-자료형-자료구조">7.3 자료형, 자료구조</h2>
+<h3 id="731-java의-collection에-대해서-설명해-주세요">7.3.1 Java의 collection에 대해서 설명해 주세요.</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>데이터의 집합, 그룹을 의미합니다. 
+크게 SET, LIST, QUEUE, MAP 인터페이스를 가지고, 세부적으로 구현된 클래스들이 존재합니다.
+</code></pre></div></div>
+<h3 id="732-array와-arraylist의-차이점은-무엇인가요">7.3.2 Array와 ArrayList의 차이점은 무엇인가요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. 배열은 크기가 고정되어 있지만 ArrayList는 동적 (현재 메모리에 1.5씩 늘어남)
+2. 배열은 기본형, object 모두 담을수 있지만 ArrayList는 object만
+3. 배열 제네릭 사용 불가 ArrayList는 사용 가능
+4. 배열은 길이 length(), ArrayList는 size()
+</code></pre></div></div>
+<h3 id="733-char-type과-string-type으로-나뉘어져-있는-이유는-무엇인가요">7.3.3 char type과 string type으로 나뉘어져 있는 이유는 무엇인가요?</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String은 char배열에 기능, 즉 함수를 추가한 것입니다. 하지만 큰 차이점이 하나가 있는데 String 객체는 읽을 수만 있고 내용 변경이 불가능 하다는 것입니다.
+</code></pre></div></div>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

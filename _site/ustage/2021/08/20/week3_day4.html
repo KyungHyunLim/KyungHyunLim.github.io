@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Week3 - day4</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Week3 - day4 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Week3 - day4" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 개인학습 pytorch4 pytorch5 2. 선택 과제 Why? xavier uniform으로 초기화? 관련논문 Xaiver함수는 비선형함수(ex. sigmoid, tanh)에서 효과적인 결과를 보여준다 하지만 ReLU함수에서 사용 시 출력 값이 0으로 수렴하게 되는 현상을 확인 할 수 있다 이전 Layer의 activation value와 다음 Layer의 activation value 평균과 표준 편차가 일정해야 한다" />
+<meta property="og:description" content="1. 개인학습 pytorch4 pytorch5 2. 선택 과제 Why? xavier uniform으로 초기화? 관련논문 Xaiver함수는 비선형함수(ex. sigmoid, tanh)에서 효과적인 결과를 보여준다 하지만 ReLU함수에서 사용 시 출력 값이 0으로 수렴하게 되는 현상을 확인 할 수 있다 이전 Layer의 activation value와 다음 Layer의 activation value 평균과 표준 편차가 일정해야 한다" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-20T05:22:30+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Week3 - day4" />
+<script type="application/ld+json">
+{"description":"1. 개인학습 pytorch4 pytorch5 2. 선택 과제 Why? xavier uniform으로 초기화? 관련논문 Xaiver함수는 비선형함수(ex. sigmoid, tanh)에서 효과적인 결과를 보여준다 하지만 ReLU함수에서 사용 시 출력 값이 0으로 수렴하게 되는 현상을 확인 할 수 있다 이전 Layer의 activation value와 다음 Layer의 activation value 평균과 표준 편차가 일정해야 한다","mainEntityOfPage":{"@type":"WebPage","@id":"/ustage/2021/08/20/week3_day4.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Week3 - day4","dateModified":"2021-08-20T05:22:30+09:00","datePublished":"2021-08-20T05:22:30+09:00","url":"/ustage/2021/08/20/week3_day4.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ustage/2021/08/20/week3_day4.html">
+    <h2 class="post-title">Week3 - day4</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 20, 2021</div><ul class="post-categories"><li>ustage</li></ul></div>
+  <div class="post">
+    <h2 id="1-개인학습">1. 개인학습</h2>
+<ul>
+  <li><a href="https://kyunghyunlim.github.io/pytorch/ml_ai/2021/08/19/Pytorch_4.html">pytorch4</a></li>
+  <li><a href="https://kyunghyunlim.github.io/pytorch/ml_ai/2021/08/19/Pytorch_5.html">pytorch5</a></li>
+</ul>
+
+<h2 id="2-선택-과제">2. 선택 과제</h2>
+<ul>
+  <li>Why?  xavier uniform으로 초기화?
+    <ul>
+      <li><a href="https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">관련논문</a></li>
+      <li>Xaiver함수는 비선형함수(ex. sigmoid, tanh)에서 효과적인 결과를 보여준다</li>
+      <li>하지만 ReLU함수에서 사용 시 출력 값이 0으로 수렴하게 되는 현상을 확인 할 수 있다</li>
+      <li>이전 Layer의 activation value와 다음 Layer의 activation value 평균과 표준 편차가 일정해야 한다</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-알고리즘-풀이">3. 알고리즘 풀이</h2>
+<ul>
+  <li><a href="https://kyunghyunlim.github.io/algorithm/2021/08/19/BAEK_11286.html">풀이</a></li>
+</ul>
+
+<h2 id="4-피어세션">4. 피어세션</h2>
+<ul>
+  <li>강의 요약</li>
+  <li>과제 코드 리뷰</li>
+  <li>알고리즘 코드 공유</li>
+</ul>
+
+<h2 id="5-마스터세션">5. 마스터세션</h2>
+<ul>
+  <li>Data centric AI
+    <ul>
+      <li>코딩을 못하면 AL/DL 어려울까? 응!</li>
+      <li>왜? 전반적인(CS 지식)이 필요하니까!</li>
+    </ul>
+  </li>
+  <li>Pre-trainning
+    <ul>
+      <li>back-bone 만 바꿔가며 좋은 성능~</li>
+      <li>NLP
+        <ul>
+          <li>back-bone: BERT…</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>성능이 중요할까?
+    <ul>
+      <li>A 모델이 97%, B 모델이 98%의 성능을 보여준다고 할 때, 이 1%가 어떤 영향을 가지는 지는 도메인에 따라 다르다. 때문에 전혀 중요하지 않은 분야도 있다!</li>
+    </ul>
+  </li>
+  <li>Research 분야
+    <ul>
+      <li>모델 개발 / 하이퍼파라미터 튜닝 싸움</li>
+    </ul>
+  </li>
+  <li>Real world(industrial 영역)
+    <ul>
+      <li>작업 과정
+        <ul>
+          <li>A. 어떤 문제를 풀어야 하는가?</li>
+          <li>B.Data</li>
+          <li>C.Modeling</li>
+          <li>D.Deployment</li>
+        </ul>
+      </li>
+      <li>B, C보다는 A, D가 더 중요하다!!</li>
+    </ul>
+  </li>
+  <li>Data Feedback Loop
+    <ul>
+      <li>사용자의 데이터를 자동화해 모델에 피딩하는 체게 필요
+        <ul>
+          <li>언제까지 crtl + enter를 사람이 눌러줄 수 없다…</li>
+        </ul>
+      </li>
+      <li>네트워크 ~ 하드웨어, 데이터 플랫폼 모든걸 이해해야함</li>
+      <li>특히 대용량 데이터를 다뤄본 경험이 중요!!</li>
+    </ul>
+  </li>
+</ul>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

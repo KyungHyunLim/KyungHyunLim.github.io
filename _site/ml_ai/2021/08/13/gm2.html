@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Generative model-VAE, GAN</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Generative model-VAE, GAN | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Generative model-VAE, GAN" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Latent Variable Models 1.1 Variational Inference and Deep Learning Autoencoder는 generative 모델일까? Autoencoder는 gnerative 모델이 아니다! Latent space를 샘플링 해서 디코더를 거쳐 데이터를 생성할 수 있어야 한다." />
+<meta property="og:description" content="1. Latent Variable Models 1.1 Variational Inference and Deep Learning Autoencoder는 generative 모델일까? Autoencoder는 gnerative 모델이 아니다! Latent space를 샘플링 해서 디코더를 거쳐 데이터를 생성할 수 있어야 한다." />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-13T22:55:22+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Generative model-VAE, GAN" />
+<script type="application/ld+json">
+{"description":"1. Latent Variable Models 1.1 Variational Inference and Deep Learning Autoencoder는 generative 모델일까? Autoencoder는 gnerative 모델이 아니다! Latent space를 샘플링 해서 디코더를 거쳐 데이터를 생성할 수 있어야 한다.","mainEntityOfPage":{"@type":"WebPage","@id":"/ml_ai/2021/08/13/gm2.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Generative model-VAE, GAN","dateModified":"2021-08-13T22:55:22+09:00","datePublished":"2021-08-13T22:55:22+09:00","url":"/ml_ai/2021/08/13/gm2.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ml_ai/2021/08/13/gm2.html">
+    <h2 class="post-title">Generative model-VAE, GAN</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 13, 2021</div><ul class="post-categories"><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-latent-variable-models">1. Latent Variable Models</h2>
+<h3 id="11-variational-inference-and-deep-learning">1.1 Variational Inference and Deep Learning</h3>
+<ul>
+  <li>Autoencoder는 generative 모델일까?<br />
+ Autoencoder는 gnerative 모델이 아니다! Latent space를 샘플링 해서 디코더를 거쳐 데이터를 생성할 수 있어야 한다.</li>
+</ul>
+
+<h3 id="12-variational-inference">1.2 Variational inference</h3>
+<ul>
+  <li>VI의 목표: posterior distribution과 매칭되는 variational distrubution을 최적화 하는것<br />
+  <img src="/assets/image/ML_AI/gm2_1.PNG" alt="" />
+    <ul>
+      <li>Posterior distribution: $P_\theta (z \vert x)$ (뒤집힌건 likelihood)</li>
+      <li>Variational distribution: $Q_\phi (z \vert x)$</li>
+      <li>보통 P를 계산하기 어렵기 때문에 P와 유사한 Q를 만드는 것이 VI의 과정이다.</li>
+    </ul>
+  </li>
+  <li>문제는?
+    <ul>
+      <li>Posterior distribution를 모른다!</li>
+      <li>ELBO trick이 이것을 가능하게 해준다.<br />
+  <img src="/assets/image/ML_AI/gm2_2.PNG" alt="" /></li>
+      <li>VI의 목적인 q와 p사이에 KL divergence를 줄이는 것이 목적인데, 이것이 불가능 하기 때문에, ELBO를 커지게하는 것으로 반대로 원하는 것을 얻고자 하는 것. <br />
+  <img src="/assets/image/ML_AI/gm2_3.PNG" alt="" /></li>
+      <li>Evidence Lower Bound(ELBO)는 계산할 수 있다! ELBO 식을 잘 유도해보면 Reconstruction Term과 Prior Fitting Term으로 변환할 수 있다. Reconstruction Term은 입력 x가 인코더를 거쳐 z를 생성하고, 이 z가 디코더를 통과해 다시 x가 됬을 때의 loss를 의미한다. Prior Fitting Term은 데이터들을 latent space에 올려두었을 때, 데이터들이 이루는 분포가 내가 가정하는 사전 분포와 유사한지에 대한 loss를 의미한다. 즉, 궁극적으로 x를 잘 표현할 수 있는 latent space z를 찾고 싶은 것.</li>
+    </ul>
+  </li>
+  <li>Key limitation
+    <ul>
+      <li>intractable (likelihood를 계산하기 어렵다)</li>
+      <li>대부분 gaussian 사전 분포를 활용</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="13-adversarial-autoencoder">1.3 Adversarial Autoencoder</h3>
+<p><img src="/assets/image/ML_AI/gm2_4.PNG" alt="" /></p>
+<ul>
+  <li>Gaussian 분포를 활용하고 싶지 않다!</li>
+  <li>GAN을 활용해 Latent distribution 사이 분포를 맞춰 주는것
+    <ul>
+      <li>Smapling 가능한 분포가 있으면 이에 z를 맞출 수 있다</li>
+      <li>복잡하고 다양한 분포를 활용 할 수 있어짐</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-generative-adversarial-network">2. Generative Adversarial Network</h2>
+<h3 id="21-concept">2.1 Concept</h3>
+<p><img src="/assets/image/ML_AI/gm2_5.PNG" alt="" /></p>
+<ul>
+  <li>GAN은 도둑이 위조 지폐를 만들고 싶은데, 위조 지폐를 잘 감별할 수 있는 경찰이 있다. 이때 도둑이 경찰을 속이기 위해 위조 지폐 기술을 계속 발전시키고, 경찰 또한 탐지 기술을 계속 발전시키면서 서로 고도화 되어가는 과정과 동일하다.</li>
+  <li>$min_G max_D V(D, G)=E_{x \sim p_{data}(x)}[logD(x)] + E_{z \sim p_z(z)}[log(1-D(G(z)))]$
+    <ul>
+      <li>$min_G$ : $D(G(z))=1$ 일때 최소가 된다</li>
+      <li>$max_D$ : $D(x)=1, \ D(G(z))=0$ 일때 최대가 된다</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="22-vae-vs-gan">2.2 VAE vs GAN</h3>
+<p><img src="/assets/image/ML_AI/gm2_6.PNG" alt="" /></p>
+<ul>
+  <li>VAE<br />
+ 학습단계에서 x를 인코더를 통해 latent space z로 보내지고, 이 z를 활용해 디코더는 x를 생성한다. 추론 단계에서는 P(z)로 부터 샘플링한 z를 기반으로 x를 생성하는 방식으로 사용이 된다.</li>
+  <li>GAN<br />
+ 학습단계에서 실제 데이터와 G가 z로 부터 생성한 이미지를 Real과 Fake라는 라벨로 분리해 Discriminator를 학습 시키고, G가 생성한 이미지가 D에서 Real로 판별되도록 학습시킨다. 따라서 학습이 거듭되면 G는 점점 실제와 유사하게 이미지를 생성하도록 성장한다. 추론 단계에서는 G만 이용해 데이터를 생성한다.</li>
+</ul>
+
+<h3 id="23-gan-objective">2.3 GAN Objective</h3>
+<ul>
+  <li>generator와 discriminator의 minimax 게임</li>
+  <li>Obtimal discriminator
+    <ul>
+      <li>$D_G^{*}(x)={P_{data}(x) \over P_{data}(x) + P_G(x)}$</li>
+      <li>위 식을 GAN의 object function에 대입하면,<br />
+  <img src="/assets/image/ML_AI/gm2_7.PNG" alt="" /></li>
+      <li>Jenson-Shannon Divergence를 최소화 하는 것과 동일해진다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-gan-종류">3. GAN 종류</h2>
+<h3 id="31-dcgan">3.1 DCGAN</h3>
+<p><img src="/assets/image/ML_AI/gm2_8.PNG" alt="" /></p>
+<ul>
+  <li>Leaky ReLU의 유용성</li>
+  <li>이미지를 만들때는 어떤식으로 구성하는게 좋더라를 제안</li>
+</ul>
+
+<h3 id="32-info-gan">3.2 Info-GAN</h3>
+<p><img src="/assets/image/ML_AI/gm2_9.PNG" alt="" /></p>
+<ul>
+  <li>특정 정보에 집중하도록 C를 추가</li>
+</ul>
+
+<h3 id="33-text2image">3.3 Text2Image</h3>
+<p><img src="/assets/image/ML_AI/gm2_14.PNG" alt="" /></p>
+
+<h3 id="34-puzzle-gan">3.4 Puzzle-GAN</h3>
+<p><img src="/assets/image/ML_AI/gm2_10.PNG" alt="" /></p>
+<ul>
+  <li>sub patch들을 가지고 GAN을 이용해 이미지 복원</li>
+  <li>E.g 범퍼, 헤드라이트, 차체 =&gt; 자동차</li>
+</ul>
+
+<h3 id="35-cycle-gan">3.5 Cycle-GAN</h3>
+<p><img src="/assets/image/ML_AI/gm2_11.PNG" alt="" /></p>
+<ul>
+  <li>이미지 Translation</li>
+  <li>Cycle-consistency loss
+    <ul>
+      <li>매칭이 되는 두 이미지가 없어도 학습 가능</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="36-star-gan">3.6 Star-GAN</h3>
+<p><img src="/assets/image/ML_AI/gm2_12.PNG" alt="" /></p>
+<ul>
+  <li>이미지를 컨트롤 할 수 있도록 학습</li>
+</ul>
+
+<h3 id="36-progressive-gan">3.6 Progressive-GAN</h3>
+<p><img src="/assets/image/ML_AI/gm2_13.PNG" alt="" />
+<img src="/assets/image/ML_AI/gm2_15.gif" alt="" /></p>
+<ul>
+  <li>고차원의 이미지를 잘 만들어준다.</li>
+</ul>
+
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

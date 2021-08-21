@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Week1 - 5 일차</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Week1 - 5 일차 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Week1 - 5 일차" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 개인학습 RNN 첫걸음 시퀀스 데이터 시계열 데이터-시간순서에 따라 나열된 데이터 소리, 문자열, 주가 등 독립동등분포(i,i,d) 가정을 잘 위배 순서를 바꾸거나, 과거정보손실 $\rightarrow$ 데이터 확률분포 변화 시퀀스 데이터 다루기 조건부확률 이용, 베이즈 룰이용 $P(X_1, …, X_t)=P(X_t \vert X_1, …, X_{t-1})P(X_1, …, X_{t-1})$ $= \prod_{s=1}^tP(X_s \vert X_{s-1},…,X_1)$ 과거의 모든 정보가 필요한 것은 아니다! 가변적 길이: $\tau$ 고정길이 $\tau$ 만큼의 시퀀스만 사용하는 경우 autoregressive model ( $AR(\tau )$ ) 과거의 정보를 인코딩 해서 활용 how? -&gt; RNN RNN 기본적인 형태 $O = HW^{(2)} + b^{(2)}$ $H = \sigma (XW^{(1)+b^{(1)}})$ $H$ : 잠재변수 $\sigma$ : 활성화함수 $W$ : 가중치행렬 $b$ : bias 현재 시점 t와 이전 시점 $H_{t-1}$ 을 이용해 $O_t$ 를 생성 역전파 BTTP (Backpropagation Throuh Time) O와 H로 부터 2개의 그레디언트 벡터 활용 Gradient vanishing 발생 길이가 길어질 수록 곱해지는 값이 늘어남 아주 작은 값 or 큰 값이 될수 있기 때문 해결책? truncated BPTT 일정 부분의 그레디언트를 무시 t시점에는 O로 부터의 그래디언트만 받음 GRU, LSTM 다른 강의에서 자세히" />
+<meta property="og:description" content="1. 개인학습 RNN 첫걸음 시퀀스 데이터 시계열 데이터-시간순서에 따라 나열된 데이터 소리, 문자열, 주가 등 독립동등분포(i,i,d) 가정을 잘 위배 순서를 바꾸거나, 과거정보손실 $\rightarrow$ 데이터 확률분포 변화 시퀀스 데이터 다루기 조건부확률 이용, 베이즈 룰이용 $P(X_1, …, X_t)=P(X_t \vert X_1, …, X_{t-1})P(X_1, …, X_{t-1})$ $= \prod_{s=1}^tP(X_s \vert X_{s-1},…,X_1)$ 과거의 모든 정보가 필요한 것은 아니다! 가변적 길이: $\tau$ 고정길이 $\tau$ 만큼의 시퀀스만 사용하는 경우 autoregressive model ( $AR(\tau )$ ) 과거의 정보를 인코딩 해서 활용 how? -&gt; RNN RNN 기본적인 형태 $O = HW^{(2)} + b^{(2)}$ $H = \sigma (XW^{(1)+b^{(1)}})$ $H$ : 잠재변수 $\sigma$ : 활성화함수 $W$ : 가중치행렬 $b$ : bias 현재 시점 t와 이전 시점 $H_{t-1}$ 을 이용해 $O_t$ 를 생성 역전파 BTTP (Backpropagation Throuh Time) O와 H로 부터 2개의 그레디언트 벡터 활용 Gradient vanishing 발생 길이가 길어질 수록 곱해지는 값이 늘어남 아주 작은 값 or 큰 값이 될수 있기 때문 해결책? truncated BPTT 일정 부분의 그레디언트를 무시 t시점에는 O로 부터의 그래디언트만 받음 GRU, LSTM 다른 강의에서 자세히" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-07T04:21:56+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Week1 - 5 일차" />
+<script type="application/ld+json">
+{"description":"1. 개인학습 RNN 첫걸음 시퀀스 데이터 시계열 데이터-시간순서에 따라 나열된 데이터 소리, 문자열, 주가 등 독립동등분포(i,i,d) 가정을 잘 위배 순서를 바꾸거나, 과거정보손실 $\\rightarrow$ 데이터 확률분포 변화 시퀀스 데이터 다루기 조건부확률 이용, 베이즈 룰이용 $P(X_1, …, X_t)=P(X_t \\vert X_1, …, X_{t-1})P(X_1, …, X_{t-1})$ $= \\prod_{s=1}^tP(X_s \\vert X_{s-1},…,X_1)$ 과거의 모든 정보가 필요한 것은 아니다! 가변적 길이: $\\tau$ 고정길이 $\\tau$ 만큼의 시퀀스만 사용하는 경우 autoregressive model ( $AR(\\tau )$ ) 과거의 정보를 인코딩 해서 활용 how? -&gt; RNN RNN 기본적인 형태 $O = HW^{(2)} + b^{(2)}$ $H = \\sigma (XW^{(1)+b^{(1)}})$ $H$ : 잠재변수 $\\sigma$ : 활성화함수 $W$ : 가중치행렬 $b$ : bias 현재 시점 t와 이전 시점 $H_{t-1}$ 을 이용해 $O_t$ 를 생성 역전파 BTTP (Backpropagation Throuh Time) O와 H로 부터 2개의 그레디언트 벡터 활용 Gradient vanishing 발생 길이가 길어질 수록 곱해지는 값이 늘어남 아주 작은 값 or 큰 값이 될수 있기 때문 해결책? truncated BPTT 일정 부분의 그레디언트를 무시 t시점에는 O로 부터의 그래디언트만 받음 GRU, LSTM 다른 강의에서 자세히","mainEntityOfPage":{"@type":"WebPage","@id":"/ustage/2021/08/07/week1_day5.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Week1 - 5 일차","dateModified":"2021-08-07T04:21:56+09:00","datePublished":"2021-08-07T04:21:56+09:00","url":"/ustage/2021/08/07/week1_day5.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ustage/2021/08/07/week1_day5.html">
+    <h2 class="post-title">Week1 - 5 일차</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 7, 2021</div><ul class="post-categories"><li>ustage</li></ul></div>
+  <div class="post">
+    <h2 id="1-개인학습">1. 개인학습</h2>
+<ul>
+  <li>RNN 첫걸음
+    <ul>
+      <li>시퀀스 데이터
+        <ul>
+          <li>시계열 데이터-시간순서에 따라 나열된 데이터</li>
+          <li>소리, 문자열, 주가 등</li>
+          <li>독립동등분포(i,i,d) 가정을 잘 위배
+            <ul>
+              <li>순서를 바꾸거나, 과거정보손실 $\rightarrow$ 데이터 확률분포 변화</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>시퀀스 데이터 다루기
+        <ul>
+          <li>조건부확률 이용, 베이즈 룰이용
+            <ul>
+              <li>$P(X_1, …, X_t)=P(X_t \vert X_1, …, X_{t-1})P(X_1, …, X_{t-1})$</li>
+              <li>$= \prod_{s=1}^tP(X_s \vert X_{s-1},…,X_1)$</li>
+            </ul>
+          </li>
+          <li>과거의 모든 정보가 필요한 것은 아니다!</li>
+          <li>가변적 길이: $\tau$
+            <ul>
+              <li>고정길이 $\tau$ 만큼의 시퀀스만 사용하는 경우 autoregressive model ( $AR(\tau )$ )</li>
+              <li>과거의 정보를 인코딩 해서 활용
+                <ul>
+                  <li>how? -&gt; RNN</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>RNN
+        <ul>
+          <li>기본적인 형태
+            <ul>
+              <li>$O = HW^{(2)} + b^{(2)}$</li>
+              <li>$H = \sigma (XW^{(1)+b^{(1)}})$
+                <ul>
+                  <li>$H$ : 잠재변수</li>
+                  <li>$\sigma$ : 활성화함수</li>
+                  <li>$W$ : 가중치행렬</li>
+                  <li>$b$ : bias</li>
+                </ul>
+              </li>
+              <li>현재 시점 t와 이전 시점 $H_{t-1}$ 을 이용해 $O_t$ 를 생성
+  <img src="/assets/image/day5_1.png" alt="" /></li>
+            </ul>
+          </li>
+          <li>역전파
+            <ul>
+              <li>BTTP (Backpropagation Throuh Time)
+                <ul>
+                  <li>O와 H로 부터 2개의 그레디언트 벡터 활용
+  <img src="/assets/image/day5_2.png" alt="" /></li>
+                </ul>
+              </li>
+              <li>Gradient vanishing 발생
+                <ul>
+                  <li>길이가 길어질 수록 곱해지는 값이 늘어남</li>
+                  <li>아주 작은 값 or 큰 값이 될수 있기 때문
+  <img src="/assets/image/day5_3.png" alt="" /></li>
+                </ul>
+              </li>
+              <li>해결책?
+                <ul>
+                  <li>truncated BPTT
+                    <ul>
+                      <li>일정 부분의 그레디언트를 무시</li>
+                      <li>t시점에는 O로 부터의 그래디언트만 받음
+  <img src="/assets/image/day5_4.png" alt="" /></li>
+                    </ul>
+                  </li>
+                  <li>GRU, LSTM
+                    <ul>
+                      <li>다른 강의에서 자세히</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-피어세션">2. 피어세션</h2>
+<ul>
+  <li>모더레이터
+    <ul>
+      <li>CNN, RNN 강의 정리</li>
+      <li>계획정리</li>
+    </ul>
+  </li>
+  <li>코딩테스트 스터디</li>
+</ul>
+
+<h2 id="3-선택과제-2">3. 선택과제 2</h2>
+<ul>
+  <li>RNN backpropagation
+    <ul>
+      <li>$\frac{\partial \xi}{\partial W_x} = \sum_{k=0}^n {\partial \xi \over \partial S_k} {\partial S_k \over \partial W_x} = \sum_{k=0}^n {\partial \xi \over \partial S_k} x_k$</li>
+      <li>$\frac{\partial \xi}{\partial W_{rec}} = \sum_{k=0}^n {\partial \xi \over \partial S_k} {\partial S_k \over \partial W_{rec}} = \sum_{k=0}^n {\partial \xi \over \partial S_k} S_{k-1}$</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1"># 뒤에서 부터 (가장 최근 부터)
+</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+	<span class="c1"># x값 곱해서 평균내서 더하기 [X.shape: (100, 10)]
+</span>	<span class="n">wx_grad</span> <span class="o">+=</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">grad_over_time</span><span class="p">[:,</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="p">[:,</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+	<span class="c1"># 이전 S값 곱해서 평균내서 더하기 [S.shape: (100, 11)]
+</span>	<span class="n">wRec_grad</span> <span class="o">+=</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">grad_over_time</span><span class="p">[:,</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">S</span><span class="p">[:,</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+	<span class="c1"># 이전 레이어 그래디언트 전파
+</span>	<span class="n">grad_over_time</span><span class="p">[:,</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">grad_over_time</span><span class="p">[:,</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">wRec</span>
+
+</code></pre></div></div>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

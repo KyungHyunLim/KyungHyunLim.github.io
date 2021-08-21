@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Week2 - 1일차</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Week2 - 1일차 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Week2 - 1일차" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 개인학습 딥러닝 기본 용어 설명 세부 포함 관계 AI &gt; ML &gt; DL Mimic human intelligence / Data-driven approach / Neural networks Key of DL Data Model Loss Algorithm (Optimization): SGD, Adam, RMSprop, … History 2012 - AlexNet 2013 - DQN 2014 - Encoder/Decoder, Adam 2015 - GAN, ResNet 2017 - Transformer (Attention Is All You Need) 2018 - Bert 2019 - GPT-X 2020 - Self-Supervised Learning (SimCLR) 뉴럴 네트워크 - MLP Linear Neral Networks Backpropagation: 어느 방향으로 움직여야 Loss가 줄어드는지? W와 b에 대한 편미분 활용 $w \leftarrow w-lr {\partial L \over \partial w}$ $b \leftarrow b-lr {\partial L \over \partial b}$ 행렬의 곱은 공간상의 전환 활성화 함수를 활용한 비선형성 부여 sigmoid, tanh, relu 등 Multi-Layer Perceptron Loss function MSE: Mean square error =&gt; Outlier가 있을때 망가질 수 있음 CE: Cross-entrophy =&gt; 해당 클래스 예측 값을 높이는 효과 MLE: Probabilistic Task 데이터 시각화 Overview 고려할 Task! 목적: 왜 시각화? 독자: 대상 데이터: 어떤 데이터? 스토리: 어떤 흐름으로 전달? 방법: 전달하고자 하는 내용과 맞나? 디자인: UI에서 만족스로운 디자인? 모범 사례를 통해 익히자! 추천 Visualization Analysis &amp; Design Fundamentals of Data visualization https://observablehq.com https://dataviztoday.com https://ieeevis.org/year/2021/welcome 시각화 요소 수많은 데이터셋 정형 데이터: csv, tsv 가장 쉽게 시각화 가능 통계적 특성 및 feature 사이 관계 데이터 간 관계 데이터 간 비교 시계열 데이터 추세(Trend), 계절성(Seasonality), 주기성(Cycle) 등 지리 데이터 지도 정보 + 정보간 조화 거리, 경로, 분포 등 관계형 데이터 Graph visualization / Network visualization 객체는 Node로 관계는 Link로 계층적 데이터 포함관계가 분명한 데이터 Tree, Treemap, Sunburst 등 다양한 비정형 데이터 4가지 분류 수치형: 연속형/ 이산형 범주형 명목형(nominal - 혈액형, 종교, …) 순서형(ordinal - 학년, 별점, 등급, …) 시각화 이해하기 기본 요소 mark: 점, 선, 면 channel: 각 mark를 변경할 수 있는 요소들 위치, 색, 면적, 모양, 기울기 등 Pre-attentive attribute 주의를 주지 않아도 인지하게 되는 요소 동시에 사용하면 인지하기 어려움 Tip! Color를 잘 활용하자! 실습" />
+<meta property="og:description" content="1. 개인학습 딥러닝 기본 용어 설명 세부 포함 관계 AI &gt; ML &gt; DL Mimic human intelligence / Data-driven approach / Neural networks Key of DL Data Model Loss Algorithm (Optimization): SGD, Adam, RMSprop, … History 2012 - AlexNet 2013 - DQN 2014 - Encoder/Decoder, Adam 2015 - GAN, ResNet 2017 - Transformer (Attention Is All You Need) 2018 - Bert 2019 - GPT-X 2020 - Self-Supervised Learning (SimCLR) 뉴럴 네트워크 - MLP Linear Neral Networks Backpropagation: 어느 방향으로 움직여야 Loss가 줄어드는지? W와 b에 대한 편미분 활용 $w \leftarrow w-lr {\partial L \over \partial w}$ $b \leftarrow b-lr {\partial L \over \partial b}$ 행렬의 곱은 공간상의 전환 활성화 함수를 활용한 비선형성 부여 sigmoid, tanh, relu 등 Multi-Layer Perceptron Loss function MSE: Mean square error =&gt; Outlier가 있을때 망가질 수 있음 CE: Cross-entrophy =&gt; 해당 클래스 예측 값을 높이는 효과 MLE: Probabilistic Task 데이터 시각화 Overview 고려할 Task! 목적: 왜 시각화? 독자: 대상 데이터: 어떤 데이터? 스토리: 어떤 흐름으로 전달? 방법: 전달하고자 하는 내용과 맞나? 디자인: UI에서 만족스로운 디자인? 모범 사례를 통해 익히자! 추천 Visualization Analysis &amp; Design Fundamentals of Data visualization https://observablehq.com https://dataviztoday.com https://ieeevis.org/year/2021/welcome 시각화 요소 수많은 데이터셋 정형 데이터: csv, tsv 가장 쉽게 시각화 가능 통계적 특성 및 feature 사이 관계 데이터 간 관계 데이터 간 비교 시계열 데이터 추세(Trend), 계절성(Seasonality), 주기성(Cycle) 등 지리 데이터 지도 정보 + 정보간 조화 거리, 경로, 분포 등 관계형 데이터 Graph visualization / Network visualization 객체는 Node로 관계는 Link로 계층적 데이터 포함관계가 분명한 데이터 Tree, Treemap, Sunburst 등 다양한 비정형 데이터 4가지 분류 수치형: 연속형/ 이산형 범주형 명목형(nominal - 혈액형, 종교, …) 순서형(ordinal - 학년, 별점, 등급, …) 시각화 이해하기 기본 요소 mark: 점, 선, 면 channel: 각 mark를 변경할 수 있는 요소들 위치, 색, 면적, 모양, 기울기 등 Pre-attentive attribute 주의를 주지 않아도 인지하게 되는 요소 동시에 사용하면 인지하기 어려움 Tip! Color를 잘 활용하자! 실습" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-10T05:22:30+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Week2 - 1일차" />
+<script type="application/ld+json">
+{"description":"1. 개인학습 딥러닝 기본 용어 설명 세부 포함 관계 AI &gt; ML &gt; DL Mimic human intelligence / Data-driven approach / Neural networks Key of DL Data Model Loss Algorithm (Optimization): SGD, Adam, RMSprop, … History 2012 - AlexNet 2013 - DQN 2014 - Encoder/Decoder, Adam 2015 - GAN, ResNet 2017 - Transformer (Attention Is All You Need) 2018 - Bert 2019 - GPT-X 2020 - Self-Supervised Learning (SimCLR) 뉴럴 네트워크 - MLP Linear Neral Networks Backpropagation: 어느 방향으로 움직여야 Loss가 줄어드는지? W와 b에 대한 편미분 활용 $w \\leftarrow w-lr {\\partial L \\over \\partial w}$ $b \\leftarrow b-lr {\\partial L \\over \\partial b}$ 행렬의 곱은 공간상의 전환 활성화 함수를 활용한 비선형성 부여 sigmoid, tanh, relu 등 Multi-Layer Perceptron Loss function MSE: Mean square error =&gt; Outlier가 있을때 망가질 수 있음 CE: Cross-entrophy =&gt; 해당 클래스 예측 값을 높이는 효과 MLE: Probabilistic Task 데이터 시각화 Overview 고려할 Task! 목적: 왜 시각화? 독자: 대상 데이터: 어떤 데이터? 스토리: 어떤 흐름으로 전달? 방법: 전달하고자 하는 내용과 맞나? 디자인: UI에서 만족스로운 디자인? 모범 사례를 통해 익히자! 추천 Visualization Analysis &amp; Design Fundamentals of Data visualization https://observablehq.com https://dataviztoday.com https://ieeevis.org/year/2021/welcome 시각화 요소 수많은 데이터셋 정형 데이터: csv, tsv 가장 쉽게 시각화 가능 통계적 특성 및 feature 사이 관계 데이터 간 관계 데이터 간 비교 시계열 데이터 추세(Trend), 계절성(Seasonality), 주기성(Cycle) 등 지리 데이터 지도 정보 + 정보간 조화 거리, 경로, 분포 등 관계형 데이터 Graph visualization / Network visualization 객체는 Node로 관계는 Link로 계층적 데이터 포함관계가 분명한 데이터 Tree, Treemap, Sunburst 등 다양한 비정형 데이터 4가지 분류 수치형: 연속형/ 이산형 범주형 명목형(nominal - 혈액형, 종교, …) 순서형(ordinal - 학년, 별점, 등급, …) 시각화 이해하기 기본 요소 mark: 점, 선, 면 channel: 각 mark를 변경할 수 있는 요소들 위치, 색, 면적, 모양, 기울기 등 Pre-attentive attribute 주의를 주지 않아도 인지하게 되는 요소 동시에 사용하면 인지하기 어려움 Tip! Color를 잘 활용하자! 실습","mainEntityOfPage":{"@type":"WebPage","@id":"/ustage/2021/08/10/week2_day1.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Week2 - 1일차","dateModified":"2021-08-10T05:22:30+09:00","datePublished":"2021-08-10T05:22:30+09:00","url":"/ustage/2021/08/10/week2_day1.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ustage/2021/08/10/week2_day1.html">
+    <h2 class="post-title">Week2 - 1일차</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 10, 2021</div><ul class="post-categories"><li>ustage</li></ul></div>
+  <div class="post">
+    <h2 id="1-개인학습">1. 개인학습</h2>
+<ul>
+  <li>딥러닝 기본 용어 설명
+    <ul>
+      <li>세부 포함 관계
+        <ul>
+          <li>AI &gt; ML &gt; DL</li>
+          <li>Mimic human intelligence / Data-driven approach / Neural networks</li>
+        </ul>
+      </li>
+      <li>Key of DL
+        <ul>
+          <li>Data</li>
+          <li>Model</li>
+          <li>Loss</li>
+          <li>Algorithm (Optimization): SGD, Adam, RMSprop, …</li>
+        </ul>
+      </li>
+      <li>History
+        <ul>
+          <li>2012 - AlexNet</li>
+          <li>2013 - DQN</li>
+          <li>2014 - Encoder/Decoder, Adam</li>
+          <li>2015 - GAN, ResNet</li>
+          <li>2017 - Transformer (Attention Is All You Need)</li>
+          <li>2018 - Bert</li>
+          <li>2019 - GPT-X</li>
+          <li>2020 - Self-Supervised Learning (SimCLR)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>뉴럴 네트워크 - MLP
+    <ul>
+      <li>Linear Neral Networks<br />
+  <img src="/assets/image/ustage/w2_day1_1.png" alt="" />
+        <ul>
+          <li>Backpropagation: 어느 방향으로 움직여야 Loss가 줄어드는지?</li>
+          <li>W와 b에 대한 편미분 활용
+            <ul>
+              <li>$w \leftarrow w-lr {\partial L \over \partial w}$</li>
+              <li>$b \leftarrow b-lr {\partial L \over \partial b}$</li>
+            </ul>
+          </li>
+          <li>행렬의 곱은 공간상의 전환<br />
+  <img src="/assets/image/ustage/w2_day1_2.png" alt="" /></li>
+          <li>활성화 함수를 활용한 비선형성 부여
+            <ul>
+              <li>sigmoid, tanh, relu 등</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Multi-Layer Perceptron
+  <img src="/assets/image/ustage/w2_day1_3.png" alt="" />
+        <ul>
+          <li>Loss function
+            <ul>
+              <li>MSE: Mean square error =&gt; Outlier가 있을때 망가질 수 있음</li>
+              <li>CE: Cross-entrophy =&gt; 해당 클래스 예측 값을 높이는 효과</li>
+              <li>MLE: Probabilistic Task</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>데이터 시각화
+    <ul>
+      <li>Overview
+        <ul>
+          <li>고려할 Task!
+            <ul>
+              <li>목적: 왜 시각화?</li>
+              <li>독자: 대상</li>
+              <li>데이터: 어떤 데이터?</li>
+              <li>스토리: 어떤 흐름으로 전달?</li>
+              <li>방법: 전달하고자 하는 내용과 맞나?</li>
+              <li>디자인: UI에서 만족스로운 디자인?</li>
+            </ul>
+          </li>
+          <li>모범 사례를 통해 익히자!</li>
+          <li>추천
+            <ul>
+              <li>Visualization Analysis &amp; Design</li>
+              <li>Fundamentals of Data visualization</li>
+              <li>https://observablehq.com</li>
+              <li>https://dataviztoday.com</li>
+              <li>https://ieeevis.org/year/2021/welcome</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>시각화 요소
+        <ul>
+          <li>수많은 데이터셋
+            <ul>
+              <li>정형 데이터: csv, tsv
+                <ul>
+                  <li>가장 쉽게 시각화 가능</li>
+                  <li>통계적 특성 및 feature 사이 관계</li>
+                  <li>데이터 간 관계</li>
+                  <li>데이터 간 비교</li>
+                </ul>
+              </li>
+              <li>시계열 데이터
+                <ul>
+                  <li>추세(Trend), 계절성(Seasonality), 주기성(Cycle) 등</li>
+                </ul>
+              </li>
+              <li>지리 데이터
+                <ul>
+                  <li>지도 정보 + 정보간 조화</li>
+                  <li>거리, 경로, 분포 등</li>
+                </ul>
+              </li>
+              <li>관계형 데이터
+                <ul>
+                  <li>Graph visualization / Network visualization</li>
+                  <li>객체는 Node로 관계는 Link로</li>
+                </ul>
+              </li>
+              <li>계층적 데이터
+                <ul>
+                  <li>포함관계가 분명한 데이터</li>
+                  <li>Tree, Treemap, Sunburst 등</li>
+                </ul>
+              </li>
+              <li>다양한 비정형 데이터</li>
+            </ul>
+          </li>
+          <li>4가지 분류
+            <ul>
+              <li>수치형: 연속형/ 이산형</li>
+              <li>범주형
+                <ul>
+                  <li>명목형(nominal - 혈액형, 종교, …)</li>
+                  <li>순서형(ordinal - 학년, 별점, 등급, …)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>시각화 이해하기
+        <ul>
+          <li>기본 요소
+            <ul>
+              <li>mark: 점, 선, 면</li>
+              <li>channel: 각 mark를 변경할 수 있는 요소들
+                <ul>
+                  <li>위치, 색, 면적, 모양, 기울기 등</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Pre-attentive attribute
+            <ul>
+              <li>주의를 주지 않아도 인지하게 되는 요소</li>
+              <li>동시에 사용하면 인지하기 어려움</li>
+            </ul>
+          </li>
+          <li>Tip!
+            <ul>
+              <li>Color를 잘 활용하자!</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>실습</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-필수과제">2. 필수과제</h2>
+<ul>
+  <li>MNIST 데이터, MLP, CrossEntropyLoss()</li>
+  <li>MLP 모델 설계
+```python
+    <h1 id="xdim-입력-데이터-크기">xdim: 입력 데이터 크기</h1>
+    <h1 id="hdim-히든레이어-노드-수">hdim: 히든레이어 노드 수</h1>
+    <h1 id="ydim-출력-크기분류할-클래스-수">ydim: 출력 크기(분류할 클래스 수)</h1>
+  </li>
+</ul>
+
+<p>self.lin_1 = nn.Linear(xdim, hdim)
+self.lin_2 = nn.Linear(hdim, ydim)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+* 모델 평가 함수
+```python
+# 모델 예측 계산, forward
+model_pred = model(torch.reshape(batch_in, (-1, 1 * 28 * 28)).to(device))
+
+# 가장 큰 값의 인덱스로 최종 분류
+_,y_pred = torch.max(model_pred.data,1)
+
+# torch.eq: element-wise로 두 Tensor 비교, 같으면 True, 다르면 False
+# torch.ne: eq와 반대, 같으면 False, 다르면 True
+# 맞춘 갯수 계산
+n_correct += (torch.eq(y_trgt, y_pred)).sum().item()
+</code></pre></div></div>
+
+<ul>
+  <li>모델 훈련
+```python
+    <h1 id="forward-path">Forward path</h1>
+    <p>y_pred = M.forward(batch_in.view(-1, 28*28).to(device))
+loss_out = loss(y_pred,batch_out.to(device))</p>
+  </li>
+</ul>
+
+<h1 id="update">Update</h1>
+<h1 id="그래디언트-초기화">그래디언트 초기화</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 파이토치는 그래디언트가 누적 됨으로 이전 배치의 그래디언트 값이 잔재
+# 배치마다 초기화 필요 optm.zero_grad() # 역전파 계산 loss_out.backward() # Weight 업데이트 optm.step() ```
+</code></pre></div></div>
+
+<h2 id="3-피어세션">3. 피어세션</h2>
+<ol>
+  <li>강의 요약</li>
+  <li>과제 리뷰</li>
+  <li>코딩 테스트 알고리즘 이론 스터디
+    <ul>
+      <li>정규표현식
+        <ul>
+          <li>re 라이브러리</li>
+        </ul>
+      </li>
+      <li>매칭알고리즘
+        <ul>
+          <li>단순비교</li>
+          <li>KMP 알고리즘: 접두사와 접미사 활용</li>
+          <li>보이어-무어 알고리즘: KMP 개선/ 뒤에서 부터 확인</li>
+          <li>라빈-카프 알고리즘: 해쉬함수 사용</li>
+        </ul>
+      </li>
+      <li>풀어야할 문제
+        <ul>
+          <li>1013, 5525, 16916, 1786</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="4-알고리즘-문제-풀이">4. 알고리즘 문제 풀이</h2>
+<ul>
+  <li><a href="https://github.com/KyungHyunLim/Algorithms/blob/main/BAEKJOON/baek_5525.cpp">코드</a></li>
+  <li><a href="https://github.com/KyungHyunLim/Algorithms/blob/main/BAEKJOON/baek_1013.cpp">코드</a></li>
+</ul>
+
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

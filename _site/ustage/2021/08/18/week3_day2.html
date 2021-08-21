@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Week3 - day2</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Week3 - day2 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Week3 - day2" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 개인학습 pytorch1 2. 필수 과제 Document 탐색 torch.tensor() vs torch.Tensor() torch.tensor()는 항상 데이터를 복제합니다. 그래서 data 없이 tensor 생성이 불가능 합니다. -&gt; runtime error torch.Tensor()는 객체(class의 instance)를 생성하는 것으로 data 없이도 생성이 가능합니다." />
+<meta property="og:description" content="1. 개인학습 pytorch1 2. 필수 과제 Document 탐색 torch.tensor() vs torch.Tensor() torch.tensor()는 항상 데이터를 복제합니다. 그래서 data 없이 tensor 생성이 불가능 합니다. -&gt; runtime error torch.Tensor()는 객체(class의 instance)를 생성하는 것으로 data 없이도 생성이 가능합니다." />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-18T08:22:30+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Week3 - day2" />
+<script type="application/ld+json">
+{"description":"1. 개인학습 pytorch1 2. 필수 과제 Document 탐색 torch.tensor() vs torch.Tensor() torch.tensor()는 항상 데이터를 복제합니다. 그래서 data 없이 tensor 생성이 불가능 합니다. -&gt; runtime error torch.Tensor()는 객체(class의 instance)를 생성하는 것으로 data 없이도 생성이 가능합니다.","mainEntityOfPage":{"@type":"WebPage","@id":"/ustage/2021/08/18/week3_day2.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Week3 - day2","dateModified":"2021-08-18T08:22:30+09:00","datePublished":"2021-08-18T08:22:30+09:00","url":"/ustage/2021/08/18/week3_day2.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ustage/2021/08/18/week3_day2.html">
+    <h2 class="post-title">Week3 - day2</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 18, 2021</div><ul class="post-categories"><li>ustage</li></ul></div>
+  <div class="post">
+    <h2 id="1-개인학습">1. 개인학습</h2>
+<ul>
+  <li><a href="https://kyunghyunlim.github.io/pytorch/ml_ai/2021/08/17/Pytorch_1.html">pytorch1</a></li>
+</ul>
+
+<h2 id="2-필수-과제">2. 필수 과제</h2>
+<ul>
+  <li>Document 탐색
+    <ul>
+      <li>torch.tensor() vs torch.Tensor()</li>
+    </ul>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  torch.tensor()는 항상 데이터를 복제합니다. 그래서 data 없이 tensor 생성이 불가능 합니다. -&gt; runtime error
+  torch.Tensor()는 객체(class의 instance)를 생성하는 것으로 data 없이도 생성이 가능합니다.
+</code></pre></div>    </div>
+  </li>
+  <li>pytorch 활용
+    <ul>
+      <li>사칙연산
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">+</code> : <a href="https://pytorch.org/docs/stable/generated/torch.add.html?highlight=add#torch.add">torch.add</a></li>
+          <li><code class="language-plaintext highlighter-rouge">-</code> : <a href="https://pytorch.org/docs/stable/generated/torch.sub.html#torch.sub">torch.sub</a></li>
+          <li><code class="language-plaintext highlighter-rouge">*</code> : <a href="https://pytorch.org/docs/stable/generated/torch.mul.html#torch.mul">torch.mul</a></li>
+          <li><code class="language-plaintext highlighter-rouge">/</code> : <a href="https://pytorch.org/docs/stable/generated/torch.div.html#torch.div">torch.div</a></li>
+        </ul>
+      </li>
+      <li>인덱싱</li>
+    </ul>
+  </li>
+  <li>torch.gather 3차원에서 대각선 뽑기!</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="c1"># TODO : 임의의 크기의 3D tensor에서 대각선 요소 가져와 2D로 반환하는 함수를 만드세요! 
+</span><span class="k">def</span> <span class="nf">get_diag_element_3D</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="c1"># 1. 인덱스 텐서 만들기
+</span>    <span class="c1"># 1개의 원소에서 뽑을 인덱스 [0,1,2,...]
+</span>    <span class="n">idx</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">([(</span><span class="n">i</span> <span class="o">%</span> <span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+    <span class="c1">#print("idx: 1: ", idx, idx.shape)
+</span>    
+    <span class="c1"># 2. 차원 맞춰주기 [0,1,2] -&gt; [[0], [1], [2]]
+</span>    <span class="n">idx</span> <span class="o">=</span> <span class="n">idx</span><span class="p">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1">#print("idx: unsqueeze: ", idx, idx.shape)
+</span>    
+    <span class="c1"># 3. 원소 개수 만큼 인덱스 복사(확장)
+</span>    <span class="n">idx</span> <span class="o">=</span> <span class="n">idx</span><span class="p">.</span><span class="n">expand</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span> 
+    <span class="c1">#print("idx: expand: ", idx, idx.shape)
+</span>    
+    <span class="c1"># 4. 대각선값만 뽑아내기
+</span>    <span class="n">output</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+    <span class="c1">#print(output.view(A.shape[0], A.shape[1])
+</span>    
+    <span class="c1"># 5. 2차원으로 만든 후 불필요한 부분 slicing
+</span>    <span class="k">return</span> <span class="n">output</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:,</span> <span class="p">:</span><span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+</code></pre></div></div>
+<ul>
+  <li>LazyLinear vs Linear
+    <ul>
+      <li>전자는 첫 forward가 불린 후에 initailize 된다.</li>
+      <li>torch.nn.UninitializedParameter class에 속한다.</li>
+    </ul>
+  </li>
+  <li>custom_model 만들기
+    <ul>
+      <li>Tensor vs Parameter</li>
+    </ul>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Parameter를 이용해서 W, b를 만들 경우에만
+  output tensor에 gradient를 계산하는 함수인 grad_fn가 생성됩니다
+</code></pre></div>    </div>
+
+    <ul>
+      <li>module 분석하기</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">module</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">named_modules</span><span class="p">():</span>
+      <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"[ Name ] : </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s">[ Module ]</span><span class="se">\n</span><span class="si">{</span><span class="n">module</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+      <span class="k">print</span><span class="p">(</span><span class="s">"-"</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+
+  <span class="n">output</span>
+  <span class="o">------</span>
+  <span class="p">[</span> <span class="n">Name</span> <span class="p">]</span> <span class="p">:</span> 
+  <span class="p">[</span> <span class="n">Module</span> <span class="p">]</span>
+  <span class="n">Model</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">ab</span><span class="p">):</span> <span class="n">Layer_AB</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">a</span><span class="p">):</span> <span class="n">Function_A</span><span class="p">()</span>
+      <span class="p">(</span><span class="n">b</span><span class="p">):</span> <span class="n">Function_B</span><span class="p">()</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">cd</span><span class="p">):</span> <span class="n">Layer_CD</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="n">Function_C</span><span class="p">()</span>
+      <span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="n">Function_D</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="n">Function_C</span><span class="p">()</span>
+      <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="o">------------------------------</span>
+  <span class="p">[</span> <span class="n">Name</span> <span class="p">]</span> <span class="p">:</span> <span class="n">ab</span>
+  <span class="p">[</span> <span class="n">Module</span> <span class="p">]</span>
+  <span class="n">Layer_AB</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">a</span><span class="p">):</span> <span class="n">Function_A</span><span class="p">()</span>
+  <span class="p">(</span><span class="n">b</span><span class="p">):</span> <span class="n">Function_B</span><span class="p">()</span>
+  <span class="p">)</span>
+  <span class="o">------------------------------</span>
+  <span class="p">[</span> <span class="n">Name</span> <span class="p">]</span> <span class="p">:</span> <span class="n">ab</span><span class="p">.</span><span class="n">a</span>
+  <span class="p">[</span> <span class="n">Module</span> <span class="p">]</span>
+  <span class="n">Function_A</span><span class="p">()</span>
+  <span class="o">------------------------------</span>
+  <span class="p">[</span> <span class="n">Name</span> <span class="p">]</span> <span class="p">:</span> <span class="n">ab</span><span class="p">.</span><span class="n">b</span>
+  <span class="p">[</span> <span class="n">Module</span> <span class="p">]</span>
+  <span class="n">Function_B</span><span class="p">()</span>
+  <span class="o">------------------------------</span>
+  <span class="p">[</span> <span class="n">Name</span> <span class="p">]</span> <span class="p">:</span> <span class="n">cd</span>
+  <span class="p">[</span> <span class="n">Module</span> <span class="p">]</span>
+  <span class="n">Layer_CD</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="n">Function_C</span><span class="p">()</span>
+  <span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="n">Function_D</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="n">Function_C</span><span class="p">()</span>
+  <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="o">------------------------------</span>
+  <span class="p">[</span> <span class="n">Name</span> <span class="p">]</span> <span class="p">:</span> <span class="n">cd</span><span class="p">.</span><span class="n">c</span>
+  <span class="p">[</span> <span class="n">Module</span> <span class="p">]</span>
+  <span class="n">Function_C</span><span class="p">()</span>
+  <span class="o">------------------------------</span>
+  <span class="p">[</span> <span class="n">Name</span> <span class="p">]</span> <span class="p">:</span> <span class="n">cd</span><span class="p">.</span><span class="n">d</span>
+  <span class="p">[</span> <span class="n">Module</span> <span class="p">]</span>
+  <span class="n">Function_D</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="n">Function_C</span><span class="p">()</span>
+  <span class="p">)</span>
+  <span class="o">------------------------------</span>
+  <span class="p">[</span> <span class="n">Name</span> <span class="p">]</span> <span class="p">:</span> <span class="n">cd</span><span class="p">.</span><span class="n">d</span><span class="p">.</span><span class="n">c</span>
+  <span class="p">[</span> <span class="n">Module</span> <span class="p">]</span>
+  <span class="n">Function_C</span><span class="p">()</span>
+  <span class="o">------------------------------</span>
+
+  <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">named_children</span><span class="p">():</span>
+      <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"[ Name ] : </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s">[ Children ]</span><span class="se">\n</span><span class="si">{</span><span class="n">child</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+      <span class="k">print</span><span class="p">(</span><span class="s">"-"</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+    
+  <span class="p">[</span> <span class="n">Name</span> <span class="p">]</span> <span class="p">:</span> <span class="n">ab</span>
+  <span class="p">[</span> <span class="n">Children</span> <span class="p">]</span>
+  <span class="n">Layer_AB</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">a</span><span class="p">):</span> <span class="n">Function_A</span><span class="p">()</span>
+  <span class="p">(</span><span class="n">b</span><span class="p">):</span> <span class="n">Function_B</span><span class="p">()</span>
+  <span class="p">)</span>
+  <span class="o">------------------------------</span>
+  <span class="p">[</span> <span class="n">Name</span> <span class="p">]</span> <span class="p">:</span> <span class="n">cd</span>
+  <span class="p">[</span> <span class="n">Children</span> <span class="p">]</span>
+  <span class="n">Layer_CD</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="n">Function_C</span><span class="p">()</span>
+  <span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="n">Function_D</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="n">Function_C</span><span class="p">()</span>
+  <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="o">------------------------------</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>parameter 분석하기</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">named_parameters</span><span class="p">():</span>
+      <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"[ Name ] : </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s">[ Parameter ]</span><span class="se">\n</span><span class="si">{</span><span class="n">parameter</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+      <span class="k">print</span><span class="p">(</span><span class="s">"-"</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+
+  <span class="n">output</span>
+  <span class="o">------</span>
+  <span class="p">[</span> <span class="n">Name</span> <span class="p">]</span> <span class="p">:</span> <span class="n">ab</span><span class="p">.</span><span class="n">b</span><span class="p">.</span><span class="n">W1</span>
+  <span class="p">[</span> <span class="n">Parameter</span> <span class="p">]</span>
+  <span class="n">Parameter</span> <span class="n">containing</span><span class="p">:</span>
+  <span class="n">tensor</span><span class="p">([</span><span class="mf">10.</span><span class="p">],</span> <span class="n">requires_grad</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+  <span class="o">------------------------------</span>
+  <span class="p">[</span> <span class="n">Name</span> <span class="p">]</span> <span class="p">:</span> <span class="n">ab</span><span class="p">.</span><span class="n">b</span><span class="p">.</span><span class="n">W2</span>
+  <span class="p">[</span> <span class="n">Parameter</span> <span class="p">]</span>
+  <span class="n">Parameter</span> <span class="n">containing</span><span class="p">:</span>
+  <span class="n">tensor</span><span class="p">([</span><span class="mf">2.</span><span class="p">],</span> <span class="n">requires_grad</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+  <span class="o">------------------------------</span>
+
+  <span class="n">parameter</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="s">'ab.b.W1'</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>buffer 정보 확인</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="nb">buffer</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">named_buffers</span><span class="p">():</span>
+      <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"[ Name ] : </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s">[ Buffer ] : </span><span class="si">{</span><span class="nb">buffer</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+      <span class="k">print</span><span class="p">(</span><span class="s">"-"</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+
+  <span class="nb">buffer</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">get_buffer</span><span class="p">(</span><span class="s">'cd.c.duck'</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>doc string</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="nf">__doc__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+      <span class="n">구현</span><span class="err">!</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="3-피어세션">3. 피어세션</h2>
+<ul>
+  <li>pytorch-basic 강의 정리</li>
+  <li>우선순위 큐 이론 공유</li>
+</ul>
+
+<h2 id="4-특강">4. 특강</h2>
+<ul>
+  <li>라이엇 CTO 님</li>
+</ul>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

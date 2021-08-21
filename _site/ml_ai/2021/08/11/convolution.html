@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Convolution Neural Network</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Convolution Neural Network | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Convolution Neural Network" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Convolution 1.1 기본 공식 Continuous: $ (f * g) (x) = \int_{R^d} f(z) g(x-z)dz = \int_{R^d} f(x-z) g(z)dz = (g * f)(x) $ Discrete: $ (f * g) (i) = \sum_a f(a)g(i-a) = \sum_a f(i-a)g(a) = (g * f) (i) $ 2d image: $ (I * K) (i,j) = \sum_{m,n} I(m,n)K(i-m,j-n) $" />
+<meta property="og:description" content="1. Convolution 1.1 기본 공식 Continuous: $ (f * g) (x) = \int_{R^d} f(z) g(x-z)dz = \int_{R^d} f(x-z) g(z)dz = (g * f)(x) $ Discrete: $ (f * g) (i) = \sum_a f(a)g(i-a) = \sum_a f(i-a)g(a) = (g * f) (i) $ 2d image: $ (I * K) (i,j) = \sum_{m,n} I(m,n)K(i-m,j-n) $" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-11T20:56:22+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Convolution Neural Network" />
+<script type="application/ld+json">
+{"description":"1. Convolution 1.1 기본 공식 Continuous: $ (f * g) (x) = \\int_{R^d} f(z) g(x-z)dz = \\int_{R^d} f(x-z) g(z)dz = (g * f)(x) $ Discrete: $ (f * g) (i) = \\sum_a f(a)g(i-a) = \\sum_a f(i-a)g(a) = (g * f) (i) $ 2d image: $ (I * K) (i,j) = \\sum_{m,n} I(m,n)K(i-m,j-n) $","mainEntityOfPage":{"@type":"WebPage","@id":"/ml_ai/2021/08/11/convolution.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Convolution Neural Network","dateModified":"2021-08-11T20:56:22+09:00","datePublished":"2021-08-11T20:56:22+09:00","url":"/ml_ai/2021/08/11/convolution.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ml_ai/2021/08/11/convolution.html">
+    <h2 class="post-title">Convolution Neural Network</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 11, 2021</div><ul class="post-categories"><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-convolution">1. Convolution</h2>
+<h3 id="11-기본-공식">1.1 기본 공식</h3>
+<ul>
+  <li>Continuous: $ (f * g) (x) = \int_{R^d} f(z) g(x-z)dz = \int_{R^d} f(x-z) g(z)dz = (g * f)(x) $</li>
+  <li>Discrete: $ (f * g) (i) = \sum_a f(a)g(i-a) = \sum_a f(i-a)g(a) = (g * f) (i) $</li>
+  <li>2d image: $ (I * K) (i,j) = \sum_{m,n} I(m,n)K(i-m,j-n) $</li>
+</ul>
+
+<h3 id="12-의미">1.2 의미?</h3>
+<ul>
+  <li>필터모양에 따라 결과가 달라진다
+    <ul>
+      <li>E.g. 외곽선 강조, Blur</li>
+    </ul>
+  </li>
+  <li>Feature map
+    <ul>
+      <li>Conv layer의 결과</li>
+      <li>Filter의 개수와 동일</li>
+    </ul>
+  </li>
+  <li>주의점
+    <ul>
+      <li>Feature map의 크기 계산
+        <ul>
+          <li>$(H, W) \rightarrow (K_H, K_W) \rightarrow (O_H, O_W)$</li>
+          <li>$O_H = H - K_H + 1$</li>
+          <li>$O_W = W - K_W + 1$</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="13-convolution-neural-networks">1.3 Convolution Neural Networks</h3>
+<ul>
+  <li>layer 종류
+    <ul>
+      <li>Feature extraction
+        <ul>
+          <li>Convolution layer</li>
+          <li>pooling layer</li>
+        </ul>
+      </li>
+      <li>Decision making
+        <ul>
+          <li>fully connected layer (E.g. 분류)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>발전 동향
+    <ul>
+      <li>파라미터의 숫자가 많아질수록 학습이 어렵고 일반화 성능이 떨어진다!</li>
+      <li>Conv layer를 deep 하게 가져가지만, 동시에 파라미터 수를 줄이기 위해 노력</li>
+    </ul>
+  </li>
+  <li>CNN 구성
+    <ul>
+      <li>Stride
+<img src="/assets/image/ML_AI/conv_1.PNG" alt="" />
+        <ul>
+          <li>칸을 건너 뛰어 계산</li>
+        </ul>
+      </li>
+      <li>Padding
+        <ul>
+          <li>가장자리를 계산할 수 없기 때문에</li>
+          <li>값을 덧대주는 역활</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>파라미터 수 계산
+    <ul>
+      <li>E.g 1<br />
+<img src="/assets/image/ML_AI/conv_2.PNG" alt="" />
+        <ul>
+          <li>$3 \times 3 \times 128 \times 64 = 73,728$</li>
+          <li>$3 \times 3 \times 128$ : 필터 크기</li>
+          <li>$64$ : 원하는 feature map 수</li>
+        </ul>
+      </li>
+      <li>E.g 2<br />
+<img src="/assets/image/ML_AI/conv_4.jpg" alt="" /></li>
+    </ul>
+  </li>
+  <li>1x1 Convolution?
+    <ul>
+      <li>Dimension reduction</li>
+      <li>깊이는 늘리고, 파라미터의 수는 줄일 수 있음!</li>
+      <li>E.g. bottleneck architecture</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-visual-recognition-challenge-주요-모델">2. Visual Recognition Challenge 주요 모델</h2>
+<h3 id="20-ilsvrc">2.0 ILSVRC</h3>
+<ul>
+  <li>ImageNet Large-Scale Visual Recognition Challenge
+    <ul>
+      <li>Classification / Detection / Localization / Segmentation</li>
+      <li>1000 categories</li>
+      <li>Over 1 million images</li>
+      <li>Training set: 456,567 imgages</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="21-alexnet">2.1 AlexNet</h3>
+<p><img src="/assets/image/ML_AI/conv_3.PNG" alt="" /></p>
+<ul>
+  <li>ImageNet Classification with Deep Convolutional Neural Networks, NIPS, 2012</li>
+  <li>5 conv layers + 3 dense layers</li>
+  <li>Key ideas
+    <ul>
+      <li>ReLU activation: Gradient vanishing 방지</li>
+      <li>GPI implementation (2 GPUs): 메모리 문제</li>
+      <li>Local response normalization, Overlapping pooling</li>
+      <li>Data augmentation</li>
+      <li>Dropout</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="22-vggnet">2.2 VGGNet</h3>
+<p><img src="/assets/image/ML_AI/conv_5.PNG" alt="" /></p>
+<ul>
+  <li>3x3 conv filter 만 사용 (stride 1)
+    <ul>
+      <li>Receptive field: # of params
+특정 위치의 픽셀들이 주변에 있는 픽셀들 하고만 상관관계가 높고, 위치가 멀수록 관계성이 떨어진다.
+이러한 특성을 이용해 이미지 또는 영상을 분석하여 어떤 Task를 수행하려고 할 경우,
+입력 이미지/영상 전체 영역에 대해 서로 동일한 중요도를 부여하여 처리하는 대신에 특정 범위를 한정해 처리를 하면 훨씬 효과적일 것이라는 것.
+따라서, 큰 필터를 하나만 쓰는 것 보다, 작은 필더를 여러번 사용하는 것이 더 좋은 결과를 유도 할 수 있다.</li>
+      <li>큰 필터를 사용하는 것 보다 3x3 필터를 여러번 적용하는 것이 deep하면서 파라미터수를 줄일 수 있다</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="23-googlenet">2.3 GoogLeNet</h3>
+<p><img src="/assets/image/ML_AI/conv_6.PNG" alt="" /></p>
+<ul>
+  <li>Inception blocks
+    <ul>
+      <li>중간 중간 1x1 conv를 사용하면 parameter수를 잘 줄일 수 있다.</li>
+      <li>channel-wise dimenstion reduction
+<img src="/assets/image/ML_AI/conv_7.PNG" alt="" /></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="24-resnet">2.4 ResNet</h3>
+<p><img src="/assets/image/ML_AI/conv_8.PNG" alt="" /></p>
+<ul>
+  <li>일반화 성능: training - test 성능 차이가 큼</li>
+  <li>Skip connection
+    <ul>
+      <li>정보의 전달</li>
+      <li>Deep 하게 쌓아도 성능 향상 가능하게 해줌</li>
+    </ul>
+  </li>
+  <li>Bottleneck architecture
+    <ul>
+      <li>1x1 conv를 활용해 입력차원을 줄였다 늘림</li>
+      <li>receptive filed를 키우는 효과</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="25-densnet">2.5 Densnet</h3>
+<p><img src="/assets/image/ML_AI/conv_9.PNG" alt="" /></p>
+<ul>
+  <li>Dense Block
+    <ul>
+      <li>각 layer concat</li>
+      <li>chnnel의 수 증가, geometrically</li>
+    </ul>
+  </li>
+  <li>Transition Block
+    <ul>
+      <li>BatchNorm -&gt; 1x1 Conv -&gt; 2x2 AvgPooling</li>
+      <li>차원 감소 효과</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-computer-vision-applications">3. Computer Vision Applications</h2>
+<h3 id="31-sematic-segmetation">3.1 Sematic Segmetation</h3>
+<ul>
+  <li>자율주행에 활용
+    <ul>
+      <li>앞에 있는 것이 자동차인지 사람인지 뭔지 판단</li>
+    </ul>
+  </li>
+  <li>How? convolutionalize  <br />
+<img src="/assets/image/ML_AI/conv_10.PNG" alt="" />
+    <ul>
+      <li>Dense layer를 없애자</li>
+      <li>heat map으로 ouput을 출력!<br />
+<img src="/assets/image/ML_AI/conv_11.PNG" alt="" /></li>
+    </ul>
+  </li>
+  <li>Reolution이 떨어진 output을 늘리기 위한 방법이 필요
+    <ul>
+      <li>Deconvolution (conv transpose)<br />
+<img src="/assets/image/ML_AI/conv_12.PNG" alt="" />
+        <ul>
+          <li>정확하게 역은 아니지만, 의미는 conv의 연산의 역</li>
+        </ul>
+      </li>
+      <li>unpooling</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="32-detection">3.2 Detection</h3>
+<ul>
+  <li>R-CNN<br />
+<img src="/assets/image/ML_AI/conv_13.PNG" alt="" />
+    <ul>
+      <li>어느 위치에 어느 것이 있는지!</li>
+      <li>2000개의 이미지를 나누어 처리해야하는 문제 -&gt; 너무 오래걸린다.</li>
+    </ul>
+  </li>
+  <li>SPPNet<br />
+<img src="/assets/image/ML_AI/conv_14.PNG" alt="" />
+    <ul>
+      <li>이미지에서 미리 bounding box 추출</li>
+      <li>image 전체에 대해 feature map을 만들고,</li>
+      <li>bounding box영역의 tensor를 가져와 사용</li>
+      <li>R-CNN에 비해 빨라짐: CNN을 한번만 사용</li>
+    </ul>
+  </li>
+  <li>Fast R-CNN<br />
+<img src="/assets/image/ML_AI/conv_15.PNG" alt="" />
+    <ul>
+      <li>SPPNet과 유사한 컨셉: 1개의 feature map</li>
+      <li>Region Proposal Network
+        <ul>
+          <li>bounding box안에 물체가 있을거 같은지 아닌지 판단</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>YOLO(v1)
+    <ul>
+      <li>Fast R-CNN 보다 빠름</li>
+      <li>Region Proposal Network를 한번에 처리<br />
+<img src="/assets/image/ML_AI/conv_16.PNG" alt="" />
+        <ul>
+          <li>SxS grid로 분할</li>
+          <li>B개 바운딩 박스 예측 (x, y, w, h) + 쓸모있는 박스인지 예측</li>
+          <li>각 Cell을 C개 class 확률들 예측</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

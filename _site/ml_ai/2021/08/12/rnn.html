@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Recurrent Neural Network</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Recurrent Neural Network | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Recurrent Neural Network" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Sequential Models 1.0 Sequential data 입력의 크기가 가변적이다 데이터가 언제 끝날지 알 수 없음 음성, 영상 등 많은 실제 데이터 1.1 Naive Sequnece Model 시간이 지날 수록 고려할 과거 데이터가 늘어남" />
+<meta property="og:description" content="1. Sequential Models 1.0 Sequential data 입력의 크기가 가변적이다 데이터가 언제 끝날지 알 수 없음 음성, 영상 등 많은 실제 데이터 1.1 Naive Sequnece Model 시간이 지날 수록 고려할 과거 데이터가 늘어남" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-12T20:15:12+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Recurrent Neural Network" />
+<script type="application/ld+json">
+{"description":"1. Sequential Models 1.0 Sequential data 입력의 크기가 가변적이다 데이터가 언제 끝날지 알 수 없음 음성, 영상 등 많은 실제 데이터 1.1 Naive Sequnece Model 시간이 지날 수록 고려할 과거 데이터가 늘어남","mainEntityOfPage":{"@type":"WebPage","@id":"/ml_ai/2021/08/12/rnn.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Recurrent Neural Network","dateModified":"2021-08-12T20:15:12+09:00","datePublished":"2021-08-12T20:15:12+09:00","url":"/ml_ai/2021/08/12/rnn.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ml_ai/2021/08/12/rnn.html">
+    <h2 class="post-title">Recurrent Neural Network</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 12, 2021</div><ul class="post-categories"><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-sequential-models">1. Sequential Models</h2>
+<h3 id="10-sequential-data">1.0 Sequential data</h3>
+<ul>
+  <li>입력의 크기가 가변적이다
+    <ul>
+      <li>데이터가 언제 끝날지 알 수 없음</li>
+    </ul>
+  </li>
+  <li>음성, 영상 등 많은 실제 데이터</li>
+</ul>
+
+<h3 id="11-naive-sequnece-model">1.1 Naive Sequnece Model</h3>
+<p><img src="/assets/image/ML_AI/rnn_1.PNG" alt="" /></p>
+<ul>
+  <li>시간이 지날 수록 고려할 과거 데이터가 늘어남</li>
+</ul>
+
+<h3 id="12-autoregressive-model">1.2 Autoregressive Model</h3>
+<p><img src="/assets/image/ML_AI/rnn_2.PNG" alt="" /></p>
+<ul>
+  <li>$\rightarrow \tau$ 고정적인 크기로 설정. 항상 과거 몇 단계만 보겠다.</li>
+  <li>과거의 전체 데이터를 보는것 보다 계산이 용이해짐</li>
+</ul>
+
+<h3 id="13-markov-model">1.3 Markov Model</h3>
+<p><img src="/assets/image/ML_AI/rnn_3.PNG" alt="" /></p>
+<ul>
+  <li>first-order autoregressive model
+    <ul>
+      <li>과거의 한스텝만 보고 결정</li>
+    </ul>
+  </li>
+  <li>Markov
+    <ul>
+      <li>바로 전 과거에만 영향을 받는 다는 가정</li>
+      <li>현실과는 맞지 않는 가정</li>
+      <li>But, joint distribution을 표현하기 용이</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="14-latent-autoregressive-model">1.4 Latent Autoregressive Model</h3>
+<p><img src="/assets/image/ML_AI/rnn_4.PNG" alt="" /></p>
+<ul>
+  <li>Hidden state: 과거의 정보 summary</li>
+</ul>
+
+<h3 id="15-recurrent-neural-network">1.5 Recurrent Neural Network</h3>
+<p><img src="/assets/image/ML_AI/rnn_5.PNG" alt="" /></p>
+<ul>
+  <li>현재 입력과 이전 입력을 활용해 $h_t$ 가 계산된다.</li>
+  <li>Short-term dependencies / Long-term dependecies<br />
+몇 스텝 이전의 정보는 잘 고려할 수 있지만, 스텝이 길어 질 수록 정보가 희미해진다.
+예를 들어, 음성인식을 진행하는 경우, 16KHz로 샘플링된 음성 신호의 경우 1초가 약 16,384 개의 원소를 가진 벡터가 된다(mono면 1차원, stereo면 2차원) 2초만 되도 약 3만 개가 되는 벡터가 되기 때문에, RNN을 사용하면 입력이 길어 질 수록 성능이 떨어지는 경향이 있다.<br />
+<img src="/assets/image/ML_AI/rnn_6.PNG" alt="" /><br />
+위 그림처럼 이전 hidden step의 결과가 계속 곱해지기 때문에 너무 커지거나 0이되어 제대로 정보정달이 되지 않기 때문이다.</li>
+</ul>
+
+<h2 id="2-rnn의-보완한-모델">2. RNN의 보완한 모델</h2>
+<h3 id="21-long-short-term-memorylstm">2.1 Long Short Term Memory(LSTM)</h3>
+<p><img src="/assets/image/ML_AI/rnn_7.PNG" alt="" /></p>
+<ul>
+  <li>Core idea
+컨베이어 벨트위에 계속 데이터가 올라오는데, 어떤 부분이 필요하고 필요없는 지를 Gate들을 이용해 걸러낸다.</li>
+  <li>Previous cell state: 0 ~ t 까지 Summaries 한 값</li>
+  <li>Previous hidden state: 이전 스탭의 출력</li>
+  <li>Gates
+    <ul>
+      <li>Forget gate<br />
+<img src="/assets/image/ML_AI/rnn_9.PNG" alt="" />
+        <ul>
+          <li>$\sigma (W_f [h_{t-1}, x_t] + b_f)$<br />
+이전 스탭의 결과( $h_{t-1}$ )와 현재의 입력 $x_t$ 가 입력으로 사용된다. 결과로 $f_t$ 라는 값을 얻는데, sigmoid를 통과하기 때문에 항상 0 ~ 1 사이 값을 가진다. 즉, 입력인 두 값과 weight, 활성화 함수를 이용해 어떤 정보를 버리고 갈지 결정한다.</li>
+        </ul>
+      </li>
+      <li>Input gate<br />
+<img src="/assets/image/ML_AI/rnn_10.PNG" alt="" />
+        <ul>
+          <li>$i_t = \sigma(W_i \cdot [h_{t_i}, x_t] + b_i)$</li>
+          <li>$\bar C_t = tanh(W_c \cdot [h_{t_i}, x_t] + b_c$<br />
+어떤 정보를 Cell state에 올릴지 말지를 결정한다. $i_t$ 가 어떤 정보를 올릴지 결정 한다. $\bar C_t$ 가 이전 출력 값들을 활용해 만들어진 Cell state 예비후보이라고 할 수 있다. 이 예비후보들과 결정자 $i_t$ 를 잘 섞어 최종 결정을 해 Cell state에 정보를 더한다.</li>
+        </ul>
+      </li>
+      <li>Update Cell<br />
+<img src="/assets/image/ML_AI/rnn_11.PNG" alt="" />
+        <ul>
+          <li>$i_t = \sigma(W_i \cdot [h_{t_i}, x_t] + b_i)$</li>
+          <li>$C_t = f_t * C_{t-1} + i_t * \bar C_t $<br />
+$f_t$ 만큼 이전 Cell state에서 버릴건 버리고, $i_t$ 만큼 $\bar C_t$ 에서 어느 값을 올릴지를 정한 값을 더해 현재의 Cell state로 업데이트</li>
+        </ul>
+      </li>
+      <li>Ouput gate<br />
+<img src="/assets/image/ML_AI/rnn_12.PNG" alt="" />
+        <ul>
+          <li>$o_t = \sigma(W_o \cdot [h_{t_i}, x_t] + b_o)$</li>
+          <li>$h_t = o_t * tanh(C_t)$<br />
+한번더 output을 가공해서 내보낸다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="22-gated-recurrent-unit">2.2 Gated Recurrent Unit</h3>
+<p><img src="/assets/image/ML_AI/rnn_13.PNG" alt="" /></p>
+<ul>
+  <li>reset gate와 update gate만 존재</li>
+  <li>cell stat와 hidden state가 없음</li>
+  <li>Tip
+    <ul>
+      <li>Network parameter가 LSTM에 비해 적어, GRU가 종종 성능이 더 좋은 경향을 보인다. 하지만 요즘은 둘다 잘 안쓴다. Transformer…</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-futher-question">3. Futher Question</h2>
+<ul>
+  <li>LSTM에서는 Modern CNN 내용에서 배웠던 중요한 개념이 적용되어 있습니다. 무엇일까요?
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Modern CNN은 1x1 conv연산 등을 활용해 deep하게 쌓으면서도 파라미터를 줄이는 방향으로 발전해 왔습니다. 이와 유사하게 LSTM은 Gate들을 활용해 모든 파라미터를 다음 셀에 넘기는 것이 아니라 필요한 부분만 넘기도록 학습해 파라미터 수와 크기를 제어하려는 것이 특징입니다. 이러한 부분이 유사하게 적용된 부분이 아닐까 생각합니다.
+</code></pre></div>    </div>
+  </li>
+  <li>Pytorch LSTM 클래스에서 3dim 데이터(batch_size, sequence length, num feature), batch_first 관련 argument는 중요한 역할을 합니다. batch_first=True인 경우는 어떻게 작동이 하게되는걸까요?
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pytorch document에 다음과 같이 설명되어 있다.
+If True, then the input and output tensors are provided as (batch, seq, feature) instead of (seq, batch, feature). Note that this does not apply to hidden or cell states.
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

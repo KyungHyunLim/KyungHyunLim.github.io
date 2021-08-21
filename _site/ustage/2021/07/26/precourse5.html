@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Multivariable linear/logistic regression</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Multivariable linear/logistic regression | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Multivariable linear/logistic regression" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Multivariable linear regression" />
+<meta property="og:description" content="1. Multivariable linear regression" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-26T22:01:21+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Multivariable linear/logistic regression" />
+<script type="application/ld+json">
+{"description":"1. Multivariable linear regression","mainEntityOfPage":{"@type":"WebPage","@id":"/ustage/2021/07/26/precourse5.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Multivariable linear/logistic regression","dateModified":"2021-07-26T22:01:21+09:00","datePublished":"2021-07-26T22:01:21+09:00","url":"/ustage/2021/07/26/precourse5.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ustage/2021/07/26/precourse5.html">
+    <h2 class="post-title">Multivariable linear/logistic regression</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Jul 26, 2021</div><ul class="post-categories"><li>ustage</li></ul></div>
+  <div class="post">
+    <h3 id="1-multivariable-linear-regression">1. Multivariable linear regression</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Data
+Q1    Q2    Q3    Final(y)
+70    80    75    75
+82    71    98    83.6
+76    92    91    86.3
+90    95    99    94.6
+
+H(x) = w1 * Q1 + w2 * Q2 + w3 * Q3 + b
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+   <span class="n">hyp</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">W</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="c1">#H(x)
+</span>
+   <span class="n">cost</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">mean</span><span class="p">((</span><span class="n">hyp</span> <span class="o">-</span> <span class="n">y_train</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+   <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="p">.</span><span class="n">zerograd</span><span class="p">()</span> 
+   <span class="c1"># 기존 grad에 계속 더하게 됨으로 꼭 초기화를 해주어야 한다.
+</span>   <span class="n">cost</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+   <span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Use nn library
+</span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+
+<span class="k">class</span> <span class="nc">MultivariableLinearRegressionModel</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">()</span>
+      <span class="bp">self</span><span class="p">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+   <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">linear</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">MultivariableLinearRegressionModel</span><span class="p">()</span>
+<span class="n">hyp</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="2-data-loading">2. Data loading</h3>
+<ul>
+  <li>대용량 데이터 처러
+    <ul>
+      <li>시간적 한계</li>
+      <li>하드웨어적 한계</li>
+    </ul>
+  </li>
+  <li>Minibatch Gradient Descent
+    <ul>
+      <li>전체가 아니라 일부를 조금씩 학습</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="nn">Dataset</span><span class="p">,</span> <span class="n">DataLoader</span>
+
+<span class="k">class</span> <span class="nc">CustomDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="c1"># Omit
+</span>
+   <span class="c1"># 구현해야할 메소드 1
+</span>   <span class="k">def</span> <span class="nf">_len_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">x_data</span><span class="p">)</span>
+
+   <span class="c1"># 구현해야할 메소드 2
+</span>   <span class="k">def</span> <span class="nf">_getitem_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">x_data</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+      <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">y_data</span><span class="p">[</span><span class="n">dix</span><span class="p">])</span>
+      <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">CustomDataset</span><span class="p">()</span>
+
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,)</span>
+
+<span class="n">epoch</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+   <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+      <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">data</span>
+      <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">forward</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+      <span class="c1">#omit
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="3-logistic-regression">3. Logistic regression</h3>
+<ul>
+  <li>Logistic regression: binary classification
+    <ul>
+      <li>$ H(X) = {1 \over 1 + e^{-W^TX}} $
+        <ul>
+          <li>시그모이드 함수와 유사</li>
+          <li>$ P(X; W) $ W가 주어졌을 때, $x$ 일 확률</li>
+        </ul>
+      </li>
+      <li>$ cost(W) = -{1 \over m} \sum ylog(H(x)) + (1-y)(log()1-H(x)) $</li>
+    </ul>
+  </li>
+  <li>Code</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">torch</span>
+ <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+ <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+ <span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="n">optim</span>
+
+ <span class="c1"># omit # 
+</span>
+ <span class="n">hyp</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">torch</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x_train</span><span class="p">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">W</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="p">))</span>
+ 
+ <span class="n">cost</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">y_train</span><span class="o">*</span><span class="n">torch</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">hyp</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y_train</span><span class="p">)</span>
+      <span class="o">*</span> <span class="n">torch</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">hpy</span><span class="p">))).</span><span class="n">mean</span><span class="p">()</span>
+ 
+ <span class="c1"># same
+</span> <span class="c1"># cost = F.binary_cross_entoropy(hpy, y_train)
+</span>
+ <span class="k">class</span> <span class="nc">BinaryClassifier</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="n">def</span><span class="p">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">()</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">layer</span> <span class="o">=</span> <span class="n">Sequentail</span><span class="p">(</span>
+         <span class="n">nn</span><span class="p">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+         <span class="n">nn</span><span class="p">.</span><span class="n">Sigmoid</span><span class="p">()</span>
+       <span class="p">)</span>
+   
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+       <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">BinaryClaasifier</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="4-softmax-classification">4. Softmax Classification</h3>
+<ul>
+  <li>Cross Entropy
+    <ul>
+      <li>2개의 확률분포가 얼마나 비슷한지 나타내주는 수치</li>
+      <li>$ H(P,Q)=-\mathbb E _{x \sim P(X)} [logQ(X)] $</li>
+      <li>최소화하는것으로 $P \leftarrow Q$ 근사</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 각각을 확률 값으로 표시
+</span><span class="n">z</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">FloatTensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">hyp</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">hyp</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span> <span class="c1"># 1
+</span></code></pre></div>    </div>
+  </li>
+  <li>원핫 벡터 만들기</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1"># hyp와 동일한 크기의 0으로 채워진 벡터 생성
+</span> <span class="n">one_hot</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">hyp</span><span class="p">)</span>
+ <span class="c1"># y라벨의 값에 따라 해당 위치의 값을 1로 변경
+</span>   <span class="c1">#(dim, 벡터, 뿌릴 값)
+</span> <span class="n">one_hot</span><span class="p">.</span><span class="n">scatter_</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+ <span class="c1"># Low level
+</span> <span class="n">cost</span> <span class="o">=</span> <span class="p">(</span><span class="n">one_hot</span> <span class="o">*</span> <span class="o">-</span><span class="n">torch</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">hyp</span><span class="p">)).</span><span class="nb">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">mean</span><span class="p">()</span>
+ <span class="c1"># High level
+</span>   <span class="c1"># = F.nll_loss(F.log_softmax(z, dim=1), y)
+</span>   <span class="c1"># = F.cross_entropy(z, y) -&gt; 원핫벡터 만드는 과정도 생략 가능
+</span></code></pre></div></div>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

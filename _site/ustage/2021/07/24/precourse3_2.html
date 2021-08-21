@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Precourse 수학튼튼-(1)</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Precourse 수학튼튼-(1) | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Precourse 수학튼튼-(1)" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. pandas 1 / 딥러닝 학습방법 1.1 pandas 1 기본적인 pandas 라이브러리 사용법 데이터 접근 loc =&gt; 인덱스 이름을 사용해 접근 iloc =&gt; 인덱스 번호로 접근 inplace: 원본에 적용 유무(True/False) describe: 전체적인 통계값 데이터 가공 ```python # 1. apply f = lambda x : x.max() - x.min() df.info.apply(f) # 데이터 프레임의 column 별로 결과값 반환" />
+<meta property="og:description" content="1. pandas 1 / 딥러닝 학습방법 1.1 pandas 1 기본적인 pandas 라이브러리 사용법 데이터 접근 loc =&gt; 인덱스 이름을 사용해 접근 iloc =&gt; 인덱스 번호로 접근 inplace: 원본에 적용 유무(True/False) describe: 전체적인 통계값 데이터 가공 ```python # 1. apply f = lambda x : x.max() - x.min() df.info.apply(f) # 데이터 프레임의 column 별로 결과값 반환" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-24T22:18:21+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Precourse 수학튼튼-(1)" />
+<script type="application/ld+json">
+{"description":"1. pandas 1 / 딥러닝 학습방법 1.1 pandas 1 기본적인 pandas 라이브러리 사용법 데이터 접근 loc =&gt; 인덱스 이름을 사용해 접근 iloc =&gt; 인덱스 번호로 접근 inplace: 원본에 적용 유무(True/False) describe: 전체적인 통계값 데이터 가공 ```python # 1. apply f = lambda x : x.max() - x.min() df.info.apply(f) # 데이터 프레임의 column 별로 결과값 반환","mainEntityOfPage":{"@type":"WebPage","@id":"/ustage/2021/07/24/precourse3_2.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Precourse 수학튼튼-(1)","dateModified":"2021-07-24T22:18:21+09:00","datePublished":"2021-07-24T22:18:21+09:00","url":"/ustage/2021/07/24/precourse3_2.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ustage/2021/07/24/precourse3_2.html">
+    <h2 class="post-title">Precourse 수학튼튼-(1)</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Jul 24, 2021</div><ul class="post-categories"><li>ustage</li></ul></div>
+  <div class="post">
+    <h2 id="1-pandas-1--딥러닝-학습방법">1. pandas 1 / 딥러닝 학습방법</h2>
+<h3 id="11-pandas-1">1.1 pandas 1</h3>
+<ul>
+  <li>기본적인 pandas 라이브러리 사용법</li>
+  <li>데이터 접근
+    <ul>
+      <li>loc =&gt; 인덱스 이름을 사용해 접근</li>
+      <li>iloc =&gt; 인덱스 번호로 접근</li>
+    </ul>
+  </li>
+  <li>inplace: 원본에 적용 유무(True/False)</li>
+  <li>describe: 전체적인 통계값</li>
+  <li>데이터 가공</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1"># 1. apply
+</span> <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">.</span><span class="nb">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="p">.</span><span class="nb">min</span><span class="p">()</span>
+ <span class="n">df</span><span class="p">.</span><span class="n">info</span><span class="p">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="c1"># 데이터 프레임의 column 별로 결과값 반환
+</span>
+ <span class="c1"># 2. applymap
+</span> <span class="n">f</span> <span class="o">=</span> <span class="n">labmda</span> <span class="n">x</span> <span class="p">:</span> <span class="o">-</span><span class="n">x</span>
+ <span class="n">df</span><span class="p">.</span><span class="n">applymap</span><span class="p">(</span><span class="n">f</span><span class="p">).</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># 처음  \sim  5개 element에만 적용
+</span></code></pre></div></div>
+
+<h3 id="12-딥러닝-학습-방법">1.2 딥러닝 학습 방법</h3>
+<ul>
+  <li>비선형모델인 신경망 중심!</li>
+  <li>기본적인 선형 모델 수식
+    <ul>
+      <li>O: output, X: data, W: weight, b: bias</li>
+      <li>$ O = X W + b $</li>
+    </ul>
+  </li>
+  <li>Softmax: 모델의 출력을 확률로 해석할 수 있도록 해주는 연산</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+     <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span> <span class="c1"># 오버플로우 방지
+</span>     <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">d</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># 전체 합
+</span>     <span class="n">val</span> <span class="o">=</span> <span class="n">d</span> <span class="o">/</span> <span class="n">n</span>
+     <span class="k">return</span> <span class="n">val</span>
+</code></pre></div></div>
+<ul>
+  <li>activation function
+    <ul>
+      <li>선형 $\rightarrow$ 비선형 변환
+        <ul>
+          <li>activation function을 사용하지 않으면 딥러닝도 선형모델과 다를 것이 없음</li>
+        </ul>
+      </li>
+      <li>가장 많이 사용됬던 함수: sigmoid, tanh</li>
+      <li>현재 인기: relu</li>
+    </ul>
+  </li>
+  <li>층이 깊을수록 목적함수 근사를 위해 필요한 뉴런의 개수가 줄어듦 $\leftarrow$ 효율적으로 학습 가능
+    <ul>
+      <li>But, 최적화하기는 어려워 짐</li>
+    </ul>
+  </li>
+  <li>역전파(backpropagation) 알고리즘
+    <ul>
+      <li>각 층 파라미터의 그레디언트 벡터는 윗층 부터 역순으로 계산됨</li>
+      <li>연쇄법칙활용
+        <ul>
+          <li>${ \partial z \over \partial x } = {\partial z \over \partial w} {\partial w \over \partial x}   $</li>
+          <li>2층 신경망의 역전파 알고리즘<br />
+  <img src="/assets/image/precourse3_1.jpg" alt="here" /></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-pandas-2--확률론">2. pandas 2 / 확률론</h2>
+<h3 id="21-pandas-2">2.1 pandas 2</h3>
+<ul>
+  <li>Groupby
+    <ul>
+      <li>split $\rightarrow$ apply $\rightarrow$ combine</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 묶음의 기준이 되는 컬럼: Department
+# 적용받는 컬럼: salary
+# 적용받을 연산: mean
+</span><span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">"Department"</span><span class="p">)[</span><span class="s">"salary"</span><span class="p">].</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># 기준이 2개
+</span><span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">"Department"</span><span class="p">,</span> <span class="s">"year"</span><span class="p">)[</span><span class="s">"salary"</span><span class="p">].</span><span class="n">mean</span><span class="p">()</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>filer: 특정 조건으로 데이터 검색</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">"Department"</span><span class="p">).</span><span class="nb">filter</span><span class="p">(</span><span class="n">lamda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s">"salary"</span><span class="p">]</span> <span class="o">&gt;=</span><span class="mi">300</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>pivot_table</li>
+  <li>crosstab</li>
+  <li>Db connection 기능 제공</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">sqlite3</span>
+ <span class="c1"># 데이터 베이스 연결
+</span> <span class="n">con</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"db경로"</span><span class="p">)</span>
+ <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+ <span class="n">cur</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SQL 쿼리 문"</span><span class="p">)</span>
+ <span class="n">results</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+ <span class="c1"># 쿼리를 이용해 dataframe 생성
+</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s">"SQL 쿼리 문"</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="22-확률론">2.2 확률론</h3>
+<ul>
+  <li>확률론이 필요한 이유
+    <ul>
+      <li>딥러닝은 확률론 기반 이론을 바탕으로 둠</li>
+      <li>L2-norm은 예측오차의 ‘분산’을 최소화하는 방향으로 학습</li>
+      <li>cross-entorpy는 모델 예측의 ‘불확실성’을 최소화 하는 방향으로 학습</li>
+    </ul>
+  </li>
+  <li>이산확률변수 vs 연속확률변수
+    <ul>
+      <li>이산확률변수
+        <ul>
+          <li>모든 경우의 수를 고려, 확률을 더해 모델링</li>
+          <li>$ \mathbb{P} (X \in A ) = \sum_{x \in A} P(X=x) $</li>
+        </ul>
+      </li>
+      <li>연속확률변수
+        <ul>
+          <li>데이터 공간에 정의된 확률변수의 밀도(pdf) 위에서 적분을 통해 모델링 (누적확률분포)</li>
+          <li>$ \mathbb{P} (X \in A ) = \int_{x \in A} P(X)dx $</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>주변확률분포
+    <ul>
+      <li>결합확률분포 $ P(X, y)  \sim  \mathfrak{D}  $ 에서,</li>
+      <li>$ P(X) $ 는 입력 X에 대한 주변확률 분포
+        <ul>
+          <li>y에 대한 정보는 부재</li>
+          <li>$ \sum_{y} P(X,y) $ / $ \int_{y} P(X,y)dy $</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>조건부확률분포
+    <ul>
+      <li>입력 X와 출력 y사이의 관계를 모델링</li>
+      <li>$ P(X \mid y) \rightarrow $ y일때 X일 확률</li>
+      <li>$ P(y \mid X) \rightarrow $ 입력이 X일때 출력이 y일 확률</li>
+    </ul>
+  </li>
+  <li>기계학습
+    <ul>
+      <li>분류 문제에서 $ softmax(W \phi + b) $ 는 x로 부터 추출된 특징패턴 $ \phi (x) $ 와 가중치행렬 W를 통해 조건부 확률 $ P(y \mid X) $ 계산</li>
+      <li>회귀 문제의 경우 조건부 기대값 $ \mathbb{E} [y \mid X] $ 를 추정
+        <ul>
+          <li>L2-norm을 최소화하는 함수와 동일</li>
+          <li>목적에 따라 다른 통계량 사용가능
+            <ul>
+              <li>median 등</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>기대값?
+    <ul>
+      <li>데이터를 대표하는 통계량 (평균)
+        <ul>
+          <li>$ \mathbb E_{X \sim P(\mathcal X)} [f(X)] = \int_{\mathcal X} f(X)P(\mathcal X)dX $</li>
+          <li>$ \mathbb E_{X \sim P(\mathcal X)} [f(X)] = \sum_{x \in \mathcal X} f(x)P(\mathcal X) $</li>
+        </ul>
+      </li>
+      <li>분산, 첨도, 공분산 등 여러 통계량 계산 가능
+        <ul>
+          <li>$ \mathbb{V} (X)=\mathbb{E}_{X \sim P(X)} [(X-\mathbb{E}[X])^2] $</li>
+          <li>$ Skewness(X)=\mathbb{E}[({X-\mathbb{E}[X] \over \sqrt{\mathbb{V}(X)}})^3] $</li>
+          <li>$ Cov(X_1, X_2)=\mathbb{E}_{X_1, X_2 \sim P(X_1, X_2)}[(X_1 - \mathbb{E}[X_1])(X_2 - \mathbb{E}[X_2])] $</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>몬테카를로 샘플링
+    <ul>
+      <li>데이터의 확률분포를 모르는 경우 사용, 샘플링을 통해 기대값 계산</li>
+      <li>이산/연속 상관없이 동작</li>
+      <li>독립추출만 보장된다면 law of largenumber에 의해 수렴성 보장</li>
+      <li>$ \mathbb E_{X \sim P(X)}[f(X)] \approx {1 \over N} \sum_{i=1}^N f(x^i),\ x^i \sim^{i.i.d.} P(X) $</li>
+    </ul>
+  </li>
+</ul>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

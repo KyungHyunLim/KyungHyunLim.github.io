@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Visualization-Line</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Visualization-Line | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Visualization-Line" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 기본 선 그래프 연속적으로 변화하는 값을 순서대로 표현 시계열 분석에 특화! 5개 이하의 선 사용 추천 요소 색상(color) 마커(marker, markersize) 선의 종류(linestyle, linewidth) 전처리 smoothing Noise 영향력 감소" />
+<meta property="og:description" content="1. 기본 선 그래프 연속적으로 변화하는 값을 순서대로 표현 시계열 분석에 특화! 5개 이하의 선 사용 추천 요소 색상(color) 마커(marker, markersize) 선의 종류(linestyle, linewidth) 전처리 smoothing Noise 영향력 감소" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-10T20:32:22+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Visualization-Line" />
+<script type="application/ld+json">
+{"description":"1. 기본 선 그래프 연속적으로 변화하는 값을 순서대로 표현 시계열 분석에 특화! 5개 이하의 선 사용 추천 요소 색상(color) 마커(marker, markersize) 선의 종류(linestyle, linewidth) 전처리 smoothing Noise 영향력 감소","mainEntityOfPage":{"@type":"WebPage","@id":"/visualize/ml_ai/2021/08/10/vizline.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Visualization-Line","dateModified":"2021-08-10T20:32:22+09:00","datePublished":"2021-08-10T20:32:22+09:00","url":"/visualize/ml_ai/2021/08/10/vizline.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/visualize/ml_ai/2021/08/10/vizline.html">
+    <h2 class="post-title">Visualization-Line</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 10, 2021</div><ul class="post-categories"><li>Visualize</li><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h3 id="1-기본">1. 기본</h3>
+<ul>
+  <li>선 그래프</li>
+  <li>연속적으로 변화하는 값을 순서대로 표현</li>
+  <li>시계열 분석에 특화!</li>
+  <li>5개 이하의 선 사용 추천</li>
+  <li>요소
+    <ul>
+      <li>색상(color)</li>
+      <li>마커(marker, markersize)</li>
+      <li>선의 종류(linestyle, linewidth)
+<img src="/assets/image/ustage/w2_day2_8.PNG" alt="" /></li>
+    </ul>
+  </li>
+  <li>전처리
+    <ul>
+      <li>smoothing
+        <ul>
+          <li>Noise 영향력 감소</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="2-정확한-line-plot">2. 정확한 Line plot</h3>
+<ul>
+  <li>꼭 축을 0에 초첨을 둘 필요는 없음
+    <ul>
+      <li>추세가 목적이기 때문에</li>
+    </ul>
+  </li>
+  <li>구체적인 것 보다는 생략된 것이 더 나을 수 있음
+    <ul>
+      <li>Grid, Annotate 등 모두 제거</li>
+      <li>디테일한 정보는 표로 제공</li>
+    </ul>
+  </li>
+  <li>간격
+    <ul>
+      <li>규칙적인 간격이 아니면 오해를 줄 수 있음
+        <ul>
+          <li>그래프 상에서 규칙적으로 보일때: 기울기 정보 오해</li>
+          <li>그래프 상에서 간격이 다를때: 없는 데이터에 대해 있는 것으로 착각</li>
+        </ul>
+      </li>
+      <li>규칙적인 간격이 아니라면, 관측 값에 점으로 표시 =&gt; 오해 감소
+<img src="/assets/image/ustage/w2_day2_9.PNG" alt="" /></li>
+    </ul>
+  </li>
+  <li>보간
+    <ul>
+      <li>점과 점사이에 데이터가 없을때 이를 잇는 방법</li>
+      <li>Error나 Noise가 포함된 경우
+        <ul>
+          <li>Moving Average</li>
+          <li>Smooth Curve with Sipy
+            <ul>
+              <li>interpolate.make_interp_spline()</li>
+              <li>interpolate.interp1d()</li>
+              <li>ndimage.gaussan_filter1d()</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Presentation에는 좋은 방법 하지만!
+        <ul>
+          <li>없는 데이터에 대해 오해 위험</li>
+          <li>작은 차이를 없앨 수 있음</li>
+          <li>일반적인 분석에서는 지양!</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>이중 축 사용
+    <ul>
+      <li>한 plot에 두개의 축 사용 (.twinx())</li>
+      <li>.secondary_xaxis(), .secondary_yaxis()</li>
+    </ul>
+  </li>
+  <li>ETC
+    <ul>
+      <li>라인 끝 단에 레이블 추가(레전드 대신)</li>
+      <li>Annotation 활용</li>
+      <li>Uncertainty 표현(신뢰구간, 분산 등)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="3-실습">3. 실습</h3>
+<ul>
+  <li><a href="https://github.com/KyungHyunLim/Prv/blob/main/Viz/Lineplot.ipynb">jupyter notebook</a></li>
+</ul>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

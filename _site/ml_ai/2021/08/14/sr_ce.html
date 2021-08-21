@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Softmax regression and Cross-entropy</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Softmax regression and Cross-entropy | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Softmax regression and Cross-entropy" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Softmax regression 1.1 One-hot encoding 분류하고 싶은 class만큼의 차원을 만들어 해당하는 부분을 1로 셋팅 E.g 개, 고양이, 말을 분류하고 싶으면 개 = (1, 0, 0) 고양이 = (0, 1, 0) 말 = (0, 0, 1) 원핫 인코딩 벡터를 Lable, 정답으로" />
+<meta property="og:description" content="1. Softmax regression 1.1 One-hot encoding 분류하고 싶은 class만큼의 차원을 만들어 해당하는 부분을 1로 셋팅 E.g 개, 고양이, 말을 분류하고 싶으면 개 = (1, 0, 0) 고양이 = (0, 1, 0) 말 = (0, 0, 1) 원핫 인코딩 벡터를 Lable, 정답으로" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-14T22:55:22+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Softmax regression and Cross-entropy" />
+<script type="application/ld+json">
+{"description":"1. Softmax regression 1.1 One-hot encoding 분류하고 싶은 class만큼의 차원을 만들어 해당하는 부분을 1로 셋팅 E.g 개, 고양이, 말을 분류하고 싶으면 개 = (1, 0, 0) 고양이 = (0, 1, 0) 말 = (0, 0, 1) 원핫 인코딩 벡터를 Lable, 정답으로","mainEntityOfPage":{"@type":"WebPage","@id":"/ml_ai/2021/08/14/sr_ce.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Softmax regression and Cross-entropy","dateModified":"2021-08-14T22:55:22+09:00","datePublished":"2021-08-14T22:55:22+09:00","url":"/ml_ai/2021/08/14/sr_ce.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ml_ai/2021/08/14/sr_ce.html">
+    <h2 class="post-title">Softmax regression and Cross-entropy</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 14, 2021</div><ul class="post-categories"><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-softmax-regression">1. Softmax regression</h2>
+<h3 id="11-one-hot-encoding">1.1 One-hot encoding</h3>
+<ul>
+  <li>분류하고 싶은 class만큼의 차원을 만들어 해당하는 부분을 1로 셋팅
+    <ul>
+      <li>E.g 개, 고양이, 말을 분류하고 싶으면</li>
+      <li>개 = (1, 0, 0)</li>
+      <li>고양이 = (0, 1, 0)</li>
+      <li>말 = (0, 0, 1)</li>
+    </ul>
+  </li>
+  <li>원핫 인코딩 벡터를 Lable, 정답으로</li>
+</ul>
+
+<h3 id="12-softmax">1.2 Softmax</h3>
+<ul>
+  <li>$ {e^{x_i} \over \sum e^{x_i} }$
+    <ul>
+      <li>다른 클래스에 비해 i번째 클래스일 확률을 알 수 있다.</li>
+      <li>즉, 상대평가가 가능</li>
+    </ul>
+  </li>
+  <li>Exponential을 활용하는 이유?
+    <ul>
+      <li>계산했을때, 차이가 더 두드러지기 때문</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-cross-entropy-with-softmax">2. Cross-entropy with Softmax</h2>
+<ul>
+  <li>Cross-entropy
+    <ul>
+      <li>$-\sum_i p_i log(q_i) $
+        <ul>
+          <li>$p_i$ : 내가 원하는 확률</li>
+          <li>$q_i$ : 계산해서(예측한) 확률</li>
+        </ul>
+      </li>
+      <li>위 식을 minimize하면 $q_i$ 가 $p_i$ 와 가까워진다.</li>
+      <li>$q_i$ 에 Softmax 함수 적용</li>
+    </ul>
+  </li>
+  <li>학습 원리<br />
+ 결국 $p_i$ 는 해당 클래스일 확률, 즉 정답지 이기 때문에 1이다. 따라서 Softmax가 적용된 $q_i$ 는 나머지 클래스일 확률들을 최대한 줄이고 정답 클래스일 확률 값(마지막 레이어의 출력)을 최대한 높이는 방향으로 Weight를 업데이트하게 된다.<br />
+ 여기서 조금더 살펴보면, Cross-entropy Loss에서 $q_i$ 에 log를 취했고, 0 ~ 1 사이의 값을 가질 수 있기 때문에, Cross-entropy를 최소화 한다는 의미는 $q_i$ 의 값이 1로 수렴해야 한다는 말이 된다. (1 미만의 값에서는 -가 붙어있어 양수가 되어버리 기 때문!!)</li>
+</ul>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

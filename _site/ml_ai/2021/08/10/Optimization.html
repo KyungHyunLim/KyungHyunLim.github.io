@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Optimization</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Optimization | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Optimization" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 기본 1.1 Gradient Desent First-order iterative optimization algorithm for finding a local minimum" />
+<meta property="og:description" content="1. 기본 1.1 Gradient Desent First-order iterative optimization algorithm for finding a local minimum" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-10T23:31:22+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Optimization" />
+<script type="application/ld+json">
+{"description":"1. 기본 1.1 Gradient Desent First-order iterative optimization algorithm for finding a local minimum","mainEntityOfPage":{"@type":"WebPage","@id":"/ml_ai/2021/08/10/Optimization.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Optimization","dateModified":"2021-08-10T23:31:22+09:00","datePublished":"2021-08-10T23:31:22+09:00","url":"/ml_ai/2021/08/10/Optimization.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ml_ai/2021/08/10/Optimization.html">
+    <h2 class="post-title">Optimization</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 10, 2021</div><ul class="post-categories"><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-기본">1. 기본</h2>
+<h3 id="11-gradient-desent">1.1 Gradient Desent</h3>
+<ul>
+  <li>First-order iterative optimization algorithm for finding a local minimum</li>
+</ul>
+
+<h3 id="12-최적화-주요-개념">1.2 최적화 주요 개념!</h3>
+<ul>
+  <li>Generalization
+    <ul>
+      <li>일반화 성능? 
+학습에 따라 Training error는 줄어들지만 학습을 반복할 수록 Test error는 다시 증가 하게된다. 즉, 학습데이터의 일반화 성능이 좋다고, 좋은 모델이라고 할수 없다.</li>
+    </ul>
+  </li>
+  <li>Under-fitting vs Over-fitting
+<img src="/assets/image/ML_AI/opt_1.png" alt="" />
+    <ul>
+      <li>Under-fitting
+모델이 너무 조금 훈련되서 학습데이터도 잘 맞추지 못하는 상황</li>
+      <li>Over-fitting
+학습데이터는 다 맞추지만, 너무 많이 학습되어 오히려 평가데이터에서는 성능이 떨어지는 상황</li>
+      <li>저 사이 어딘가를 찾아야 한다!</li>
+    </ul>
+  </li>
+  <li>Cross validation
+    <ul>
+      <li>K-fold validation</li>
+      <li>Train data를 K개의 그룹으로 나누어
+        <ul>
+          <li>k-1개는 훈련데이터</li>
+          <li>나머지 1개를 검증데이터로 사용하는 것</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Bais-variance tradeoff
+<img src="/assets/image/ML_AI/opt_2.png" alt="" />
+    <ul>
+      <li>Variance: 출력이 일관되게 나오는지?</li>
+      <li>Bias: 평균과 벗어나는 정도</li>
+      <li>$Given D={(x_i,t_i)}_i^N, where t=f(x)+\epsilon \ and \epsilon \sim N(0, \sigma^2)$
+cost를 최소화하는 것은 $bias^2$ , variance, noise 3가지를 줄이는 것과 동일. 이때 bias를 최소화하면 variance는 높아질 가능성이 크고, 반대의 경우도 동일하기 때문에 trade off를 최소화 하는 지점을 찾는 것이 중요하다.</li>
+    </ul>
+  </li>
+  <li>Bootstrapping
+    <ul>
+      <li>학습데이터를 random으로 샘플링 하여 사용하는 것</li>
+      <li>여러 묶음을 만들어 여러개의 모델을 학습하는 것에 사용</li>
+    </ul>
+  </li>
+  <li>Bagging and boosting
+    <ul>
+      <li>Bagging
+        <ul>
+          <li>여러개의 모델을 sub 샘플링을 통해 학습</li>
+          <li>여러개의 모델의 output을 voting, averaging을 이용해 사용</li>
+        </ul>
+      </li>
+      <li>Boosting
+        <ul>
+          <li>여러개의 모델을 Seqential하게 생성</li>
+          <li>분류하기 어려운 데이터에 가중치 부여</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="13-practical-gradien-decent-methods">1.3 Practical Gradien Decent Methods</h3>
+<ul>
+  <li>구분
+    <ul>
+      <li>Stochastic GD
+        <ul>
+          <li>한 single sample로 부터 업데이트</li>
+        </ul>
+      </li>
+      <li>Mini-batch GD
+        <ul>
+          <li>Batch 크기만큼으로 부터 업데이트</li>
+        </ul>
+      </li>
+      <li>Batch GD
+        <ul>
+          <li>모두 사용해 업데이트</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Batch-size Matter</p>
+
+    <p><img src="/assets/image/ML_AI/opt_3.png" alt="" />
+큰 배치사이즈를 활용하면 sharp minimizers, 작은 배치 사이즈를 사용하면 Flat minimizers. Flat minimizers는 일반적으로 Test셋에 대해서도 잘 동작할 가능성이 높지만, sharp는 성능이 떨어 질 수도 있다.</p>
+  </li>
+  <li>
+    <p>종류
+<img src="/assets/image/ML_AI/opt_4.png" alt="" /></p>
+
+    <p>출처:https://www.slideshare.net/yongho/ss-79607172</p>
+    <ul>
+      <li>Stochastic Gradient Descent
+        <ul>
+          <li>$W_{t+1} \leftarrow W_t - r g_t$
+가장 큰 문제점? learning rate, step size를 결정하는 것이 어려움!</li>
+        </ul>
+      </li>
+      <li>Momentum
+        <ul>
+          <li>$a_{t+1} \leftarrow  \beta a_t - g_t$</li>
+          <li>$W_{t+1} \leftarrow  W_t - ra_{t+1}$
+관성을 이용 이전 step의 gradient 방향을 일정 부분 유지. $\beta$ 가 momentum.</li>
+        </ul>
+      </li>
+      <li>Nesterov Accelerate
+        <ul>
+          <li>$a_{t+1} \leftarrow  \beta a_t - \nabla L(W_t-r \beta a_t)$</li>
+          <li>$W_{t+1} \leftarrow  W_t - ra_{t+1}$ 
+$\nabla L(W_t-r \beta a_t)$ 는 Lookahead gradient라고 부른다. 한번 이동해보고, 그곳에서 계산을 진행해봄. 만약 Local minimum을 지났으면 momentum은 관성으로 인해 지나친 방향으로 더 가려는 습성을 지나는데,  Lookahead gradient을 이용하면 한번 더 간 곳의 gradient의 방향을 활용하기 때문에 조금 더 빨리 Local minimum에 수렴할 수 있다.</li>
+        </ul>
+      </li>
+      <li>Adagrad
+        <ul>
+          <li>$W_{t+1} \leftarrow  W_t - {r \over \sqrt {G_t + \epsilon}}g_t$
+neural network 지금 까지 변해온 정보활용. 많이 변했던 것들은 적게, 적게 변했던 것들은 많이! 정보를 $G$ 에 저장 $\epsilon$ 0으로 나누는 것을 방지.
+하지만! $G$가 계속커지면 시간이 지나면 학습이 안되는 문제 발생</li>
+        </ul>
+      </li>
+      <li>Adadelta
+        <ul>
+          <li>$G_t=rG_{t-1}+(1-r)g_t^2$</li>
+          <li>$W_{t+1} \leftarrow  W_t - {\sqrt {H_{t-1} + \epsilon} \over \sqrt {G_t + \epsilon}}g_t$</li>
+          <li>$H_t=rH_{t-1}+(1-r)(\Delta W_t)^2$
+Adagrad의 $G$가 계속해서 커지는 것을 방지하기 위해 나온 방법. Window size만큼의 gradient만 활용. 
+하지만 learning rate가 없어 잘 활용하지 않는다.</li>
+        </ul>
+      </li>
+      <li>RMSprop
+        <ul>
+          <li>$G_t=rG_{t-1}+(1-r)g_t^2$</li>
+          <li>$W_{t+1} \leftarrow  W_t - {lr \over \sqrt {G_t + \epsilon}}g_t$
+힌턴이 이러면 잘되더라 했던 알고리즘. Stepsize를 분자에 추가한게 전부.</li>
+        </ul>
+      </li>
+      <li>Adam
+        <ul>
+          <li>Momentum: $m_t=\beta_1 m_{t=1} + (1-\beta_1)g_t$</li>
+          <li>EMA of gradient squares: $v_t=\beta_2 v_{t-1} + (1-\beta_2)g_t^2$</li>
+          <li>$W_{t+1} = W_t + {lr \over \sqrt {v_t + \epsilon}} {\sqrt {1-\beta_2^t} \over 1-\beta_1^t}m_t$
+Momentum을 얼마나 유지할 것인가? EMA 정도, step size 등의 파라미터를 잘 설정해주는 것이 중요.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="14-regularization">1.4 Regularization</h3>
+<p>Generalization이 잘 되게 하고 싶은것. 즉, Test 데이터에 대해서도 잘 동작할 수 있도록 규제하는 것이 목적</p>
+<ul>
+  <li>Early Stopping
+    <ul>
+      <li>검증 에러가 높아지는 시점에 학습 중단</li>
+    </ul>
+  </li>
+  <li>Parameter Norm Penalty
+    <ul>
+      <li>$total cost = loss(D;W)+{\alpha \over 2} \Vert W \Vert_2^2$
+네트워크 파라미터들의 크기를 줄이자. Function space에서 부드러운 함수로 보자.</li>
+    </ul>
+  </li>
+  <li>Data Augmentation
+많은 데이터는 언제나 좋은 결과를 가저다 준다. 
+이미지 같은 경우, 돌리거나, 뒤집거나 등의 방식을 통해 데이터를 늘릴 수 있음
+하지만 Mnist같은 경우에는 라벨이 변할 수 있으니(6-&gt;9) 주의할 필요가 있음</li>
+  <li>Noise Robustness
+입력 데이터에 Noise를 중간중간 추가.</li>
+  <li>Label Smooting
+학습데이터에서 임의적으로 선택한 두개의 데이터를 섞는것, 라벨과 이미지를 모두 섞음(Mix up, Cut mix)<br />
+<img src="/assets/image/ML_AI/opt_5.png" alt="" /></li>
+  <li>Dropout
+일부 뉴런을 0으로 설정. forward pass</li>
+  <li><a href="https://kyunghyunlim.github.io/ml_ai/2021/07/31/Batchnorm.html">Batch Normalization</a>
+    <ul>
+      <li>Batch norm</li>
+      <li>Layer norm</li>
+      <li>Instance norm</li>
+      <li>Group norm</li>
+    </ul>
+  </li>
+</ul>
+
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

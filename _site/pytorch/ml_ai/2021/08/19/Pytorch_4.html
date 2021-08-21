@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Pytorch(4)-모델 불러오기(transfer learning)</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Pytorch(4)-모델 불러오기(transfer learning) | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Pytorch(4)-모델 불러오기(transfer learning)" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Intro Transfer learning? 이미 학습된 모델을 가져와 내 데이터로 추가로 학습시키는 방법 Back bone 모델 선택을 잘 해야 한다." />
+<meta property="og:description" content="1. Intro Transfer learning? 이미 학습된 모델을 가져와 내 데이터로 추가로 학습시키는 방법 Back bone 모델 선택을 잘 해야 한다." />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-19T19:31:12+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pytorch(4)-모델 불러오기(transfer learning)" />
+<script type="application/ld+json">
+{"description":"1. Intro Transfer learning? 이미 학습된 모델을 가져와 내 데이터로 추가로 학습시키는 방법 Back bone 모델 선택을 잘 해야 한다.","mainEntityOfPage":{"@type":"WebPage","@id":"/pytorch/ml_ai/2021/08/19/Pytorch_4.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Pytorch(4)-모델 불러오기(transfer learning)","dateModified":"2021-08-19T19:31:12+09:00","datePublished":"2021-08-19T19:31:12+09:00","url":"/pytorch/ml_ai/2021/08/19/Pytorch_4.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/pytorch/ml_ai/2021/08/19/Pytorch_4.html">
+    <h2 class="post-title">Pytorch(4)-모델 불러오기(transfer learning)</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 19, 2021</div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-intro">1. Intro</h2>
+<ul>
+  <li>Transfer learning?
+    <ul>
+      <li>이미 학습된 모델을 가져와 내 데이터로 추가로 학습시키는 방법</li>
+      <li>Back bone 모델 선택을 잘 해야 한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-모델을-저장-및-불러오는-방법">2. 모델을 저장 및 불러오는 방법</h2>
+<h3 id="21-modelsave">2.1 model.save</h3>
+<ul>
+  <li>학습 결과를 저장</li>
+  <li>모델 구조와 parameter 저장</li>
+  <li>학습 중간 저장을해 최선의 결과 모델 유지</li>
+  <li>외부에 공유해 결과 재연 가능</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 모델의 Parameter save
+# 확장자는 .pt를 많이 사용한다.
+</span><span class="n">torch</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s">"저장할 path"</span> <span class="o">+</span> <span class="s">"model.pt"</span><span class="p">)</span>
+
+<span class="c1"># 동일한 모델에서 Parameter만 load
+</span><span class="n">new_model</span> <span class="o">=</span> <span class="n">ModelClass</span><span class="p">()</span>
+<span class="n">new_model</span><span class="p">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"저장했던 경로"</span><span class="p">))</span>
+
+<span class="c1"># 모델의 구조 + Parameter save
+</span><span class="n">torch</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">"저장할 path"</span> <span class="o">+</span> <span class="s">"model.pt"</span><span class="p">)</span>
+
+<span class="c1"># 모델의 구조 + Parameter load
+</span><span class="n">new_model</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"저장했던 경로"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="22-모델-정보-확인">2.2 모델 정보 확인</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">torchsummary</span> <span class="kn">import</span> <span class="n">summary</span>
+<span class="n">summary</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">))</span> <span class="c1"># input size
+</span></code></pre></div></div>
+
+<h3 id="23-checkpoints">2.3 Checkpoints</h3>
+<ul>
+  <li>학습의 중간 중간 결과 저장 $\rightarrow$ 최선의 결과 선택</li>
+  <li>Earlystopping 활용 $\rightarrow$ 이전 학습의 결과물 저장</li>
+  <li>loss와 metric 값을 지속적으로 확인하고 저장
+    <ul>
+      <li>일반적으로 epoch, loss, metric을 함께 확인</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 정보들을 한번에 저장
+# 파일 이름은 저장 당시의 정보를 활용
+</span>    <span class="c1"># loss/len(dataloader) : 저장 당시 loss
+</span>    <span class="c1"># metric/len(dataloader) : 저장 당시 평가 결과
+</span><span class="n">torch</span><span class="p">.</span><span class="n">save</span><span class="p">({</span>
+    <span class="s">'epoch'</span><span class="p">:</span> <span class="n">e</span><span class="p">,</span>
+    <span class="s">'model_satate_dict'</span><span class="p">:</span> <span class="n">model</span><span class="p">.</span><span class="n">state_dict</span><span class="p">(),</span>
+    <span class="s">'optimizer_state_dict'</span><span class="p">:</span> <span class="n">optimizer</span><span class="p">.</span><span class="n">state_dict</span><span class="p">(),</span>
+    <span class="s">'loss'</span><span class="p">:</span> <span class="n">loss</span><span class="p">,},</span>
+    <span class="sa">f</span><span class="s">'checkpoint_model_</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">loss</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">metric</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span><span class="si">}</span><span class="s">.pt'</span>
+<span class="p">)</span>
+
+<span class="c1"># 저장한 정보들 불러오기
+</span><span class="n">check_point</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"저장한 경로"</span><span class="p">)</span>
+<span class="n">model</span><span class="p">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">[</span><span class="s">'model_satate_dict'</span><span class="p">])</span>
+<span class="n">optimizer</span><span class="p">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">[</span><span class="s">'optimizer_state_dict'</span><span class="p">])</span>
+<span class="n">epoch</span> <span class="o">=</span> <span class="n">checkpoint</span><span class="p">[</span><span class="s">'epoch'</span><span class="p">]</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="n">checkpoint</span><span class="p">[</span><span class="s">'loss'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="3-pretrained-model--transfer-learning">3. Pretrained model / Transfer learning</h2>
+<ul>
+  <li>Transfer learning
+    <ul>
+      <li>다른 데이터셋으로 만든 모델을 현재 데이터에 적용</li>
+      <li>일반적으로 대용량 데이터셋으로 만들어진 모델의 성능이 좋다</li>
+      <li>현재 가장 일반적인(?) 학습기법
+        <ul>
+          <li>Backbone 구조가 잘 학습된 모델에서 일부만 변경해 학습 수행</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>TrochVision에서 다양한 기본 모델 제공
+    <ul>
+      <li><a href="https://github.com/rwightman/pytorch-image-models#introduction">링크</a>
+  <img src="/assets/image/Pytorch/py4_1.PNG" alt="" /></li>
+    </ul>
+  </li>
+  <li>How?
+    <ul>
+      <li>일부분의 parameter를 frozen 시킴 (parameter update가 일어나지 않도록) 
+  <img src="/assets/image/Pytorch/py4_2.PNG" alt="" /></li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Moudle</span><span class="p">):</span>
+      <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+          <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">()</span>
+          <span class="c1"># 학습된 vgg19 모델 가져오기
+</span>          <span class="bp">self</span><span class="p">.</span><span class="n">pretrained_model</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">vgg19</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+          <span class="c1"># 새로 추가하는 layer
+</span>          <span class="bp">self</span><span class="p">.</span><span class="n">dense</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+      <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+          <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">pretrained_model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+          <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dense</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+          <span class="k">return</span> <span class="n">x</span>
+
+  <span class="c1"># 학습에서 제외할 Parameter Frozen 시키기
+</span>  <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mymodel</span><span class="p">.</span><span class="n">parameters</span><span class="p">():</span> <span class="c1"># 전체 Parameter 학습 비활성화
+</span>      <span class="n">p</span><span class="p">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="bp">False</span>
+  <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mymodel</span><span class="p">.</span><span class="n">dense</span><span class="p">.</span><span class="n">parameters</span><span class="p">():</span> <span class="c1"># 마지막 layer만 다시 활성화
+</span>      <span class="n">p</span><span class="p">.</span><span class="n">requres_grad</span> <span class="o">=</span> <span class="bp">True</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

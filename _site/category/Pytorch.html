@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Pytorch</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Pytorch | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Pytorch" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<meta property="og:description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pytorch" />
+<script type="application/ld+json">
+{"description":"Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.","author":{"@type":"Person","name":"LKH"},"@type":"WebPage","headline":"Pytorch","url":"/category/Pytorch.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header ">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer "><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer ">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer ">&copy;
+        2021</p><div class="about-footer ">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <ul class="posts-list">
+  
+  
+  
+	<li><a class="post-link" href="/pytorch/ml_ai/2021/08/20/Pytorch_8.html">
+          <h2 class="post-title">Pytorch(8)-Trouble shooting</h2>
+        </a>
+        <div class="post-meta">
+          <div class="post-date">
+            <i class="icon-calendar"></i>
+            Aug 20, 2021
+          </div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+        <!--<div class="post"><h2 id="1-oom">1. OOM</h2>
+<h3 id="11-대응하기-어려움">1.1 대응하기 어려움</h3>
+<ul>
+  <li>왜…를 알기 어려움</li>
+  <li>어디서… 도 알기 어려움
+    <ul>
+      <li>Error backtracking이 이상한 곳으로 빠짐</li>
+      <li>메모리의 이전상황의 파악이 난해</li>
+    </ul>
+  </li>
+  <li>주로 Iteration 안에서 발생
+    <ul>
+      <li>GPU clean -&gt; RUN / Batch_size 줄이기</li>
+    </ul>
+  </li>
+</ul>
+</div> 내용 표시 -->
+      </li>
+    <!--<li>
+      <h3>
+        <a href="/pytorch/ml_ai/2021/08/20/Pytorch_8.html">
+          Pytorch(8)-Trouble shooting
+        </a>
+        <small>20 Aug 2021</small>
+      </h3>
+    </li>-->
+  
+	<li><a class="post-link" href="/pytorch/ml_ai/2021/08/20/Pytorch_7.html">
+          <h2 class="post-title">Pytorch(7)-Hyperparameter tuning</h2>
+        </a>
+        <div class="post-meta">
+          <div class="post-date">
+            <i class="icon-calendar"></i>
+            Aug 20, 2021
+          </div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+        <!--<div class="post"><h2 id="1-성능을-높이는-방법">1. 성능을 높이는 방법</h2>
+<ol>
+  <li>모델 바꾸기</li>
+  <li>데이터 바꾸기 (가장… 좋은 영향)</li>
+  <li>Hyperparameter tuning
+    <ul>
+      <li>모델 스스로 학습하지 않는 값들
+        <ul>
+          <li>learning rate, 모델의 크기, optimizer 등</li>
+        </ul>
+      </li>
+      <li>결과가 크게 좌우 될 때도 있음 (요즘은… 드뭄)</li>
+      <li>마지막 0.01을 쥐어짜야 할 때 도전해볼만!</li>
+    </ul>
+  </li>
+</ol>
+</div> 내용 표시 -->
+      </li>
+    <!--<li>
+      <h3>
+        <a href="/pytorch/ml_ai/2021/08/20/Pytorch_7.html">
+          Pytorch(7)-Hyperparameter tuning
+        </a>
+        <small>20 Aug 2021</small>
+      </h3>
+    </li>-->
+  
+	<li><a class="post-link" href="/pytorch/ml_ai/2021/08/20/Pytorch_6.html">
+          <h2 class="post-title">Pytorch(6)-MultiGPU</h2>
+        </a>
+        <div class="post-meta">
+          <div class="post-date">
+            <i class="icon-calendar"></i>
+            Aug 20, 2021
+          </div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+        <!--<div class="post"><h2 id="1-개념-정리">1. 개념 정리</h2>
+<ul>
+  <li>Single vs Multi : 1개 vs 2개 이상</li>
+  <li>GPU vs Node : GPU vs 1대 컴퓨터의 1대 GPU</li>
+  <li>Single Node Single GPU : 1대 컴퓨터의 1대 GPU</li>
+  <li>Single Node Multi GPU : 1대 컴퓨터의 여러 GPU</li>
+  <li>Multi Node Multi GPU : 여러 컴퓨터의 여러 GPU</li>
+</ul>
+</div> 내용 표시 -->
+      </li>
+    <!--<li>
+      <h3>
+        <a href="/pytorch/ml_ai/2021/08/20/Pytorch_6.html">
+          Pytorch(6)-MultiGPU
+        </a>
+        <small>20 Aug 2021</small>
+      </h3>
+    </li>-->
+  
+	<li><a class="post-link" href="/pytorch/ml_ai/2021/08/19/Pytorch_5.html">
+          <h2 class="post-title">Pytorch(5)-Monitering(Tensorbaord &amp; Weight and Bias)</h2>
+        </a>
+        <div class="post-meta">
+          <div class="post-date">
+            <i class="icon-calendar"></i>
+            Aug 19, 2021
+          </div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+        <!--<div class="post"><h2 id="1-intro">1. Intro</h2>
+<ul>
+  <li>긴 학습시간… 기다림의 기록이 필요
+    <ul>
+      <li>log, csv 등도 활용가능</li>
+    </ul>
+  </li>
+  <li>잘만들어진 도구를 활용하자
+    <ul>
+      <li>Tensorboard</li>
+      <li>weigth &amp; biases</li>
+    </ul>
+  </li>
+</ul>
+</div> 내용 표시 -->
+      </li>
+    <!--<li>
+      <h3>
+        <a href="/pytorch/ml_ai/2021/08/19/Pytorch_5.html">
+          Pytorch(5)-Monitering(Tensorbaord & Weight and Bias)
+        </a>
+        <small>19 Aug 2021</small>
+      </h3>
+    </li>-->
+  
+	<li><a class="post-link" href="/pytorch/ml_ai/2021/08/19/Pytorch_4.html">
+          <h2 class="post-title">Pytorch(4)-모델 불러오기(transfer learning)</h2>
+        </a>
+        <div class="post-meta">
+          <div class="post-date">
+            <i class="icon-calendar"></i>
+            Aug 19, 2021
+          </div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+        <!--<div class="post"><h2 id="1-intro">1. Intro</h2>
+<ul>
+  <li>Transfer learning?
+    <ul>
+      <li>이미 학습된 모델을 가져와 내 데이터로 추가로 학습시키는 방법</li>
+      <li>Back bone 모델 선택을 잘 해야 한다.</li>
+    </ul>
+  </li>
+</ul>
+</div> 내용 표시 -->
+      </li>
+    <!--<li>
+      <h3>
+        <a href="/pytorch/ml_ai/2021/08/19/Pytorch_4.html">
+          Pytorch(4)-모델 불러오기(transfer learning)
+        </a>
+        <small>19 Aug 2021</small>
+      </h3>
+    </li>-->
+  
+	<li><a class="post-link" href="/pytorch/ml_ai/2021/08/18/Pytorch_3.html">
+          <h2 class="post-title">Pytorch(3)-Dataset &amp; DataLoader</h2>
+        </a>
+        <div class="post-meta">
+          <div class="post-date">
+            <i class="icon-calendar"></i>
+            Aug 18, 2021
+          </div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+        <!--<div class="post"><h2 id="1-intro">1. Intro</h2>
+<p><img src="/assets/image/Pytorch/py3_1.PNG" alt="" /></p>
+<ol>
+  <li>데이터 수집</li>
+  <li>Dataset class
+    <ul>
+      <li>init -&gt; 어떤 데이터를 불러올것인지?</li>
+      <li>len -&gt; 길이가 얼마인지?</li>
+      <li>getitem -&gt; 하나의 데이터를 불러올때 어떻게 반환하는지?</li>
+    </ul>
+  </li>
+  <li>transforms: 전처리(이미지 변환 등)
+    <ul>
+      <li>데이터셋을 전처리 해주는 부분</li>
+      <li>텐서로 만들어주는 부분과 데이터 하나를 넘겨주는 부분이 다르다.</li>
+    </ul>
+  </li>
+  <li>DataLoader
+    <ul>
+      <li>Data를 어떻게 처리할지 정의한대로 Data를 묶어서 Batch를 만들어줌</li>
+    </ul>
+  </li>
+  <li>Model에 feed</li>
+</ol>
+</div> 내용 표시 -->
+      </li>
+    <!--<li>
+      <h3>
+        <a href="/pytorch/ml_ai/2021/08/18/Pytorch_3.html">
+          Pytorch(3)-Dataset & DataLoader
+        </a>
+        <small>18 Aug 2021</small>
+      </h3>
+    </li>-->
+  
+	<li><a class="post-link" href="/pytorch/ml_ai/2021/08/18/Pytorch_2.html">
+          <h2 class="post-title">Pytorch(2)-AutoGrad &amp; Optimizer</h2>
+        </a>
+        <div class="post-meta">
+          <div class="post-date">
+            <i class="icon-calendar"></i>
+            Aug 18, 2021
+          </div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+        <!--<div class="post"><h2 id="1-intro">1. Intro</h2>
+<h3 id="11-딥러닝-모델은">1.1 딥러닝 모델은?</h3>
+<ul>
+  <li>Layer = Block
+    <ul>
+      <li>논문에 있는 모델 =&gt; 수많은 반복의 연속</li>
+      <li>Block들을 조립한것
+<img src="/assets/image/Pytorch/py2_1.PNG" alt="" /></li>
+    </ul>
+  </li>
+</ul>
+</div> 내용 표시 -->
+      </li>
+    <!--<li>
+      <h3>
+        <a href="/pytorch/ml_ai/2021/08/18/Pytorch_2.html">
+          Pytorch(2)-AutoGrad & Optimizer
+        </a>
+        <small>18 Aug 2021</small>
+      </h3>
+    </li>-->
+  
+	<li><a class="post-link" href="/pytorch/ml_ai/2021/08/18/Pytorch_1.html">
+          <h2 class="post-title">Pytorch(1)-Basic</h2>
+        </a>
+        <div class="post-meta">
+          <div class="post-date">
+            <i class="icon-calendar"></i>
+            Aug 18, 2021
+          </div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+        <!--<div class="post"><h2 id="1-introduction-to-pytorch">1. Introduction to PyTorch</h2>
+<h3 id="11-computational-graph">1.1 Computational Graph</h3>
+<ul>
+  <li>연산과정을 그래프로 표현한 것<br />
+<img src="/assets/image/Pytorch/py1_1.PNG" alt="" /></li>
+  <li>Define and Run<br />
+ 그래프를 먼저 정의한 후 실행 시점에 데이터 feed</li>
+  <li>Define by Run(Pytorch 방식)<br />
+ 실행을 하면서 그래프를 생성<br />
+ 즉시 확인 가능 $\rightarrow$ pythonic code</li>
+</ul>
+</div> 내용 표시 -->
+      </li>
+    <!--<li>
+      <h3>
+        <a href="/pytorch/ml_ai/2021/08/18/Pytorch_1.html">
+          Pytorch(1)-Basic
+        </a>
+        <small>18 Aug 2021</small>
+      </h3>
+    </li>-->
+  
+	<li><a class="post-link" href="/pytorch/ml_ai/2021/07/30/dataset.html">
+          <h2 class="post-title">Pytorch, 대용량 데이터 처리 with Dataset 클래스</h2>
+        </a>
+        <div class="post-meta">
+          <div class="post-date">
+            <i class="icon-calendar"></i>
+            Jul 30, 2021
+          </div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+        <!--<div class="post"><h2 id="0-torch에서-제공하는-기본-클래스">0. torch에서 제공하는 기본 클래스</h2>
+<ul>
+  <li>HDF5Matrix와 동일하게, 해당 데이터를 사용할 때 메모리에 적재, 메모리에러로 부터 자유로워질 수 있다</li>
+  <li>아래 함수들을 필수로 구현해 주어야한다
+    <ul>
+      <li><strong>init</strong>(self,…): 초기화 함수</li>
+      <li><strong>len</strong>(data): 데이터의 길이 반환</li>
+      <li><strong>getitem</strong>(idx): idx번째 데이터 반환</li>
+    </ul>
+  </li>
+</ul>
+</div> 내용 표시 -->
+      </li>
+    <!--<li>
+      <h3>
+        <a href="/pytorch/ml_ai/2021/07/30/dataset.html">
+          Pytorch, 대용량 데이터 처리 with Dataset 클래스
+        </a>
+        <small>30 Jul 2021</small>
+      </h3>
+    </li>-->
+  
+	<li><a class="post-link" href="/pytorch/ml_ai/2021/07/29/h5py.html">
+          <h2 class="post-title">Tensorflow, 대용량 데이터 처리 with h5py, HDF5Matrix</h2>
+        </a>
+        <div class="post-meta">
+          <div class="post-date">
+            <i class="icon-calendar"></i>
+            Jul 29, 2021
+          </div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+        <!--<div class="post"><h2 id="0-메모리에러">0. 메모리에러…</h2>
+<ul>
+  <li>딥러닝을 학습하다 보면 생각보다 자주 메모리에러에 접하게 됩니다.</li>
+  <li>연구실에서 하드웨어 빵빵한 PC를 사용할 때는 거의 문제가 없었는데, 졸업 후 개인 PC로 하려니 힘들어서… 좋은 방법이 없나 찾아보았습니다.</li>
+  <li>보통 h5py + HDF5Mtrix나</li>
+  <li>data generator 라이브러리를 활용했습니다.</li>
+  <li>이번엔 h5py + HDF5Mtrix를 알아보겠습니다.</li>
+</ul>
+</div> 내용 표시 -->
+      </li>
+    <!--<li>
+      <h3>
+        <a href="/pytorch/ml_ai/2021/07/29/h5py.html">
+          Tensorflow, 대용량 데이터 처리 with h5py, HDF5Matrix
+        </a>
+        <small>29 Jul 2021</small>
+      </h3>
+    </li>-->
+  
+  
+</ul>
+    </section>
+    <footer class="">
+      <ul class="social about-footer "><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer ">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer ">&copy;
+        2021</p><div class="about-footer ">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

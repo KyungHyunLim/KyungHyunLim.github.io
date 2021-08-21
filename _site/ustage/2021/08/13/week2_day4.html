@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Week2 - 4일차</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Week2 - 4일차 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Week2 - 4일차" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 개인학습 RNN Transformer 2. 필수과제 LSTM" />
+<meta property="og:description" content="1. 개인학습 RNN Transformer 2. 필수과제 LSTM" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-13T04:22:30+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Week2 - 4일차" />
+<script type="application/ld+json">
+{"description":"1. 개인학습 RNN Transformer 2. 필수과제 LSTM","mainEntityOfPage":{"@type":"WebPage","@id":"/ustage/2021/08/13/week2_day4.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Week2 - 4일차","dateModified":"2021-08-13T04:22:30+09:00","datePublished":"2021-08-13T04:22:30+09:00","url":"/ustage/2021/08/13/week2_day4.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ustage/2021/08/13/week2_day4.html">
+    <h2 class="post-title">Week2 - 4일차</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 13, 2021</div><ul class="post-categories"><li>ustage</li></ul></div>
+  <div class="post">
+    <h2 id="1-개인학습">1. 개인학습</h2>
+<ul>
+  <li><a href="https://kyunghyunlim.github.io/ml_ai/2021/08/12/rnn.html">RNN</a></li>
+  <li><a href="https://kyunghyunlim.github.io/ml_ai/2021/08/12/transformer.html">Transformer</a></li>
+</ul>
+
+<h2 id="2-필수과제">2. 필수과제</h2>
+<ul>
+  <li>LSTM</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># LSTM 설정
+</span><span class="bp">self</span><span class="p">.</span><span class="n">rnn</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">LSTM</span><span class="p">(</span>
+    <span class="n">input_size</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">xdim</span><span class="p">,</span><span class="n">hidden_size</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">hdim</span><span class="p">,</span><span class="n">num_layers</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">n_layer</span><span class="p">,</span><span class="n">batch_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># h와 c의 크기
+</span><span class="n">h0</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">n_layer</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="p">.</span><span class="n">hdim</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">c0</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">n_layer</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="p">.</span><span class="n">hdim</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Transformer
+    <ul>
+      <li>$\text{Attention}(Q,K,V) = \text{softmax} ({QK^T \over \sqrt{d_K}}) V \in \mathbb{R}^{n \times d_V} $</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">SPDA</span> <span class="o">=</span> <span class="n">ScaledDotProductAttention</span><span class="p">()</span>
+  <span class="c1"># d_K(=d_Q) does not necessarily be equal to d_V
+</span>  <span class="n">n_batch</span><span class="p">,</span><span class="n">d_K</span><span class="p">,</span><span class="n">d_V</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">256</span> 
+  <span class="n">n_Q</span><span class="p">,</span><span class="n">n_K</span><span class="p">,</span><span class="n">n_V</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span>
+  <span class="n">Q</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_batch</span><span class="p">,</span><span class="n">n_Q</span><span class="p">,</span><span class="n">d_K</span><span class="p">)</span>
+  <span class="n">K</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_batch</span><span class="p">,</span><span class="n">n_K</span><span class="p">,</span><span class="n">d_K</span><span class="p">)</span>
+  <span class="n">V</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_batch</span><span class="p">,</span><span class="n">n_V</span><span class="p">,</span><span class="n">d_V</span><span class="p">)</span>
+  <span class="n">out</span><span class="p">,</span><span class="n">attention</span> <span class="o">=</span> <span class="n">SPDA</span><span class="p">.</span><span class="n">forward</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">mask</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>Multihead-attention
+        <ul>
+          <li>$\text{head}<em>{\color{red}i} = \text{Attention}(Q {\color{green}W}^Q</em>{\color{red}i},K {\color{green}W}^K_{\color{red}i}, V {\color{green}W}^V_{\color{red}i}) $</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-git-특강-2">3. Git 특강 2</h2>
+<ul>
+  <li>branch 만들고 합치기</li>
+  <li>pull = fetch + merge</li>
+</ul>
+
+<h2 id="4-피어-세션">4. 피어 세션</h2>
+<ul>
+  <li>RNN, Tramsformer 강의요약</li>
+  <li>필수 과제 리뷰</li>
+  <li>코딩테스트 코드 리뷰</li>
+</ul>
+
+<h2 id="5-선택과제">5. 선택과제</h2>
+<ul>
+  <li>Vision transformer
+    <ul>
+      <li>Image(Patch) embedding
+        <ul>
+          <li>
+            <ol>
+              <li>이미지를 패치 크기로 분할</li>
+            </ol>
+          </li>
+          <li>
+            <ol>
+              <li>positioncal embedding 벡터를 붙인 class token vector 생성
+                <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># (1) Build [token; image embedding] by concatenating class token with image embedding
+</span>  <span class="c1"># x: embedded patches
+</span>  <span class="n">c</span> <span class="o">=</span> <span class="n">repeat</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">cls_token</span><span class="p">,</span> <span class="s">'() n d -&gt; b n d'</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span> 
+  <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">cat</span><span class="p">([</span><span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>                </div>
+              </li>
+            </ol>
+          </li>
+        </ul>
+      </li>
+      <li>Transformer encoder
+        <ul>
+          <li>$ z_l^{‘} = MSA(LN(z_{l-1})) + z_{l-1} $</li>
+          <li>$ z_l = MLP(LN(z_l^{‘})) + z_l^{‘} $</li>
+        </ul>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># forward
+</span>  <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">norm_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">_x</span><span class="p">,</span> <span class="n">attention</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">mha</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">_x</span> <span class="o">+</span> <span class="n">x</span>
+        
+  <span class="n">_x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">norm_2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">_x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">mlp</span><span class="p">(</span><span class="n">_x</span><span class="p">)</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">_x</span> <span class="o">+</span> <span class="n">x</span>
+</code></pre></div>        </div>
+      </li>
+      <li>Body
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+  <span class="c1"># ================ ToDo3 ================ #
+</span>  <span class="c1"># (1) image embedding
+</span>  <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">ie</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+  <span class="c1"># (2) transformer_encoder
+</span>  <span class="n">x</span><span class="p">,</span> <span class="n">attentions</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">em</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+  <span class="c1"># ======================================= #
+</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="c1"># cls_token output
+</span>  <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">normalization</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">classification_head</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">attentions</span>
+</code></pre></div>        </div>
+      </li>
+      <li>Result<br />
+  <img src="/assets/image/ustage/w2_day4_1.PNG" alt="" /></li>
+    </ul>
+  </li>
+  <li>AAE
+    <ul>
+      <li>모델 구현</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># Encoder 일부 구조
+</span>  <span class="bp">self</span><span class="p">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Sequential</span><span class="p">(</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>               <span class="c1">#TODO 1: dropout layer을 넣어주세요
+</span>      <span class="n">nn</span><span class="p">.</span><span class="n">ReLU</span><span class="p">(),</span>                        <span class="c1">#TODO 2: relu layer을 넣어주세요
+</span>      <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>              <span class="c1">#TODO 3: linear layer을 넣어주세요 
+</span>      <span class="n">nn</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">ReLU</span><span class="p">()</span>
+  <span class="p">)</span>
+    
+  <span class="c1"># Decoder 일부 구조
+</span>  <span class="bp">self</span><span class="p">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Sequential</span><span class="p">(</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">ReLU</span><span class="p">(),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="mi">512</span><span class="p">),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">ReLU</span><span class="p">(),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">1024</span><span class="p">),</span> <span class="c1">#TODO 4: linear layer을 넣어주세요. 힌트: Encoder의 첫번째 layer를 주목해주세요.
+</span>      <span class="n">nn</span><span class="p">.</span><span class="n">Tanh</span><span class="p">(),</span>
+  <span class="p">)</span>
+    
+  <span class="c1"># Discriminator 일부 구조
+</span>  <span class="bp">self</span><span class="p">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Sequential</span><span class="p">(</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>      <span class="c1">#TODO 5: linear layer을 넣어주세요. 힌트: Decoder의 첫번째 layer을 주목해주세요.
+</span>      <span class="n">nn</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">ReLU</span><span class="p">(),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">ReLU</span><span class="p">(),</span>
+      <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>          <span class="c1">#TODO 6: linear layer을 넣어주세요. output의 dimension은 1입니다.
+</span>      <span class="n">nn</span><span class="p">.</span><span class="n">Sigmoid</span><span class="p">()</span>              <span class="c1">#TODO 7: sigmoid layer을 넣어주세요.
+</span>  <span class="p">)</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>결과<br />
+  <img src="/assets/image/ustage/w2_day4_2.PNG" alt="" /></li>
+    </ul>
+  </li>
+</ul>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

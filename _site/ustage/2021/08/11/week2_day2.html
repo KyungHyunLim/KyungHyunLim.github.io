@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Week2 - 2일차</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Week2 - 2일차 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Week2 - 2일차" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 개인학습 시각화 Bar plot Line Plot Scatter Plot Optimization" />
+<meta property="og:description" content="1. 개인학습 시각화 Bar plot Line Plot Scatter Plot Optimization" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-11T05:22:30+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Week2 - 2일차" />
+<script type="application/ld+json">
+{"description":"1. 개인학습 시각화 Bar plot Line Plot Scatter Plot Optimization","mainEntityOfPage":{"@type":"WebPage","@id":"/ustage/2021/08/11/week2_day2.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Week2 - 2일차","dateModified":"2021-08-11T05:22:30+09:00","datePublished":"2021-08-11T05:22:30+09:00","url":"/ustage/2021/08/11/week2_day2.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ustage/2021/08/11/week2_day2.html">
+    <h2 class="post-title">Week2 - 2일차</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 11, 2021</div><ul class="post-categories"><li>ustage</li></ul></div>
+  <div class="post">
+    <h2 id="1-개인학습">1. 개인학습</h2>
+<ul>
+  <li>시각화
+    <ul>
+      <li><a href="https://kyunghyunlim.github.io/ml_ai/2021/08/10/vizbar.html">Bar plot</a></li>
+      <li><a href="https://kyunghyunlim.github.io/ml_ai/2021/08/10/vizline.html">Line Plot</a></li>
+      <li><a href="https://kyunghyunlim.github.io/ml_ai/2021/08/10/vizsc.html">Scatter Plot</a></li>
+    </ul>
+  </li>
+  <li><a href="https://kyunghyunlim.github.io/ml_ai/2021/08/10/Optimization.html">Optimization</a></li>
+</ul>
+
+<h2 id="2-필수과제">2. 필수과제</h2>
+<p><img src="/assets/image/ustage/w2_day2_10.gif" alt="" /></p>
+<ul>
+  <li>SGD
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">optm_sgd</span> <span class="o">=</span> <span class="n">optim</span><span class="p">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model_sgd</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">LEARNING_RATE</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>momentum
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">optm_momentum</span> <span class="o">=</span> <span class="n">optim</span><span class="p">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model_momentum</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">LEARNING_RATE</span><span class="p">,</span><span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Adam
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">optm_adam</span> <span class="o">=</span> <span class="n">optim</span><span class="p">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model_adam</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">LEARNING_RATE</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="3-cv-nlp-소개">3. CV, NLP 소개</h2>
+
+<h2 id="4-피어-세션">4. 피어 세션</h2>
+<ul>
+  <li>시각화 및 Optimization 강의요약</li>
+  <li>코딩테스트 코드 공유</li>
+</ul>
+
+<h2 id="5-마스터-세션">5. 마스터 세션</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* 시각화 강의
+</code></pre></div></div>
+
+<h2 id="6-알고리즘-풀이">6. 알고리즘 풀이</h2>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

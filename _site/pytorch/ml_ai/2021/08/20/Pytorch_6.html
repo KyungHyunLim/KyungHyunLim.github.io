@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Pytorch(6)-MultiGPU</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Pytorch(6)-MultiGPU | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Pytorch(6)-MultiGPU" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 개념 정리 Single vs Multi : 1개 vs 2개 이상 GPU vs Node : GPU vs 1대 컴퓨터의 1대 GPU Single Node Single GPU : 1대 컴퓨터의 1대 GPU Single Node Multi GPU : 1대 컴퓨터의 여러 GPU Multi Node Multi GPU : 여러 컴퓨터의 여러 GPU" />
+<meta property="og:description" content="1. 개념 정리 Single vs Multi : 1개 vs 2개 이상 GPU vs Node : GPU vs 1대 컴퓨터의 1대 GPU Single Node Single GPU : 1대 컴퓨터의 1대 GPU Single Node Multi GPU : 1대 컴퓨터의 여러 GPU Multi Node Multi GPU : 여러 컴퓨터의 여러 GPU" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-20T19:59:12+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pytorch(6)-MultiGPU" />
+<script type="application/ld+json">
+{"description":"1. 개념 정리 Single vs Multi : 1개 vs 2개 이상 GPU vs Node : GPU vs 1대 컴퓨터의 1대 GPU Single Node Single GPU : 1대 컴퓨터의 1대 GPU Single Node Multi GPU : 1대 컴퓨터의 여러 GPU Multi Node Multi GPU : 여러 컴퓨터의 여러 GPU","mainEntityOfPage":{"@type":"WebPage","@id":"/pytorch/ml_ai/2021/08/20/Pytorch_6.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Pytorch(6)-MultiGPU","dateModified":"2021-08-20T19:59:12+09:00","datePublished":"2021-08-20T19:59:12+09:00","url":"/pytorch/ml_ai/2021/08/20/Pytorch_6.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/pytorch/ml_ai/2021/08/20/Pytorch_6.html">
+    <h2 class="post-title">Pytorch(6)-MultiGPU</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 20, 2021</div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-개념-정리">1. 개념 정리</h2>
+<ul>
+  <li>Single vs Multi : 1개 vs 2개 이상</li>
+  <li>GPU vs Node : GPU vs 1대 컴퓨터의 1대 GPU</li>
+  <li>Single Node Single GPU : 1대 컴퓨터의 1대 GPU</li>
+  <li>Single Node Multi GPU : 1대 컴퓨터의 여러 GPU</li>
+  <li>Multi Node Multi GPU : 여러 컴퓨터의 여러 GPU</li>
+</ul>
+
+<h2 id="2-다중-gpu에-학습을-분산하는-방법">2. 다중 GPU에 학습을 분산하는 방법</h2>
+<ul>
+  <li>모델을 나누기 : alexnet 같이
+    <ul>
+      <li>모델의 병목, 파이프라인의 어려움이 있어 병렬화는 고난이도 과제<br />
+  <img src="/assets/image/Pytorch/py6_1.PNG" alt="" /></li>
+      <li>교차되는 지점: GPU간 병렬적인 계산을 위한 것</li>
+      <li>예시</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">class</span> <span class="nc">ParallelModel</span><span class="p">(</span><span class="n">ResNet</span><span class="p">):</span>
+      <span class="k">def</span> <span class="nf">__init__</span><span class="p">():</span>
+          <span class="p">...</span>
+          <span class="c1"># cuda 0에 할당
+</span>          <span class="bp">self</span><span class="p">.</span><span class="n">layer1</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Sequential</span><span class="p">(...).</span><span class="n">to</span><span class="p">(</span><span class="s">'cuda:0'</span><span class="p">)</span>
+          <span class="c1"># cuda 1에 할당
+</span>          <span class="bp">self</span><span class="p">.</span><span class="n">layer2</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Sequential</span><span class="p">(...).</span><span class="n">to</span><span class="p">(</span><span class="s">'cuda:1'</span><span class="p">)</span>
+          <span class="bp">self</span><span class="p">.</span><span class="n">fc</span><span class="p">.</span><span class="n">to</span><span class="p">(</span><span class="s">'cuda:1'</span><span class="p">)</span>
+
+      <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+          <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">seq2</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">seq1</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="s">'cuda:1'</span><span class="p">))</span>
+          <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">fc</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</code></pre></div>    </div>
+  </li>
+  <li>데이터를 나누기
+    <ul>
+      <li>데이터를 나눠 GPU 할당후 결과의 평균을 취하는 것</li>
+      <li>minibatch 수식과 유사, 한번에 여러 GPU에서 수행</li>
+      <li>DataParallel
+        <ul>
+          <li>단순 분배후 평균</li>
+          <li>GPU 사용 불균형 문제, Batch 사이즈 감소, GIL</li>
+          <li>예시</li>
+        </ul>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">p_model</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">DataParallel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="c1"># 이게 전부
+</span>
+  <span class="n">pred</span> <span class="o">=</span> <span class="n">p_model</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>   <span class="c1"># Forward 연산
+</span>  <span class="n">loss</span> <span class="o">=</span> <span class="n">Loss</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">real</span><span class="p">)</span> <span class="c1"># 로스계산
+</span>  <span class="n">loss</span><span class="p">.</span><span class="n">mean</span><span class="p">().</span><span class="n">backward</span><span class="p">()</span>  <span class="c1"># GPU 로의의 평균 + backward 계산
+</span>  <span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>        <span class="c1"># parameter 업데이트
+</span></code></pre></div>        </div>
+      </li>
+      <li>DistributedDataParallel
+        <ul>
+          <li>각 CPU마다 process 생성, 개별 GPU 할당</li>
+          <li>기본적으로 DataParallel로 하지만, 개별적으로 연산의 평균을 냄</li>
+          <li>예시</li>
+        </ul>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">sampler</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">distributed</span><span class="p">.</span><span class="n">DistributedSampler</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="n">shuffle</span> <span class="o">=</span> <span class="bp">False</span>   
+  <span class="n">pin_memory</span> <span class="o">=</span> <span class="bp">True</span> <span class="c1"># 메모리에 바로바로 올릴 수 있도록 처리해주는 것
+</span>
+  <span class="n">trainloader</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="n">shuffle</span><span class="p">,</span> <span class="n">sampler</span><span class="o">=</span><span class="n">sampler</span><span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Pytorch(1)-Basic</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Pytorch(1)-Basic | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Pytorch(1)-Basic" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Introduction to PyTorch 1.1 Computational Graph 연산과정을 그래프로 표현한 것 Define and Run 그래프를 먼저 정의한 후 실행 시점에 데이터 feed Define by Run(Pytorch 방식) 실행을 하면서 그래프를 생성 즉시 확인 가능 $\rightarrow$ pythonic code" />
+<meta property="og:description" content="1. Introduction to PyTorch 1.1 Computational Graph 연산과정을 그래프로 표현한 것 Define and Run 그래프를 먼저 정의한 후 실행 시점에 데이터 feed Define by Run(Pytorch 방식) 실행을 하면서 그래프를 생성 즉시 확인 가능 $\rightarrow$ pythonic code" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-18T01:14:28+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pytorch(1)-Basic" />
+<script type="application/ld+json">
+{"description":"1. Introduction to PyTorch 1.1 Computational Graph 연산과정을 그래프로 표현한 것 Define and Run 그래프를 먼저 정의한 후 실행 시점에 데이터 feed Define by Run(Pytorch 방식) 실행을 하면서 그래프를 생성 즉시 확인 가능 $\\rightarrow$ pythonic code","mainEntityOfPage":{"@type":"WebPage","@id":"/pytorch/ml_ai/2021/08/18/Pytorch_1.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Pytorch(1)-Basic","dateModified":"2021-08-18T01:14:28+09:00","datePublished":"2021-08-18T01:14:28+09:00","url":"/pytorch/ml_ai/2021/08/18/Pytorch_1.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/pytorch/ml_ai/2021/08/18/Pytorch_1.html">
+    <h2 class="post-title">Pytorch(1)-Basic</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 18, 2021</div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-introduction-to-pytorch">1. Introduction to PyTorch</h2>
+<h3 id="11-computational-graph">1.1 Computational Graph</h3>
+<ul>
+  <li>연산과정을 그래프로 표현한 것<br />
+<img src="/assets/image/Pytorch/py1_1.PNG" alt="" /></li>
+  <li>Define and Run<br />
+ 그래프를 먼저 정의한 후 실행 시점에 데이터 feed</li>
+  <li>Define by Run(Pytorch 방식)<br />
+ 실행을 하면서 그래프를 생성<br />
+ 즉시 확인 가능 $\rightarrow$ pythonic code</li>
+</ul>
+
+<h3 id="12-trend">1.2 Trend</h3>
+<ul>
+  <li>Tensorflow -&gt; Torch</li>
+  <li>편하고 작성하기 쉽고, 디버깅이 더 쉽다
+<img src="/assets/image/Pytorch/py1_2.PNG" alt="" /></li>
+  <li>Numpy + Autograd + Function
+    <ul>
+      <li>Tensor를 numpy처럼 다룰 수 있다</li>
+      <li>자동으로 미분! DL 연산지원</li>
+      <li>다양한 형태의 DL을 지원하는 함수와 모델을 지원</li>
+    </ul>
+  </li>
+  <li>Tensorflow가 production과 scalability의 장점을 가진다고 하는데, 요즘은 torch도 production API가 잘 구축되어가는 추세인 것 같다</li>
+</ul>
+
+<h2 id="2-pytorchbasics">2. PyTorchBasics</h2>
+<h3 id="21-numpy-to-tensor">2.1 Numpy to Tensor</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="c1"># Numpy array 생성
+</span><span class="n">n_array</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">n_array</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"ndim: "</span><span class="p">,</span> <span class="n">n_array</span><span class="p">.</span><span class="n">ndim</span><span class="p">,</span> <span class="s">"shape: "</span><span class="p">,</span> <span class="n">n_array</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">Output</span>
+<span class="o">------</span>
+<span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]]</span>
+<span class="n">ndim</span><span class="p">:</span>  <span class="mi">2</span> <span class="n">shape</span><span class="p">:</span>  <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+<hr />
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="c1"># numpy array Tensor로 변경 (list도 사용가능)
+# torch.Tensor(x, dtype=?) 다양한 데이터 타입 사용가능
+</span>    <span class="c1"># ? - torch.float32(=torch.float), torch.float64(=torch.double)
+</span>    <span class="c1"># - torch.complex32, torch.complex64
+</span>    <span class="c1"># - torch.int64, ...
+# torch.FloatTensor(n_array) -&gt; CPU
+# torch.cuda.FloatTensor(n_array) -&gt; GPU
+</span><span class="n">t_array</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">n_array</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t_array</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"ndim: "</span><span class="p">,</span> <span class="n">t_array</span><span class="p">.</span><span class="n">ndim</span><span class="p">,</span> <span class="s">"shape: "</span><span class="p">,</span> <span class="n">t_array</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">Output</span>
+<span class="o">------</span>
+<span class="n">tensor</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">,</span> <span class="mf">9.</span><span class="p">]])</span>
+<span class="n">ndim</span><span class="p">:</span>  <span class="mi">2</span> <span class="n">shape</span><span class="p">:</span>  <span class="n">torch</span><span class="p">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="22-tensor-methods">2.2 Tensor methods</h3>
+<ul>
+  <li>flatten</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># shape를 평평하게 1차원으로 변경
+</span><span class="n">t_array</span><span class="p">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">Output</span>
+<span class="o">------</span>
+<span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">,</span> <span class="mf">9.</span><span class="p">])</span>
+</code></pre></div></div>
+
+<ul>
+  <li>ones_like</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 동일한 모양의 1로 채워진 Tensor 생성
+</span><span class="n">torch</span><span class="p">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">t_array</span><span class="p">)</span>
+
+<span class="n">Output</span>
+<span class="o">------</span>
+<span class="n">tensor</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<ul>
+  <li>view =&gt; reshape 대신 view를 쓰는게 좋다 (why?)
+    <ul>
+      <li>view는 변환후 메모리 주소 반환 -&gt; 원하는데로 변형 후 변화값 반영을 항상 보장 가는</li>
+      <li>reshape은 모양이 바뀌면 복사한 값을 반환</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view
+</span><span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">a</span><span class="p">.</span><span class="n">fill_</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="n">Output</span>
+<span class="o">------</span>
+<span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+
+<span class="c1"># reshpe
+</span><span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">t</span><span class="p">().</span><span class="n">reshape</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">a</span><span class="p">.</span><span class="n">fill_</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="n">Output</span>
+<span class="o">------</span>
+<span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>squeeze, unsqueeze -&gt; 1인 차원 축소, 증가</p>
+  </li>
+  <li>
+    <p>numpy의 함수들을 대부분 동일하게 구현되어있음 <a href="https://pytorch.org/docs/stable/tensors.html">라이브러리</a></p>
+  </li>
+</ul>
+
+<h3 id="23-tensor-operation">2.3 Tensor operation</h3>
+<ul>
+  <li>사칙연산은 numpy와 동일하게 사용가능</li>
+  <li>dot, matmul-&gt; matmul을 사용하자!</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+
+<span class="c1"># dot 내적
+</span><span class="n">t1</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span>
+
+<span class="n">Output</span>
+<span class="o">------</span>
+<span class="n">Runtime</span> <span class="n">Error</span>
+
+<span class="c1"># matmul 행렬간 연산
+</span><span class="n">t1</span><span class="p">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span>
+
+<span class="n">Output</span>
+<span class="o">------</span>
+<span class="n">tensor</span><span class="p">([[</span> <span class="mf">42.</span><span class="p">,</span>  <span class="mf">48.</span><span class="p">,</span>  <span class="mf">54.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">114.</span><span class="p">,</span> <span class="mf">136.</span><span class="p">,</span> <span class="mf">158.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">186.</span><span class="p">,</span> <span class="mf">224.</span><span class="p">,</span> <span class="mf">262.</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<h3 id="24-gpu활용하기">2.4 GPU활용하기</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># GPU에 Tensor 올리기
+</span><span class="k">if</span> <span class="n">torch</span><span class="p">.</span><span class="n">cuda</span><span class="p">.</span><span class="n">is_available</span><span class="p">():</span>
+    <span class="n">tensor_data</span> <span class="o">=</span> <span class="n">tensor_data</span><span class="p">.</span><span class="n">to</span><span class="p">(</span><span class="s">"cuda"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="25-mldl-formula">2.5 ML/DL formula</h3>
+<ul>
+  <li>nn.functional 모듈: 다양한 수식 변환 지원</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="p">...</span>
+<span class="n">F</span><span class="p">.</span><span class="n">sotfmax</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">output</span>
+<span class="o">------</span>
+<span class="n">tensor</span><span class="p">([</span><span class="n">확률</span> <span class="n">값1</span><span class="p">,</span> <span class="n">확률</span> <span class="n">값2</span><span class="p">,</span> <span class="p">...])</span>
+
+<span class="p">...</span>
+<span class="n">F</span><span class="p">.</span><span class="n">one_hot</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
+
+<span class="n">output</span>
+<span class="o">------</span>
+<span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<h3 id="26-autograd">2.6 AutoGrad</h3>
+<ul>
+  <li>requires_grad=True : False면 계산 불가
+    <ul>
+      <li>미분을 하지 않겠다, 파라미터 업데이트를 안하겠다는 의미
+```python
+w = torch.tensor(2.0, requires_grad=True)
+y = w<em>*2
+z = 10</em>y + 2
+z.backward() 
+w.grad # w에 대해서 미분하고, w에 2.0을 대입하면?!</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="output">output</h2>
+<p>tensor(40.)
+```</p>
+
+<h2 id="3-프로젝트-구조-이해하기">3. 프로젝트 구조 이해하기</h2>
+<h3 id="31-overview">3.1 Overview</h3>
+<ul>
+  <li>언제까지 jupyter notebook을 사용할 수 없다
+    <ul>
+      <li>배포, 공유가 어렵다</li>
+      <li>재현이 어렵고, 실행순서가 꼬일 수 있다</li>
+      <li>유지보수가 불편하다</li>
+    </ul>
+  </li>
+  <li>실행, 데이터, 모델, 설정, 로깅, 지표, 유틸리티 등 모듈화 필요</li>
+  <li>추천 Template
+    <ul>
+      <li>https://github.com/FrancescoSaverioZuppichini/PyTorch-DeepDeep-LearningLearning-Template</li>
+      <li>https://github.com/PyTorchLightning/deep-learninglearning-projectproject-template</li>
+      <li>https://github.com/victoresque/pytorch-template ✅이거 기준<br />
+  <img src="/assets/image/Pytorch/py1_3.PNG" alt="" /></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="32-코드-분석">3.2 코드 분석?</h3>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

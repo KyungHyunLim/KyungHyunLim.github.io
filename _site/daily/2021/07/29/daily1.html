@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>오늘의 일기, 07-28</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>오늘의 일기, 07-28 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="오늘의 일기, 07-28" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="라인 과제테스트 때 사용했던 모델을 개선해보기 위해 실험을 진행하며 하루를 보냈다." />
+<meta property="og:description" content="라인 과제테스트 때 사용했던 모델을 개선해보기 위해 실험을 진행하며 하루를 보냈다." />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-29T06:25:36+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="오늘의 일기, 07-28" />
+<script type="application/ld+json">
+{"description":"라인 과제테스트 때 사용했던 모델을 개선해보기 위해 실험을 진행하며 하루를 보냈다.","mainEntityOfPage":{"@type":"WebPage","@id":"/daily/2021/07/29/daily1.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"오늘의 일기, 07-28","dateModified":"2021-07-29T06:25:36+09:00","datePublished":"2021-07-29T06:25:36+09:00","url":"/daily/2021/07/29/daily1.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/daily/2021/07/29/daily1.html">
+    <h2 class="post-title">오늘의 일기, 07-28</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Jul 29, 2021</div><ul class="post-categories"><li>Daily</li></ul></div>
+  <div class="post">
+    <p>라인 과제테스트 때 사용했던 모델을 개선해보기 위해 실험을 진행하며 하루를 보냈다.</p>
+
+<p>기존에 잘 되던 모델이 학습이 제대로 이루어 지지 않았다.</p>
+
+<p>loss가 NaN이 되면서 전혀 학습이 되지 않았다.</p>
+
+<p>이럴 경우 보통은 데이터에 이상한 값(nan 등)이 들어있었는데 확인해보았지만, 데이터는 정상이었다.</p>
+
+<p>그럼 왜?
+ 당시 tensorflow 2.51 으로 최신 버전을 사용했는데, HDF5Matrix를 사용하기 위해 2.31버전으로 다운그레이드 시킨 이후로 계속 발생해서, 이 버전차이 때문이 아닌가 하는 의심이 생겼다.</p>
+
+<p>유사한 구조로 직접 구현했을때는 NaN이 발생하지 않는 것으로 보아 Autokeras 안에서 버전차이로 인해 무언가 문제가 생기는 듯했다. 아마도 multilabel encoding layer가 문제가 아닌가 싶다. 이 layer는 따로 구현시 사용하고 싶어도 어디존재하는 지 찾지 못해 실험을 따로 해보지는 못했다.</p>
+
+<p>결국, multilabel encoding layer를 제외하고 구현해 학습에 성공했다. 성능이 조금 떨어지긴 했지만…</p>
+
+<p>향후 할일!<br />
+ ☆multilabel encoding layer 정체 알아내기</p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

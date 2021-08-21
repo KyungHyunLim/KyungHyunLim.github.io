@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Week1 - 3 일차</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Week1 - 3 일차 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Week1 - 3 일차" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 개인학습 파이썬 기초 3.1 ~ 7.2 asterisk" />
+<meta property="og:description" content="1. 개인학습 파이썬 기초 3.1 ~ 7.2 asterisk" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-05T05:52:56+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Week1 - 3 일차" />
+<script type="application/ld+json">
+{"description":"1. 개인학습 파이썬 기초 3.1 ~ 7.2 asterisk","mainEntityOfPage":{"@type":"WebPage","@id":"/ustage/2021/08/05/week1_day3.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Week1 - 3 일차","dateModified":"2021-08-05T05:52:56+09:00","datePublished":"2021-08-05T05:52:56+09:00","url":"/ustage/2021/08/05/week1_day3.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ustage/2021/08/05/week1_day3.html">
+    <h2 class="post-title">Week1 - 3 일차</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 5, 2021</div><ul class="post-categories"><li>ustage</li></ul></div>
+  <div class="post">
+    <h2 id="1-개인학습">1. 개인학습</h2>
+<ul>
+  <li>파이썬 기초 3.1 ~ 7.2
+    <ul>
+      <li>asterisk</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">print</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># [1,2,3]
+</span> <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># 1 2 3 =&gt; unpacking
+</span>
+ <span class="n">funtion</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+ <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span> <span class="c1"># 여러개 인자
+</span>     <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="c1"># (1,2,3,4,5)
+</span>     <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="c1"># 1 2 3 4 5
+</span>
+ <span class="o">**</span> <span class="c1"># keyword unpacking
+</span></code></pre></div>    </div>
+    <ul>
+      <li>Numpy, pandas 활용법
+        <ul>
+          <li>연구실에서 많이 했던것들</li>
+          <li>numpy
+            <ul>
+              <li>indexing, slicing, arrange …</li>
+              <li>identity, eye</li>
+              <li>diag: 대각선 값 추출</li>
+            </ul>
+          </li>
+          <li>
+            <p>pandas</p>
+
+            <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">list_d</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+  <span class="n">list_s</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">list_d</span><span class="p">)</span>
+  <span class="c1">#0 1
+</span>  <span class="c1">#1 2
+</span>  <span class="c1">#3 3
+</span>  <span class="c1">#4 4
+</span>  <span class="c1">#5 5
+</span></code></pre></div>            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>AI 수학 기초 4 ~ 7
+    <ul>
+      <li>경사하강법
+        <ul>
+          <li>편미분(partial differentiation)
+            <ul>
+              <li>일부 변수에 대해서만 미분
+                <ul>
+                  <li>$ f(x,y) = x^2 + y $</li>
+                  <li>$ \partial x f(x,y) = 2x $</li>
+                </ul>
+              </li>
+              <li>변수가 벡터이면?
+                <ul>
+                  <li>그레디언트(gradient) 벡터 활용</li>
+                  <li>$ \nabla{f} = (\partial{x_1}, … ,\partial{x_d}) $</li>
+                  <li>$ -\nabla{f} $ 벡터를 그리면 극점으로 수렴</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>선형회귀 목적식:
+            <ul>
+              <li>아래식을 최소화하는 $\beta$를 찾음</li>
+              <li>$ \nabla \Vert y-X \beta \Vert _2 = (\partial _\beta{_1} \Vert y-X \Vert _2, …, \partial _\beta{_d} \Vert y-X \Vert _2) $</li>
+              <li>$ =-{X^T(y-X\beta) \over  n\Vert{y-X\beta{^t}}\Vert{_2}} $</li>
+              <li>$ \beta{^{t+1}} \leftarrow \beta{^t}-\lambda{\nabla{_\beta{\Vert y-X\beta{^t}\Vert_2}}} $</li>
+            </ul>
+          </li>
+          <li>convex 함수(볼록 함수)가 아닌 경우 다른 경사하강법이 필요: SGD</li>
+        </ul>
+      </li>
+      <li>통계
+        <ul>
+          <li>표본 평균: ${1 \over n}[x_1 + x_2 + …]$</li>
+          <li>표본 분산: ${1 \over n-1}[(x_1 - \mu)^2 + (x_2 - \mu)^2 + …]$</li>
+          <li><a href="https://kyunghyunlim.github.io/study_ai/2021/07/25/MLE.html">MLE post 참조!</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-과제풀이-4-5번-마무리">2. 과제풀이 4, 5번 마무리</h2>
+<ul>
+  <li>4번
+    <ul>
+      <li>“Good you win!” 을 출력해줘서 꼬인것이었다…</li>
+      <li>2시간 넘게 main test를 저것때문에…</li>
+    </ul>
+  </li>
+  <li>5번
+    <ul>
+      <li>메인 함수 구현</li>
+      <li>크게 어려운점 없이 테스트 통과</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-멘토시간-및-피어세션">3. 멘토시간 및 피어세션</h2>
+<ul>
+  <li>강의 복습 (벡터 ~ 경사 하강법)</li>
+</ul>
+
+<h2 id="4-선택과제-1">4. 선택과제 1</h2>
+<ul>
+  <li>1번
+    <ul>
+      <li>선형회귀 구현해보기
+        <ul>
+          <li>목적함수 편미분!
+ ```python
+ _y = w*train_x + b</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p># gradient
+     # w에 대한 편미분
+     # b에 대한 편미분
+ gradient_w = np.sum((w * train_x + b - train_y) * 2 * train_x) / n_data
+ gradient_b = np.sum((w * train_x + b - train_y) * 2) / n_data</p>
+
+    <p># w, b update with gradient and learning rate
+ w = w - lr_rate<em>gradient_w
+ b = b - lr_rate</em>gradient_b</p>
+
+    <p># L2 norm과 np_sum 함수 활용해서 error 정의
+ error = np.mean(np.sum((_y - train_y)**2))
+ # Error graph 출력하기 위한 부분
+ errors.append(error)</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> * SGD로 구현하기!
+     * 데이터 분할하기!
+     * numpy index 활용
+ ```python
+ batch_error = 0
+ # batch로 나누기
+ for batch in range(100):
+     index = np.random.choice([i for i in range(1000)], size=10)
+     batch_train_x = train_x[index]
+     batch_train_y = train_y[index]
+     _y = w*batch_train_x + b
+</code></pre></div>    </div>
+  </li>
+  <li>3번
+    <ul>
+      <li>TODO 1<br />
+  <img src="/assets/image/day3_1.PNG" alt="why?" /></li>
+      <li>TODO 2
+        <ul>
+          <li>$\frac{\partial L(\theta \vert x)}{\partial \mu} = -\frac{1}{2\sigma^2}\sum_{i=1}^{n}\frac{\partial}{\partial \mu}\left(x_i^2-2x_i\mu+\mu^2\right) $</li>
+          <li><img src="/assets/image/day3_2.jpg" alt="" /></li>
+        </ul>
+      </li>
+      <li>TODO 3
+        <ul>
+          <li>$ \frac{\partial L(\theta \vert x)}{\partial \sigma}  = -{n \over \sigma} + {1 \over \sigma^3} \sum_{i=1}^n(x_i - \mu)^2 $</li>
+          <li><img src="/assets/image/day3_3.jpg" alt="" /></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="5-필수퀴즈-풀이">5. 필수퀴즈 풀이</h2>
+<ul>
+  <li>5강 - 계산실수…</li>
+  <li>6강, 7강, 9강</li>
+</ul>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

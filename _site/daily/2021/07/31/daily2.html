@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>오늘의 일기, 07-30</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>오늘의 일기, 07-30 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="오늘의 일기, 07-30" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="☆multilabel encoding layer 정체 알아내기 Structed block에 categorical encoding layer의 multi_hot 버전 인것 같다." />
+<meta property="og:description" content="☆multilabel encoding layer 정체 알아내기 Structed block에 categorical encoding layer의 multi_hot 버전 인것 같다." />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-31T04:25:36+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="오늘의 일기, 07-30" />
+<script type="application/ld+json">
+{"description":"☆multilabel encoding layer 정체 알아내기 Structed block에 categorical encoding layer의 multi_hot 버전 인것 같다.","mainEntityOfPage":{"@type":"WebPage","@id":"/daily/2021/07/31/daily2.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"오늘의 일기, 07-30","dateModified":"2021-07-31T04:25:36+09:00","datePublished":"2021-07-31T04:25:36+09:00","url":"/daily/2021/07/31/daily2.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/daily/2021/07/31/daily2.html">
+    <h2 class="post-title">오늘의 일기, 07-30</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Jul 31, 2021</div><ul class="post-categories"><li>Daily</li></ul></div>
+  <div class="post">
+    <p>☆multilabel encoding layer 정체 알아내기
+ Structed block에 categorical encoding layer의 multi_hot 버전 인것 같다.</p>
+
+<p>이미 전처리를 통해 범주화를 해주었기 때문에, 없어도 되는 것 아닌가 싶은데,
+ 이 레이어를 지나면서 nan 값이 형성되는 것으로 의심된다.
+ (이걸 제외하면 제대로 학습이 진행 된다.)</p>
+
+<p>따라서, 현재 데이터는 structedclassification 모델로는 autokeras에서 fitting이 불가능 할 것 같다.
+ 커스텀을 통해 해당 레이어를 false로 변경하거나, 
+ 직접 구현한 모델의 파라미터를 searching하도록 변경해 보아야 겠다.</p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

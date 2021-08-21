@@ -1,0 +1,879 @@
+[
+  
+    {
+      "title"    : "Visualization-Color 활용",
+      "title-lower"    : "visualization-color 활용",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "VisualizeML_AI",
+      "tags"     : "",
+      "url"      : "/visualize/ml_ai/2021/08/21/vizcolor.html",
+      "date"     : "2021-08-21 07:10:22 +0900",
+      "content"     : "1. Color에 대한 이해1.1 색이 중요한 이유  위치와 색은 가장 효과적인 채널 구분          위치는 시각화 방법에 따라 정해지지만,      색은 우리가 직접 결정 해야한다      1.2 화려함이 시각화이 전부가 아니다!  화려한 것은 매력적이지만, 정보를 담기 어려울 수 있다.  시각화에서 가장 중요한 것은 정보를 전달하는 것!1.3..."
+    } ,
+  
+    {
+      "title"    : "Week3 - day5",
+      "title-lower"    : "week3 - day5",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/21/week3_day5.html",
+      "date"     : "2021-08-21 05:22:30 +0900",
+      "content"     : "1. 개인학습  Pytorch 강의          pytorch6      pytorch7      pytorch8        시각화 강의          text      color      2. 알고리즘 풀이  풀이3. 멘토링4. 스페셜 피어 세션5. 피어세션  강의 요약  선택 과제 코드 리뷰  알고리즘 코드 공유6. 과제 풀이 특강"
+    } ,
+  
+    {
+      "title"    : "Visualization-Text 활용",
+      "title-lower"    : "visualization-text 활용",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "VisualizeML_AI",
+      "tags"     : "",
+      "url"      : "/visualize/ml_ai/2021/08/21/viztext.html",
+      "date"     : "2021-08-21 05:10:22 +0900",
+      "content"     : "1. Matplotlib에서 Text1.1 Text in Viz*Why?	* 시각화에서 줄 수 없는 많은 설명 추가 가능	* 잘못된 전달 방지, 오해 방지  But! 적절히 사용해야 한다1.2 Anatomy of a Figure  Title: 가장 큰 주제를 설명  Label: 축에 해당하는 데이터 정보 제공  Tick Label: 축에 눈금을 사용하..."
+    } ,
+  
+    {
+      "title"    : "Pytorch(8)-Trouble shooting",
+      "title-lower"    : "pytorch(8)-trouble shooting",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "PytorchML_AI",
+      "tags"     : "",
+      "url"      : "/pytorch/ml_ai/2021/08/20/Pytorch_8.html",
+      "date"     : "2021-08-20 22:15:12 +0900",
+      "content"     : "1. OOM1.1 대응하기 어려움  왜…를 알기 어려움  어디서… 도 알기 어려움          Error backtracking이 이상한 곳으로 빠짐      메모리의 이전상황의 파악이 난해        주로 Iteration 안에서 발생          GPU clean -&amp;gt; RUN / Batch_size 줄이기      1.2 어떻..."
+    } ,
+  
+    {
+      "title"    : "Pytorch(7)-Hyperparameter tuning",
+      "title-lower"    : "pytorch(7)-hyperparameter tuning",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "PytorchML_AI",
+      "tags"     : "",
+      "url"      : "/pytorch/ml_ai/2021/08/20/Pytorch_7.html",
+      "date"     : "2021-08-20 22:15:12 +0900",
+      "content"     : "1. 성능을 높이는 방법  모델 바꾸기  데이터 바꾸기 (가장… 좋은 영향)  Hyperparameter tuning          모델 스스로 학습하지 않는 값들                  learning rate, 모델의 크기, optimizer 등                    결과가 크게 좌우 될 때도 있음 (요즘은… 드뭄)      ..."
+    } ,
+  
+    {
+      "title"    : "BAEK-2075 N번째 큰수",
+      "title-lower"    : "baek-2075 n번째 큰수",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Algorithm",
+      "tags"     : "",
+      "url"      : "/algorithm/2021/08/20/BAEK_2075.html",
+      "date"     : "2021-08-20 20:48:12 +0900",
+      "content"     : "1. 문제 설명  문제 링크NxN 배열이 주어진다. 모든 수는 자신의 한 칸 위에 있는 수보다 크다.이러한 표에서 N번 째 큰수는?조건1 &amp;lt;= N &amp;lt;= 1,500수는 -10억 보다 크고 10억보다 작거나 같은 정수 -&amp;gt; int 범위2. 풀이  priority_queue 라이브러리 활용  전체 수를 탐색하며 우선순위..."
+    } ,
+  
+    {
+      "title"    : "Pytorch(6)-MultiGPU",
+      "title-lower"    : "pytorch(6)-multigpu",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "PytorchML_AI",
+      "tags"     : "",
+      "url"      : "/pytorch/ml_ai/2021/08/20/Pytorch_6.html",
+      "date"     : "2021-08-20 19:59:12 +0900",
+      "content"     : "1. 개념 정리  Single vs Multi : 1개 vs 2개 이상  GPU vs Node : GPU vs 1대 컴퓨터의 1대 GPU  Single Node Single GPU : 1대 컴퓨터의 1대 GPU  Single Node Multi GPU : 1대 컴퓨터의 여러 GPU  Multi Node Multi GPU : 여러 컴퓨터의 여러 GPU2..."
+    } ,
+  
+    {
+      "title"    : "Week3 - day4",
+      "title-lower"    : "week3 - day4",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/20/week3_day4.html",
+      "date"     : "2021-08-20 05:22:30 +0900",
+      "content"     : "1. 개인학습  pytorch4  pytorch52. 선택 과제  Why?  xavier uniform으로 초기화?          관련논문      Xaiver함수는 비선형함수(ex. sigmoid, tanh)에서 효과적인 결과를 보여준다      하지만 ReLU함수에서 사용 시 출력 값이 0으로 수렴하게 되는 현상을 확인 할 수 있다      이전..."
+    } ,
+  
+    {
+      "title"    : "BAEK-11286 절대값 힙",
+      "title-lower"    : "baek-11286 절대값 힙",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Algorithm",
+      "tags"     : "",
+      "url"      : "/algorithm/2021/08/19/BAEK_11286.html",
+      "date"     : "2021-08-19 20:48:12 +0900",
+      "content"     : "1. 문제 설명  문제 링크          배열에 정수 x (x ≠ 0)를 넣는다.      배열에서 절댓값이 가장 작은 값을 출력하고, 그 값을 배열에서 제거한다. 절댓값이 가장 작은 값이 여러개일 때는, 가장 작은 수를 출력하고, 그 값을 배열에서 제거한다      비거나 0이면 출력      2. 풀이  priority_queue 라이브러리 활..."
+    } ,
+  
+    {
+      "title"    : "Pytorch(5)-Monitering(Tensorbaord &amp; Weight and Bias)",
+      "title-lower"    : "pytorch(5)-monitering(tensorbaord &amp; weight and bias)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "PytorchML_AI",
+      "tags"     : "",
+      "url"      : "/pytorch/ml_ai/2021/08/19/Pytorch_5.html",
+      "date"     : "2021-08-19 20:24:12 +0900",
+      "content"     : "1. Intro  긴 학습시간… 기다림의 기록이 필요          log, csv 등도 활용가능        잘만들어진 도구를 활용하자          Tensorboard      weigth &amp;amp; biases      2. Tensorboard  TensorFlow의 프로젝트로 만들어진 시각화 도구  학습 그래프, metric, 학..."
+    } ,
+  
+    {
+      "title"    : "Pytorch(4)-모델 불러오기(transfer learning)",
+      "title-lower"    : "pytorch(4)-모델 불러오기(transfer learning)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "PytorchML_AI",
+      "tags"     : "",
+      "url"      : "/pytorch/ml_ai/2021/08/19/Pytorch_4.html",
+      "date"     : "2021-08-19 19:31:12 +0900",
+      "content"     : "1. Intro  Transfer learning?          이미 학습된 모델을 가져와 내 데이터로 추가로 학습시키는 방법      Back bone 모델 선택을 잘 해야 한다.      2. 모델을 저장 및 불러오는 방법2.1 model.save  학습 결과를 저장  모델 구조와 parameter 저장  학습 중간 저장을해 최선의 결과 모델 ..."
+    } ,
+  
+    {
+      "title"    : "Week3 - day3",
+      "title-lower"    : "week3 - day3",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/19/week3_day3.html",
+      "date"     : "2021-08-19 05:22:30 +0900",
+      "content"     : "1. 개인학습  pytorch2  pytorch32. 필수 과제  Dataset, Dataloader 실습3. 알고리즘 풀이  풀이4. 피어세션  모더레이터 -&amp;gt; Pytorch2, Pytorch3 요약 정리  과제 코드 공유  알고리즘 코드 공유5. 특강  라이엇 CTO님"
+    } ,
+  
+    {
+      "title"    : "BAEK-1967 최소힙",
+      "title-lower"    : "baek-1967 최소힙",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Algorithm",
+      "tags"     : "",
+      "url"      : "/algorithm/2021/08/18/BAEK_1967.html",
+      "date"     : "2021-08-18 20:48:12 +0900",
+      "content"     : "1. 문제 설명  문제 링크          배열에 자연수 x를 넣는다.      배열에서 가장 작은 값을 출력하고, 그 값을 배열에서 제거한다.      비거나 0이면 출력      2. 풀이  priority_queue 라이브러리 활용#include&amp;lt;iostream&amp;gt;#include&amp;lt;queue&amp;gt;usi..."
+    } ,
+  
+    {
+      "title"    : "Pytorch(3)-Dataset &amp; DataLoader",
+      "title-lower"    : "pytorch(3)-dataset &amp; dataloader",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "PytorchML_AI",
+      "tags"     : "",
+      "url"      : "/pytorch/ml_ai/2021/08/18/Pytorch_3.html",
+      "date"     : "2021-08-18 20:32:28 +0900",
+      "content"     : "1. Intro  데이터 수집  Dataset class          init -&amp;gt; 어떤 데이터를 불러올것인지?      len -&amp;gt; 길이가 얼마인지?      getitem -&amp;gt; 하나의 데이터를 불러올때 어떻게 반환하는지?        transforms: 전처리(이미지 변환 등)          데이터셋을 ..."
+    } ,
+  
+    {
+      "title"    : "Pytorch(2)-AutoGrad &amp; Optimizer",
+      "title-lower"    : "pytorch(2)-autograd &amp; optimizer",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "PytorchML_AI",
+      "tags"     : "",
+      "url"      : "/pytorch/ml_ai/2021/08/18/Pytorch_2.html",
+      "date"     : "2021-08-18 19:29:28 +0900",
+      "content"     : "1. Intro1.1 딥러닝 모델은?  Layer = Block          논문에 있는 모델 =&amp;gt; 수많은 반복의 연속      Block들을 조립한것      1.2 Base classes  torch.nn.Module          Layer의 base class      Input, output, Forward, Backward..."
+    } ,
+  
+    {
+      "title"    : "Week3 - day2",
+      "title-lower"    : "week3 - day2",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/18/week3_day2.html",
+      "date"     : "2021-08-18 08:22:30 +0900",
+      "content"     : "1. 개인학습  pytorch12. 필수 과제  Document 탐색          torch.tensor() vs torch.Tensor()          torch.tensor()는 항상 데이터를 복제합니다. 그래서 data 없이 tensor 생성이 불가능 합니다. -&amp;gt; runtime error  torch.Tensor()는 객체(..."
+    } ,
+  
+    {
+      "title"    : "Pytorch(1)-Basic",
+      "title-lower"    : "pytorch(1)-basic",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "PytorchML_AI",
+      "tags"     : "",
+      "url"      : "/pytorch/ml_ai/2021/08/18/Pytorch_1.html",
+      "date"     : "2021-08-18 01:14:28 +0900",
+      "content"     : "1. Introduction to PyTorch1.1 Computational Graph  연산과정을 그래프로 표현한 것  Define and Run 그래프를 먼저 정의한 후 실행 시점에 데이터 feed  Define by Run(Pytorch 방식) 실행을 하면서 그래프를 생성 즉시 확인 가능 $\rightarrow$ pythonic code1.2 ..."
+    } ,
+  
+    {
+      "title"    : "Week3 - day1(휴일)",
+      "title-lower"    : "week3 - day1(휴일)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/17/week3_day1.html",
+      "date"     : "2021-08-17 00:22:30 +0900",
+      "content"     : "1. 개인학습  데이터 과학자와 데이터 엔지니어를 위한 인터뷰 문답집 구입 및 Ch1.2. 휴일 계획(15, 16일)  데이터 과학자와 데이터 엔지니어를 위한 인터뷰 문답집 구입 및 Ch1. 정리하기 ✅"
+    } ,
+  
+    {
+      "title"    : "Week2 - 일요일",
+      "title-lower"    : "week2 - 일요일",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/16/week2_SUN.html",
+      "date"     : "2021-08-16 05:22:30 +0900",
+      "content"     : "1. 개인학습  GAN + alpha  통계학 복습2. 알고리즘 풀이  12222. 문자열 나누기3. 휴일 계획(15, 16일)  Tranformer decoder part, 응용 공부 -&amp;gt; 내용 추가 ✅  GAN + alpha ✅  데이터 과학자와 데이터 엔지니어를 위한 인터뷰 문답집 구입 및 Ch1. 정리하기"
+    } ,
+  
+    {
+      "title"    : "SWEA-12222 문자열 나누기(C++, Python)",
+      "title-lower"    : "swea-12222 문자열 나누기(c++, python)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Algorithm",
+      "tags"     : "",
+      "url"      : "/algorithm/2021/08/16/SWEA_12222.html",
+      "date"     : "2021-08-16 04:20:12 +0900",
+      "content"     : "1. 문제 설명  문제 링크  알파벳 소문자로 이루어진 문자열 S  조건을 만족하는 최대 K 찾기  단 $S_i와 S_{i+1}$ 은 달라야한다.  E.g. aabbaa -&amp;gt; {a, b, ba, a} 로 4  15개의 테스트 케이스를 합쳐서 13초  $1 &amp;lt;= S길이 &amp;lt;= 2*10^5$2. 풀이  모든 단어를 끊었..."
+    } ,
+  
+    {
+      "title"    : "GAN - Mode collapsing",
+      "title-lower"    : "gan - mode collapsing",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/08/16/gp.html",
+      "date"     : "2021-08-16 01:14:28 +0900",
+      "content"     : "1. Vanila GAN Backpropagation in Paper  Minibatch SGD를 optimizer로 학습을 진행한다.  Discriminator를 SGD가 높아지는 방향으로 업데이트 한다.          식을 살펴보면 실제 데이터를 실제 데이터로 잘 판단하면 $log 1$ 로 0이 되고, 가짜 데이터를 가짜 데이터로 잘 판단하면 $..."
+    } ,
+  
+    {
+      "title"    : "Week2 - 토요일",
+      "title-lower"    : "week2 - 토요일",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/15/week2_SAT.html",
+      "date"     : "2021-08-15 05:22:30 +0900",
+      "content"     : "1. 개인학습  Softmax regression and Cross-entropy  Transformer 복습2. 선택과제  Mixture Density Network 풀이3. Git 인증 오류 해결  2021 8 13 이후로 passwd 인증으로 원격 push를 못하게 한다고 한다….  ssh로 바꾸었다. 힘들었다.          개인 토큰을 쓰라..."
+    } ,
+  
+    {
+      "title"    : "Softmax regression and Cross-entropy",
+      "title-lower"    : "softmax regression and cross-entropy",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/08/14/sr_ce.html",
+      "date"     : "2021-08-14 22:55:22 +0900",
+      "content"     : "1. Softmax regression1.1 One-hot encoding  분류하고 싶은 class만큼의 차원을 만들어 해당하는 부분을 1로 셋팅          E.g 개, 고양이, 말을 분류하고 싶으면      개 = (1, 0, 0)      고양이 = (0, 1, 0)      말 = (0, 0, 1)        원핫 인코딩 벡터를 Labl..."
+    } ,
+  
+    {
+      "title"    : "Week2 - 5일차",
+      "title-lower"    : "week2 - 5일차",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/14/week2_day5.html",
+      "date"     : "2021-08-14 05:22:30 +0900",
+      "content"     : "1. 개인학습  Generative model 1  Generative model 22. 멘토링  Transformer decoder  파이썬 코딩3. 스페셜 피어세션  진행 방향 공유  좋은 책 정보          데이터 과학자와 데이터 엔지니어를 위한 인터뷰 문답집 - 교보문고      4. 피어세선  강의 요약 Generative model 1..."
+    } ,
+  
+    {
+      "title"    : "Generative model-VAE, GAN",
+      "title-lower"    : "generative model-vae, gan",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/08/13/gm2.html",
+      "date"     : "2021-08-13 22:55:22 +0900",
+      "content"     : "1. Latent Variable Models1.1 Variational Inference and Deep Learning  Autoencoder는 generative 모델일까? Autoencoder는 gnerative 모델이 아니다! Latent space를 샘플링 해서 디코더를 거쳐 데이터를 생성할 수 있어야 한다.1.2 Variational in..."
+    } ,
+  
+    {
+      "title"    : "Generative model-통계이론 및 모델",
+      "title-lower"    : "generative model-통계이론 및 모델",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/08/13/gm1.html",
+      "date"     : "2021-08-13 20:15:22 +0900",
+      "content"     : "1. Intro  Richard Feynman(1918 ~ 1988) What i cannot create, i do not understand.  Generative model을 학습 시킨다는 것은?          일반적으로 이미지, 문장 등의 데이터를 생성하는 모델을 만들어 내는것이라고 생각하지만, 더 많은 의미를 포함한다!      Genera..."
+    } ,
+  
+    {
+      "title"    : "Week2 - 4일차",
+      "title-lower"    : "week2 - 4일차",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/13/week2_day4.html",
+      "date"     : "2021-08-13 04:22:30 +0900",
+      "content"     : "1. 개인학습  RNN  Transformer2. 필수과제  LSTM# LSTM 설정self.rnn = nn.LSTM(    input_size=self.xdim,hidden_size=self.hdim,num_layers=self.n_layer,batch_first=True)# h와 c의 크기h0 = torch.zeros(self.n_layer, x...."
+    } ,
+  
+    {
+      "title"    : "Transformer",
+      "title-lower"    : "transformer",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/08/12/transformer.html",
+      "date"     : "2021-08-12 22:15:22 +0900",
+      "content"     : "1. Sequential modeiling 문제Sequential하게 입력이 사용되면, 중간에 데이터가 없거나, 잘 못된 경우 모델링이 매우 난해해진다.2. Transformer2.1 구조  Transformer는 전체가 attention으로 이루어진 첫번째 sequence transduction 모델이다.  인코더와 디코더            Rec..."
+    } ,
+  
+    {
+      "title"    : "Recurrent Neural Network",
+      "title-lower"    : "recurrent neural network",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/08/12/rnn.html",
+      "date"     : "2021-08-12 20:15:12 +0900",
+      "content"     : "1. Sequential Models1.0 Sequential data  입력의 크기가 가변적이다          데이터가 언제 끝날지 알 수 없음        음성, 영상 등 많은 실제 데이터1.1 Naive Sequnece Model  시간이 지날 수록 고려할 과거 데이터가 늘어남1.2 Autoregressive Model  $\rightarrow..."
+    } ,
+  
+    {
+      "title"    : "Week2 - 3일차",
+      "title-lower"    : "week2 - 3일차",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/12/week2_day3.html",
+      "date"     : "2021-08-12 04:22:30 +0900",
+      "content"     : "1. 개인학습  CNN2. 필수과제  Conv layer 구성    nn.Conv2d(in_channels = prev_cdim,out_channels = cdim,kernel_size = self.ksize,stride=(1,1),padding=self.ksize//2))        Conv 훈련    y_pred = C.forward(batch_..."
+    } ,
+  
+    {
+      "title"    : "Convolution Neural Network",
+      "title-lower"    : "convolution neural network",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/08/11/convolution.html",
+      "date"     : "2021-08-11 20:56:22 +0900",
+      "content"     : "1. Convolution1.1 기본 공식  Continuous: $ (f * g) (x) = \int_{R^d} f(z) g(x-z)dz = \int_{R^d} f(x-z) g(z)dz = (g * f)(x) $  Discrete: $ (f * g) (i) = \sum_a f(a)g(i-a) = \sum_a f(i-a)g(a) = (g * f) (i..."
+    } ,
+  
+    {
+      "title"    : "Week2 - 2일차",
+      "title-lower"    : "week2 - 2일차",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/11/week2_day2.html",
+      "date"     : "2021-08-11 05:22:30 +0900",
+      "content"     : "1. 개인학습  시각화          Bar plot      Line Plot      Scatter Plot        Optimization2. 필수과제  SGD    optm_sgd = optim.SGD(model_sgd.parameters(), lr=LEARNING_RATE)        momentum    optm_momentum = ..."
+    } ,
+  
+    {
+      "title"    : "Visualization-Scatter",
+      "title-lower"    : "visualization-scatter",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "VisualizeML_AI",
+      "tags"     : "",
+      "url"      : "/visualize/ml_ai/2021/08/11/vizsc.html",
+      "date"     : "2021-08-11 00:23:22 +0900",
+      "content"     : "1. 기본  정의          점을 사용해 그리는 그래프      =산점도      x, y값을 매핑해서 사용 (N차원 데이터로 확장 가능)        요소          색      모양      크기        목적          상관관계 확인                  양의 상관관계          음의 상관관계          뚜..."
+    } ,
+  
+    {
+      "title"    : "Optimization",
+      "title-lower"    : "optimization",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/08/10/Optimization.html",
+      "date"     : "2021-08-10 23:31:22 +0900",
+      "content"     : "1. 기본1.1 Gradient Desent  First-order iterative optimization algorithm for finding a local minimum1.2 최적화 주요 개념!  Generalization          일반화 성능? 학습에 따라 Training error는 줄어들지만 학습을 반복할 수록 Test error는..."
+    } ,
+  
+    {
+      "title"    : "Visualization-Line",
+      "title-lower"    : "visualization-line",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "VisualizeML_AI",
+      "tags"     : "",
+      "url"      : "/visualize/ml_ai/2021/08/10/vizline.html",
+      "date"     : "2021-08-10 20:32:22 +0900",
+      "content"     : "1. 기본  선 그래프  연속적으로 변화하는 값을 순서대로 표현  시계열 분석에 특화!  5개 이하의 선 사용 추천  요소          색상(color)      마커(marker, markersize)      선의 종류(linestyle, linewidth)        전처리          smoothing                  N..."
+    } ,
+  
+    {
+      "title"    : "Visualization-Bar",
+      "title-lower"    : "visualization-bar",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "VisualizeML_AI",
+      "tags"     : "",
+      "url"      : "/visualize/ml_ai/2021/08/10/vizbar.html",
+      "date"     : "2021-08-10 19:40:22 +0900",
+      "content"     : "1. Bar plot 종류  Bar plot          .bar() : 수직      .barh() : 수평        multiple Bar Plot  Stacked Bar Plot          bar() : bottom 파라미터 사용      barh() : left 파라미터 사용        Percentage Stacked Bar C..."
+    } ,
+  
+    {
+      "title"    : "Week2 - 1일차",
+      "title-lower"    : "week2 - 1일차",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/10/week2_day1.html",
+      "date"     : "2021-08-10 05:22:30 +0900",
+      "content"     : "1. 개인학습  딥러닝 기본 용어 설명          세부 포함 관계                  AI &amp;gt; ML &amp;gt; DL          Mimic human intelligence / Data-driven approach / Neural networks                    Key of DL          ..."
+    } ,
+  
+    {
+      "title"    : "Ensemble - bagging and boosting",
+      "title-lower"    : "ensemble - bagging and boosting",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/08/09/Ensemble.html",
+      "date"     : "2021-08-09 02:27:22 +0900",
+      "content"     : "1. Ensemble learning  목적: 여러 모델을 하나의 모델로 연결해, 더 좋은 성능을 추구  방법:          여러 알고리즘 모델: Voting, averaging      단일 알고리즘 모델: Bagging, Boosting      2. Voting and averaging  분류: 여러 모델(weak learner)의 결과를 투..."
+    } ,
+  
+    {
+      "title"    : "Vanishing gradient &amp; Relu",
+      "title-lower"    : "vanishing gradient &amp; relu",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/08/09/Relu.html",
+      "date"     : "2021-08-09 00:12:22 +0900",
+      "content"     : "1. Vanishing gradient problemdef sigmoid(x):    return 1 / (1 + np.exp(-x))  Sigmoid          미분 했을 때, 기울기가 큰 부분?                  0 근처 -&amp;gt; 0.25 정도 밖에 안됨                          $sigmoid’() ..."
+    } ,
+  
+    {
+      "title"    : "Week1 - 토요일",
+      "title-lower"    : "week1 - 토요일",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/08/week1_SAT.html",
+      "date"     : "2021-08-08 07:01:56 +0900",
+      "content"     : "1. 개인학습  베이즈 통계          조건부 확률을 활용해 정보를 갱신하는 방법      조건부 확률                  $Y$ 가 관찰되었을 때, X가 발생할 확률          $ P(X \vert Y) = {P(X,Y) \over P(Y)} $                    베이즈 정리                  $P(..."
+    } ,
+  
+    {
+      "title"    : "Week1 - 일요일",
+      "title-lower"    : "week1 - 일요일",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/08/week1_SUN.html",
+      "date"     : "2021-08-08 05:01:56 +0900",
+      "content"     : "1. 개인학습  Activation 함수와 gradient vanishing          Vanishing gradient &amp;amp; Relu        Ensemble          Ensemble - bagging and boosting      2. 알고리즘 예습  KMP 알고리즘"
+    } ,
+  
+    {
+      "title"    : "Week1 - 5 일차",
+      "title-lower"    : "week1 - 5 일차",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/07/week1_day5.html",
+      "date"     : "2021-08-07 04:21:56 +0900",
+      "content"     : "1. 개인학습  RNN 첫걸음          시퀀스 데이터                  시계열 데이터-시간순서에 따라 나열된 데이터          소리, 문자열, 주가 등          독립동등분포(i,i,d) 가정을 잘 위배                          순서를 바꾸거나, 과거정보손실 $\rightarrow$ 데이터 확률분포 변..."
+    } ,
+  
+    {
+      "title"    : "Week1 - 4 일차",
+      "title-lower"    : "week1 - 4 일차",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/06/week1_day4.html",
+      "date"     : "2021-08-06 06:54:56 +0900",
+      "content"     : "1. 면접일정2. 개인학습  통계론          기대값?                  $ \mathbb E_{X \sim P(\mathcal X)} [f(X)] = \int_{\mathcal X} f(X)P(\mathcal X)dX $          $ \mathbb E_{X \sim P(\mathcal X)} [f(X)] = \sum_{x \..."
+    } ,
+  
+    {
+      "title"    : "Week1 - 3 일차",
+      "title-lower"    : "week1 - 3 일차",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/05/week1_day3.html",
+      "date"     : "2021-08-05 05:52:56 +0900",
+      "content"     : "1. 개인학습  파이썬 기초 3.1 ~ 7.2          asterisk         print([1,2,3]) # [1,2,3] print(*[1,2,3]) # 1 2 3 =&amp;gt; unpacking funtion((1,2,3,4,5)]) def function(*args): # 여러개 인자     print(args) # (1,2,3..."
+    } ,
+  
+    {
+      "title"    : "Week1 - 2 일차",
+      "title-lower"    : "week1 - 2 일차",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/04/week1_day2.html",
+      "date"     : "2021-08-04 08:37:56 +0900",
+      "content"     : "1. 면접일정때문에 강의 수강 못함2. 피어세션 자기소개 문구 작성3. 과제풀이 4, 5번  4번          main test에서 오류      Console 값 검사        5번          함수 기능 구현 완료      "
+    } ,
+  
+    {
+      "title"    : "Week1 - 1 일차",
+      "title-lower"    : "week1 - 1 일차",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/08/03/week1_day1.html",
+      "date"     : "2021-08-03 04:55:56 +0900",
+      "content"     : "1. 타운홀 미팅  Orientation2. Meet peer  파이썬(월~화)/ 기초수학(수~금)  필수과제 2번3. 개인학습  python 1-1 ~ 2-4          python 기초                  python에서 -5 ~ 256 정적 메모리 관리          is는 메모리 주소 비교  ```python  a = -4  ..."
+    } ,
+  
+    {
+      "title"    : "Batch Normalization layer",
+      "title-lower"    : "batch normalization layer",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/07/31/Batchnorm.html",
+      "date"     : "2021-07-31 19:27:22 +0900",
+      "content"     : "1. 기본 동작  Annotation          $x_i$ : 다음 레이어에 들어가려는 입력, 0 &amp;lt;= i &amp;lt;= batch_size      $w_{ij}$ : 해당 노드의 가중치, 0 &amp;lt;= i, j &amp;lt;= # of layer      $\sigma$ : 활성화 함수      $\gamma , \ ..."
+    } ,
+  
+    {
+      "title"    : "오늘의 일기, 07-30",
+      "title-lower"    : "오늘의 일기, 07-30",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Daily",
+      "tags"     : "",
+      "url"      : "/daily/2021/07/31/daily2.html",
+      "date"     : "2021-07-31 04:25:36 +0900",
+      "content"     : "☆multilabel encoding layer 정체 알아내기 Structed block에 categorical encoding layer의 multi_hot 버전 인것 같다.이미 전처리를 통해 범주화를 해주었기 때문에, 없어도 되는 것 아닌가 싶은데, 이 레이어를 지나면서 nan 값이 형성되는 것으로 의심된다. (이걸 제외하면 제대로 학습이 진행 된..."
+    } ,
+  
+    {
+      "title"    : "Entropy, KL Divergence (정보이론)",
+      "title-lower"    : "entropy, kl divergence (정보이론)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/07/31/KL.html",
+      "date"     : "2021-07-31 00:20:22 +0900",
+      "content"     : "1. Entropy  의미?          정보를 표현하는데 필요한 (평균) 최소 자원량      공통 단위로 표현할수 없을까?                  정보이론의 아버지 (Claude Elwood Shannon)          Bits! 로 표현해라!                          몇개의 비트로 표시할 수 있는가?!      ..."
+    } ,
+  
+    {
+      "title"    : "Pytorch, 대용량 데이터 처리 with Dataset 클래스",
+      "title-lower"    : "pytorch, 대용량 데이터 처리 with dataset 클래스",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "PytorchML_AI",
+      "tags"     : "",
+      "url"      : "/pytorch/ml_ai/2021/07/30/dataset.html",
+      "date"     : "2021-07-30 02:54:56 +0900",
+      "content"     : "0. torch에서 제공하는 기본 클래스  HDF5Matrix와 동일하게, 해당 데이터를 사용할 때 메모리에 적재, 메모리에러로 부터 자유로워질 수 있다  아래 함수들을 필수로 구현해 주어야한다          init(self,…): 초기화 함수      len(data): 데이터의 길이 반환      getitem(idx): idx번째 데이터 반환..."
+    } ,
+  
+    {
+      "title"    : "Tensorflow, 대용량 데이터 처리 with h5py, HDF5Matrix",
+      "title-lower"    : "tensorflow, 대용량 데이터 처리 with h5py, hdf5matrix",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "PytorchML_AI",
+      "tags"     : "",
+      "url"      : "/pytorch/ml_ai/2021/07/29/h5py.html",
+      "date"     : "2021-07-29 20:52:56 +0900",
+      "content"     : "0. 메모리에러…  딥러닝을 학습하다 보면 생각보다 자주 메모리에러에 접하게 됩니다.  연구실에서 하드웨어 빵빵한 PC를 사용할 때는 거의 문제가 없었는데, 졸업 후 개인 PC로 하려니 힘들어서… 좋은 방법이 없나 찾아보았습니다.  보통 h5py + HDF5Mtrix나  data generator 라이브러리를 활용했습니다.  이번엔 h5py + HDF..."
+    } ,
+  
+    {
+      "title"    : "오늘의 일기, 07-28",
+      "title-lower"    : "오늘의 일기, 07-28",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Daily",
+      "tags"     : "",
+      "url"      : "/daily/2021/07/29/daily1.html",
+      "date"     : "2021-07-29 06:25:36 +0900",
+      "content"     : "라인 과제테스트 때 사용했던 모델을 개선해보기 위해 실험을 진행하며 하루를 보냈다.기존에 잘 되던 모델이 학습이 제대로 이루어 지지 않았다.loss가 NaN이 되면서 전혀 학습이 되지 않았다.이럴 경우 보통은 데이터에 이상한 값(nan 등)이 들어있었는데 확인해보았지만, 데이터는 정상이었다.그럼 왜? 당시 tensorflow 2.51 으로 최신 버전을..."
+    } ,
+  
+    {
+      "title"    : "Tips",
+      "title-lower"    : "tips",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/07/27/precourse6.html",
+      "date"     : "2021-07-27 21:01:21 +0900",
+      "content"     : "1. Maximum Likelihood Estimation  What?          Observation을 가장 잘 설명하는 $\theta$ 를 찾아내는 과정      2. Reminder: Optimization via Gradient Descent  기울기를 이용해, 최대가되는 지점 탐색  기울기에 따라 $\theta$ 를 증가시키거나 감소시키..."
+    } ,
+  
+    {
+      "title"    : "Multivariable linear/logistic regression",
+      "title-lower"    : "multivariable linear/logistic regression",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/07/26/precourse5.html",
+      "date"     : "2021-07-26 22:01:21 +0900",
+      "content"     : "1. Multivariable linear regressionDataQ1    Q2    Q3    Final(y)70    80    75    7582    71    98    83.676    92    91    86.390    95    99    94.6H(x) = w1 * Q1 + w2 * Q2 + w3 * Q3 + bfor e in ..."
+    } ,
+  
+    {
+      "title"    : "Precourse PyTorch Basic Tensor Manipulation",
+      "title-lower"    : "precourse pytorch basic tensor manipulation",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/07/26/precourse4.html",
+      "date"     : "2021-07-26 22:01:21 +0900",
+      "content"     : "1. Shape convention# 2d|t| = (batch size, dim)# 3d|t| = (batch size, width, height) # IMAGE|t| = (batch size, length, dim) # NLP2. Numpy와 유사하게 Tensor 다루기 가능import torch# slicingt = torch.FloatTenso..."
+    } ,
+  
+    {
+      "title"    : "Maximum Likelihood",
+      "title-lower"    : "maximum likelihood",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ML_AI",
+      "tags"     : "",
+      "url"      : "/ml_ai/2021/07/25/MLE.html",
+      "date"     : "2021-07-25 20:35:56 +0900",
+      "content"     : "참조https://www.youtube.com/watch?v=XepXtl9YKwc1. 의미  Maximum likelihood를 찾았다?  관측치에 대한 우도를 최대화 하는 평균 or 표준편차를 찾은것  데이터의 분포를 fit하기 위한 최적의 방법(분포)를 찾는 것2. 예시  Goal: 쥐의 몸무게들을 잘 표현하는 분포 찾기  어떤 분포가 가장 적합한..."
+    } ,
+  
+    {
+      "title"    : "Precourse 수학튼튼-(2)",
+      "title-lower"    : "precourse 수학튼튼-(2)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/07/24/precourse3_1.html",
+      "date"     : "2021-07-24 23:42:21 +0900",
+      "content"     : "3. 파이썬 시각화 / 통계론3.1 파이썬 시각화  matplotlib.pyplot  show로 flush  basic arg          color: 그래프 선 색      linestyle: 그래프 선 종류      label: 범례 (-legend)      alpha: 투명도        plot 종류          plot(x)     ..."
+    } ,
+  
+    {
+      "title"    : "Precourse 수학튼튼-(1)",
+      "title-lower"    : "precourse 수학튼튼-(1)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/07/24/precourse3_2.html",
+      "date"     : "2021-07-24 22:18:21 +0900",
+      "content"     : "1. pandas 1 / 딥러닝 학습방법1.1 pandas 1  기본적인 pandas 라이브러리 사용법  데이터 접근          loc =&amp;gt; 인덱스 이름을 사용해 접근      iloc =&amp;gt; 인덱스 번호로 접근        inplace: 원본에 적용 유무(True/False)  describe: 전체적인 통계값  데이터..."
+    } ,
+  
+    {
+      "title"    : "Precourse 수학기초",
+      "title-lower"    : "precourse 수학기초",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/07/24/precourse2.html",
+      "date"     : "2021-07-24 01:20:56 +0900",
+      "content"     : "1. Numpy / 벡터 &amp;amp; 행렬1.1 Numerical Python - Numpy  기본적으로 파이썬 리스트는 메모리 주소 복사  fancy index1.2 벡터란?  공간에서 한 점을 표현하는 것  기준점으로 부터의 상대적 위치  Hadamard product: 성분 곱    # Hadamard productnp.array([1, 2..."
+    } ,
+  
+    {
+      "title"    : "Precourse 파이썬 기초~다지기",
+      "title-lower"    : "precourse 파이썬 기초~다지기",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/07/23/precourse_1.html",
+      "date"     : "2021-07-23 02:55:56 +0900",
+      "content"     : "1. 파이썬 기초강의자료만 한번 읽어보고, 기초적인 문법이라 skip!2. 파이썬 다지기2.1 Python object orientation programming1. 객체란? 실생활에서 일종의 물체, 속성과 행동을 가진다. -&amp;gt; 변수와 함수로 표현2. 클래스? 설계도   인스턴스? 설계도로 만든 실제 구현체3. 이름짓기   * 클래스명: ..."
+    } ,
+  
+    {
+      "title"    : "Noise surppression 모델-(pytorch)",
+      "title-lower"    : "noise surppression 모델-(pytorch)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Noise_surpression",
+      "tags"     : "",
+      "url"      : "/noise_surpression/2021/07/22/NSmodeling.html",
+      "date"     : "2021-07-22 07:35:56 +0900",
+      "content"     : "0. 모델 개요GAN 기반 잡음 제거 모델을 사용했습니다. End-to-End 잡음 제거 모델 중 에서는 가장 좋은 성능을 보여주고 있다고 생각합니다.Generator(G): 잡음 제거 담당 Clean Discriminator(CD): G가 생성한 음성 신호와 타겟 음성 신호 비교 Noise Discriminator(ND): 입력과의 차이를 이용해 N..."
+    } ,
+  
+    {
+      "title"    : "Noise surppression (잡음 제거) 결과샘플 &lt;졸업논문&gt;",
+      "title-lower"    : "noise surppression (잡음 제거) 결과샘플 &lt;졸업논문&gt;",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Noise_surpression",
+      "tags"     : "",
+      "url"      : "/noise_surpression/2021/07/22/NSresult.html",
+      "date"     : "2021-07-22 03:35:56 +0900",
+      "content"     : "                    Samples 1~25 MAN        Left: Noisy speech, Right: Enhanced speech        			          001. p232_001                     002. p232_005                     003. p232_007         ..."
+    } ,
+  
+    {
+      "title"    : "Window10 손상된 파일/디렉토리 복구",
+      "title-lower"    : "window10 손상된 파일/디렉토리 복구",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ETC",
+      "tags"     : "",
+      "url"      : "/etc/2021/07/20/CHDSDK.html",
+      "date"     : "2021-07-20 23:20:12 +0900",
+      "content"     : "CHKDSK (check disk) 명령어를 사용해 간단하게 복구 가능합니다.1. 관리자 권한으로 cmd (명령 프롬프트) 실행2. CHKDSK &amp;lt;고치고 싶은 디렉토리&amp;gt; /f    +-- E.g) CHKDSK D: /f명령어를 실행하면, 먼저 볼륨을 분리해도 되겠냐고 물어봅니다.  y를 누르고 실행하면 자동으로 복구가 가능해집..."
+    } ,
+  
+    {
+      "title"    : "Dday-13",
+      "title-lower"    : "dday-13",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "ustage",
+      "tags"     : "",
+      "url"      : "/ustage/2021/07/20/Dday.html",
+      "date"     : "2021-07-20 02:55:56 +0900",
+      "content"     : "블로그 작성 테스트!!!"
+    } ,
+  
+    {
+      "title"    : "블로그 카테고리 지정 및 모아보기 기능 만들기(토글형식)",
+      "title-lower"    : "블로그 카테고리 지정 및 모아보기 기능 만들기(토글형식)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Blog",
+      "tags"     : "",
+      "url"      : "/blog/2021/07/19/categorising.html",
+      "date"     : "2021-07-19 20:35:56 +0900",
+      "content"     : "0. 기본 셋팅* jekyll 활용 Git 블로그* 코드 참조: https://devyurim.github.io/development%20environment/github%20blog/2018/08/07/blog-6.html* 테마: https://github.com/samarsault/plainwhite-jekyll1. root 경로에서 폴더내 ca..."
+    } ,
+  
+    {
+      "title"    : "Machine Learning",
+      "title-lower"    : "machine learning",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Tech_interview",
+      "tags"     : "",
+      "url"      : "/tech_interview/2021/07/15/Machine-Learning.html",
+      "date"     : "2021-07-15 23:24:21 +0900",
+      "content"     : "11.1 BASIC11.1.1 What’s the trade-off between bias and variance?Bias는 학습에 사용 중인 알고리즘의 잘못된 가정이나, 단순한 가정으로 인한 오류 입니다.Variance는 사용 중인 알고리즘이 너무 복잡해 발생하는 오류 입니다.따라서 두 변수는 반비례 관계에 있으며, 학습을 통해 둘 모두를 최소화 할..."
+    } ,
+  
+    {
+      "title"    : "JAVA",
+      "title-lower"    : "java",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Tech_interview",
+      "tags"     : "",
+      "url"      : "/tech_interview/2021/07/10/JAVA.html",
+      "date"     : "2021-07-10 20:15:12 +0900",
+      "content"     : "7.l Basic7.1.1 Java 접근 제어자에 대해서 각각 설명해 주세요.Private: 선언한 클래스 내부에서만 접근 가능Public: 외부로 공개되어 어디서든 접근 가능Protected: 같은 패키지 혹은 자식클래스들은 접근 가능Default: 같은 패키지 클래스들은 접근 가능, 자식은 X (사실상 없음, 지정하지 않은 경우)7.1.2 JVM의..."
+    } ,
+  
+    {
+      "title"    : "Programming",
+      "title-lower"    : "programming",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Tech_interview",
+      "tags"     : "",
+      "url"      : "/tech_interview/2021/07/09/Programming.html",
+      "date"     : "2021-07-09 17:55:31 +0900",
+      "content"     : "6.l Basic6.1.1 대표적인 객체지향 언어에는 어떤 것들이 있나요?C++, C#, JAVA 등이 있습니다.6.1.2 객체지향이란? 절차지향과의 차이점은?객체지향이란 실제 세계의 사물들을 객체로 모델링하여 개발을 진행하는 프로그래밍 기법입니다. 예를 들어 자동차를 조립할 때, 절차지향은 정해진 순서에 따라 엔진, 차체 핸들 의자를 만들어야 자동차..."
+    } ,
+  
+    {
+      "title"    : "Data Structure (자료구조)",
+      "title-lower"    : "data structure (자료구조)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Tech_interview",
+      "tags"     : "",
+      "url"      : "/Tech_interview/DS",
+      "date"     : "2021-07-05 21:35:56 +0900",
+      "content"     : "5.l Basic5.1.1 배열과 링크드 리스트의 차이점에 대해서 설명해 주세요.배열은 데이터를 입력하면 순차적으로 입력이 되며, 물리적 주소 또한 순차적입니다. 또한 한번 크기가 결정이 되면 변경이 불가능 합니다. 하지만 인덱스가 있어 데이터에 접근하는 속도가 빠릅니다. 하지만 중간에 삽입하거나 삭제하는 경우 인덱스를 재배열해야 하기 때문에 효율이 ..."
+    } ,
+  
+    {
+      "title"    : "Algorithm (알고리즘)",
+      "title-lower"    : "algorithm (알고리즘)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Tech_interview",
+      "tags"     : "",
+      "url"      : "/tech_interview/2021/06/30/Algorithm.html",
+      "date"     : "2021-06-30 18:35:56 +0900",
+      "content"     : "4.1 Basic4.1.1 피보나치 수열 구현 방식 3가지, 시간복잡도 및 공간복잡도- 재귀적 풀이: 시간복잡도 O(2^N), 공간복잡도: 동일(함수호출)def fibo(n):  return fibo(n-1) + fibo(n-1) if n &amp;gt;= 2 else n - 반복문 풀이: 시간복잡도 O(N), 공간복잡도: constantdef fib..."
+    } ,
+  
+    {
+      "title"    : "Database (데이터베이스)",
+      "title-lower"    : "database (데이터베이스)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Tech_interview",
+      "tags"     : "",
+      "url"      : "/tech_interview/2021/06/25/Database.html",
+      "date"     : "2021-06-25 01:35:56 +0900",
+      "content"     : "3.1 Basic3.1.1 정규화에 대해서 설명해주세요.데이터의 무결성과 안정성 높이기 위해, 데이터를 구조화시키는 것을 말합니다. 1단계는 원자 값 아닌 속성을 분해해 원자 값으로 변경합니다. (도메인이 원자값 )2단계와 3단계는 함수적 종속과 이행 함수적 종속을 제거하는 단계입니다. (부분적 함수 종속 제거)										(이행적 함수 종속 제..."
+    } ,
+  
+    {
+      "title"    : "Network (네트워크)",
+      "title-lower"    : "network (네트워크)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Tech_interview",
+      "tags"     : "",
+      "url"      : "/tech_interview/2021/06/24/.Network.html",
+      "date"     : "2021-06-24 16:35:56 +0900",
+      "content"     : "2.1 기본2.1.1 OSI 7계층에 대해서 설명해주세요.국제 표준화 기구 ISO에서 만든, 네트워크 프로토콜 디자인과 통신을 계층으로 구분해 놓은 것을 말합니다.Application, Presentation, Session, Transport, Network, Data Link, Physical, 7계층으로 구성이 되어있습니다.7 단계가 독립적으로 ..."
+    } ,
+  
+    {
+      "title"    : "Operation system (운영체제)",
+      "title-lower"    : "operation system (운영체제)",
+      "sub-titile" : "",
+      "sub-titile-lower" : "",
+      "categories" : "Tech_interview",
+      "tags"     : "",
+      "url"      : "/Tech_interview/OS",
+      "date"     : "2021-06-20 18:33:36 +0900",
+      "content"     : "1. 기본1.1 프로세스와 스레드의 차이?프로세스는 OS로 부터 자원을 할당받고, 스레드는 프로세스로 부터 자원을 할당받습니다. 하나의 프로세스 안에서 스택을 제외한 메모리 공간을 공유하며 여러 스레드 생성이 가능합니다.공유 메모리 공간: 코드/데이터/힙개별 메모리 공간: 스택+a프로세스를 다수의 멀티 스레드로 구성하면, Context-switchin..."
+    } 
+  
+]

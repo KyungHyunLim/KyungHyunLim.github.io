@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Pytorch(3)-Dataset & DataLoader</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Pytorch(3)-Dataset &amp; DataLoader | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Pytorch(3)-Dataset &amp; DataLoader" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Intro 데이터 수집 Dataset class init -&gt; 어떤 데이터를 불러올것인지? len -&gt; 길이가 얼마인지? getitem -&gt; 하나의 데이터를 불러올때 어떻게 반환하는지? transforms: 전처리(이미지 변환 등) 데이터셋을 전처리 해주는 부분 텐서로 만들어주는 부분과 데이터 하나를 넘겨주는 부분이 다르다. DataLoader Data를 어떻게 처리할지 정의한대로 Data를 묶어서 Batch를 만들어줌 Model에 feed" />
+<meta property="og:description" content="1. Intro 데이터 수집 Dataset class init -&gt; 어떤 데이터를 불러올것인지? len -&gt; 길이가 얼마인지? getitem -&gt; 하나의 데이터를 불러올때 어떻게 반환하는지? transforms: 전처리(이미지 변환 등) 데이터셋을 전처리 해주는 부분 텐서로 만들어주는 부분과 데이터 하나를 넘겨주는 부분이 다르다. DataLoader Data를 어떻게 처리할지 정의한대로 Data를 묶어서 Batch를 만들어줌 Model에 feed" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-18T20:32:28+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pytorch(3)-Dataset &amp; DataLoader" />
+<script type="application/ld+json">
+{"description":"1. Intro 데이터 수집 Dataset class init -&gt; 어떤 데이터를 불러올것인지? len -&gt; 길이가 얼마인지? getitem -&gt; 하나의 데이터를 불러올때 어떻게 반환하는지? transforms: 전처리(이미지 변환 등) 데이터셋을 전처리 해주는 부분 텐서로 만들어주는 부분과 데이터 하나를 넘겨주는 부분이 다르다. DataLoader Data를 어떻게 처리할지 정의한대로 Data를 묶어서 Batch를 만들어줌 Model에 feed","mainEntityOfPage":{"@type":"WebPage","@id":"/pytorch/ml_ai/2021/08/18/Pytorch_3.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Pytorch(3)-Dataset &amp; DataLoader","dateModified":"2021-08-18T20:32:28+09:00","datePublished":"2021-08-18T20:32:28+09:00","url":"/pytorch/ml_ai/2021/08/18/Pytorch_3.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/pytorch/ml_ai/2021/08/18/Pytorch_3.html">
+    <h2 class="post-title">Pytorch(3)-Dataset &amp; DataLoader</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 18, 2021</div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-intro">1. Intro</h2>
+<p><img src="/assets/image/Pytorch/py3_1.PNG" alt="" /></p>
+<ol>
+  <li>데이터 수집</li>
+  <li>Dataset class
+    <ul>
+      <li>init -&gt; 어떤 데이터를 불러올것인지?</li>
+      <li>len -&gt; 길이가 얼마인지?</li>
+      <li>getitem -&gt; 하나의 데이터를 불러올때 어떻게 반환하는지?</li>
+    </ul>
+  </li>
+  <li>transforms: 전처리(이미지 변환 등)
+    <ul>
+      <li>데이터셋을 전처리 해주는 부분</li>
+      <li>텐서로 만들어주는 부분과 데이터 하나를 넘겨주는 부분이 다르다.</li>
+    </ul>
+  </li>
+  <li>DataLoader
+    <ul>
+      <li>Data를 어떻게 처리할지 정의한대로 Data를 묶어서 Batch를 만들어줌</li>
+    </ul>
+  </li>
+  <li>Model에 feed</li>
+</ol>
+
+<h2 id="2-classes">2. Classes</h2>
+<h3 id="21-dataset-클래스">2.1 Dataset 클래스</h3>
+<ul>
+  <li>데이터 입력 형태를 정의</li>
+  <li>데이터를 입력하는 방식의 표준화</li>
+  <li>유의사항
+    <ul>
+      <li>데이터 형태에 따라 각 함수를 다르게 정의</li>
+      <li>모든 것을 데이터 생성 시점에 처리할 필요가 없다
+        <ul>
+          <li>Tensor변화는 학습에 필요한 시점에서!</li>
+        </ul>
+      </li>
+      <li>데이터 셋에 대한 표준화된 처리방법 제공 필요</li>
+      <li>HuggingFace등 표준화된 라이브러리 사용
+        <ul>
+          <li>허깅페이스는 트랜스포머 기반의 모델들과 학습 알고리즘을 구현해 놓은 라이브러리이다. 원래는 torch로 전부 구현해야 하지만, 허깅 페이스를 사용하면 간단하게 사용할 수 있다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CustomDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="c1"># 초기 데이터 생성방법을 지정
+</span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">text</span>
+
+    <span class="c1"># 데이터의 전체 길이
+</span>    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">labels</span><span class="p">)</span>
+
+    <span class="c1"># index를 주었을 때 반환되는 데이터의 형태
+</span>    <span class="c1"># index/data tpye 이름(?)을 사용할 수도 있다.
+</span>    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">labels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">sample</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Text"</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="s">"Class"</span><span class="p">:</span> <span class="n">label</span><span class="p">}</span>
+            <span class="k">return</span> <span class="n">sample</span>
+</code></pre></div></div>
+
+<h3 id="22-dataloader-클래스">2.2 DataLoader 클래스</h3>
+<ul>
+  <li>Data의 Batch를 생성해주는 클래스</li>
+  <li>학습 직전 변환 책임</li>
+  <li>Tensor 변환 + Batch 처리가 메인</li>
+  <li>병렬적인 데이터 전처리 코드 고민 필요</li>
+  <li>파라미터
+    <ul>
+      <li>sampler, batch_sampler: 데이터를 어떻게 뽑을지 인덱스를 정해주는 것</li>
+      <li>collate_fn: variable정의, padding 등의 함수 정의</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Dataset 생성
+</span><span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Happy'</span><span class="p">,</span> <span class="s">'Amazing'</span><span class="p">,</span> <span class="s">'Sad'</span><span class="p">,</span> <span class="s">'Unhapy'</span><span class="p">,</span> <span class="s">'Glum'</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Positive'</span><span class="p">,</span> <span class="s">'Positive'</span><span class="p">,</span> <span class="s">'Negative'</span><span class="p">,</span> <span class="s">'Negative'</span><span class="p">,</span> <span class="s">'Negative'</span><span class="p">]</span>
+<span class="n">MyDataset</span> <span class="o">=</span> <span class="n">CustomDataset</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+
+<span class="c1"># Data 로딩
+# batch size 만큼 묶어줌,
+</span><span class="n">MyDataLoader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">MyDataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">MyDataLoader</span><span class="p">))</span> <span class="c1"># 다음 객체 호출
+</span><span class="o">------</span>
+<span class="n">output</span>
+<span class="o">------</span>
+<span class="p">{</span><span class="s">'Class'</span><span class="p">:</span> <span class="p">[</span><span class="s">'Positive'</span><span class="p">,</span> <span class="s">'Negative'</span><span class="p">],</span> <span class="s">'Text'</span><span class="p">:</span> <span class="p">[</span><span class="s">'Happy'</span><span class="p">,</span> <span class="s">'Glum'</span><span class="p">]}</span>
+</code></pre></div></div>
+
+<h2 id="3-notmnist">3. NotMnist</h2>
+<h3 id="31-라이브러리">3.1 라이브러리</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">torchvision.datasets</span> <span class="kn">import</span> <span class="n">VisionDataset</span>  <span class="c1"># 다양한 데이터셋 제공
+</span><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>                           <span class="c1"># 진행바
+</span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">transform</span>               <span class="c1"># 이미지 입출력 및 변환
+</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>                 <span class="c1"># plot
+</span></code></pre></div></div>
+
+<h3 id="32-getitem">3.2 <strong>getitem</strong></h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="n">image_name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="c1"># index에 해당하는 image 경로반환
+</span>    <span class="n">image</span> <span class="o">=</span> <span class="n">io</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_name</span><span class="p">)</span> <span class="c1"># image read
+</span>    <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">targets</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>   <span class="c1"># index에 해당하는 label 값 반환
+</span>    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">transform</span><span class="p">:</span>            <span class="c1"># 정의되어있으면, transform 적용
+</span>        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">label</span>           <span class="c1"># 데이터와 라벨 반환
+</span></code></pre></div></div>
+
+<h3 id="33-transform">3.3 transform</h3>
+<ul>
+  <li>이미지 전처리 예시</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="p">.</span><span class="n">Compose</span><span class="p">([</span>
+    <span class="n">transforms</span><span class="p">.</span><span class="n">RandomSizedCrop</span><span class="p">(</span><span class="mi">224</span><span class="p">),</span>    <span class="c1"># 임의 구간 crop/데이터 크기 변환
+</span>    <span class="n">transforms</span><span class="p">.</span><span class="n">RandomHorizontalFlip</span><span class="p">(),</span>  <span class="c1"># 수평반전
+</span>    <span class="n">transforms</span><span class="p">.</span><span class="n">ToTensor</span><span class="p">(),</span>              <span class="c1"># 텐서로 변환
+</span>    <span class="n">transforms</span><span class="p">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">],</span> <span class="c1"># 정규화
+</span>                            <span class="n">std</span><span class="o">=</span><span class="p">[</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">])</span>
+<span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="34-dataloader">3.4 DataLoader</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># batch size = 128로 데이터 로딩
+</span><span class="n">dataset_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span>
+                                             <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># 데이터 형태
+</span><span class="n">train_features</span><span class="p">,</span> <span class="n">train_labels</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">dataset_loader</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">train_features</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_labels</span><span class="p">))</span>
+
+<span class="o">------</span>
+<span class="n">output</span>
+<span class="o">------</span>
+<span class="n">torch</span><span class="p">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">128</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">])</span> <span class="mi">128</span>
+</code></pre></div></div>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

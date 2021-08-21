@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Pytorch(2)-AutoGrad & Optimizer</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Pytorch(2)-AutoGrad &amp; Optimizer | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Pytorch(2)-AutoGrad &amp; Optimizer" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Intro 1.1 딥러닝 모델은? Layer = Block 논문에 있는 모델 =&gt; 수많은 반복의 연속 Block들을 조립한것" />
+<meta property="og:description" content="1. Intro 1.1 딥러닝 모델은? Layer = Block 논문에 있는 모델 =&gt; 수많은 반복의 연속 Block들을 조립한것" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-18T19:29:28+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pytorch(2)-AutoGrad &amp; Optimizer" />
+<script type="application/ld+json">
+{"description":"1. Intro 1.1 딥러닝 모델은? Layer = Block 논문에 있는 모델 =&gt; 수많은 반복의 연속 Block들을 조립한것","mainEntityOfPage":{"@type":"WebPage","@id":"/pytorch/ml_ai/2021/08/18/Pytorch_2.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Pytorch(2)-AutoGrad &amp; Optimizer","dateModified":"2021-08-18T19:29:28+09:00","datePublished":"2021-08-18T19:29:28+09:00","url":"/pytorch/ml_ai/2021/08/18/Pytorch_2.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/pytorch/ml_ai/2021/08/18/Pytorch_2.html">
+    <h2 class="post-title">Pytorch(2)-AutoGrad &amp; Optimizer</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 18, 2021</div><ul class="post-categories"><li>Pytorch</li><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-intro">1. Intro</h2>
+<h3 id="11-딥러닝-모델은">1.1 딥러닝 모델은?</h3>
+<ul>
+  <li>Layer = Block
+    <ul>
+      <li>논문에 있는 모델 =&gt; 수많은 반복의 연속</li>
+      <li>Block들을 조립한것
+<img src="/assets/image/Pytorch/py2_1.PNG" alt="" /></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="12-base-classes">1.2 Base classes</h3>
+<ul>
+  <li>torch.nn.Module
+    <ul>
+      <li>Layer의 base class</li>
+      <li>Input, output, Forward, Backward(AutoGrad) 정의</li>
+      <li>학습 대상(parameter-tensor) 정의</li>
+    </ul>
+  </li>
+  <li>nn.Parameter
+    <ul>
+      <li>Tensor 객체의 상속 객체</li>
+      <li>nn.Module 내에 attribute가 되면 학습되상이 된다(required_grad=True)</li>
+      <li>대부분의 layer에는 이미 잘 지정되어있음(Dense, Conv, …)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="13-custom-layer-만들기">1.3 Custom Layer 만들기</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CustomLayer</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_ft</span><span class="p">,</span> <span class="n">out_ft</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">()</span>  <span class="c1"># 부모 __init__() 호출
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">in_ft</span> <span class="o">=</span> <span class="n">in_ft</span>  <span class="c1"># 입력 피쳐 크기
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">out_ft</span> <span class="o">=</span> <span class="n">out_ft</span><span class="c1"># 출력 피쳐 크기
+</span>
+        <span class="c1"># 파라미터 설정
+</span>        <span class="c1"># 평균이 0이고 표준편차가 1인 가우시안 정규분포를 이용해 난수 생성
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">in_ft</span><span class="p">,</span> <span class="n">out_ft</span><span class="p">))</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">out_ft</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">forwrad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">@</span> <span class="bp">self</span><span class="p">.</span><span class="n">W</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="c1"># 선형회귀 계산
+</span>
+<span class="c1"># layer 선언!
+</span><span class="n">Mylayer</span> <span class="o">=</span> <span class="n">CustomLayer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># 설정한 파라미터 확인 가능 
+# Layer 구현시 parameter를 단순 Tensor로 선언시 parameter로 반영되지 않는다
+</span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">Mylayer</span><span class="p">.</span><span class="n">parameters</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</code></pre></div></div>
+<h3 id="14-backward">1.4 Backward</h3>
+<ul>
+  <li>Parameter들을 미분</li>
+  <li>Forward의 결과값과 실제값의 차이에 대해 미분, 이 값으로 parameter 업데이트</li>
+  <li><a href="https://pytorch.org/docs/stable/nn.html#loss-functions">Loss functions</a></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># criterion =&gt; [Loss functions]
+</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">MSELoss</span><span class="p">()</span>
+
+<span class="c1"># optimizer 정하기
+# 기본 인자: 모델 파라미터와, learning rate
+# optimizer에 따라 다양한 인자가 있음
+</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="c1"># grad 초기화
+</span>    <span class="c1"># 이전 epoch의 grad값에 대한 정보가 남아있음.
+</span>    <span class="c1"># 영향을 주길 원하지 않으면 초기화 필수
+</span>    <span class="n">optimizer</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+    <span class="c1"># Forward 연산
+</span>    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+
+    <span class="c1"># 예측과 실제값 차이 계산
+</span>    <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+    
+    <span class="c1"># Parmeter로 설정한 변수들 미분값 계산
+</span>    <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+
+    <span class="c1"># Parameter 업데이트
+</span>    <span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="c1"># Disabling gradient calculation is useful for inference
+# The Variable API has been deprecated: Variables are no longer necessary to use autograd with tensors. 
+# autograd_tensor = torch.randn((2, 3, 4), requires_grad=True)
+</span><span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="kn">import</span> <span class="n">Variable</span>
+<span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">torch</span><span class="p">.</span><span class="n">cuda</span><span class="p">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="c1"># .cpu(): Cpu 메모리로 해당 object 복사
+</span>        <span class="c1"># .data Object 내용/값
+</span>        <span class="c1"># .numpy() numpy array로 변환해 반환
+</span>        <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">x_train</span><span class="p">).</span><span class="n">cuda</span><span class="p">())).</span><span class="n">cpu</span><span class="p">().</span><span class="n">data</span><span class="p">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="c1">#pred = model(torch.from_numpy(x_train).cuda()).cpu().data.numpy()
+</span>    <span class="k">else</span><span class="p">:</span> 
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">x_train</span><span class="p">))).</span><span class="n">data</span><span class="p">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="c1">#pred = model(torch.from_numpy(x_train)).data.numpy() 
+</span>    <span class="s">'''
+    +a .detach()
+    gradient가 계산될 tensor의 경우 graph로 기록되어있다
+    node: Tensor
+    edge: 입력 Tensor로 부터 출력 Tensor 생성
+    .cpu().detach() 로 사용하면 cpu를 만드는 edge가 생성된다.
+    .detach().cpu() 로 사용하면 추가적으로 edge가 생성되지 않는다.
+    그래서 주로, .detach().cpu() 순으로 사용한다.
+</span></code></pre></div></div>
+
+<h3 id="15-logistic-regression-구현해보기">1.5 Logistic Regression 구현해보기</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">LR</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">scalar_tensor</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LR</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="c1"># intialize parameters
+</span>        <span class="c1"># 직접 미분하기 때문에 parameter로 선언할 필요 없음
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="nb">float</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">scalar_tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">grads</span> <span class="o">=</span> <span class="p">{</span><span class="s">"dw"</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="nb">float</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>      <span class="p">,</span><span class="s">"db"</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">scalar_tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)}</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">lr</span> <span class="o">=</span> <span class="n">lr</span><span class="p">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="p">...</span>
+        <span class="k">return</span> <span class="n">output</span>
+
+    <span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">torch</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">yhat</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="c1">## compute backward
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">grads</span><span class="p">[</span><span class="s">"dw"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">torch</span><span class="p">.</span><span class="n">mm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">yhat</span> <span class="o">-</span> <span class="n">y</span><span class="p">).</span><span class="n">T</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">grads</span><span class="p">[</span><span class="s">"db"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">torch</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">yhat</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1">## optimization step
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">w</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">lr</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">grads</span><span class="p">[</span><span class="s">"dw"</span><span class="p">]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">b</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">lr</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">grads</span><span class="p">[</span><span class="s">"db"</span><span class="p">]</span>
+</code></pre></div></div>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

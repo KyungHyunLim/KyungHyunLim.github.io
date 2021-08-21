@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Week1 - 1 일차</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Week1 - 1 일차 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Week1 - 1 일차" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 타운홀 미팅 Orientation" />
+<meta property="og:description" content="1. 타운홀 미팅 Orientation" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-03T04:55:56+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Week1 - 1 일차" />
+<script type="application/ld+json">
+{"description":"1. 타운홀 미팅 Orientation","mainEntityOfPage":{"@type":"WebPage","@id":"/ustage/2021/08/03/week1_day1.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Week1 - 1 일차","dateModified":"2021-08-03T04:55:56+09:00","datePublished":"2021-08-03T04:55:56+09:00","url":"/ustage/2021/08/03/week1_day1.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ustage/2021/08/03/week1_day1.html">
+    <h2 class="post-title">Week1 - 1 일차</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 3, 2021</div><ul class="post-categories"><li>ustage</li></ul></div>
+  <div class="post">
+    <h2 id="1-타운홀-미팅">1. 타운홀 미팅</h2>
+<ul>
+  <li>Orientation</li>
+</ul>
+
+<h2 id="2-meet-peer">2. Meet peer</h2>
+<ul>
+  <li>파이썬(월~화)/ 기초수학(수~금)</li>
+  <li>필수과제 2번</li>
+</ul>
+
+<h2 id="3-개인학습">3. 개인학습</h2>
+<ul>
+  <li>python 1-1 ~ 2-4
+    <ul>
+      <li>python 기초
+        <ul>
+          <li>python에서 -5 ~ 256 정적 메모리 관리</li>
+          <li>is는 메모리 주소 비교
+  ```python
+  a = -4
+  b = -4
+  print(a is b) # True</li>
+        </ul>
+
+        <p>a = -123
+  b = -123
+  print(a is b) # False
+  ```</p>
+      </li>
+      <li>String 변수 다루기
+ <img src="/assets/image/day1_1.png" alt="" /></li>
+    </ul>
+  </li>
+  <li>AI math 1 ~ 3
+    <ul>
+      <li>벡터
+        <ul>
+          <li>L1 norm: Sum(변화량의 절대 값)</li>
+          <li>L2 norm: 유클라디안 거리</li>
+          <li>두 벡터사이 각도
+            <ul>
+              <li>$ cos\theta = inner(x, y) / (L2(x) \times L2(y)) $</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>역행렬 구하기
+        <ul>
+          <li>역행렬은 행과 열 숫자가 같고 행렬식이 0이 아닌 경우에만 존재</li>
+          <li>numpy 라이브러리 활용</li>
+        </ul>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">inv</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># 역행렬
+</span>  <span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># 유사 역행렬 (무어-펜로즈)
+</span></code></pre></div>        </div>
+      </li>
+      <li>미분 공식<br />
+ <img src="/assets/image/day1_2.png" alt="" /></li>
+    </ul>
+  </li>
+  <li>필수과제 1, 2, 3번 풀이</li>
+  <li>필수퀴즈 1, 2, 3번 풀이</li>
+</ul>
+
+<h2 id="4-피어세션">4. 피어세션</h2>
+<ul>
+  <li>팀계획 정리</li>
+  <li>cnn, rnn 강의 요약!</li>
+</ul>
+
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

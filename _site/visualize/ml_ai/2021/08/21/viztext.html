@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Visualization-Text 활용</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Visualization-Text 활용 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Visualization-Text 활용" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Matplotlib에서 Text 1.1 Text in Viz *Why? * 시각화에서 줄 수 없는 많은 설명 추가 가능 * 잘못된 전달 방지, 오해 방지 But! 적절히 사용해야 한다" />
+<meta property="og:description" content="1. Matplotlib에서 Text 1.1 Text in Viz *Why? * 시각화에서 줄 수 없는 많은 설명 추가 가능 * 잘못된 전달 방지, 오해 방지 But! 적절히 사용해야 한다" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-21T05:10:22+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Visualization-Text 활용" />
+<script type="application/ld+json">
+{"description":"1. Matplotlib에서 Text 1.1 Text in Viz *Why? * 시각화에서 줄 수 없는 많은 설명 추가 가능 * 잘못된 전달 방지, 오해 방지 But! 적절히 사용해야 한다","mainEntityOfPage":{"@type":"WebPage","@id":"/visualize/ml_ai/2021/08/21/viztext.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Visualization-Text 활용","dateModified":"2021-08-21T05:10:22+09:00","datePublished":"2021-08-21T05:10:22+09:00","url":"/visualize/ml_ai/2021/08/21/viztext.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/visualize/ml_ai/2021/08/21/viztext.html">
+    <h2 class="post-title">Visualization-Text 활용</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 21, 2021</div><ul class="post-categories"><li>Visualize</li><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-matplotlib에서-text">1. Matplotlib에서 Text</h2>
+<h3 id="11-text-in-viz">1.1 Text in Viz</h3>
+<p>*Why?
+	* 시각화에서 줄 수 없는 많은 설명 추가 가능
+	* 잘못된 전달 방지, 오해 방지</p>
+<ul>
+  <li>But! 적절히 사용해야 한다</li>
+</ul>
+
+<h3 id="12-anatomy-of-a-figure">1.2 Anatomy of a Figure</h3>
+<ul>
+  <li>Title: 가장 큰 주제를 설명</li>
+  <li>Label: 축에 해당하는 데이터 정보 제공</li>
+  <li>Tick Label: 축에 눈금을 사용하여 스케일 정보 제공</li>
+  <li>Legend: 한 그래프에서 2개 이상의 서로 다른 데이터를 분류 해주는 보조 정보</li>
+  <li>Annotation(Text): 그 외의 설명 추가</li>
+</ul>
+
+<h3 id="13-text-api">1.3 Text API</h3>
+<p><img src="/assets/image/Viz/text_1.PNG" alt="" /></p>
+
+<h2 id="2-text-properties">2. Text Properties</h2>
+<ul>
+  <li>font</li>
+  <li>Details
+    <ul>
+      <li>color, linespacing, background color, alpha, zorder, visible</li>
+    </ul>
+  </li>
+  <li>Alignment
+    <ul>
+      <li>ha, va, rotation, multialignment</li>
+    </ul>
+  </li>
+  <li>Box 그리기
+    <ul>
+      <li>bbox</li>
+      <li><a href="https://matplotlib.org/stable/gallery/shapes_and_collections/fancybox_demo.html">others</a>
+        <h3 id="21-text-표시하기">2.1 Text 표시하기</h3>
+      </li>
+    </ul>
+  </li>
+  <li>코드</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s">'Sub Title'</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s">'legend'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'Ax Title'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">'X Label'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">'Y Label'</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="s">'Text'</span><span class="p">)</span> <span class="c1"># x=1, y=2 위치에 s 표시
+</span><span class="n">fig</span><span class="p">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="s">'Figure Text'</span><span class="p">)</span> <span class="c1"># 좌표 기반 (0.5, 0.6) 위치에 s 표시
+</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<ul>
+  <li>결과<br />
+<img src="/assets/image/Viz/text_2.PNG" alt="" /></li>
+</ul>
+
+<h3 id="22-details">2.2 Details</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ax</span><span class="p">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="s">'Text</span><span class="se">\n</span><span class="s">is Important'</span><span class="p">,</span>
+	<span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+	<span class="n">fontweight</span><span class="o">=</span><span class="s">'bold'</span><span class="p">,</span>
+	<span class="n">fontfamily</span><span class="o">=</span><span class="s">'serif'</span><span class="p">,</span>
+<span class="c1">#         color='royalblue',
+#         linespacing=2,
+#         backgroundcolor='lightgray',
+#         alpha=0.5
+</span>   <span class="p">)</span>
+</code></pre></div></div>
+<p><img src="/assets/image/Viz/text_4.PNG" alt="" /></p>
+
+<h3 id="23-alignment">2.3 Alignment</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ax</span><span class="p">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="s">'Text</span><span class="se">\n</span><span class="s">is Important'</span><span class="p">,</span>
+	<span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+	<span class="n">fontweight</span><span class="o">=</span><span class="s">'bold'</span><span class="p">,</span>
+	<span class="n">fontfamily</span><span class="o">=</span><span class="s">'serif'</span><span class="p">,</span>
+	<span class="n">color</span><span class="o">=</span><span class="s">'royalblue'</span><span class="p">,</span>
+	<span class="n">linespacing</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+	<span class="n">va</span><span class="o">=</span><span class="s">'center'</span><span class="p">,</span> 			<span class="c1"># top, bottom, center
+</span>	<span class="n">ha</span><span class="o">=</span><span class="s">'center'</span><span class="p">,</span> 			<span class="c1"># left, right, center
+</span>	<span class="n">rotation</span><span class="o">=</span><span class="s">'horizontal'</span> 	<span class="c1"># vertical?
+</span>   <span class="p">)</span>
+</code></pre></div></div>
+<p><img src="/assets/image/Viz/text_5.PNG" alt="" /></p>
+
+<h3 id="24-advanced-box">2.4 Advanced box</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ax</span><span class="p">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="s">'Text</span><span class="se">\n</span><span class="s">is Important'</span><span class="p">,</span>
+	<span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+	<span class="n">fontweight</span><span class="o">=</span><span class="s">'bold'</span><span class="p">,</span>
+	<span class="n">fontfamily</span><span class="o">=</span><span class="s">'serif'</span><span class="p">,</span>
+	<span class="n">color</span><span class="o">=</span><span class="s">'black'</span><span class="p">,</span>
+	<span class="n">linespacing</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+	<span class="n">va</span><span class="o">=</span><span class="s">'center'</span><span class="p">,</span> 
+	<span class="n">ha</span><span class="o">=</span><span class="s">'center'</span><span class="p">,</span> 
+	<span class="n">rotation</span><span class="o">=</span><span class="s">'horizontal'</span><span class="p">,</span>
+	<span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s">'round'</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s">'wheat'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span> <span class="c1"># bbox
+</span>   <span class="p">)</span>
+
+</code></pre></div></div>
+<p><img src="/assets/image/Viz/text_6.PNG" alt="" /></p>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

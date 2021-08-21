@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>SWEA-12222 문자열 나누기(C++, Python)</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>SWEA-12222 문자열 나누기(C++, Python) | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="SWEA-12222 문자열 나누기(C++, Python)" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. 문제 설명 문제 링크 알파벳 소문자로 이루어진 문자열 S 조건을 만족하는 최대 K 찾기 단 $S_i와 S_{i+1}$ 은 달라야한다. E.g. aabbaa -&gt; {a, b, ba, a} 로 4 15개의 테스트 케이스를 합쳐서 13초 $1 &lt;= S길이 &lt;= 2*10^5$" />
+<meta property="og:description" content="1. 문제 설명 문제 링크 알파벳 소문자로 이루어진 문자열 S 조건을 만족하는 최대 K 찾기 단 $S_i와 S_{i+1}$ 은 달라야한다. E.g. aabbaa -&gt; {a, b, ba, a} 로 4 15개의 테스트 케이스를 합쳐서 13초 $1 &lt;= S길이 &lt;= 2*10^5$" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-16T04:20:12+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="SWEA-12222 문자열 나누기(C++, Python)" />
+<script type="application/ld+json">
+{"description":"1. 문제 설명 문제 링크 알파벳 소문자로 이루어진 문자열 S 조건을 만족하는 최대 K 찾기 단 $S_i와 S_{i+1}$ 은 달라야한다. E.g. aabbaa -&gt; {a, b, ba, a} 로 4 15개의 테스트 케이스를 합쳐서 13초 $1 &lt;= S길이 &lt;= 2*10^5$","mainEntityOfPage":{"@type":"WebPage","@id":"/algorithm/2021/08/16/SWEA_12222.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"SWEA-12222 문자열 나누기(C++, Python)","dateModified":"2021-08-16T04:20:12+09:00","datePublished":"2021-08-16T04:20:12+09:00","url":"/algorithm/2021/08/16/SWEA_12222.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/algorithm/2021/08/16/SWEA_12222.html">
+    <h2 class="post-title">SWEA-12222 문자열 나누기(C++, Python)</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 16, 2021</div><ul class="post-categories"><li>Algorithm</li></ul></div>
+  <div class="post">
+    <h2 id="1-문제-설명">1. 문제 설명</h2>
+<ul>
+  <li><a href="https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AXpz5_AavskDFATi&amp;categoryId=AXpz5_AavskDFATi&amp;categoryType=CODE&amp;problemTitle=&amp;orderBy=FIRST_REG_DATETIME&amp;selectCodeLang=ALL&amp;select-1=&amp;pageSize=10&amp;pageIndex=1">문제 링크</a></li>
+  <li>알파벳 소문자로 이루어진 문자열 S</li>
+  <li>조건을 만족하는 최대 K 찾기</li>
+  <li>단 $S_i와 S_{i+1}$ 은 달라야한다.</li>
+  <li>E.g. aabbaa -&gt; {a, b, ba, a} 로 4</li>
+  <li>15개의 테스트 케이스를 합쳐서 13초</li>
+  <li>$1 &lt;= S길이 &lt;= 2*10^5$</li>
+</ul>
+
+<h2 id="2-풀이">2. 풀이</h2>
+<ul>
+  <li>모든 단어를 끊었을때 최대의 길이가 될 수있다.</li>
+  <li>즉, $문자열_i$ 와 $문자열_{i+1}$ 이 다르다면 나누는 것이 좋다</li>
+  <li>Cur과 pre를 이용해 접근 가능
+    <ul>
+      <li>Cur을 빈문자열 부터 하나씩 늘려가며 pre와 다르면 answer에 추가!</li>
+      <li>인접한 문자열만 다르면 되고, 최대로 만들어야 하기 때문에 짧게 할 수록 유리하다.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 테스트용 함수</span>
+<span class="kt">void</span> <span class="nf">Print</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">strs</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">strs</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">strs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">test_case</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">T</span><span class="p">;</span>
+
+	<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">T</span><span class="p">;</span>
+
+	<span class="k">for</span> <span class="p">(</span><span class="n">test_case</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">test_case</span> <span class="o">&lt;=</span> <span class="n">T</span><span class="p">;</span> <span class="o">++</span><span class="n">test_case</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="c1">// 데이터 입력 받기</span>
+		<span class="n">string</span> <span class="n">str</span><span class="p">;</span>
+		<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">str</span><span class="p">;</span>
+
+		<span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+
+		<span class="c1">// 문자열 길이 만큼 반복 검사!</span>
+		<span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// S 개수</span>
+		<span class="n">string</span> <span class="n">cur</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span> <span class="c1">// 현재 부분문자열 S_i</span>
+		<span class="n">string</span> <span class="n">pre</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span> <span class="c1">// 이전 부분문자열 S_{i-1}</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">cur</span> <span class="o">+=</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="n">pre</span><span class="p">)</span> <span class="p">{</span>
+				<span class="c1">// 테스트용</span>
+				<span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+				<span class="n">answer</span><span class="o">++</span><span class="p">;</span> <span class="c1">//pre와 다르니까 추가가능</span>
+				<span class="n">pre</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span> <span class="c1">// pre cur로 변경</span>
+				<span class="n">cur</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span> <span class="c1">// cur 초기화</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"#"</span> <span class="o">&lt;&lt;</span> <span class="n">test_case</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">answer</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+		
+		<span class="c1">// 테스트용</span>
+		<span class="n">Print</span><span class="p">(</span><span class="n">ans</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//정상종료시 반드시 0을 리턴해야합니다.</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 알고리즘은 C++과 동일
+</span><span class="n">T</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">test_case</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="n">pre</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">length</span><span class="p">()):</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">+</span> <span class="n">S</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">cur</span> <span class="o">!=</span> <span class="n">pre</span><span class="p">:</span>
+            <span class="n">answer</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">pre</span> <span class="o">=</span> <span class="n">cur</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"#{0} {1}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">test_case</span><span class="p">,</span> <span class="n">answer</span><span class="p">))</span>
+</code></pre></div></div>
+
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

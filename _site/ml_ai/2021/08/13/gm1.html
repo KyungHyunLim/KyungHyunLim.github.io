@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Generative model-통계이론 및 모델</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Generative model-통계이론 및 모델 | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Generative model-통계이론 및 모델" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Intro Richard Feynman(1918 ~ 1988) What i cannot create, i do not understand. Generative model을 학습 시킨다는 것은? 일반적으로 이미지, 문장 등의 데이터를 생성하는 모델을 만들어 내는것이라고 생각하지만, 더 많은 의미를 포함한다! Generation (sampling) $x_{new} \sim P(x)$ Density estimation (anomaly detection) $P(x)$ 는 만약 x가 원하는 것(E.g. 이미지면 강아지)과 같으면 값이 높을 것이다. Explicit model: 생성뿐아니라 무엇을 생성하는 지 알고 있다. Unsupervised representation learning (feature learning) E.g. ears, tail, etc!! 이미지의 특징" />
+<meta property="og:description" content="1. Intro Richard Feynman(1918 ~ 1988) What i cannot create, i do not understand. Generative model을 학습 시킨다는 것은? 일반적으로 이미지, 문장 등의 데이터를 생성하는 모델을 만들어 내는것이라고 생각하지만, 더 많은 의미를 포함한다! Generation (sampling) $x_{new} \sim P(x)$ Density estimation (anomaly detection) $P(x)$ 는 만약 x가 원하는 것(E.g. 이미지면 강아지)과 같으면 값이 높을 것이다. Explicit model: 생성뿐아니라 무엇을 생성하는 지 알고 있다. Unsupervised representation learning (feature learning) E.g. ears, tail, etc!! 이미지의 특징" />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-13T20:15:22+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Generative model-통계이론 및 모델" />
+<script type="application/ld+json">
+{"description":"1. Intro Richard Feynman(1918 ~ 1988) What i cannot create, i do not understand. Generative model을 학습 시킨다는 것은? 일반적으로 이미지, 문장 등의 데이터를 생성하는 모델을 만들어 내는것이라고 생각하지만, 더 많은 의미를 포함한다! Generation (sampling) $x_{new} \\sim P(x)$ Density estimation (anomaly detection) $P(x)$ 는 만약 x가 원하는 것(E.g. 이미지면 강아지)과 같으면 값이 높을 것이다. Explicit model: 생성뿐아니라 무엇을 생성하는 지 알고 있다. Unsupervised representation learning (feature learning) E.g. ears, tail, etc!! 이미지의 특징","mainEntityOfPage":{"@type":"WebPage","@id":"/ml_ai/2021/08/13/gm1.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Generative model-통계이론 및 모델","dateModified":"2021-08-13T20:15:22+09:00","datePublished":"2021-08-13T20:15:22+09:00","url":"/ml_ai/2021/08/13/gm1.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        tex2jax: {
+        inlineMath: [ ['$', '$'] ],
+        displayMath: [ ['$$', '$$'] ],
+        processEscapes: true,
+      }
+    });
+    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+          alert("Math Processing Error: "+message[1]);
+        });
+</script>
+<script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/ml_ai/2021/08/13/gm1.html">
+    <h2 class="post-title">Generative model-통계이론 및 모델</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Aug 13, 2021</div><ul class="post-categories"><li>ML_AI</li></ul></div>
+  <div class="post">
+    <h2 id="1-intro">1. Intro</h2>
+<ul>
+  <li>Richard Feynman(1918 ~ 1988)<br />
+ What i cannot create, i do not understand.</li>
+  <li>Generative model을 학습 시킨다는 것은?
+    <ul>
+      <li>일반적으로 이미지, 문장 등의 데이터를 생성하는 모델을 만들어 내는것이라고 생각하지만, 더 많은 의미를 포함한다!</li>
+      <li>Generation (sampling) $x_{new} \sim P(x)$</li>
+      <li>Density estimation (anomaly detection)
+        <ul>
+          <li>$P(x)$ 는 만약 x가 원하는 것(E.g. 이미지면 강아지)과 같으면 값이 높을 것이다.</li>
+          <li>Explicit model: 생성뿐아니라 무엇을 생성하는 지 알고 있다.</li>
+        </ul>
+      </li>
+      <li>Unsupervised representation learning (feature learning)
+        <ul>
+          <li>E.g. ears, tail, etc!! 이미지의 특징</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-statics">2. Statics</h2>
+<h3 id="21-basic-discrete-distributions">2.1 Basic Discrete Distributions</h3>
+<ul>
+  <li>Bernoulli distribution
+    <ul>
+      <li>$D = {Heads, Tails}$</li>
+      <li>$P(X=Heads)=p then P(X=Tails)=1-p$</li>
+      <li>$X ~ Ber(p)$ 로 표현</li>
+      <li>한개의 숫자로 분포를 표현할 수 있음</li>
+    </ul>
+  </li>
+  <li>Categorical distribution
+    <ul>
+      <li>$D = {1,…, m}$</li>
+      <li>$P(Y=i)=p_i, such that \sum_{i=1}^m p_i = 1$</li>
+      <li>$Y~Cat(p_1, …, p_m)$ 로 표현</li>
+      <li>m-1개의 숫자로 분포를 표현할 수 있음(마지막 숫자는 1에서 나머지 합을 빼면 되기 때문)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="22-example-rgb의-결합-확률-분포-모델링">2.2 Example: RGB의 결합 확률 분포 모델링</h3>
+<ul>
+  <li>$(r, g, b) \sim p(R,G,B)$</li>
+  <li>경우의 수 = 256 x 256 x 256</li>
+  <li>몇개의 파라미터가 필요?
+    <ul>
+      <li>256 x 256 x 256 - 1 개</li>
+      <li>So. big $\leftarrow$ Too hard</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="23-example-binary의-결합-확률-분포-모델링">2.3 Example: Binary의 결합 확률 분포 모델링</h3>
+<ul>
+  <li>$X_1,…,X_n \rightarrow n binary pixels$</li>
+  <li>경우의 수 = 2 x 2 x … x 2 = $2^n$</li>
+  <li>몇개의 파라미터가 필요?
+    <ul>
+      <li>$2^n$ - 1 개</li>
+      <li>So. big $\leftarrow$ Too hard</li>
+    </ul>
+  </li>
+  <li>딥러닝에서 파라미터가 너무 많아지면 학습이 어렵워 성능 저하 우려가 있다.</li>
+</ul>
+
+<h3 id="24-파라미터를-줄이는-방법">2.4 파라미터를 줄이는 방법</h3>
+<ul>
+  <li>가정: 모든 파라미터가 Independent 하다.
+    <ul>
+      <li>$P(x_1,…,x_n) = p(x_1)p(x_2)…p(x_n)$</li>
+      <li>경우의 수 = 2 x 2 x … x 2 = $2^n$</li>
+      <li>몇개의 파라미터가 필요?
+        <ul>
+          <li>n개</li>
+          <li>why?</li>
+        </ul>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  각각의 픽셀에 대해 1개의 파라미터만 있으면 되기 때문(각 파라미터들이 독립적이니까)
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>Three important rules
+    <ul>
+      <li>Chain rule:
+        <ul>
+          <li>$P(x_1,…,x_m) = p(x_1)p(x_2 \vert x_1)p(x_3 \vert x_1,x_2)…p(x_n \vert x_1,…,x_{n-1})$</li>
+        </ul>
+      </li>
+      <li>Bayes’ rule:
+        <ul>
+          <li>$P(x \vert y)={P(x,y) \over P(y)} = {P(y \vert x) P(x) \over p(y)}$</li>
+        </ul>
+      </li>
+      <li>Conditional Independence(가정):
+        <ul>
+          <li>if $x \bot y \vert z, $ then $P(x \vert y,z) = P(x \vert z)$</li>
+          <li>z가 주어졌을 때, x와 y가 independent하다면, y는 상관이 없다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="25-chain-rule--conditional-independence">2.5 Chain rule + Conditional Independence</h3>
+<ul>
+  <li>Chain rule
+    <ul>
+      <li>필요한 파라미터수?
+        <ul>
+          <li>$P(x_1)$ : 1개</li>
+          <li>$P(x_2 \vert x_1)$ : 2개 ( $P(x_2 \vert x_1=0), P(x_2 \vert x_1=1)$ )</li>
+          <li>$P(x_3 \vert x_1, x_2)$ : 4개</li>
+          <li>$1+2+…+2^{n-1} = 2^n - 1$</li>
+        </ul>
+      </li>
+      <li>Why? 달라진게 없으니까…</li>
+    </ul>
+  </li>
+  <li>Chain rule + Conditional Independence
+    <ul>
+      <li>Markov 가정. 바로 이전 값에만 Indenpendent 하다.
+        <ul>
+          <li>$x_{10} \bot x_9, \ x_9 \bot x_8, \ …$</li>
+        </ul>
+      </li>
+      <li>Markov 가정을 적용한 Chain rule
+        <ul>
+          <li>$P(x_1,…,x_m) = p(x_1)p(x_2 \vert x_1)p(x_3 \vert x_2)…p(x_n \vert x_{n-1})$</li>
+          <li>이쁘게 바뀐다!</li>
+        </ul>
+      </li>
+      <li>몇개의 파라미더 필요? 2n-1 개</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-models">3. Models</h2>
+<h3 id="31-auto-regressive-model">3.1 Auto-regressive Model</h3>
+<ul>
+  <li>28x28 binary pixels</li>
+  <li>$P(x)=P(x_1,…,x_784) over x \in {0,1}^{784} $</li>
+  <li>$P(x)$ 를 어떻게 parametieze 할 수 있을까?
+    <ul>
+      <li>Chain rule을 이용해 결합 확률분포 생성</li>
+      <li>이것을 autoregressive model이라 부름
+        <ul>
+          <li>이전 n개를 고려 $\rightarrow$ AR(n) 모델</li>
+        </ul>
+      </li>
+      <li>모든 random variable들의 순서가 필요</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="32-nade-neural-autoregressive-density">3.2 NADE: Neural Autoregressive Density</h3>
+<p><img src="/assets/image/ML_AI/gm1_1.PNG" alt="" /></p>
+<ul>
+  <li>$P(x_i \vert x_{1:i-1} = \sigma(a_ih_i + b_i) \ where \ h_i=\sigma (W_{&lt;i}x_{1:i-1} + c)$</li>
+  <li>i번째 픽셀을 1~i-1번째 까지 dependent하게 설정</li>
+  <li>explicit 모델
+    <ul>
+      <li>How? 결합확률분포가 다음과 같이 계산될 수 있다.
+        <ul>
+          <li>$P(x_1,…,x_{784}) = P(x_1)P(x_2 \vert x_1)…P(x_{784} \vert x_{1:783})$</li>
+        </ul>
+      </li>
+      <li>어떤 입력에 대한 확률을 계산을 할 수 있다.</li>
+    </ul>
+  </li>
+  <li>Conitnuous한 데이터의 경우 Gaussian mixture 모델을 활용</li>
+</ul>
+
+<h3 id="33-pixel-rnn">3.3 Pixel RNN</h3>
+<p><img src="/assets/image/ML_AI/gm1_2.PNG" alt="" /></p>
+<ul>
+  <li>Ordering<br />
+  <img src="/assets/image/ML_AI/gm_3.PNG" alt="" />
+    <ul>
+      <li>Row LSTM: i번째 위쪽에 있는 정보를 활용</li>
+      <li>Diagonal BiLSTM: 이전 정보들을 모두 활용</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-한줄-정리">4. 한줄 정리</h2>
+<p>Generative 모델이 많이 쓰이는 GAN, VAE 와 같이 Generation을 할 수 있는 모델 뿐만이 아니라, 확률 값을 계산할 수 있는 explicit한 모델들 또한 존재한다!</p>
+
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>

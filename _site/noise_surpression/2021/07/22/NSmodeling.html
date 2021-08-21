@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<title>Noise surppression 모델-(pytorch)</title>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Noise surppression 모델-(pytorch) | AI Tech Study</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Noise surppression 모델-(pytorch)" />
+<meta name="author" content="LKH" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="0. 모델 개요 GAN 기반 잡음 제거 모델을 사용했습니다. End-to-End 잡음 제거 모델 중 에서는 가장 좋은 성능을 보여주고 있다고 생각합니다." />
+<meta property="og:description" content="0. 모델 개요 GAN 기반 잡음 제거 모델을 사용했습니다. End-to-End 잡음 제거 모델 중 에서는 가장 좋은 성능을 보여주고 있다고 생각합니다." />
+<meta property="og:site_name" content="AI Tech Study" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-22T07:35:56+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Noise surppression 모델-(pytorch)" />
+<script type="application/ld+json">
+{"description":"0. 모델 개요 GAN 기반 잡음 제거 모델을 사용했습니다. End-to-End 잡음 제거 모델 중 에서는 가장 좋은 성능을 보여주고 있다고 생각합니다.","mainEntityOfPage":{"@type":"WebPage","@id":"/noise_surpression/2021/07/22/NSmodeling.html"},"author":{"@type":"Person","name":"LKH"},"@type":"BlogPosting","headline":"Noise surppression 모델-(pytorch)","dateModified":"2021-07-22T07:35:56+09:00","datePublished":"2021-07-22T07:35:56+09:00","url":"/noise_surpression/2021/07/22/NSmodeling.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<script type="text/javascript" src="/assets/js/darkmode.js"></script>
+
+</head>
+
+<body>
+  <main class="container">
+    <section class="about">
+      <div class="about-header condensed">
+      <div class="about-title">
+      <a href="/">
+        
+        <img src="/assets/portfolio.png" alt="KyungHyun Lim" />
+        
+      </a>
+      <h2 id="title">
+        <a href="/">KyungHyun Lim</a>
+      </h2>
+      </div><p class="tagline">AI/ML/SW Developer</p></div>
+      
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </section>
+    <section class="content">
+      <div class="post-container">
+  <a class="post-link" href="/noise_surpression/2021/07/22/NSmodeling.html">
+    <h2 class="post-title">Noise surppression 모델-(pytorch)</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>Jul 22, 2021</div><ul class="post-categories"><li>Noise_surpression</li></ul></div>
+  <div class="post">
+    <h2 id="0-모델-개요">0. 모델 개요</h2>
+<p>GAN 기반 잡음 제거 모델을 사용했습니다.
+ End-to-End 잡음 제거 모델 중 에서는 가장 좋은 성능을 보여주고 있다고 생각합니다.</p>
+
+<p>Generator(G): 잡음 제거 담당
+ Clean Discriminator(CD): G가 생성한 음성 신호와 타겟 음성 신호 비교
+ Noise Discriminator(ND): 입력과의 차이를 이용해 Noise 파형을 얻어, 학습에 사용</p>
+
+<h2 id="1-라이브러리-임포트">1. 라이브러리 임포트</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="nn">torch.utils</span> <span class="k">as</span> <span class="n">utills</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">torchsummary</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">from</span> <span class="nn">torchgan.layers</span> <span class="kn">import</span> <span class="n">VirtualBatchNorm</span>
+</code></pre></div></div>
+
+<h2 id="2-판별자-구현">2. 판별자 구현</h2>
+<p>CD와 ND는 유사한 구조로 이루어져 있습니다. 다만, 입력이 달라 다른 것을 학습하게 됩니다.
+ 정확히는 ND는 G의 인코더와 더 유사하다고 볼 수 있습니다.</p>
+
+<p>CD: (타겟 음성, 잡음 음성) -&gt; true label
+     (생성된 음성, 잡음 음성) -&gt; fake label</p>
+
+<p>ND: (잡음 음성 - 타겟 음성) -&gt; true label
+     (잡음 음성 - 생성된 음성) -&gt; fake label</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Discriminator</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Discriminator</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">ModuleList</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">filters</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">1024</span><span class="p">]</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Sequential</span><span class="p">(</span>
+                <span class="n">nn</span><span class="p">.</span><span class="n">Conv1d</span><span class="p">(</span>
+                    <span class="n">in_channels</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">filters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> 
+                    <span class="n">out_channels</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">filters</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
+                    <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">padding</span><span class="o">=</span><span class="mi">15</span><span class="p">),</span>
+                <span class="n">VirtualBatchNorm</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">filters</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
+                <span class="n">nn</span><span class="p">.</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+                 <span class="p">)</span>
+             <span class="p">)</span>
+                              
+        <span class="bp">self</span><span class="p">.</span><span class="n">flatten</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="p">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="mf">0.3</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="n">Sigmoid</span><span class="p">()</span>
+        <span class="p">)</span>
+                              
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+</code></pre></div></div>
+
+<h2 id="3-생성자-구현">3. 생성자 구현</h2>
+<p>일반적으로 GAN은 랜덤 분포인 z를 생성해 입력으로 사용하는데, Speech enhancement GAN에서는 이 z를 생략하는 것이 성능이 더 좋게 나타난다는 연구가 있습니다.
+ 즉, Speech enhancement GAN의 생성자는 인코더에서 추출한 잠재공간 벡터를 바탕으로 잡음이 제거된 음성을 생성하도록 학습됩니다.
+ 또한 인코더의 출력을 디코더의 레이어에서 concat 함으로써 residual 구조를 사용하였습니다. 컨볼루션 층을 통과하며 손실되는 정보를 넘겨주어 보다 원본에 가까운 음성을 생성할 수 있는 효과가 있습니다.</p>
+
+<p>구현한 생성자 또한 forward 함수를 2개 가지고 있습니다. z를 사용할 때와 사용하지 않을 때 입니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">NoiseCanceler</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">skip_z</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NoiseCanceler</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+            
+        <span class="bp">self</span><span class="p">.</span><span class="n">enc_layers</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">ModuleList</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">dec_layers</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">ModuleList</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">filters</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">1024</span><span class="p">]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">skip_z</span> <span class="o">=</span> <span class="n">skip_z</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">prelu</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">PReLU</span><span class="p">()</span>
+        
+        <span class="c1"># For Encoder [Batch x feature map x length]
+</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">enc_layers</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Conv1d</span><span class="p">(</span>
+                    <span class="n">in_channels</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">filters</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+                    <span class="n">out_channels</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">filters</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
+                    <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">padding</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+               <span class="p">)</span>
+               <span class="c1"># output: [Batch x 1024 x 8]
+</span>       
+        <span class="c1"># For Decoder
+</span>        <span class="c1"># Gaussian random variable z, Whether or not to use.
+</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">11</span> <span class="ow">and</span> <span class="n">skip_z</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+                 <span class="bp">self</span><span class="p">.</span><span class="n">dec_layers</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">ConvTranspose1d</span><span class="p">(</span>
+                        <span class="n">in_channels</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">filters</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+                        <span class="n">out_channels</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">filters</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                        <span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
+                        <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                        <span class="n">padding</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+                    <span class="p">)</span>
+                  <span class="c1"># output: [Batch x 1 x 16384]
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">dec_layers</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">ConvTranspose1d</span><span class="p">(</span>
+                        <span class="n">in_channels</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">filters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> 
+                        <span class="n">out_channels</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">filters</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                        <span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
+                        <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                        <span class="n">padding</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+                    <span class="p">)</span>
+                   <span class="c1"># output: [Batch x 1 x 16384]  
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">dec_tanh</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Tanh</span><span class="p">()</span>
+
+    <span class="c1"># Use z      
+</span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+       
+        <span class="c1"># Encoding
+</span>        <span class="k">for</span> <span class="n">enc</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">enc_layers</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">prelu</span><span class="p">(</span><span class="n">enc</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">values</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="c1"># Enc out : Batch x 1024 x 8
+</span>        <span class="n">values</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">cat</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            
+        <span class="c1"># Decoding
+</span>        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">dec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">dec_layers</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">dec</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">cat</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>          
+                        
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dec_tanh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+    
+    <span class="c1"># Not use z
+</span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+       
+        <span class="c1"># Encoding
+</span>        <span class="k">for</span> <span class="n">enc</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">enc_layers</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">prelu</span><span class="p">(</span><span class="n">enc</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">values</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="c1"># Enc out : Batch x 1024 x 8
+</span>        <span class="n">values</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+        
+        <span class="c1"># Decoding
+</span>        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">dec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">dec_layers</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">prelu</span><span class="p">(</span><span class="n">dec</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">cat</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>          
+                        
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dec_tanh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+</code></pre></div></div>
+
+<h2 id="4-reference">4. Reference</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Lim, K. H., Kim, J. Y., &amp; Cho, S. B. (2019, November). Non-stationary noise cancellation using deep autoencoder based on adversarial learning. In International Conference on Intelligent Data Engineering and Automated Learning (pp. 367-374). Springer, Cham.
+2. Lim, K. H., Kim, J. Y., &amp; Cho, S. B. (2020, November). Generative Adversarial Network with Guided Generator for Non-stationary Noise Cancelation. In International Conference on Hybrid Artificial Intelligence Systems (pp. 3-12). Springer, Cham.
+3. Pascual, S., Bonafonte, A., &amp; Serra, J. (2017). SEGAN: Speech enhancement generative adversarial network. arXiv preprint arXiv:1703.09452.
+</code></pre></div></div>
+
+  </div></div>
+
+    </section>
+    <footer class="condensed">
+      <ul class="social about-footer condensed"><a href="https://github.com/KyungHyunLim" target="_blank">
+          <li>
+            <i class="icon-github-circled"></i>
+          </li>
+        </a><a href="mailto:fly1294@naver.com" target="_blank">
+          <li>
+            <i class="icon-mail-alt"></i>
+          </li>
+        </a></ul><nav class="navigation about-footer condensed">
+        <ul>
+          
+          <li>
+            <a href="/" class="ctext">Home</a>
+          </li>
+          
+        </ul>
+      </nav><p class="about-footer condensed">&copy;
+        2021</p><div class="about-footer condensed">
+        <p>Dark Mode
+          <i class="icon-moon"></i>
+          <label class="switch">
+            <input type="checkbox" class="dark-mode-toggle">
+            <span class="slider round" onclick="toggleDarkMode()"></span>
+          </label>
+        </p>
+      </div>
+    </footer>
+  </main>
+  
+  <script type="text/javascript" src="/assets/js/darkmode.js"></script>
+  
+</body>
+
+</html>
