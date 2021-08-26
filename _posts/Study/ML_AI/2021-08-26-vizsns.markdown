@@ -1,0 +1,188 @@
+---
+layout: post
+title:  "Visualization-Seaborn Basic"
+date:   2021-08-26 14:48:22
+categories: [Visualize, ML_AI]
+use_math: true
+---
+향후.. plot 추가 예정
+
+## 1. Intro
+### 1.1 seaborn?
+* 통계 정보
+* Matplotlib으로 커스텀 가능
+* 쉬운 문법과 깔끔한 디자인이 특징
+* 아직 1.0 버전이 없음
+
+### 1.2 설치방법
+* pip insatll seaborn==0.11
+* import seaborn as sns
+	* 왜 sns로 줄여쓰는지는...?
+
+### 1.3 다양한 API
+* Categorical API
+* Distribution API
+* Relational API
+* Regression API
+* Multiples API
+* Theme API
+
+## 2. Basic
+### 2.1 공통요소
+* Countplot
+
+```python
+# 수직 bar graph
+# hue => gender로 grouping
+# order => group의 순서 정렬
+# palette => 색상변경, saturation도 조절 가능
+# ax => subplot 위치 지정 가능
+sns.countplot(x='column_name1', data=<DataFrame>,
+			hue = 'column_name2',
+			order=sorted(<DataFrame>.unique()),
+			palette = 'Set2',
+			ax=axes[0])
+# 수평 bar graph
+sns.countplot(y='column_name1', data=<DataFrame>, ax=axes[1])
+```
+
+### 2.2 Categorical API
+* Box Plot
+	* 가장 기본적인 plot
+
+```python
+# 1
+fig, ax = plt.subplots(1,1, figsize=(12, 5))
+sns.boxplot(x='math score', data=student, ax=ax)
+plt.show()
+
+# 2
+fig, ax = plt.subplots(1,1, figsize=(10, 5))
+sns.boxplot(x='race/ethnicity', y='math score', data=student, 
+            order=sorted(student['race/ethnicity'].unique()),
+            ax=ax)
+plt.show()
+
+# 3
+fig, ax = plt.subplots(1,1, figsize=(10, 5))
+sns.boxplot(x='race/ethnicity', y='math score', data=student,
+            hue='gender', 
+            order=sorted(student['race/ethnicity'].unique()),
+            width=0.3,
+            linewidth=2,
+            fliersize=10,
+            ax=ax)
+
+plt.show()
+```
+
+* Violin Plot
+	* box plot으론 편향성을 보기 어려움
+
+```python
+#1
+fig, ax = plt.subplots(1,1, figsize=(12, 5))
+sns.violinplot(x='math score', data=student, ax=ax)
+plt.show()
+
+#2
+fig, ax = plt.subplots(1,1, figsize=(12, 7))
+sns.violinplot(x='race/ethnicity', y='math score', data=student, ax=ax,
+               order=sorted(student['race/ethnicity'].unique()),
+               hue='gender',
+               split=True,
+               bw=0.2, cut=0
+              )
+plt.show()
+```
+
+* ETC
+	* boxenplot
+	* swarmplot
+	* stripplot
+
+### 2.3 Distribution
+* histplot 
+	* 막대 형태
+	
+	```python
+	fig, ax = plt.subplots(figsize=(12, 7))
+	sns.histplot(x='math score', data=student, ax=ax,
+	#			   element='poly', # step, poly
+	#			   multiple='stack', # layer, dodge, stack, fill
+	#              binwidth=50, 
+	#              bins=100,
+				)
+	plt.show()
+	```
+	
+* kdeplot
+	* 밀도 함수: 속을 채워서 그리자
+
+	```python
+	fig, ax = plt.subplots(figsize=(12, 7))
+	sns.kdeplot(x='math score', data=student, ax=ax,
+				fill=True, 
+				hue='race/ethnicity', 
+				hue_order=sorted(student['race/ethnicity'].unique()),
+				multiple="layer", # layer, stack, fill
+				cumulative=True,
+				cut=0
+			)
+	plt.show()
+
+	# 누적 분포
+	stat='count', # proportion
+	```
+
+* ecdfplot, rugplot
+* 결합확률 분포 표현
+
+```python
+# 1
+fig, axes = plt.subplots(1,2, figsize=(12, 7))
+ax.set_aspect(1)
+
+axes[0].scatter(student['math score'], student['reading score'], alpha=0.2)
+
+sns.histplot(x='math score', y='reading score', 
+             data=student, ax=axes[1],
+#              color='orange',
+             cbar=False,
+             bins=(10, 20), 
+            )
+# 2
+fig, ax = plt.subplots(figsize=(7, 7))
+ax.set_aspect(1)
+
+sns.kdeplot(x='math score', y='reading score', 
+             data=student, ax=ax,
+            fill=True,
+#             bw_method=0.1
+            )
+
+plt.show()
+```
+
+### 2.4 Relation & Regression
+* Scatter Plot: mat 라이브러리와 동일
+* Line Plot: 자동으로 평균과 표준편차로 오차범위 시각화 해줌
+
+```python
+fig, ax = plt.subplots(1, 1, figsize=(12, 7))
+sns.lineplot(data=flights, x="year", y="passengers", ax=ax)
+plt.show()
+```
+
+* Regplot: 회귀선 표현
+
+```python
+fig, ax = plt.subplots(figsize=(7, 7))
+sns.regplot(x='math score', y='reading score', data=student,
+            x_estimator=np.mean, x_bins=20
+           )
+plt.show()
+```
+
+### 2.5 Matrix
+* Heatmap: 대표적으로 상관관계 시각화에 많이 사용
