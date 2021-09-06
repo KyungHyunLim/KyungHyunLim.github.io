@@ -1,0 +1,9 @@
+---
+layout: post
+title:  "NLP word embedding"
+date:   2021-09-06 14:48:22
+categories: [ML_AI]
+use_math: true
+---
+
+# Introduction of NLP

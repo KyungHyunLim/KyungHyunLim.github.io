@@ -1,0 +1,77 @@
+---
+layout: post
+title:  "NLP basic"
+date:   2021-09-06 14:48:22
+categories: [ML_AI]
+use_math: true
+---
+
+# Introduction of NLP
+## 1. Natural language processing 
+* Major conference: ACL, EMNLP, NAACL
+* Low-level parsing 
+	* Tokenization
+	* Stemming
+* Word & Pharase level
+	* Named entity recognition(NER)
+	* Part-of-speech(POS) tagging
+	* Noun-phrase chuking
+	* Dependency parsing
+	* Corefernece resolution
+* Sentence level
+	* Sentiment analysis
+	* Machine translation
+* Multi-sentence and paragraph level
+	* Entailment prediction
+	* Question answering
+	* Dialog system
+	* Summarization
+
+## 2. Text mining
+* Major conference: KDD, The WebConf, WSDM, CIKM, ICWSM
+* 문서나 글에서 유용한 정보 추출
+* 문서나 글 클러스터링
+
+## 3. Information retrieval
+* Major conference: SIGIR, WSDM, CIKM, RecSys
+* Compuational social science과 높은 연관
+	* 현시점 활발하게 연구되고 있지는 않음
+	* 추천 시스템의 진화 버전 (자동화된 검색시스템)
+
+# Trends of NLP
+* 초기: Word2Vec or GloVe
+* RNN-family models(LSTM, GRUs)
+* 2017: attention modules and transformer models
+* 현재는 대부분 transformer 기반
+* 특수한 라벨이 더 필요하지 않고 pretrained 모델로 다양한 Task model 생성 가능
+	* BERT, GPT-3
+
+# Basic method of NLP
+## 1. Bag-of-Words Representation
+* step 1. 단어들(words)의 유니크 set을 담고있는 단어장(vocabulary) 생성
+	* E.g "I am a boy", "I am a girl"
+	* => {I, am, a, boy, girl}
+* step 2. 각 단어를 one-hot vector로 변경
+	* 어떤 단어 pair도 거리는 $\sqrt2$
+	* cosine similarity = 0
+	* E.g
+		* I: 	[1 0 0 0 0]
+		* am: 	[0 1 0 0 0]
+		* a: 	[0 0 1 0 0]
+		* boy: 	[0 0 0 1 0]
+		* girl:	[0 0 0 0 1]
+* setp 3. Bag-of-Words vector
+	* 포함된 단어들의 one-hot vector 합
+	* E.g
+		* "I am a boy" $\rightarrow$ [1 1 1 1 0]
+		* "I am a girl" $\rightarrow$ [1 1 1 0 1]
+
+## 2. NaiveBayes classifier
+* Bayes' Rule (Documents and Classes)
+* Document d and a class c
+	* $C_(MAP) = argmax P(c \vert d) $
+	* $ = argmax {(P(d \vert c) P(c)) \over P(d)}$
+	* $ = argmax P(d \vert c) P(c) $
+	* c가 고정되었을 때 d 가 나타날 확률
+	* E.g  
+	![](/assets/image/ustagelv2/w5_nb_1.png)
