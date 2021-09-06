@@ -27,6 +27,7 @@ use_math: true
 			* 두 페어에 대해 학습 진행
 			* (x: study y: I)
 			* (x: study y: math)
+* 학습후 활용시에는 W1 벡터를 곱해 embedding vector get
 * [시각적으로 볼수 있는 사이트](https://ronxin.github.io/wevi/)
 
 ## 2. Property of Word2Vec
@@ -50,7 +51,7 @@ use_math: true
 ## 1. 기본 원리
 * Gloval Vectors for Word Representation
 * $J(\theta) = {1 \over 2} \sum_{i,j=1}^W f(P_{i,j})(v_i^T v_j - log(P_{i,j}))^2$
-	* 특정 단어의 pair를 반복적으로 학습하는 것을 피하기 위해, 각 단어페어를 모두 학습하기 보다, 먼저 co-ocuurrence matrix(동시에 등장하는 횟수)를 계산
+	* 특정 단어의 pair를 반복적으로 학습하는 것을 피하기 위해, 각 단어페어를 모두 학습하기 보다, 먼저 co-ocurrence matrix(동시에 등장하는 횟수)를 계산
 	* 동일한 단어가 여러번 나오면 Word2Vec에서는 그 단어는 여러번 학습된다
 	* Fast training
 	* 작은 corpus에 대해서도 잘 동작
