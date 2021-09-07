@@ -6,8 +6,8 @@ categories: [ML_AI]
 use_math: true
 ---
 
-# Introduction of NLP
-## 1. Natural language processing 
+# 1. Introduction of NLP
+## 1.1 Natural language processing 
 * Major conference: ACL, EMNLP, NAACL
 * Low-level parsing 
 	* Tokenization
@@ -27,18 +27,18 @@ use_math: true
 	* Dialog system
 	* Summarization
 
-## 2. Text mining
+## 1.2 Text mining
 * Major conference: KDD, The WebConf, WSDM, CIKM, ICWSM
 * 문서나 글에서 유용한 정보 추출
 * 문서나 글 클러스터링
 
-## 3. Information retrieval
+## 1.3 Information retrieval
 * Major conference: SIGIR, WSDM, CIKM, RecSys
 * Compuational social science과 높은 연관
 	* 현시점 활발하게 연구되고 있지는 않음
 	* 추천 시스템의 진화 버전 (자동화된 검색시스템)
 
-# Trends of NLP
+# 2. Trends of NLP
 * 초기: Word2Vec or GloVe
 * RNN-family models(LSTM, GRUs)
 * 2017: attention modules and transformer models
@@ -46,8 +46,8 @@ use_math: true
 * 특수한 라벨이 더 필요하지 않고 pretrained 모델로 다양한 Task model 생성 가능
 	* BERT, GPT-3
 
-# Basic method of NLP
-## 1. Bag-of-Words Representation
+# 3. Basic method of NLP
+## 3.1 Bag-of-Words Representation
 * step 1. 단어들(words)의 유니크 set을 담고있는 단어장(vocabulary) 생성
 	* E.g "I am a boy", "I am a girl"
 	* => {I, am, a, boy, girl}
@@ -66,7 +66,7 @@ use_math: true
 		* "I am a boy" $\rightarrow$ [1 1 1 1 0]
 		* "I am a girl" $\rightarrow$ [1 1 1 0 1]
 
-## 2. NaiveBayes classifier
+## 3.2 NaiveBayes classifier
 * Bayes' Rule (Documents and Classes)
 * Document d and a class c
 	* $C_(MAP) = argmax P(c \vert d) $
