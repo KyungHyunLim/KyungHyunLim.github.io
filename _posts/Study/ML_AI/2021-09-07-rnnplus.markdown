@@ -9,7 +9,7 @@ use_math: true
 # 1. Type of RNNs
 ## 1.1 One-to-one
 * 기본 신경망  
-![](/assets/image/ustagelv2/w5_d2_2.PNG)
+![](/assets/image/ustagelv2/w5_d2_2.png)
 
 ## 1.2 One-to-many
 * E.g Image captioning  
@@ -33,7 +33,7 @@ use_math: true
 	* vocabulary: [h, e, l, o]
 	* training sequence: "hello"  
 	* $h_t = f_W(h_{t-1}, x_t)$
-		* 처음부분 h0는 0으로 주거나 할수 있음
+		* 처음부분 h0는 0으로 주거나 할수 있음  
 	![](/assets/image/ustagelv2/w5_d2_7.png)
 	![](/assets/image/ustagelv2/w5_d2_8.png)
 	* 현재 'o'가 4.1로 확률이 가장 높은데, target은 'e'이다. 따라서 학습 과정 중에 'e'의 확률이 가장 높아질 수 있도록 loss를 설정하여 학습하면, 'h'다음에 'e'가 아온다고 예측하도록 훈련시킬 수 있다.
@@ -44,7 +44,7 @@ use_math: true
 * 입력 벡터가 hidden state로 변환될 때 사용되는 $W_{xh}$ ,   
 전 time step의 hidden state 벡터가 현재 time step의 hidden state로 변환될 때 사용 되는 $W_{hh}$ ,  
 계산된 $h_t$ 가 output 벡터로 변환될 때 사용되는 $W_{hy}$  
-위 3가지가 backpropagation에 의해 학습 된다.
+위 3가지가 backpropagation에 의해 학습 된다.  
 ![](/assets/image/ustagelv2/w5_d2_9.png)
 * 너무 길어지면 정보를 다 담기에 메모리에 무리가 가기 때문에 turncate를 한다.
 * $W_{hh}$ 가 반복적으로 곱해지기 때문에, vanishing/exploding gradient 문제가 발생 할 수 있다.
