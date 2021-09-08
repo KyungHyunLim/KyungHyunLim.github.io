@@ -1,0 +1,9 @@
+---
+layout: post
+title:  "Beam search and BLUE score"
+date:   2021-09-08 12:00:22
+categories: [ML_AI]
+use_math: true
+---
+BLEU score가 번역 문장 평가에 있어서 갖는 단점은 무엇이 있을까요?
+# 1. 
