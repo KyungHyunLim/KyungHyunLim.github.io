@@ -33,7 +33,7 @@ use_math: true
 	![](/assets/image/ustagelv2/w5_d3_5.png)
 	7. 디코더의 이전층 출력(the, $h_1^d$ )을 입력으로 받고, 1-5의 동일한 과정을 적용해, Attention output 벡터를 구한후 $h_2^d$ 와 같이 활용해 두번째 출력을 구한다.
 	8. < Eos >가 나올때 까지 반복한다.
-* Backward
+* Backward  
 	![](/assets/image/ustagelv2/w5_d3_6.png)
 	* 디코더의 가중치 뿐만 아니라, Attention 가중치까지 역전파 학습
 * Teacher forcing
