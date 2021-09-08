@@ -32,6 +32,43 @@ BLEU score가 번역 문장 평가에 있어서 갖는 단점은 무엇이 있�
 		* 다른 시점에 생성에 종료됨
 		* 또는 Stopping criterion을 활용해 강제 종료 가능
 * 상대적으로 길이가 길수록 joint probability가 작아짐
+	* 각 hypothesis 별로 단어의 길이로 나누어 주어 공평하게 비교
 
 # 2. BLEU score
+## 2.1 단순한 비교방식  
+![](/assets/image/ustagelv2/w5_d3_9.png)
+* 자리와 단어를 비교하는 방식으로 정확한 평가가 어려움
+* E.g
+	* GT: I Love you
+	* Pred: oh I Love you
+	* 위와 같은 경우 score는 0
+* Recall
+	* 소환해야 하는 대상중에 얼마나 잘 소환했는가...
+* 평균
+	* 산술평균: 일반 평균
+	* 기하평균: 곱해서 루트
+	* 조화평균: 역수의 산술 평균의 역수
+	* 산술 >= 기하 >= 조화
+		* 조화평균은 작은쪽에 더 가중치가 있는 평균
+		* F-score => 조화평균으로 Precision과 Recall을 계산
 
+## 2.2 BLEU score
+* N-gram overlap
+	* I love this movie very much
+	* 나는 이 영화를 많이 사랑한다.
+	* (정말)이 없지만, 충분히 괜찮은 번역임 -> Recall을 고려하지 않는 이유
+* $BLEU = min (1, \ {length \ of \ prediction \over length \ of \ reference }) (\prod_i^n precision_i)^{1/n}$
+	* 기하평균
+	* reference보다 짧은 문장을 생성했을 때, 짧은 비율만큼 precision을 낮추어주고, 길게 생성했을 때는 1로 설정해 원하는 모든 단어가 있을 경우 100%을 기대할 수 있다.  
+* Examples  
+	![](/assets/image/ustagelv2/w5_d3_10.png)
+	* model 1
+		* Precision (1-gram): 9개의 단어 중 Half, my, heart, is, in, ooh, na 7개의 단어 일치 $\rightarrow {7 \over 9}$
+		* Precision (2-gram): 8개의 단어 묶음 중 my heart, heart is, is in, ooh na 4개의 묶음 일치 $\rightarrow {4 \over 8}$
+		* Precision (3-gram): 7개의 단어 묶음 중 my heart is, heart is in 2개의 묶음 일치 $\rightarrow {2 \over 7}$
+		* Precision (4-gram): 6개의 단어 묶음 중 my heart is in 1개의 묶음 일치 $\rightarrow {1 \over 6}$
+		* Breviry penalty: reference는 10개 단어, model1은 9개의 단어를 생성했기 때문에 $\rightarrow {9 \over 10}$
+		* $ BLEU score = 0.9 \times {\sqrt{3} \over 3} $
+	* model 2
+		* 모든 단어들은 동일하게 구성되어있지만, 2-gram 부터는 맞는 것이 없음
+		* $ BLEU score =  1 \times 0 $
