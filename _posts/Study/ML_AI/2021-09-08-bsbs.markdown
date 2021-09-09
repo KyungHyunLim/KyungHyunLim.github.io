@@ -68,7 +68,7 @@ BLEU score가 번역 문장 평가에 있어서 갖는 단점은 무엇이 있�
 		* Precision (3-gram): 7개의 단어 묶음 중 my heart is, heart is in 2개의 묶음 일치 $\rightarrow {2 \over 7}$
 		* Precision (4-gram): 6개의 단어 묶음 중 my heart is in 1개의 묶음 일치 $\rightarrow {1 \over 6}$
 		* Breviry penalty: reference는 10개 단어, model1은 9개의 단어를 생성했기 때문에 $\rightarrow {9 \over 10}$
-		* $ BLEU score = 0.9 \times {\sqrt{3} \over 3} $
+		* $ BLEU score = 0.9 \times ( {7 * 4 * 2 * 1 \over 9 * 8 * 7 * 6})^{1 \over 4} $
 	* model 2
 		* 모든 단어들은 동일하게 구성되어있지만, 2-gram 부터는 맞는 것이 없음
 		* $ BLEU score =  1 \times 0 $
