@@ -1,0 +1,65 @@
+---
+layout: post
+title:  "Visualization-PIE"
+date:   2021-09-10 14:48:22
+categories: [Visualize, ML_AI]
+use_math: true
+---
+
+# 1. Pie Chart
+## 1.1 Pie Chart
+* 원을 부채꼴로 분할해 표현하는 통계 차트
+	* 백분위 표현시 유용
+
+	```python
+	fig, ax = plt.subplots(1, 1, figsize=(7, 7))
+	ax.pie(data
+		,labels=labels
+		)
+	plt.show()
+	```
+	![](/assets/image/Viz/pi_1.PNG)
+
+	```python
+	# explode를 활용해 다음과 같이 표현 가능
+	fig, ax = plt.subplots(1, 1, figsize=(7, 7))
+	explode = [0, 0, 0.2, 0]
+
+	ax.pie(data, labels=labels, explode=explode, startangle=90)
+	plt.show()
+	```
+	![](/assets/image/Viz/pi_2.PNG)
+
+* 지양...
+	* 비교 어려움
+	* 유용성 떨어짐
+	* 오히려 bar plot이 더 유용
+
+# 2. 응용
+## 2.1 Dounut Chart
+* 중간이 비어있는 pie chart
+	* 디자인 적으로 선호
+	* 인포그래픽에서 사용
+	* Plotly에서 쉽게 사용 가능
+
+	```python
+	fig, ax = plt.subplots(1, 1, figsize=(7, 7))
+	ax.pie(data, labels=labels, startangle=90,
+		shadow=True, autopct='%1.1f%%', pctdistance=0.85, textprops={'color':"w"})
+
+	# 중간에 흰 원을 그려주는 방식
+	# 좌표 0, 0, r=0.7, facecolor='white'
+	centre_circle = plt.Circle((0,0),0.70,fc='white')
+	ax.add_artist(centre_circle)
+
+	plt.show()
+	```
+	![](/assets/image/Viz/pi_4.PNG)
+
+## 2.2 Sunburst Chart
+* 햇살을 닮은 차트
+* 계층적 데이터를 시각화
+	* 구현 난이도에 비해 화려함
+	* 오히려 Treemap을 추천
+	* Plotly에서 쉽게 사용 가능
+
