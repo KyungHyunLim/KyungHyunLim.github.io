@@ -13,9 +13,7 @@ use_math: true
 
 	```python
 	fig, ax = plt.subplots(1, 1, figsize=(7, 7))
-	ax.pie(data
-		,labels=labels
-		)
+	ax.pie(data, labels=labels)
 	plt.show()
 	```
 	![](/assets/image/Viz/pi_1.PNG)
