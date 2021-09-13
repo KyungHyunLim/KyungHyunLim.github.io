@@ -58,7 +58,7 @@ use_math: true
 		![](/assets/image/ustagelv2/w7_d1_14.PNG)
 
 ## 1.5 Tansformer: Warm-up Learning Rate Scheduler
-* $learning rate = d^{-0.5}_{model} \cdot min(step^{-0.5}, step \cdot warmup_{steps}^{-1.5}) $  
+* $learning rate = d_{model}^{-0.5} \cdot min(step^{-0.5}, step \cdot warmup_{steps}^{-1.5}) $  
 ![](/assets/image/ustagelv2/w7_d1_15.PNG)
 
 # 2. Transformer: High-Level View
