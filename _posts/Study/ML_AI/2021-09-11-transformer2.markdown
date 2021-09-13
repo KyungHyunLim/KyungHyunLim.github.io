@@ -50,8 +50,8 @@ use_math: true
 	* 가중평균을 낼 때, 교환법칙이 성립하기 때문
 	* 순서를 고려하지 않는 임베딩이 됨
 * Positional Encoding
-	* $PE_{(pos, 2i)} = sin(pos/10000^{2i \over d_model})$
-	* $PE_{(pos, 2i+1)} = cos(pos/10000^{2i \over d_model})$
+	* $PE_{(pos, 2i)} = sin(pos/10000^{2i \over d_{model}})$
+	* $PE_{(pos, 2i+1)} = cos(pos/10000^{2i \over d_{model}})$
 	* E.g.  
 		![](/assets/image/ustagelv2/w7_d1_13.PNG)
 		* 실제로 사용하는 sin, cos 조합 벡터  
