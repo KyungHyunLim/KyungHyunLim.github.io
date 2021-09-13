@@ -1,58 +1,83 @@
 ---
 layout: post
-title:  "Transformer - Self attention"
-date:   2021-09-13 11:15:22
+title:  "Transformer - Multi head attention"
+date:   2021-09-13 15:25:22
 categories: [NLP, ML_AI]
 use_math: true
 ---
 
-# 1. RNN 
-## 1.1 Long term dependency
-![](/assets/image/ustagelv2/w7_d1_1.PNG)
-* $h_3$ 에 이전 정보들이 모두 담겨 시퀀스가 길어질수록 상대적으로 멀리있는 정보가 희미해짐
-* Gradient vanishing/expoloding 문제도 발생
 
-## 1.2 Bi-directional RNN
-![](/assets/image/ustagelv2/w7_d1_2.PNG)
-* Foward 방향과, Backward 방향 두개의 서로 다른 파라미터를 가지는 두 RNN을 활용
-* 양방향의 hidden state 벡터를 concat하여 사용
-* Long term dependency 어느정도 보완하려는 시도
+# 1. Multi-Head attention
+## 1.1 Problem of single attention
+* Only one way for words to interact with one another
+	* 하나의 행렬 셋만 존재 
+	* 여러 측면에서 정보를 병렬적으로 얻을 수 없음
 
-# 2. Transformer
-## 2.1 Self-attention 방식
-* 과정  
-	![](/assets/image/ustagelv2/w7_d1_3.PNG)
-	1. 자기자신 및 나머지 워드들과 내적
-	2. Softmax를 취해 가중치를 구하고 벡터에 곱하고 서로 더함
-	3. 해당 워드에 대한 임베딩 벡터로 사용
-* 문제점
-	* 자기자신과 내적할 때, 더 큰 값을 가질 수 밖에 없음
-	* 즉, 자기자신의 정보만을 주로 포함하고 있는 벡터가 됨
+## 1.2 Multi-Head attention
+![](/assets/image/ustagelv2/w7_d1_8.PNG)
+* $MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^o$
+* $Where \ head_i=Attention(QW_i^Q, \ KW_i^K, \ VW_i^V$
+	* 여러버전의 어텐션을 수행하고 Concat하여 사용  
+	![](/assets/image/ustagelv2/w7_d1_9.PNG)
+* 계산 복잡도  
+	* n: sequence 길이
+	* d: representation의 차원
+	* k: convolution의 kernel size
+	* r: neighborhood의 크기  
+	|Layer type|Complexity per Layer|Sequential Operations|Maximum Path Length|
+	|---|---|---|---|
+	|Self-attention| $O(n^2 \cdot d)$ | $O(1)$ | $O(1)$ |
+	|Recurrent| $O(n \cdot d^2)$ | $O(n)$ | $O(n)$ |
+	|Convolution| $O(k \cdot n \cdot d^2)$ | $O(1)$ | $O(log_k(n))$ |
+	|Self-attention (restricted)| $O(r \cdot n \cdot d)$ | $O(1)$ | $O(n/r)$ |
 
-* 개선된 과정
-	![](/assets/image/ustagelv2/w7_d1_4.PNG)
-	1. $W^Q, \ W^K, \ W^V$ 를 이용해 각각 Query, Key, Value로 변환
-	2. Query와 Key 벡터들을 내적 후 softmax를 취해 가중치 생성
-	3. Value들에 가중치를 적용하고 더해 hidden state 벡터 생성
-* 개선 사항
-	* 자기 자신이 아닌 다른 워드와의 내적 값이 더 커질 수 있음
-	* 즉, 더 유연한 임베딩 벡터를 생성할 수 있음
-	* Time step이 멀어져도 정보를 유지 할 수 있음 (RNN에서의 개선사항)
+## 1.3 Transformer: Block-Based Model
+* Block 구조  
+	![](/assets/image/ustagelv2/w7_d1_10.PNG)
+	* $LayerNorm(x+sublayer(x))$
+	* 그림과 같이 'I'에 대한 벡터와 'I'를 쿼리로한 Attention 모듈의 출력을 Add 해 최종 임베딩 벡터를 얻음 (Why?)
+		* Gradient vanishing 방지 효과
+		* 학습안정화 효과
+	* LayerNorm  
+		![](/assets/image/ustagelv2/w7_d1_11.PNG)
+		* 주어진 다수의 샘플들에 대해 평균 0, 분산 1로 만들어주고, 원하는 평균과 분산을 주입해 줄 수 있게 해줌  
+		![](/assets/image/ustagelv2/w7_d1_12.PNG)
+		* [Batch Normalization](https://kyunghyunlim.github.io/ml_ai/2021/07/31/Batchnorm.html)
 
-## 2.2 Scaled Dot-Product Attention
-* Self-attention 계산 과정
-* 입력: Query(q), (Key(k), Value(v)) 페어 집합
-* 출력: Weighted sum of Values
-* Query와 key는 동일한 차원을 가져야함, Value는 가중평균을 구하기 위한 것으로 달라도 됨
-* $A(q, K, V) = \sum_i {exp(q \cdot k_i) \over \sum_j exp(q \cdot k_j)}v_i$
-	* ${exp(q \cdot k_i) \over \sum_j exp(q \cdot k_j)}$ : 가중치
-	* $similarity * v_i$ : 가중평균으로 구해진 Attention vector  
-	![](/assets/image/ustagelv2/w7_d1_6.PNG)
-* Row-wise softmax 예시  
-	![](/assets/image/ustagelv2/w7_d1_5.PNG)
+## 1.4 Transformer: Positional encoding
+* {home, go, I} / {I, go, home} 순서로 입력했을 때, I에 대한 임베딩 결과가 동일
+	* 가중평균을 낼 때, 교환법칙이 성립하기 때문
+	* 순서를 고려하지 않는 임베딩이 됨
+* Positional Encoding
+	* $PE_{(pos, 2i)} = sin(pos/10000^{2i \over d_model})$
+	* $PE_{(pos, 2i+1)} = cos(pos/10000^{2i \over d_model})$
+	* E.g.  
+		![](/assets/image/ustagelv2/w7_d1_13.PNG)
+		* 실제로 사용하는 sin, cos 조합 벡터  
+		![](/assets/image/ustagelv2/w7_d1_14.PNG)
 
-## 2.3 Problems
-![](/assets/image/ustagelv2/w7_d1_7.PNG)
-* $d_k$ 가 클수록, 분산과 표준편차가 커지고, soft-max를 취했을 때, 더 큰값에 몰리는 패턴이 나타남
-	* $\sqrt {d_k}$ 로 나누어 주면서 영향을 적게하는 연산을 추가
-	* $A(Q,K,V)=softmax({QK^T \over \sqrt {d_k}})V$
+## 1.5 Tansformer: Warm-up Learning Rate Scheduler
+* $learning rate = d^{-0.5}_model \cot min(#step^{-0.5}, #step \cdot warmup_steps^{-1.5})$  
+![](/assets/image/ustagelv2/w7_d1_15.PNG)
+
+# 2. Transformer: High-Level View
+## 2.1 Encoder: Self-Attention Visualization
+![](/assets/image/ustagelv2/w7_d1_16.PNG)
+* 윗줄은 Query, 아래는 Attention Value, 색상은 각각 head를 의미
+* 'making' 이라는 단어에 대해 'more'과 'difficult'가 큰 관계를 보임
+* 이러한 방식으로 시각화를 통해 분석이 가능
+
+## 2.2 Decoder: Masked Self-Attention
+![](/assets/image/ustagelv2/w7_d1_17.PNG)
+* 인코더로 부터 V, K를 받아옴
+* 디코더의 입력으로 부터 생성된 Attention vector가 Query로 사용됨
+* Masked Self-Attention  
+	![](/assets/image/ustagelv2/w7_d1_18.PNG)
+	* Inference 상황을 생각해보면, 실제로 뒤에 어떤 단어가 입력으로 들어 올지 decoder는 알 수 없다. 학습 때는 모든 입력값을 넣어주지만, 실제 상황을 고려해 정보를 통제해 줄 필요가 있다. 따라서 그림과 같이 얻을 수 없는 정보에 대해 0으로 처리한 후, 남은 값들을 1이 되게 가중평균을 사용해 맞추어 준다.
+
+## 2.3 성능비교
+![](/assets/image/ustagelv2/w7_d1_19.PNG)
+* BLEU score 20 ~ 40%는 서비스 중인 번역 성능과 유사
+
+# 3. Further Question
+* Attention은 이름 그대로 어떤 단어의 정보를 얼마나 가져올 지 알려주는 직관적인 방법처럼 보입니다. Attention을 모델의 Output을 설명하는 데에 활용할 수 있을까요?
