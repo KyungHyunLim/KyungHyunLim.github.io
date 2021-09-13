@@ -6,7 +6,6 @@ categories: [NLP, ML_AI]
 use_math: true
 ---
 
-
 # 1. Multi-Head attention
 ## 1.1 Problem of single attention
 * Only one way for words to interact with one another
@@ -16,7 +15,7 @@ use_math: true
 ## 1.2 Multi-Head attention
 ![](/assets/image/ustagelv2/w7_d1_8.PNG)
 * $MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^o$
-* $Where \ head_i=Attention(QW_i^Q, \ KW_i^K, \ VW_i^V$
+* $Where \ head_i=Attention(QW_i^Q, \ KW_i^K, \ VW_i^V)$
 	* 여러버전의 어텐션을 수행하고 Concat하여 사용  
 	![](/assets/image/ustagelv2/w7_d1_9.PNG)
 * 계산 복잡도  
