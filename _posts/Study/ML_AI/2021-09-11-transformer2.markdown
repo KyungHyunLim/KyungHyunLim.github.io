@@ -24,6 +24,7 @@ use_math: true
 	* d: representation의 차원
 	* k: convolution의 kernel size
 	* r: neighborhood의 크기  
+	
 	|Layer type|Complexity per Layer|Sequential Operations|Maximum Path Length|
 	|---|---|---|---|
 	|Self-attention| $O(n^2 \cdot d)$ | $O(1)$ | $O(1)$ |
@@ -57,7 +58,7 @@ use_math: true
 		![](/assets/image/ustagelv2/w7_d1_14.PNG)
 
 ## 1.5 Tansformer: Warm-up Learning Rate Scheduler
-* $learning rate = d^{-0.5}_model \cot min(#step^{-0.5}, #step \cdot warmup_steps^{-1.5})$  
+* $learning rate = d^{-0.5}_{model} \cdot min(step^{-0.5}, #step \cdot warmup_steps^{-1.5}) $  
 ![](/assets/image/ustagelv2/w7_d1_15.PNG)
 
 # 2. Transformer: High-Level View
