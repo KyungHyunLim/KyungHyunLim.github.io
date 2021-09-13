@@ -2,7 +2,7 @@
 layout: post
 title:  "Recurrent Neural Network - NLP"
 date:   2021-09-07 12:00:22
-categories: [ML_AI]
+categories: [NLP, ML_AI]
 use_math: true
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title:  "NLP basic"
 date:   2021-09-06 11:00:22
-categories: [ML_AI]
+categories: [NLP, ML_AI]
 use_math: true
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title:  "Seq2Seq with attention"
 date:   2021-09-08 10:43:22
-categories: [ML_AI]
+categories: [NLP, ML_AI]
 use_math: true
 ---
 
