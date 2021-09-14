@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "NLP: GPT-1, BERT"
-date:   2021-09-12 15:25:22
+date:   2021-09-14 15:25:22
 categories: [NLP, ML_AI]
 use_math: true
 ---
