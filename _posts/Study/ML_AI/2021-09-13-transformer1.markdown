@@ -56,3 +56,7 @@ use_math: true
 * $d_k$ 가 클수록, 분산과 표준편차가 커지고, soft-max를 취했을 때, 더 큰값에 몰리는 패턴이 나타남
 	* $\sqrt {d_k}$ 로 나누어 주면서 영향을 적게하는 연산을 추가
 	* $A(Q,K,V)=softmax({QK^T \over \sqrt {d_k}})V$
+
+# 3. 참고하기 좋은 사이트
+* [Attention](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html)
+* [Hugging face tutorial](https://huggingface.co/course/chapter0?fw=pt)

@@ -91,3 +91,6 @@ use_math: true
 * Big models help a lot
 	* 모델의 크기를 키울수록 성능이 좋아짐  
 	![](/assets/image/ustagelv2/w7_d2_8.PNG)
+
+# 4. 참고하면 좋은 사이트
+* [Bert 무료 강의](https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=164)
