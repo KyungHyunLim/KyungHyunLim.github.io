@@ -107,6 +107,7 @@ use_math: true
 	* Adversarial 하게 학습
 * Generator로 mask된 부분의 단어를 예측하게 하고, Discriminator가 판단해 피드백을 부여하는 방식으로 Pretraining하는 방식
 	* 즉, Discriminater가 pre-training을 위한 main network
+
 ## 4.2 Performance
 ![](/assets/image/ustagelv2/w7_d3_10.PNG)
 * 계산량 측면(왼쪽 그래프)에서 동일 계산량에 비해 더 좋은 성능
@@ -120,6 +121,7 @@ use_math: true
 	* DIstillBERT와 유사
 	* 다만 결과 값 뿐만이 아니라, attention의 파라미터와 hidden state 벡터까지도 유사해 지도록 학습
 		* 하지만, student 모델은 teacher모델 보다 hidden state 벡터의 차원이 작기 때문에, 차원을 줄여주는 Layer를 하나더 두어 Loss를 계산
+
 ## 5.2 Fusing Knowledge Graph into Language Model
 * Knowledge Graph: 외부 지식
 * ERNIE: Enhanced Language Representation with Informative Entities
