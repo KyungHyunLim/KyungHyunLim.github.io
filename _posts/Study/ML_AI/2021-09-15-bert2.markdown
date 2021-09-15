@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "NLP: GPT-2/3, ALBERT, ELECTRA"
-date:   2021-09-15 15:25:22
+date:   2021-09-15 15:50:22
 categories: [NLP, ML_AI]
 use_math: true
 ---
@@ -26,7 +26,7 @@ use_math: true
 	* 8M removed Wikipedia documents
 	* Use dragnet and newspaper to extract content from links
 * Preprocess
-	* Byte pair encoding (BPE)
+	* [Byte pair encoding (BPE)]()
 	* Minimal fragmentation of words across multiple vocab tokens (?)
 * Modification
 	* Layer normalization이 각 sub-block의 입력으로 이동
@@ -39,8 +39,8 @@ use_math: true
 	* QA test
 		* Conversation question answering dataset(CoQA)
 			* zero-shot learning setting (학습데이터 사용 X)
-			* 바로 예측 시켰을 때, f1-score가 55
-			* Fine-tuned BERT 89
+			* 바로 예측 시켰을 때, f1-score: 55
+			* Fine-tuned BERT: 89
 	* Summarization
 		* 마지막에 TL;DR 을 붙이는 것으로 요약한 문장이 나오도록 문장 생성
 			* TL;DR: Too long, didn't read
@@ -50,4 +50,89 @@ use_math: true
 		* 마지막에 they say in French: 이런식으로 붙여주면 어느정도 번역된 문장을 생성  
 		![](/assets/image/ustagelv2/w7_d3_2.PNG)
 
-# GPT-3
+# 2. GPT-3
+## 2.1 GPT-3: Language Models are Few-Shot Learners
+* 모델의 확장
+	* Scaling up이 task-agnostic, few-shot performance를 많이 향상시킬 수 있음
+	* few-shot stteing으로 175M parameter 크기의 Autoregressive LM 사용
+	* 96 Attention layers, Batch size: 3.2M0
+* Few-Shot Learners  
+	![](/assets/image/ustagelv2/w7_d3_4.PNG)
+	* Prompt: 모델에게 prefix 제공
+	* Zero-shot: task의 자연어 설명만으로 정답 예측 
+	* One-shot: 한쌍의 데이터만 제공, 모델의 변경은 없음
+	* Few-shot: 여러개의 데이터 제공
+	* Few > One > Zero
+
+# 3. ALBERT
+## 3.1 ALBERT: A Lite BERT for self-supervised Learning of Language Representations
+* Too big model
+	* 메모리적인 한계
+	* 학습속도
+
+## 3.2 Solutions
+* Factorized Embedding Parameterization  
+	![](/assets/image/ustagelv2/w7_d3_5.PNG)
+	* V: Vocabulary size, H: Hidden-state dimension, E: Word embedding dimension
+	* 기존의 BERT에서는 입력되는 word embedding 벡터와 Attention의 output인 hidden state embedding 벡터의 길이(차원)이 동일 했어야 한다. 그렇기 때문에 그림에서와 같이 $V \times H$ 라는 큰 벡터를 가지게 된다. 하지만 word embedding 벡터는 hiddend state의 벡터에 비해 담고 있는 정보가 적다! 즉, 동일한 차원일 필요가 없다.
+	* ALBERT 에서는 word embedding 벡터의 차원을 줄이고, 새로운 Layer를 하나 추가해 원하는 차원의 크기로 변환해주는 $E \times H$ 를 넣어 경량화와 동시에 성능을 유지하려는 시도를 했다.
+* Cross-layer Parameter Sharing
+	* Shared-FFN: feed-forward network 파라미터만 공유
+	* Shared-attention: attention에 관련된 파라미터만 공유 (Q, V, K)
+	* 모두 공유
+	* 경량화 대비 성능 차이가 그렇게 크지 않음  
+	![](/assets/image/ustagelv2/w7_d3_6.PNG)
+* Sentence Order Prediction
+	* 기존의 Pretrain 방법: 두개의 문장을 Concat해 사용 (Next Sentence Prediction 방법)
+		* 실효성이 별로 없음
+		* Mask 방법만 사용했을 때 성능이 떨어지지 않음
+		* 기존 방법의 Random 추출된 두 문장은 연관관계가 많이 적음
+			* 고차원적인 정보를 추출해 맞춰야 하는 어려운 문제
+	* 두개의 문장을 놓고, 순서가 바른지, 역순인지를 표현해 학습
+		* 두 연속된 segments에 대해 Negative samples
+			* 즉, 단순하게 순서가 맞는지 아닌지를 판단하는 문제가 된다.
+			* 유사한 내용이 얼마나 되는지, 아닌지로 간단하게 판별 가능
+* 효과검증
+	* Next Sentence Prediction vs Sentence Order Prediction  
+	![](/assets/image/ustagelv2/w7_d3_7.PNG)
+	* GLUE Results  
+	![](/assets/image/ustagelv2/w7_d3_8.PNG)
+
+# 4. ELECTRA
+## 4.1 ELECTRA: Efficiently learning an Encoder that Classifies Token Replacements Accurately
+![](/assets/image/ustagelv2/w7_d3_9.PNG)
+* 모델 구조
+	* Generator: BERT
+	* Discriminator: Transformer 구조
+	* Adversarial 하게 학습
+* Generator로 mask된 부분의 단어를 예측하게 하고, Discriminator가 판단해 피드백을 부여하는 방식으로 Pretraining하는 방식
+	* 즉, Discriminater가 pre-training을 위한 main network
+## 4.2 Performance
+![](/assets/image/ustagelv2/w7_d3_10.PNG)
+* 계산량 측면(왼쪽 그래프)에서 동일 계산량에 비해 더 좋은 성능
+
+# 5. Others
+## 5.1 Light-weight Models
+* DistillBERT
+	* Hugging face에서 발표한 모델
+	* Teacher - student 구조를 활용, 작은 사이즈의 student 모델이 큰 사이즈의 Teacher 모델의 결과 확률 분포를 모방하도록 학습
+* TinyBERT
+	* DIstillBERT와 유사
+	* 다만 결과 값 뿐만이 아니라, attention의 파라미터와 hidden state 벡터까지도 유사해 지도록 학습
+		* 하지만, student 모델은 teacher모델 보다 hidden state 벡터의 차원이 작기 때문에, 차원을 줄여주는 Layer를 하나더 두어 Loss를 계산
+## 5.2 Fusing Knowledge Graph into Language Model
+* Knowledge Graph: 외부 지식
+* ERNIE: Enhanced Language Representation with Informative Entities
+* KagNET: Knowledge-Aware Graph Networks for Conmmonsense Reasoning
+
+# 6. Refference
+* [GPT-2 openai](https://blog.floydhub.com/gpt2/)
+* [GPT-2 paper](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
+* [illustrated-transformer](http://jalammar.github.io/illustrated-transformer/)
+* [BERT](https://arxiv.org/abs/1810.04805)
+* [ALBERT paper](https://arxiv.org/abs/1909.11942)
+* [ELECTRA paper](https://arxiv.org/abs/2003.10555) 
+* [DistillBERT paper](https://arxiv.org/abs/1910.01108)
+* [TinyBERT paper](https://arxiv.org/abs/1909.10351)
+* [ERNIE paper](https://arxiv.org/abs/1905.07129)
+* [KagNET paper](https://arxiv.org/abs/1909.02151)
