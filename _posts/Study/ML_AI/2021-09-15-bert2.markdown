@@ -26,7 +26,7 @@ use_math: true
 	* 8M removed Wikipedia documents
 	* Use dragnet and newspaper to extract content from links
 * Preprocess
-	* [Byte pair encoding (BPE)]()
+	* [Byte pair encoding (BPE)](https://kyunghyunlim.github.io/nlp/ml_ai/2021/09/15/byteenc.html)
 	* Minimal fragmentation of words across multiple vocab tokens (?)
 * Modification
 	* Layer normalization이 각 sub-block의 입력으로 이동
