@@ -1,0 +1,8 @@
+---
+layout: post
+title:  "NLP: GPT-1, BERT Advanced"
+date:   2021-09-15 15:25:22
+categories: [NLP, ML_AI]
+use_math: true
+---
+![](/assets/image/ustagelv2/w7_d2_.PNG)
