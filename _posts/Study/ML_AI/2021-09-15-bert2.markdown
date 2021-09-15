@@ -1,8 +1,53 @@
 ---
 layout: post
-title:  "NLP: GPT-1, BERT Advanced"
+title:  "NLP: GPT-2/3, ALBERT, ELECTRA"
 date:   2021-09-15 15:25:22
 categories: [NLP, ML_AI]
 use_math: true
 ---
-![](/assets/image/ustagelv2/w7_d2_.PNG)
+# 1. GPT-2
+## 1.1 GPT-2: Language Models are Unsupervised Multi-task Learners
+* 정말 큰 transformer LM
+* 40GB 분량의 text 훈련
+	* 데이터셋의 퀄리티를 높이기 위해 노력을 많이 들임
+	* reddit link들로 부터 webpage들 취합
+* Language model은 zero-shot setting에서 down-stream task(생성 관련)들을 수행할 수 있음
+	* 파라미터 수정이나, 구조의 변경 없이
+	* 기본적으로 첫 문장을 이어받아 다음 단어들을 출력하도록 학습된 모델
+
+## 1.2 GPT-2: Motivation (decaNLP)
+* NLP Decathlon: Multitask Learning as Question Answering
+	* 모든 NLP 테스크들이 QA 형식으로 바뀔 수 있다
+	* E.g. "I love this movie" 라는 문장이 주어지면, 긍정인지 부정인지 분류하고자 할때, 중간에 "What do you think about this document in terms of positive or negative sentiment?" 문장을 만들어 넣어 주면, 질문에 대한 답을 생성하는 형태로 변형할 수 있다.
+
+## 1.3 GPT-2: Dataset
+* promising source, diverse and nearly unlimited text
+	* Reddit에서 외부 링크로 포함된 것중 호평을 많이 받은 것을 scrapped 해, 외부링크 까지 데이터로 가져옴
+	* 8M removed Wikipedia documents
+	* Use dragnet and newspaper to extract content from links
+* Preprocess
+	* Byte pair encoding (BPE)
+	* Minimal fragmentation of words across multiple vocab tokens (?)
+* Modification
+	* Layer normalization이 각 sub-block의 입력으로 이동
+		* pre-activation residual network
+	* 마지막 self-attention block 이후 추가적인 layer normalization 사용
+	* Scaled the weights of residual layer at initialization by a factor of ${1 \over \sqrt n}$ , n: # of residual layer  
+		![](/assets/image/ustagelv2/w7_d3_1.PNG)
+		* layer가 위쪽으로 가면 갈수록, 해당하는 선형변환들이 0에 가까워 지도록. 즉, 위쪽으로 갈수록 layer의 영향력이 줄어들도록 구성 (?)
+* GPT-2 활용 실험
+	* QA test
+		* Conversation question answering dataset(CoQA)
+			* zero-shot learning setting (학습데이터 사용 X)
+			* 바로 예측 시켰을 때, f1-score가 55
+			* Fine-tuned BERT 89
+	* Summarization
+		* 마지막에 TL;DR 을 붙이는 것으로 요약한 문장이 나오도록 문장 생성
+			* TL;DR: Too long, didn't read
+		* 학습에 사용하지 않고도 요약 수행이 가능했음  
+		![](/assets/image/ustagelv2/w7_d3_3.PNG)
+	* Translation
+		* 마지막에 they say in French: 이런식으로 붙여주면 어느정도 번역된 문장을 생성  
+		![](/assets/image/ustagelv2/w7_d3_2.PNG)
+
+# GPT-3
