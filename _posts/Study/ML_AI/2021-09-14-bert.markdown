@@ -94,4 +94,4 @@ use_math: true
 
 # 4. 참고하면 좋은 사이트
 * [Bert 무료 강의](https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=164)
-* [추가의문점 및 정리]()
+* [추가의문점 및 정리](https://kyunghyunlim.github.io/ustage/2021/09/16/week7_Day4.html)
