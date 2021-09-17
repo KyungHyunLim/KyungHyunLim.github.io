@@ -15,6 +15,7 @@ use_math: true
     * E.g. ['abc', 'def'] $\rightarrow$ ['a b c _', 'd e f _']
 * idx2word는 subword를 모두 담을 리스트로, 먼저 알파벳들(여기서는)을 중복없이 담아 준다!
 * python Collections 라이브러이의 Counter를 써서 쉽게 빈도수 계산 가능!
+
 ```python
 # Subword 단어들을 저장할 list
 idx2word = []

@@ -158,4 +158,76 @@ use_math: true
     ```
 
 ## 5. Handling multiple sequences
-* 
+* Tensorflow의 입력은 multiple sequence
+* Batch를 이용해 multiple sequence 구성
+    * 다른 길이를 pad를 통해 맞추어 주어야 함
+
+```python
+import torch
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+# Load tokenizer
+checkpoint = "distilbert-base-uncased-finetuned-sst-2-english"
+tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+# Load model
+model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
+
+sequence = "I've been waiting for a HuggingFace course my whole life."
+
+# apply tokenizer
+tokens = tokenizer.tokenize(sequence)
+# token to index
+ids = tokenizer.convert_tokens_to_ids(tokens)
+
+#################################################################
+# This line will fail.
+    # Transformers models은 기본적으로 여러 문장을 입력으로 기대
+input_ids = torch.tensor(ids)
+
+# This is ok.
+input_ids = torch.tensor([ids])
+#################################################################
+output = model(input_ids)
+```
+* Padding 시 주의점  
+    * padding 한 문장의 loggit 값이 달라진다.
+
+    ```python
+    sequence1_ids = [[200, 200, 200]] # 문장 1
+    sequence2_ids = [[200, 200]] # 문장 2
+    batched_ids = [[200, 200, 200], [200, 200, tokenizer.pad_token_id]]  # Batch
+
+    print(model(torch.tensor(sequence1_ids)).logits)
+    print(model(torch.tensor(sequence2_ids)).logits)
+    print(model(torch.tensor(batched_ids)).logits)
+
+    ----------
+    OUTPUT
+    ----------
+    tensor([[ 1.5694, -1.3895]], grad_fn=<AddmmBackward>)
+    tensor([[ 0.5803, -0.4125]], grad_fn=<AddmmBackward>)
+    tensor([[ 1.5694, -1.3895],
+            [ 1.3373, -1.2163]], grad_fn=<AddmmBackward>)
+    ```
+
+    * Attention mask를 통해 pad 토큰을 무시하게 해주어야 한다.
+
+    ```python
+    batched_ids = [
+    [200, 200, 200],
+    [200, 200, tokenizer.pad_token_id]
+    ]
+
+    attention_mask = [
+    [1, 1, 1],
+    [1, 1, 0]
+    ]
+    outputs = model(torch.tensor(batched_ids), attention_mask=torch.tensor(attention_mask))
+    
+    ----------
+    OUTPUT
+    ----------
+    tensor([[ 1.5694, -1.3895],
+            [ 0.5803, -0.4125]], grad_fn=<AddmmBackward>)
+    ```
+
