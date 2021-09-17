@@ -5,7 +5,7 @@ date:   2021-09-15 10:15:22
 categories: [NLP, ML_AI]
 use_math: true
 ---
-![](/assets/image/ustagelv2/w7_d2_.PNG)
+
 # 1. Byte Pair Encoding
 * 일반적으로 하나의 단어에 대해 하나의 embedding 벡터를 생성할 경우 학습하지 못한 단어를 맞이했을 경우 out-of-vocabulary(OOV)라는 치명적인 문제를 갖게 됩니다. 이럴 경우 보통, Unknown token으로 처리해주어 모델의 입력으로 넣게 되면서, 이러한 경우가 많아지면 전체적으로 모델의 성능이 저하될 수 있습니다. 하지만 모든 단어의 embedding 벡터를 만들기에는 필요한 embedding parameter의 수가 지나치게 많아집니다. 이러한 문제를 해결하기 위해 컴퓨터가 이해하는 단어를 표현하는 데에 데이터 압축 알고리즘 중 하나인 byte pair encoding 기법을 적용한 sub-word tokenizaiton이라는 개념이 나타났습니다.
 
