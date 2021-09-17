@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Huggingface- Chapter 2"
-date:   2021-09-17 10:15:22
+date:   2021-09-17 21:15:22
 categories: [NLP, ML_AI]
 use_math: true
 ---
@@ -220,10 +220,10 @@ output = model(input_ids)
 
     attention_mask = [
     [1, 1, 1],
-    [1, 1, 0]
+    [1, 1, 0] # 마지막 pad 토큰을 무시하도록 설정
     ]
     outputs = model(torch.tensor(batched_ids), attention_mask=torch.tensor(attention_mask))
-    
+
     ----------
     OUTPUT
     ----------
@@ -231,3 +231,47 @@ output = model(input_ids)
             [ 0.5803, -0.4125]], grad_fn=<AddmmBackward>)
     ```
 
+## 6. Putting it all together
+
+```python
+from transformers import AutoTokenizer
+
+checkpoint = "distilbert-base-uncased-finetuned-sst-2-english"
+tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
+
+sequences = [
+  "I've been waiting for a HuggingFace course my whole life.",
+  "So have I!"
+]
+
+# 여러 가지 model_input 유형!
+    # tokenizer가 [CLS]를 문장 처음에, [SEP]를 문장 끝ㄴ에 추가
+# 가장 긴 sequence의 길이에 맞추어 padding
+model_inputs = tokenizer(sequences, padding="longest")
+
+# model의 max length 까지 padding
+# (512 for BERT or DistilBERT)
+model_inputs = tokenizer(sequences, padding="max_length")
+
+# 특정 max_length 까지 sequences padding
+model_inputs = tokenizer(sequences, padding="max_length", max_length=8)
+
+# max_length 보다 긴 sequence들 truncate
+model_inputs = tokenizer(sequences, max_length=8, truncation=True)
+
+# Returns PyTorch tensors
+model_inputs = tokenizer(sequences, padding=True, return_tensors="pt")
+
+# Returns TensorFlow tensors
+model_inputs = tokenizer(sequences, padding=True, return_tensors="tf")
+
+# Returns NumPy arrays
+model_inputs = tokenizer(sequences, padding=True, return_tensors="np")
+
+# Inference
+output = model(**tokens)
+```
+
+# Reference
+* [링크](https://huggingface.co/course/chapter2/6?fw=pt)
