@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Huggingface- Chapter 2"
+title:  "Huggingface- Chapter 2. Pretrained model & tokenizer"
 date:   2021-09-17 21:15:22
 categories: [NLP, ML_AI]
 use_math: true

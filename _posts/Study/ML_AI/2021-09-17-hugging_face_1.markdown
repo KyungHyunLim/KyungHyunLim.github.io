@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Huggingface- Chapter 1"
+title:  "Huggingface- Chapter 1. pipeline, theory"
 date:   2021-09-17 10:15:22
 categories: [NLP, ML_AI]
 use_math: true
