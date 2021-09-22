@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Huggingface- Text Classification"
-date:   2021-09-22 17:45:22
+date:   2021-09-22 23:45:22
 categories: [NLP, ML_AI]
 use_math: true
 ---
