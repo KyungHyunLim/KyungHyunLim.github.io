@@ -35,8 +35,8 @@ metric = load_metric('glue', actual_task)
 ```
 
 ## 1.2 Metrics
-* Accuracy
-* F1 score
+* Accuracy: 정확도
+* F1 score: precision과 recall의 조화평균
 * Pearson Correlation
     * 두 변수 X와 Y간의 선형 상관 관계
     * -1 ~ 1 사이 값
