@@ -31,4 +31,4 @@ model = AutoModelForMaskedLM.from_pretrained("camembert-base")
 
 ## 3. Sharing
 * Hugging Face Hub를 통해 간단하게 sharing 가능
-* 작성중...
+* [참고](https://huggingface.co/course/chapter4/3?fw=pt)
