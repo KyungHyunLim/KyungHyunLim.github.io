@@ -141,7 +141,7 @@ trainer.train()
 # 평가
 trainer.evaluate()
 
-# hyper parameter search
+# Hyper parameter search
 def model_init():
     return AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=num_labels)
 
