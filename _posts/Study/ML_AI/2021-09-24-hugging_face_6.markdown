@@ -127,6 +127,7 @@ trainer.train()
 * 학습 전략 변화 필요
     * low level 코드 활용이 필요해 보임
 * top leader board model config file
+
 ```json
 // config.json
 {
