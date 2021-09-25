@@ -1,0 +1,56 @@
+---
+layout: post
+title:  "A method of relation extraction using pre-training models"
+date:   2021-09-26 00:44:22
+categories: [Paper, NLP]
+use_math: true
+---
+
+# 1. 정보
+* 논문명: A method of relation extraction using pre-training models
+* 학회: 2020 13th International Symposium on Computational Intelligence and Design (ISCID)
+* 저자 소속: 
+    1. AnHui Province Key Laboratory of Medical Physics and Technology, Institute of Intelligent Machines, Hefei Institutes of Physical Sciences, Chinese Academy of Sciences, Hefei 230031, China
+    2. University of Science and Technology of China, Hefei 230026, China
+    3. Anhui Jianzhu University, Hefei 230601, China
+
+# 2. 논문 분석
+* 유명한 학회는 아닌 듯 함, NLP 공부를 시작하지 얼마 안됬기 때문에 그래도 한번쯤은 읽어볼만 한 것 같음
+
+* NLP task 중 Relation extraction을 수행할 때, pre-trained 모델(BERT, ERNIE)을 잘 활용해 성능 향상이 가능한가? 에 대해 알아보고 싶다고, abstract 에서 언급하고 있다.
+    > Therefore, it is interesting to know whether the performance of RE can be improved utilizing the pre-training models.
+
+* pretrained 모델을 사용하는 것 이외에, 추가적인 전처리로 입력되는 sequence에 Special token 추가, 두개의 entitiy를 표시하는 special token을 추가하고 있다.
+    > For the input sequence, in order to embed the position information into the input sequence, unique symbols “[e1]~[/e1]” and “[e2]~[/e2]” are appended around the entities in the original sequence.
+
+* 이외에 특별한 방법 제안은 없다. pre-trained 모델을 활용하고, BERT와 동일하게 [CLS] 토큰을 활용해 RE class를 구분한다.
+
+* 여러 실험(모델)을 통해, RE task에서 prior sementic knowledge(Pretrained 모델)를 사용하는 것이 성능 향상에 도움을 준다는 것을 보였다.
+    * 아래 표가 논문의 실험 결과를 나타낸다. 확실히 pretrained 모델을 사용한 것이 사용하지 않았을 때보다 5%정도의 f1-score 차이를 보여준다. 
+    * 또한, 저자는 BERT보다 ERNIE를 사용했을 때, 더 좋은 결과가 나왔다고 말하면서 ERNIE의 pre-trained task가 더 의미파악을 잘한다고 주장하고 있다. 다음 posting은 ERNIE의 pretrained task를 공부해봐야 겠다.
+        > the pre-training task of ERNIE is multi-task which consists of word-aware, structure-aware, and semantic-aware pre-training tasks.
+
+        |Methods|F1-value(%)|
+        |:---:|:---:|
+        |SVM|82.2|
+        |MVRNN|82.4|
+        |CNN+Softmax|82.7|
+        |FCM|83.0|
+        |CR-CNN|84.1|
+        |**BERT**|88.3|
+        |**ERNIE**|89.1|
+
+* BERT는 MLM과 NSP 두가지 pretraining task를 사용한다.
+    * 자세한 내용은 아래 posting 링크를 확인!
+* ERNIE는 continual multi-task learning 이라는 것을 한다.
+    * 더 공부하고 다른 포스팅에서 더 자세히 다뤄야 할 것 같다. 주객 전도가 될수 있으니..., 간단히 읽어본것을 설명하자면!
+    * ERNIE 논문을 살펴보면, 두가지 step을 포함하고 있다고 한다. 첫번째는 사전 지식과 빅 데이터를 포함한 비지도학습, 두번째는 continual multi-task learning으로 ERNIE을 더 개선시킬 수 있다고 한다.
+        > Firstly, We continually construct unsupervised pre-training tasks with big data and prior knowledge involved. Secondly, We incrementally update the ERNIE model via continual multi-task learning.
+        * 첫번째 step은 structure-aware tasks and semantic-aware tasks로 구성된다.
+        * 두번째 step에서는 lexical, syntactic 그리고 semantic information 여러 task로 부터 학습한다고 한다.
+        * 이 과정에서 더 많은 것을 경험하기 때문에 BERT의 pretrianed task에 비해 더 sematic한 정보들을 학습하는 것이 가능하다고 주장하는 것 같다.
+
+# 3. 참고자료
+* [A method of relation extraction using pre-training models (paper link)](https://ieeexplore.ieee.org/document/9325805)
+* [BERT posting](https://kyunghyunlim.github.io/nlp/ml_ai/2021/09/14/bert.html)
+* [ERNIE (paper link)](https://ojs.aaai.org//index.php/AAAI/article/view/6428)
