@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "인공지능과 자연어처리"
-date:   2021-09-27 23:45:22
+date:   2021-09-27 11:45:22
 categories: [NLP, ML_AI]
 use_math: true
 ---
