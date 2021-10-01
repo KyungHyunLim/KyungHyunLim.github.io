@@ -1,0 +1,114 @@
+---
+layout: post
+title:  "Hugging face - Custom Loss"
+date:   2021-10-01 10:39:22
+categories: [NLP, ML_AI]
+use_math: true
+---
+
+# 1. transformers - Trainer class 'compute_loss' 살펴보기
+* transformers의 Trainer class를 git에 가서 살펴보면, compute_loss 함수가 어떻게 정의되었나 알 수 있습니다!
+* https://github.com/huggingface/transformers/blob/master/src/transformers/trainer.py [1864 line]
+
+```python
+def compute_loss(self, model, inputs, return_outputs=False):
+        # 기본적으로 hugging face에서 제공하는 모든 모델들은 첫번째 원소에 loss를 반환 한다고 설명하고 있습니다.
+        """
+        How the loss is computed by Trainer. By default, all models return the loss in the first element.
+        Subclass and override for custom behavior.
+        """
+        
+        # label_smoother 가 None 이고, labels가 inputs에 존재하면 labels를 꺼내 옵니다.
+            # label이 없는 task가 있기 때문이 아닌가 싶습니다! -> 더 분석이 필요할듯
+        if self.label_smoother is not None and "labels" in inputs:
+            labels = inputs.pop("labels")
+        else:
+            labels = None
+
+        # 모델에 입력을 넣어 output을 생성하고,
+        outputs = model(**inputs)
+
+        # 흠 나중에 고칠 필요가 있다고 하네요. 과거 state가 필요한 task에서 사용이 되는것 같습니다.
+        # Save past state if it exists 
+        # TODO: this needs to be fixed and made cleaner later.
+        if self.args.past_index >= 0: 
+            # 인덱스에 맞춰서 과거 ouput을 다 저장하고 있습니다. 어딘가에서 따로 사용이 되는듯합니다. 이번 포스팅에선 상관없는 부분!
+            self._past = outputs[self.args.past_index]
+
+        # label이 있으면 loss를 계산합니다.
+        if labels is not None:
+            # 기본적으로는 label_smoother 라는 loss를 사용하고 있습니다.
+            loss = self.label_smoother(outputs, labels)
+        else:
+            # 이부분은 사용되지 않는다고 하네요
+            # We don't use .loss here since the model may return tuples instead of ModelOutput.
+            loss = outputs["loss"] if isinstance(outputs, dict) else outputs[0]
+
+        # 계산한 값들을 반환해 줍니다!
+        return (loss, outputs) if return_outputs else loss
+```
+
+# 2. Trainer 상속 받아 compute_loss 오버라이딩 하기
+* Overriding을 해야하는데, 먼저 Trainer class를 상속받는 Mytrainer를 정의해야합니다.
+* init에서는 부모 class인 Trainer에 기존에 사용하던 args들을 넘겨주어 기능들을 다 사용할 수 있도록 초기화 해줍니다
+* 추가적으로 원하는 loss를 설정하기 위해 loss_name을 추가로 받아 주겠습니다!
+
+    ```python
+    class MyTrainer(Trainer):
+        # loss_name 이라는 인자를 추가로 받아 self에 각인 시켜줍니다.
+        def __init__(self, loss_name, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.loss_name= loss_name # 각인!
+
+        def compute_loss(self, model, inputs, return_outputs=False):
+    ```
+
+* 본격적으로 compute_loss를 변경해 보겠습니다.!
+
+    ```python
+    def compute_loss(self, model, inputs, return_outputs=False):
+
+        # config에 저장된 loss_name에 따라 다른 loss 계산 
+        if self.loss_name == 'CrossEntropy':
+            # lossname이 CrossEntropy 이면, custom_loss에 torch.nn.CrossEntropyLoss()를 선언(?) 해줍니다.
+            custom_loss = torch.nn.CrossEntropyLoss()
+                    
+        if self.label_smoother is not None and "labels" in inputs:
+            labels = inputs.pop("labels")
+        else:
+            labels = None
+
+        outputs = model(**inputs)
+
+        if labels is not None:
+            #loss를 계산 하던 부분에 custom_loss를 이용해 계산하는 코드를 넣어 줍니다!
+            #원본 코드를 보시면 output[0]가 logit 임을 알 수 있습니다!
+            loss = custom_loss(outputs[0], labels)
+        else:
+            # We don't use .loss here since the model may return tuples instead of ModelOutput.
+            loss = outputs["loss"] if isinstance(outputs, dict) else outputs[0]
+        return (loss, outputs) if return_outputs else loss
+    ```
+
+* 자 이제 새로운 loss를 적용할 수 있게 되었습니다!
+
+# 3. 적용하기!
+* MyTrainer 객체를 선언할 때, 원래 사용하던 arg들과 추가로 정의한 loss_name을 넘겨줍니다.
+* 다음에는, 하시던데로 train을 호출 하면 끝!
+
+    ```python
+    # Custom Loss 사용을 위해 Trainner 정의 (loss.py)
+    trainer = MyTrainer(
+        loss_name='CrossEntropy',            # 내가 새롭게 정의한 / 또는 Torch에 있는 다양한 Loss들 적용가능
+        model=model,                         # the instantiated 🤗 Transformers model to be trained
+        args=training_args,                  # training arguments, defined above
+        train_dataset=train_dataset,         # training dataset
+        eval_dataset=valid_dataset,          # evaluation dataset
+        compute_metrics=compute_metrics      # define metrics function
+    )
+
+    # train model
+    trainer.train()
+
+    Optimizers = (Optimzer, Scheduler) arg를 이용하면 Optimzer, Scheduler 도 자유롭게 변경하실 수 있습니다!
+    ```
