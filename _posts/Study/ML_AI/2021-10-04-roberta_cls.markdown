@@ -312,5 +312,17 @@ use_math: true
     ```
 
 ## 2.2 최종 형태의 의미
-* loss, logits, next_decoder_cache, all_hidden_states, all_self_attentions, all_cross_attention 가 최종형태이고 (loss는 조건에 따라 있을 수도 없을 수 도 있습니다.), 보통은 없는 것 같으니 왜, output의 첫번째 인덱스가 각 클래스일 확률인지를 이해할 수 있었습니다.
+* loss, logits, next_decoder_cache, all_hidden_states, all_self_attentions, all_cross_attention 가 최종형태입니다. 왜, output의 첫번째 인덱스가 각 클래스일 확률인지를 이해할 수 있었습니다. 
 * 물론 이외에 더 복잡하고 연관된 사항들이 많기 때문에 아직은 갈길이 멀다고 생각합니다. 다음번 포스팀에서는 조금더 세세한 의미를 알아볼 수 있도록 노력해보겠습니다!
+
+```python
+# 실제 출력
+SequenceClassifierOutput(logits=tensor([[ 0.0800,  0.1805,  0.0620,  ..., -0.1257, -0.1650, -0.3279],
+        [ 0.1403,  0.1399,  0.0256,  ..., -0.1489, -0.0258, -0.4063],
+        [ 0.1422,  0.1240,  0.1042,  ...,  0.0295, -0.2008, -0.4127],
+        ...,
+        [-0.0334,  0.2673, -0.0113,  ..., -0.0961, -0.0519, -0.4188],
+        [ 0.0981,  0.1145, -0.0784,  ..., -0.0449, -0.1429, -0.3333],
+        [ 0.0175,  0.2102, -0.0617,  ..., -0.1251, -0.0935, -0.4533]],
+       device='cuda:0', grad_fn=<AddmmBackward>), hidden_states=None, attentions=None)
+```
