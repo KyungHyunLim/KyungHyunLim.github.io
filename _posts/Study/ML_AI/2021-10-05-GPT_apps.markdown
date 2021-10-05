@@ -1,0 +1,83 @@
+---
+layout: post
+title:  "GPT - applications"
+date:   2021-10-05 12:45:22
+categories: [NLP, ML_AI]
+use_math: true
+---
+
+# 1. GPT 언어 모델
+## 1.1 GPT 모델 소개
+* 자연어 문장 $\rightarrow$ 분류, 성능이 아주 좋은 디코더
+* 적은 양의 데이터에서도 높은 분류 성능
+* 다양한 자연어 task에서 SOTA 달성 (BERT 나오기 전에)
+* BERT로 발전하는 밑거름
+* 하지만, 여진히 지도 학습을 필요로 하는 단점 존재
+* fine tunning한 모델은 다른 task에서 사용 불가능
+
+## 1.2 GPT의 응용
+* 상식 Q&A
+* 텍스트 데이터 파싱
+* 의학
+* Awesome GPT-3: 약 70개 가량 예제 수록
+
+## 1.3 GPT의 한계?
+* 다음 단어 혹은 masked 단어 예측하는 LM 학습 방식으로 정말 다 해결이 되는가?
+    * Weight update가 없으면, 새로운 학습이 없다는 것
+    * 시기에 따라 달라지는 문제에 대응 불가 (E.g 현재 대통령은?)
+* 멀티 모달이 필요하다! (글로만 배우지 말자)
+
+# 2. GPT 활용해 보기
+## 2.1 코드
+* GPT2 불러오기
+
+    ```python
+    from transformers import GPT2Config, GPT2LMHeadModel
+    # creating the configurations from which the model can be made
+    config = GPT2Config(
+    vocab_size=tokenizer.get_vocab_size(),
+    bos_token_id=tokenizer.token_to_id("<s>"),
+    eos_token_id=tokenizer.token_to_id("</s>"),
+    )
+    # creating the model
+    model = GPT2LMHeadModel(config)
+    ```
+
+* Trainer 정의
+
+    ```python
+    from transformers import Trainer, TrainingArguments
+
+    training_args = TrainingArguments(
+        output_dir='model_output',
+        overwrite_output_dir=True,
+        num_train_epochs=50,
+        per_device_train_batch_size=64,
+        save_steps=1000,
+        save_total_limit=2,
+        logging_steps=100
+
+    )
+
+    trainer = Trainer(
+        model=model,
+        args=training_args,
+        data_collator=data_collator,
+        train_dataset=dataset
+    )
+    ```
+
+* 훈련해보기
+
+    ```python
+    trainer.train()
+    ```
+
+* 사용하기
+    * output_sequences에 생성된 문장이 닮긴다.
+
+
+    ```python
+    # GPT는 generate 라는 함수를 지원
+    output_sequences = model.generate(input_ids=input_ids, do_sample=True, max_length=100, num_return_sequences=3)
+    ```
