@@ -68,6 +68,6 @@ use_math: true
     ```
 
 * embedding 값 확인해보기  
-    ![](/assets/image/pytorch/em1.PNG)
+    ![](/assets/image/pytorch/em1.png)
     * 당연한 얘기지만 모듈을 재선하면 값이 달라진다. weigth의 초기 값에 의해 결정되는 것 같다.
     * 너무 작은 값이 나올 수 도 있는것 같다. 주의하면 좋을 것 같다.
