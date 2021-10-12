@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "MRC Intro & Python Basics"
+date:   2021-10-12 18:00:22
+categories: [NLP, ML_AI]
+use_math: true
+---
+
+# 1. 
+
+
+
+
+
+# 4. 참조
+* Naver Ai bootcamp MRC 강의
