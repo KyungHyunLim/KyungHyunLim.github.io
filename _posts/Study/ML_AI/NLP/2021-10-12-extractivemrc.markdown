@@ -12,7 +12,7 @@ use_math: true
 * 질문에 대한 답변이 항상 지문 내에 존재
 * 답변을 생성하는 것이 아니라 찾는 것이기 때문에 약간 편한 느낌
 * 평가방법
-    * EM, F1-score [상세!]()
+    * EM, F1-score
 
 # 2. Pre-processing
 ## 2.1 Tokenization

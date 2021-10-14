@@ -24,7 +24,7 @@ use_math: true
 * 이 공간상에서 거리등 을 활용해 유사도를 계산할 수 있음
 
 ## 2.2 Sparse Embedding
-* Sparse: 0이 아닌 값이 굉장히 많이 있는 것을 의미
+* Sparse: 0이 아닌 값이 굉장히 많이 있는 것을 의미 #############
 * Bag of words  
     ![](/assets/image/mrc/se_2.PNG)
     * 단어가 있으면 1, 없으면 0으로 표시
