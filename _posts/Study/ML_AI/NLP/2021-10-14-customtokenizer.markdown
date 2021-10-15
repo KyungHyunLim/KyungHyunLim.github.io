@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Custom vocab을 이용해 BertTokenizer 훈련하기"
+title:  "Custom data를 이용해 WordPiece 방식으로 vocab 생성 및 BertTokenizer 훈련하기"
 date:   2021-10-14 22:07:22
 categories: [NLP, ML_AI]
 use_math: true
@@ -92,7 +92,7 @@ bert_tokenizer = BertTokenizer('./vocab/', do_basic_tokenize=False)
 bert_tokenizer = BertTokenizer.from_pretrained('./vocab/', do_basic_tokenize=False)
 ```
 
-## 2.2 잘 되는지 확인해보기
+## 2.2 결과 확인해보기
 ![](/assets/image/)
 * 잘 tokenization 된것을 확인 할 수 있습니다.
 * [UNK] token을 줄이기 위해서 최적의 vocab size나 학습 예문을 늘리는 방향도 필요할 것 같습니다.
