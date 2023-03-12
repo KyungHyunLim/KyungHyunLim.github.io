@@ -154,7 +154,14 @@ title: 'Tech_interview'
 ```
 ---
 
-## 4. 카테고리 레이아웃 만들기
+## 4. style.scss에서 category.scss import 하기
+
+```
+@import "plain";
+@import "category"; <- 
+```
+
+## 5. 카테고리 레이아웃 만들기
  아래와 같이 _layout 폴더에 category.html을 생성합니다.
 ```
 +-- _layout
@@ -201,7 +208,7 @@ layout: default
 ```
 ---
 
-## 5. _sass 폴더의 dark.scss 수정하기
+## 6. _sass 폴더의 dark.scss 수정하기
  현재 테마는 다크모드와 화이트모드 전환이 가능합니다.
  모드에 따라 글씨색이 바뀌는 것을 구현하기 위해 클래스를 추가합니다.
  .about ~ 위에 추가하시면 됩니다.
@@ -212,7 +219,7 @@ layout: default
 ```
 ---
 
-## 6. home.html 수정하기
+## 7. home.html 수정하기
  home.html에 다음과 같은 코드를 추가합니다. 토글을 위한 레이아웃 구조를 나타냅니다.
  향후 자동 생성하게 할 수 있도록 수정해볼 예정입니다.
  if문 바로 아래 추가합니다.
@@ -239,7 +246,7 @@ layout: default
 </div>
 ```
 ---
-## 7. 설정파일 수정하기
+## 8. 설정파일 수정하기
  '_config.yml'에 아래 내용을 추가해줍니다. 
  "깃헙주소/카테고리명" 으로 해당 카테고리만 모여있는 post 리스트를 볼 수 있습니다.
 ```yml
@@ -247,5 +254,5 @@ category_path: "category" # <- default value
 category_layout: "category.html" # <- default value
 ```
 ---
-## 8. 완성!!!
+## 9. 완성!!!
  html, css를 거의 몰라서 하나하나 찾아보고 하느라 하루종일 걸렸네요...
